@@ -1,0 +1,34 @@
+#+TITLE:  HODGEPODGE
+#+EMAIL: valjean@foxmail.com
+#+OPTIONS: toc:2
+#+OPTIONS: toc:t
+#+STARTUP: overview
+#+COLUMNS: %25ITEM %TAGS %TODO %3PRIORITYd
+#+OPTIONS: ^:nil
+#+OPTIONS: email:t
+#+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
+#+setupfile: ../css/org-theme/setup/local-worg.setup
+
+** brivckly
+*** tools
+**** vscode
+***** office 
+****** [[https://code.visualstudio.com/Download][windows download]]
+  #+caption: vscode-download
+       [[file:img/vscode-download.png]] 
+****** [[https://code.visualstudio.com/Download][office website]]
+****** [[https://code.visualstudio.com/docs][office docs]]
+**** sublime
+**** git
+***** [[file+emacs:../git/git.org][git note]]
+**** vim
+**** emacs
+**** tmux
+**** ubuntu
+**** email
+*** languages
+**** window
+***** vbs
+***** cmd
+***** powershell
+**** 

@@ -1,0 +1,8 @@
+# -*- mode: org; -*-
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="file://localhost/home/valjean/.valjean.d/css/org-theme/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="file://localhost/home/valjean/.valjean.d/css/org-theme/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script type="text/javascript" src="file://localhost/home/valjean/.valjean.d/css/org-theme/styles/lib/js/jquery.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="file://localhost/home/valjean/.valjean.d/css/org-theme/styles/lib/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="file://localhost/home/valjean/.valjean.d/css/org-theme/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="file://localhost/home/valjean/.valjean.d/css/org-theme/styles/readtheorg/js/readtheorg.js"></script>
