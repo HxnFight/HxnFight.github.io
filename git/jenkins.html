@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-07-23 一 10:05 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JENKINS</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="valjean" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../css/org-theme/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="../css/org-theme/styles/readtheorg/css/readtheorg.css"/>
+<script type="text/javascript" src="../css/org-theme/styles/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="../css/org-theme/styles/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../css/org-theme/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="../css/org-theme/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">JENKINS</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgb70a3d7">jenkins</a>
+<ul>
+<li><a href="#orge58a18e">installation</a>
+<ul>
+<li><a href="#org2d657e9">official website</a></li>
+<li><a href="#org4e64d03">tutor-1</a></li>
+<li><a href="#org2212239">jenkins manage config</a></li>
+<li><a href="#orge8e60e3">jenkins manage maven repo</a></li>
+</ul>
+</li>
+<li><a href="#org6f77b4c">build category</a>
+<ul>
+<li><a href="#org07fea47">./img/jenkins_build_category.jpg</a></li>
+<li><a href="#org9adfef8">freestyle</a></li>
+<li><a href="#org2591613">pipeline</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgb70a3d7" class="outline-2">
+<h2 id="orgb70a3d7">jenkins</h2>
+<div class="outline-text-2" id="text-orgb70a3d7">
+</div>
+<div id="outline-container-orge58a18e" class="outline-3">
+<h3 id="orge58a18e">installation</h3>
+<div class="outline-text-3" id="text-orge58a18e">
+</div>
+<div id="outline-container-org2d657e9" class="outline-4">
+<h4 id="org2d657e9"><a href="https://jenkins.io/doc/pipeline/tour/getting-started/">official website</a></h4>
+</div>
+<div id="outline-container-org4e64d03" class="outline-4">
+<h4 id="org4e64d03"><a href="https://blog.csdn.net/kikajack/article/details/79418061">tutor-1</a></h4>
+</div>
+<div id="outline-container-org2212239" class="outline-4">
+<h4 id="org2212239"><a href="https://wiki.jenkins.io/display/JENKINS/Config+File+Provider+Plugin">jenkins manage config</a></h4>
+</div>
+<div id="outline-container-orge8e60e3" class="outline-4">
+<h4 id="orge8e60e3"><a href="https://wiki.jenkins.io/display/JENKINS/Pipeline+Maven+Plugin">jenkins manage maven repo</a></h4>
+</div>
+</div>
+<div id="outline-container-org6f77b4c" class="outline-3">
+<h3 id="org6f77b4c">build category</h3>
+<div class="outline-text-3" id="text-org6f77b4c">
+</div>
+<div id="outline-container-org07fea47" class="outline-4">
+<h4 id="org07fea47"><img src="./img/jenkins_build_category.jpg" alt="jenkins_build_category.jpg" /></h4>
+</div>
+<div id="outline-container-org9adfef8" class="outline-4">
+<h4 id="org9adfef8">freestyle</h4>
+<div class="outline-text-4" id="text-org9adfef8">
+<ul class="org-ul">
+<li>此类别分一下几个步骤,在linux上话,配合shell脚本,就可以轻松的完成项目的部署和发布
+所有的逻辑都写在脚本里控制,在general中定义好变量,在build里直接调用变量和预先写好的脚本,
+对目标机的管理,可以考虑使用ansible.</li>
+<li>缺点就是每次新加项目,需要额外的修改脚本,再个就是比较依赖shell.(windows 用户可以考虑bat,或着poweshell)</li>
+</ul>
+</div>
+<ul class="org-ul">
+<li><a id="org61d3dcb"></a>general<br />
+<ul class="org-ul">
+<li><a id="org75f24be"></a>choice parameter<br />
+<div class="outline-text-6" id="text-org75f24be">
+<ul class="org-ul">
+<li>deploy_env</li>
+<li>发布环境(prod,test,dev)</li>
+</ul>
+</div>
+</li>
+<li><a id="org2167db2"></a>string parameter<br />
+<div class="outline-text-6" id="text-org2167db2">
+<ul class="org-ul">
+<li>opt_local_repo</li>
+<li>本地仓库目录</li>
+</ul>
+</div>
+</li>
+<li><a id="org3dd6b16"></a>string parameter<br />
+<div class="outline-text-6" id="text-org3dd6b16">
+<ul class="org-ul">
+<li>opt_git_url</li>
+<li>项目git地址</li>
+</ul>
+</div>
+</li>
+<li><a id="orgf160bc3"></a>string parameter<br />
+<div class="outline-text-6" id="text-orgf160bc3">
+<ul class="org-ul">
+<li>opt_bak_dir</li>
+<li>备份路径</li>
+</ul>
+</div>
+</li>
+<li><a id="org543d410"></a>string parameter<br />
+<div class="outline-text-6" id="text-org543d410">
+<ul class="org-ul">
+<li>opt_web_dir</li>
+<li>程序路径</li>
+</ul>
+</div>
+</li>
+<li><a id="org88168a9"></a>string parameter<br />
+<div class="outline-text-6" id="text-org88168a9">
+<ul class="org-ul">
+<li>opt_info_dir</li>
+<li>相关信息目录</li>
+</ul>
+</div>
+</li>
+<li><a id="orgf1b235f"></a>string parameter<br />
+<div class="outline-text-6" id="text-orgf1b235f">
+<ul class="org-ul">
+<li>opt_war_dir</li>
+<li>war包路径</li>
+</ul>
+</div>
+</li>
+<li><a id="orgc711c18"></a>string parameter<br />
+<div class="outline-text-6" id="text-orgc711c18">
+<ul class="org-ul">
+<li>opt_version</li>
+<li>打包版本</li>
+</ul>
+</div>
+</li>
+</ul>
+</li>
+<li><a id="org0577ddb"></a>source code management<br /></li>
+<li><a id="org1d75ae5"></a>build triggers<br /></li>
+<li><a id="orgc03ff04"></a>build eventment<br /></li>
+<li><a id="org1d87a6b"></a>build<br />
+<ul class="org-ul">
+<li><a id="orgec3cda1"></a>以下代码主要内容为<br />
+<ul class="org-ul">
+<li><a id="org5c1246c"></a>更新代码<br /></li>
+<li><a id="org0d5107d"></a>mvn 打包<br /></li>
+<li><a id="org6428a5d"></a>将打包内容上传至目标机<br />
+<div class="outline-text-7" id="text-org6428a5d">
+<div class="org-src-container">
+<pre class="src src-shell"><span class="linenr"> 1: </span><span style="color: #268bd2;">echo</span> $<span style="color: #8787d7;">deploy_env</span>
+<span class="linenr"> 2: </span><span style="color: #268bd2; font-weight: bold;">case</span> $<span style="color: #8787d7;">deploy_env</span><span style="color: #268bd2; font-weight: bold;"> in</span>
+<span class="linenr"> 3: </span>    deploy)
+<span class="linenr"> 4: </span>        <span style="color: #268bd2;">echo</span> <span style="color: #2aa198;">"deploy: $deploy_env"</span>
+<span class="linenr"> 5: </span>        /data/project/test/script/sw_deploy.sh --local-repository=$<span style="color: #8787d7;">opt_local_repo</span> --repository-url=$<span style="color: #8787d7;">opt_git_url</span> --backup-dir=$<span style="color: #8787d7;">opt_bak_dir</span> --webdir=$<span style="color: #8787d7;">opt_web_dir</span> --infodir=$<span style="color: #8787d7;">opt_info_dir</span> --version=$<span style="color: #8787d7;">opt_version</span> --package=$<span style="color: #8787d7;">opt_war_dir</span>
+<span class="linenr"> 6: </span>    <span style="color: #268bd2; font-weight: bold;">if</span> <span style="color: #268bd2;">[</span> $<span style="color: #8787d7;">?</span> == <span style="color: #d75fd7;">0</span> <span style="color: #268bd2;">]</span>;<span style="color: #268bd2; font-weight: bold;">then</span>
+<span class="linenr"> 7: </span>            <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">&#21019;&#24314;&#30446;&#26631;&#26412;&#22320;&#20179;&#24211;&#30446;&#24405;</span>
+<span class="linenr"> 8: </span>          ansible test -m file -a <span style="color: #2aa198;">"path=$opt_local_repo/target state=directory"</span>
+<span class="linenr"> 9: </span>            <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">&#21019;&#24314;&#30446;&#26631;&#26412;&#22320;&#20449;&#24687;&#23384;&#25918;&#30446;&#24405;</span>
+<span class="linenr">10: </span>      ansible test -m file -a <span style="color: #2aa198;">"path=$opt_info_dir state=directory"</span>
+<span class="linenr">11: </span>            <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">&#21019;&#24314;&#30446;&#26631;&#32447;&#19978;&#19994;&#21153;&#30446;&#24405;</span>
+<span class="linenr">12: </span>          ansible test -m file -a <span style="color: #2aa198;">"path=$opt_web_dir state=directory"</span>
+<span class="linenr">13: </span>            <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">&#21019;&#24314;&#30446;&#26631;&#22791;&#20221;&#30446;&#24405;</span>
+<span class="linenr">14: </span>            ansible test -m file -a <span style="color: #2aa198;">"path=$opt_bak_dir state=directory"</span>
+<span class="linenr">15: </span>            <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">&#21019;&#24314;&#30446;&#26631;&#23384;&#25918;&#30446;&#24405;,&#23558;&#25171;&#21253;&#20195;&#30721;&#21457;&#25918;&#33267;&#30446;&#26631;&#30446;&#24405;</span>
+<span class="linenr">16: </span>            <span style="color: #8787d7;">dir_path</span>=<span style="color: #fa8072;">`dirname $opt_war_dir`</span>
+<span class="linenr">17: </span>            ansible test -m file -a <span style="color: #2aa198;">"path=$opt_local_repo/$dir_path state=directory"</span>
+<span class="linenr">18: </span>        ansible test -m copy -a <span style="color: #2aa198;">"src=$opt_local_repo/$opt_war_dir dest=$opt_local_repo/$opt_war_dir"</span>
+<span class="linenr">19: </span>            <span style="color: #268bd2; font-weight: bold;">if</span> <span style="color: #268bd2;">[</span> <span style="color: #2aa198;">"$opt_version"</span>x != <span style="color: #2aa198;">"break"</span>x <span style="color: #268bd2;">]</span>;<span style="color: #268bd2; font-weight: bold;">then</span>
+<span class="linenr">20: </span>              <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">&#23558;&#22791;&#20221;&#25991;&#20214;&#35760;&#24405;&#21457;&#36865;&#21040;&#30446;&#26631;&#30446;&#24405;</span>
+<span class="linenr">21: </span>                ansible test -m copy -a <span style="color: #2aa198;">"src=$opt_info_dir/ dest=$opt_info_dir"</span>
+<span class="linenr">22: </span>                <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">&#23558;&#22791;&#20221;&#25991;&#20214;&#21457;&#36865;&#21040;&#30446;&#26631;&#30446;&#24405;</span>
+<span class="linenr">23: </span>                ansible test -m copy -a <span style="color: #2aa198;">"src=$opt_bak_dir/$opt_version/ dest=$opt_bak_dir/$opt_version"</span>
+<span class="linenr">24: </span>            <span style="color: #268bd2; font-weight: bold;">fi</span>
+<span class="linenr">25: </span>            <span style="color: #008787; background-color: #262626;">#</span><span style="color: #008787; background-color: #262626;">&#30446;&#26631;&#24320;&#22987;&#36827;&#34892;&#29615;&#22659;&#37096;&#32626;</span>
+<span class="linenr">26: </span>          ansible test -m script -a <span style="color: #2aa198;">"/data/project/test/script/sw_build.sh --local-repository=$opt_local_repo --webdir=$opt_web_dir --package=$opt_war_dir"</span>
+<span class="linenr">27: </span>        <span style="color: #268bd2; font-weight: bold;">else</span>
+<span class="linenr">28: </span>          <span style="color: #268bd2;">echo</span> <span style="color: #2aa198;">"project exit"</span>
+<span class="linenr">29: </span>        <span style="color: #268bd2; font-weight: bold;">fi</span>
+<span class="linenr">30: </span>        ;;
+<span class="linenr">31: </span>    rollback)
+<span class="linenr">32: </span>        <span style="color: #268bd2;">echo</span> <span style="color: #2aa198;">"rollback: $deploy_envirenment"</span>
+<span class="linenr">33: </span>        ansible test -m script -a <span style="color: #2aa198;">"/data/project/test/script/sw_rollback.sh --backup-dir=$opt_bak_dir --webdir=$opt_web_dir --infodir=$opt_info_dir --version=$opt_version --package=$opt_war_dir"</span>
+<span class="linenr">34: </span>        ;;
+<span class="linenr">35: </span>    *)
+<span class="linenr">36: </span>    <span style="color: #268bd2; font-weight: bold;">exit</span>
+<span class="linenr">37: </span>        ;;
+<span class="linenr">38: </span><span style="color: #268bd2; font-weight: bold;">esac</span>
+<span class="linenr">39: </span>
+</pre>
+</div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a id="org8e42b8e"></a>post-build actions<br /></li>
+</ul>
+</div>
+<div id="outline-container-org2591613" class="outline-4">
+<h4 id="org2591613">pipeline</h4>
+<div class="outline-text-4" id="text-org2591613">
+<ul class="org-ul">
+<li>这种方式是jenkins 推荐的方式,对其支持的也比较好,在终端页面,能看到其执行的状态,并可以查看日志.
+其配置语言类似groovy,官网有很多介绍,<a href="https://jenkins.io/doc/tutorials/build-a-java-app-with-maven/">java build demo</a> 这个是一个Java编译demo,可以参考下.</li>
+<li>mvn 打包,总是从中央仓库下载jar</li>
+<li>Jenkinsfile 调用shell如果权限被拒的话,将本地脚本添加执行权限eg: <code>chmod +x ./shell.sh</code></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: valjean</p>
+<p class="email">Email: <a href="mailto:valjean@foxmail.com">valjean@foxmail.com</a></p>
+<p class="date">Created: 2018-07-23 一 10:05</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -6,7 +6,7 @@
 <!-- 2018-07-23 一 10:05 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>GIT</title>
+<title>GITOLITE</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="valjean" />
 <style type="text/css">
@@ -235,99 +235,63 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">GIT</h1>
+<h1 class="title">GITOLITE</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org122a3cd">git 笔记</a>
+<li><a href="#org862f7db">gitolite</a>
 <ul>
-<li><a href="#org0aa9b06">搭建gitlab仓库</a></li>
-<li><a href="#orgbce5c7c">git 资源</a></li>
-<li><a href="#orga28bea0">使用gitlab遇到的问题</a>
+<li><a href="#org7d8f5ef">installation</a>
 <ul>
-<li><a href="#org4a16003">在gitlab服务器上直接导入已有项目，而不用通过远端push</a></li>
+<li><a href="#org02fd88b">gitolite github website</a></li>
+</ul>
+</li>
+<li><a href="#org61f3c0e">usage</a>
+<ul>
+<li><a href="#org7715896">ditto</a></li>
+</ul>
+</li>
+<li><a href="#org9c00727">supplement</a></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
 </div>
 </div>
-<div id="outline-container-org122a3cd" class="outline-2">
-<h2 id="org122a3cd">git 笔记</h2>
-<div class="outline-text-2" id="text-org122a3cd">
+<div id="outline-container-org862f7db" class="outline-2">
+<h2 id="org862f7db">gitolite</h2>
+<div class="outline-text-2" id="text-org862f7db">
 </div>
-<div id="outline-container-org0aa9b06" class="outline-3">
-<h3 id="org0aa9b06">搭建gitlab仓库</h3>
-<div class="outline-text-3" id="text-org0aa9b06">
+<div id="outline-container-org7d8f5ef" class="outline-3">
+<h3 id="org7d8f5ef">installation</h3>
+<div class="outline-text-3" id="text-org7d8f5ef">
+</div>
+<div id="outline-container-org02fd88b" class="outline-4">
+<h4 id="org02fd88b"><a href="https://github.com/sitaramc/gitolite">gitolite github website</a></h4>
+</div>
+</div>
+<div id="outline-container-org61f3c0e" class="outline-3">
+<h3 id="org61f3c0e">usage</h3>
+<div class="outline-text-3" id="text-org61f3c0e">
+</div>
+<div id="outline-container-org7715896" class="outline-4">
+<h4 id="org7715896">ditto</h4>
+</div>
+</div>
+<div id="outline-container-org9c00727" class="outline-3">
+<h3 id="org9c00727">supplement</h3>
+<div class="outline-text-3" id="text-org9c00727">
 <ul class="org-ul">
-<li>gitlab 已经封装的相当好了，看着官方文档安装即可</li>
-<li><a href="https://about.gitlab.com/installation/">gitlab installation  </a></li>
-<li><a href="https://docs.gitlab.com.cn/">gitlab 中文文档</a></li>
-<li><a href="https://gitlab.com/gitlab-org/omnibus-gitlab">omnibus-gitlab Readme </a> 介绍了安装、配置等信息，多阅读</li>
-<li>在配置邮件smtp时，有些服务商提供的端口是25，其他的安装示例文件配置即可</li>
+<li>参考gitolite 基本能解决问题,这里只对新建用户补充一些内容
+因为随着项目的增多,磁盘占用就会增加, <code>df -l</code> 命令可以查看各个挂载点的容量情况
+所以在新建用户的时候,就选择一个比较大的挂载点, <code>adduser --home</code>  可以指定新建用户
+的家目录. 随后按照以上的操作说明即可.</li>
 </ul>
-</div>
-</div>
-<div id="outline-container-orgbce5c7c" class="outline-3">
-<h3 id="orgbce5c7c">git 资源</h3>
-<div class="outline-text-3" id="text-orgbce5c7c">
-<ul class="org-ul">
-<li><a href="http://iissnan.com/progit/">pro git 中文版</a></li>
-<li><a href="https://git-scm.com/">git  官网</a> ，可以下载客户端软件，可以找到对应的使用说明</li>
-<li><a href="https://www.sourcetreeapp.com/">sourcetree  一个比较好用的git客户端</a></li>
-<li><a href="http://git.oschina.net/">国内免费的git站点&#x2013;码云</a></li>
-</ul>
-</div>
-</div>
-<div id="outline-container-orga28bea0" class="outline-3">
-<h3 id="orga28bea0">使用gitlab遇到的问题</h3>
-<div class="outline-text-3" id="text-orga28bea0">
-</div>
-<div id="outline-container-org4a16003" class="outline-4">
-<h4 id="org4a16003">在gitlab服务器上直接导入已有项目，而不用通过远端push</h4>
-<div class="outline-text-4" id="text-org4a16003">
-<ul class="org-ul">
-<li>首先弄明白普通代码仓库和裸仓库的区别
-<ul class="org-ul">
-<li><a href="https://segmentfault.com/a/1190000007686496">裸仓库和仓库的概念</a>  ，<a href="http://blog.sina.com.cn/s/blog_72ef7bea0101gcao.html">另一个说明</a></li>
-<li><a href="https://gitlab.com/gitlab-org/gitlab-ce/blob/master/doc/raketasks/import.md">gitlab bare import 相关说明</a></li>
-</ul></li>
-<li>将现有的普通仓库转化成裸仓库</li>
-</ul>
-<div class="org-src-container">
-<pre class="src src-sh"><span class="linenr">1: </span><span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">&#38543;&#20415;&#19968;&#20010;&#30446;&#24405;&#65292;&#23558;&#39033;&#30446;clone&#19979;&#26469;&#65292;&#38543;&#21518;&#36716;&#25104;&#35064;&#20179;&#24211;,&#35760;&#24471;&#26356;&#25913;&#23646;&#20027;</span>
-<span class="linenr">2: </span>  git clone   https://git.oschina.net/ld/J2Cache.git
-<span class="linenr">3: </span>  git clone  --bare  ./J2Cache/
-<span class="linenr">4: </span>  chown -R  git:git ./J2Cache.git/
-</pre>
-</div>
-<ul class="org-ul">
-<li>最后将转化后的裸仓库复制到gitlab的所指定的中央仓库中（记得更改属主）</li>
-</ul>
-<div class="org-src-container">
-<pre class="src src-sh"><span class="linenr">1: </span><span style="color: #008787; background-color: #262626;"># </span><span style="color: #008787; background-color: #262626;">&#22312;gitlab&#26381;&#21153;&#31471;&#30340;&#20013;&#22830;&#20179;&#24211;&#19979;&#24314;&#31435;&#23545;&#24212;&#30340;&#25991;&#20214;&#22841;&#65292;&#38543;&#21518;&#23558;&#36716;&#21270;&#21518;&#30340;&#20013;&#22830;&#20179;&#24211;&#22797;&#21046;&#21040;&#27492;&#30446;&#24405;</span>
-<span class="linenr">2: </span>  <span style="color: #268bd2;">cd</span> /data/git-data/repositories/
-<span class="linenr">3: </span>  sudo -u git mkdir bare
-<span class="linenr">4: </span>  cp -rp /var/tmp/J2Cache.git   /data/git-data/repositories/bare/
-</pre>
-</div>
-<ul class="org-ul">
-<li>最后执行gitlab  导入命令</li>
-</ul>
-<div class="org-src-container">
-<pre class="src src-sh"><span class="linenr">1: </span>gitlab-rake gitlab:import:repos<span style="color: #268bd2;">[</span><span style="color: #2aa198;">'/data/tools/gitlab/repositories/dev/'</span><span style="color: #268bd2;">]</span>
-<span class="linenr">2: </span>gitlab-rake gitlab:import:repos
-</pre>
-</div>
-</div>
 </div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: 2017-07-11 二 00:00</p>
 <p class="author">Author: valjean</p>
 <p class="email">Email: <a href="mailto:valjean@foxmail.com">valjean@foxmail.com</a></p>
 <p class="date">Created: 2018-07-23 一 10:05</p>
