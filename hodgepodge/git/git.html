@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-09-25 二 17:45 -->
+<!-- 2018-09-27 四 14:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>GIT</title>
@@ -242,16 +242,16 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#orgeed3308">git 笔记</a>
 <ul>
-<li><a href="#org8be6437">搭建gitlab仓库</a></li>
+<li><a href="#org8be6437">搭建gitlab仓库</a>
+<ul>
+<li><a href="#orgbd40686">普通方式搭建</a></li>
+<li><a href="#org18cb4c6">docker 搭建</a></li>
+</ul>
+</li>
 <li><a href="#orga53cc32">git 资源</a></li>
 <li><a href="#org5e73254">使用gitlab遇到的问题</a>
 <ul>
 <li><a href="#orga57e27a">在gitlab服务器上直接导入已有项目，而不用通过远端push</a></li>
-</ul>
-</li>
-<li><a href="#orgfa20620">docker gitlab install</a>
-<ul>
-<li><a href="#orge2f0330">centos 7</a></li>
 </ul>
 </li>
 </ul>
@@ -266,12 +266,53 @@ for the JavaScript code in this tag.
 <div id="outline-container-org8be6437" class="outline-3">
 <h3 id="org8be6437">搭建gitlab仓库</h3>
 <div class="outline-text-3" id="text-org8be6437">
+</div>
+<div id="outline-container-orgbd40686" class="outline-4">
+<h4 id="orgbd40686">普通方式搭建</h4>
+<div class="outline-text-4" id="text-orgbd40686">
 <ul class="org-ul">
 <li>gitlab 已经封装的相当好了，看着官方文档安装即可</li>
 <li><a href="https://about.gitlab.com/installation/">gitlab installation  </a></li>
 <li><a href="https://docs.gitlab.com.cn/">gitlab 中文文档</a></li>
 <li><a href="https://gitlab.com/gitlab-org/omnibus-gitlab">omnibus-gitlab Readme </a> 介绍了安装、配置等信息，多阅读</li>
-<li>在配置邮件smtp时，有些服务商提供的端口是25，其他的安装示例文件配置即可</li>
+<li><p>
+在配置邮件smtp时，有些服务商提供的端口是25，其他的安装示例文件配置即可,端口特别注意
+</p>
+<pre class="example">
+<span class="linenr"> 1: </span>gitlab_rails['gitlab_ssh_host'] = 'host'
+<span class="linenr"> 2: </span>gitlab_rails['smtp_enable'] = true
+<span class="linenr"> 3: </span>gitlab_rails['smtp_address'] = "smtp.xxx"
+<span class="linenr"> 4: </span>gitlab_rails['smtp_port'] = 465
+<span class="linenr"> 5: </span>gitlab_rails['smtp_domain'] = "domain"
+<span class="linenr"> 6: </span>gitlab_rails['smtp_openssl_verify_mode'] = 'none'
+<span class="linenr"> 7: </span>gitlab_rails['smtp_enable_starttls_auto'] = true
+<span class="linenr"> 8: </span>gitlab_rails['smtp_tls'] = true
+<span class="linenr"> 9: </span>gitlab_rails['smtp_user_name'] = "account"
+<span class="linenr">10: </span>gitlab_rails['smtp_password'] = "passwd"
+<span class="linenr">11: </span>gitlab_rails['smtp_authentication'] = "login"
+<span class="linenr">12: </span>gitlab_rails['gitlab_email_from'] = 'you eamil'
+<span class="linenr">13: </span>gitlab_rails['gitlab_email_reply_to'] = 'you eamil'
+</pre></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org18cb4c6" class="outline-4">
+<h4 id="org18cb4c6">docker 搭建</h4>
+<div class="outline-text-4" id="text-org18cb4c6">
+</div>
+<ul class="org-ul">
+<li><a id="org4f21726"></a><a href="https://docs.docker.com/install/linux/docker-ce/centos/#install-using-the-repository">install docker</a><br /></li>
+<li><a id="org560d18d"></a><a href="https://docs.gitlab.com/omnibus/docker/">gitlab install by docker</a><br /></li>
+<li><a id="org4c999cc"></a>systemctl status|start|restart|stop docker  (控制docker 命令)<br /></li>
+<li><a id="org2440d4a"></a><a href="https://blog.csdn.net/felix_yujing/article/details/52139070">修改一些默认配置</a><br /></li>
+<li><a id="orgbeb51e6"></a><a href="https://docs.gitlab.com.cn/omnibus/settings/smtp.html#smtp-without-ssl">conf smtp</a><br />
+<ul class="org-ul">
+<li><a id="orgfea74ea"></a>Notify.test_email('valjean@189.cn','gitlab-test','gitlab').deliver_now<br /></li>
+<li><a id="org043a9d2"></a>gitlab-rails console<br /></li>
+<li><a id="org6a6e057"></a>gitlab-ctl reconfigures<br /></li>
+<li><a id="org802dfab"></a>telnet smtp.xxx  25/xx 可以用telnet 先行尝试<br /></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -329,29 +370,13 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </div>
-<div id="outline-container-orgfa20620" class="outline-3">
-<h3 id="orgfa20620">docker gitlab install</h3>
-<div class="outline-text-3" id="text-orgfa20620">
-</div>
-<div id="outline-container-orge2f0330" class="outline-4">
-<h4 id="orge2f0330">centos 7</h4>
-<div class="outline-text-4" id="text-orge2f0330">
-</div>
-<ul class="org-ul">
-<li><a id="org4f21726"></a><a href="https://docs.docker.com/install/linux/docker-ce/centos/#install-using-the-repository">install docker</a><br /></li>
-<li><a id="org560d18d"></a><a href="https://docs.gitlab.com/omnibus/docker/">gitlab install by docker</a><br /></li>
-<li><a id="org4c999cc"></a>systemctl status|start|restart|stop docker  (控制docker 命令)<br /></li>
-<li><a id="org2440d4a"></a><a href="https://blog.csdn.net/felix_yujing/article/details/52139070">修改一些默认配置</a><br /></li>
-</ul>
-</div>
-</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="date">Date: 2017-07-11 二 00:00</p>
 <p class="author">Author: valjean</p>
 <p class="email">Email: <a href="mailto:valjean@foxmail.com">valjean@foxmail.com</a></p>
-<p class="date">Created: 2018-09-25 二 17:45</p>
+<p class="date">Created: 2018-09-27 四 14:02</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
