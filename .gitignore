@@ -4,5 +4,7 @@
 *.class
 *.iml
 *.#.*
+.#*
+.*swp
 resource
 public
