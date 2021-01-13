@@ -1,4 +1,8 @@
-# ignore the following files 
-
-./github
-
+!.gitignore
+.idea/
+*.iws
+*.class
+*.iml
+*.#.*
+resource
+public
