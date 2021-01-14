@@ -1,6 +1,6 @@
 #+title: 环境搭建
 #+date: 2021-01-13T23:30:36+08:00
-#+weight: 15
+#+weight: 1
 #+chapter: true
 #+pre: <b>1. </b>
 
