@@ -1,8 +1,6 @@
 #!/bin/bash
 
 set -e 
-set -x
-
 cd $(pwd)
 
 rm -rf docs
@@ -20,3 +18,4 @@ if [ -z $__msg ]; then
 fi
 
 git commit -m "$__msg"
+git push
