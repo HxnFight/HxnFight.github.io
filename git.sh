@@ -5,6 +5,8 @@ set -x
 
 cd $(pwd)
 
+rm -rf docs
+
 hugo 
 
 git add . 
