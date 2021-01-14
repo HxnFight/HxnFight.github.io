@@ -3,8 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://blog.valjean.cn/soul/module/</loc>
-    <lastmod>2021-01-13T23:31:33+08:00</lastmod>
+    <loc>http://blog.valjean.cn/</loc>
+    <lastmod>2021-01-13T23:27:41+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.valjean.cn/soul/</loc>
+    <lastmod>2021-01-13T23:27:41+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.valjean.cn/soul/env/basic/</loc>
   </url>
   
   <url>
@@ -18,17 +27,13 @@
   </url>
   
   <url>
-    <loc>http://blog.valjean.cn/soul/</loc>
-    <lastmod>2021-01-13T23:27:41+08:00</lastmod>
+    <loc>http://blog.valjean.cn/soul/module/</loc>
+    <lastmod>2021-01-13T23:31:33+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://blog.valjean.cn/categories/</loc>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://blog.valjean.cn/</loc>
   </url>
   
   <url>

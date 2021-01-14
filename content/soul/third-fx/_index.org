@@ -1,8 +1,9 @@
 #+title: Third Fx
 #+date: 2021-01-13T23:30:56+08:00
-#+weight: 5
+#+weight: 10
 #+chapter: true
-#+pre: <b>X. </b>
+#+pre: <b>3. </b>
 
-* Chapter X
+** soul 中第三方框架 
+   后续补充
 
