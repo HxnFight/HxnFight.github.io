@@ -19,8 +19,8 @@
   目前简单修改了一个主题来使用 hugo-theme-learn, 改的比较糙。也在慢慢的优化使用. 还有就是这个排版，也好头疼。等我再搞搞的
     github pages 设置    早期在github page中搭建blog是建立一个&amp;lt;USERNAME&amp;gt;.github.io项目。 将编译后的静态内容作为内容提交。   这几天在查看hugo的发布时，发现在可以在github.io项目中，建立一个docs的文件夹，来存放 生成的静态网站内容，这样方便和源码以前存放。
     soul 代码编译    下载代码
-  git clone https://github.com/dromara/soul.git    编译代码 shardingshpere 中也是采用这样的命令。 其中rat checkstyle 有空看看的，自己的项目中没有使用过.
-  mvn clean package install -Dmaven.</description>
+git clone https://github.com/dromara/soul.git    编译代码 shardingshpere 中也是采用这样的命令。 其中rat checkstyle 有空看看的，自己的项目中没有使用过.
+mvn clean package install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.</description>
     </item>
     
   </channel>

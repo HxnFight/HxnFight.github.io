@@ -21,30 +21,88 @@
 ** soul 代码编译
    - 下载代码
 
-#+begin_src  shell
+    #+begin_src  shell
     git clone  https://github.com/dromara/soul.git
-#+end_src
+    #+end_src
 
    - 编译代码
      shardingshpere 中也是采用这样的命令。
      其中rat checkstyle 有空看看的，自己的项目中没有使用过.
 
-#+begin_src  shell
+    #+begin_src  shell
     mvn clean package install 
     -Dmaven.test.skip=true 
     -Dmaven.javadoc.skip=true
     -Drat.skip=true 
     -Dcheckstyle.skip=true
-#+end_src
+    #+end_src
+
+   - deepin install docker 
+     [[https://gist.github.com/madkoding/3f9b02c431de5d748dfde6957b8b85ff][tutor]]
+     #+begin_src shell
+
+    sudo apt-get remove -y docker docker-engine docker.io containerd runc
+
+    sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+
+    curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+    sudo apt-key fingerprint 0EBFCD88
+
+    # 主要是这句，官方文档中，执行类似的这句报错
+    # https://docs.docker.com/engine/install/ubuntu/
+    #sudo add-apt-repository \
+    #   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    #   $(lsb_release -cs) \
+    #   stable"
+
+    printf 'deb [arch=amd64] https://download.docker.com/linux/debian stretch stable\n'  | sudo tee /etc/apt/sources.list.d/docker-ce.list
+
+    sudo apt-get update -y
+    sudo apt-get install -y docker-ce
+
+    sudo usermod -aG docker $(whoami)
+     #+end_src
+
+   - docker install mysql
+
+    #+begin_src  shell
+
+    docker run --rm -d --name local_mysql \
+    -v /data/docker/mysql/:/var/lib/mysql \
+    -p 3306:3306 -e MYSQL_ROOT_PASSWORD=xxxxxxx  mysql:5.7.32
+
+    #+end_src
+
+   - docker install zk
+
+    #+begin_src shell
+    docker run -d --rm   \
+    -p 2181:2181 -p 2888:2888 -p 3888:3888 -p 8080:8080 \
+    --name local-zk  \
+    -v /tmp/log/zk:/logs/ \
+    -e ZOO_LOG4J_PROP="INFO,ROLLINGFILE"  \
+    zookeeper
+
+
+    #+end_src
+
+   - soul-admin 启动
+
+     mysql 安装以后，修改soul-admin配置文件application-local.yml  中的db密码，就可以编译启动
+     db 相关文件soul会自动创建
+     
+     [[../images/soul-db.png]]
+
 
 ** 环境待改善的地方
     
    - emacs
      emacs 中配置spacemacs, 家里下载spacemacs比较慢。    
-     lisp抽空也许看下，完善自己的配置文件
      emacs 排版问题
    - vim
      vim 中 YouCompleteMe插件的编译安装
      vim本身配置的调试
    - deepin 开机中加入一些自启动项
+   - hugo 安装的版本过低，渲染org文件失败，折腾半天，升级最近的版本后
+     支持渲染org文件,这点疏忽了，公司环境安装的比较新。
    - rat checkstyle 查一些资料

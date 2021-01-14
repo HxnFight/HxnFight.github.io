@@ -12,19 +12,19 @@
     <title>文档环境、代码环境 :: Documentation for Hugo Learn Theme</title>
 
     
-    <link href="/css/nucleus.css?1610644224" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1610644224" rel="stylesheet">
-    <link href="/css/hybrid.css?1610644224" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1610644224" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1610644224" rel="stylesheet">
-    <link href="/css/auto-complete.css?1610644224" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1610644224" rel="stylesheet">
-    <link href="/css/theme.css?1610644224" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1610644224" rel="stylesheet">
+    <link href="/css/nucleus.css?1610665123" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1610665123" rel="stylesheet">
+    <link href="/css/hybrid.css?1610665123" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1610665123" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1610665123" rel="stylesheet">
+    <link href="/css/auto-complete.css?1610665123" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1610665123" rel="stylesheet">
+    <link href="/css/theme.css?1610665123" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1610665123" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1610644224"></script>
+    <script src="/js/jquery-3.3.1.min.js?1610665123"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -69,14 +69,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1610644224"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1610644224"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1610665123"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1610665123"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/blog.valjean.cn\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1610644224"></script>
+<script type="text/javascript" src="/js/search.js?1610665123"></script>
 
     
   </div>
@@ -373,25 +373,78 @@ soul 代码编译
 <ul>
 <li>
 <p>下载代码</p>
-</li>
-</ul>
 <div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    git clone  https://github.com/dromara/soul.git</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone  https://github.com/dromara/soul.git</code></pre></div>
 </div>
-<ul>
+</li>
 <li>
 <p>编译代码
 shardingshpere 中也是采用这样的命令。
 其中rat checkstyle 有空看看的，自己的项目中没有使用过.</p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mvn clean package install 
+-Dmaven.test.skip<span style="color:#f92672">=</span>true 
+-Dmaven.javadoc.skip<span style="color:#f92672">=</span>true
+-Drat.skip<span style="color:#f92672">=</span>true 
+-Dcheckstyle.skip<span style="color:#f92672">=</span>true</code></pre></div>
+</div>
+</li>
+<li>
+<p>deepin install docker 
+<a href="https://gist.github.com/madkoding/3f9b02c431de5d748dfde6957b8b85ff">tutor</a></p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+sudo apt-get remove -y docker docker-engine docker.io containerd runc
+
+sudo apt-get install -y apt-transport-https ca-certificates curl gnupg2 software-properties-common
+
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+
+<span style="color:#75715e"># 主要是这句，官方文档中，执行类似的这句报错</span>
+<span style="color:#75715e"># https://docs.docker.com/engine/install/ubuntu/</span>
+<span style="color:#75715e">#sudo add-apt-repository \</span>
+<span style="color:#75715e">#   &#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu \</span>
+<span style="color:#75715e">#   $(lsb_release -cs) \</span>
+<span style="color:#75715e">#   stable&#34;</span>
+
+printf <span style="color:#e6db74">&#39;deb [arch=amd64] https://download.docker.com/linux/debian stretch stable\n&#39;</span>  | sudo tee /etc/apt/sources.list.d/docker-ce.list
+
+sudo apt-get update -y
+sudo apt-get install -y docker-ce
+
+sudo usermod -aG docker <span style="color:#66d9ef">$(</span>whoami<span style="color:#66d9ef">)</span></code></pre></div>
+</div>
+</li>
+<li>
+<p>docker install mysql</p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
+docker run --rm -d --name local_mysql <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /data/docker/mysql/:/var/lib/mysql <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-p 3306:3306 -e MYSQL_ROOT_PASSWORD<span style="color:#f92672">=</span>xxxxxxx  mysql:5.7.32</code></pre></div>
+</div>
+</li>
+<li>
+<p>docker install zk</p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run -d --rm   <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-p 2181:2181 -p 2888:2888 -p 3888:3888 -p 8080:8080 <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--name local-zk  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-v /tmp/log/zk:/logs/ <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>-e ZOO_LOG4J_PROP<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;INFO,ROLLINGFILE&#34;</span>  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>zookeeper</code></pre></div>
+</div>
+</li>
+<li>
+<p>soul-admin 启动</p>
+<p>
+mysql 安装以后，修改soul-admin配置文件application-local.yml  中的db密码，就可以编译启动
+db 相关文件soul会自动创建</p>
+<p>
+<img src="../images/soul-db.png" alt="../images/soul-db.png" title="../images/soul-db.png" /></p>
 </li>
 </ul>
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">    mvn clean package install 
-    -Dmaven.test.skip<span style="color:#f92672">=</span>true 
-    -Dmaven.javadoc.skip<span style="color:#f92672">=</span>true
-    -Drat.skip<span style="color:#f92672">=</span>true 
-    -Dcheckstyle.skip<span style="color:#f92672">=</span>true</code></pre></div>
-</div>
 </div>
 </div>
 <div id="outline-container-headline-4" class="outline-3">
@@ -403,7 +456,6 @@ shardingshpere 中也是采用这样的命令。
 <li>
 <p>emacs
 emacs 中配置spacemacs, 家里下载spacemacs比较慢。    
-lisp抽空也许看下，完善自己的配置文件
 emacs 排版问题</p>
 </li>
 <li>
@@ -413,6 +465,10 @@ vim本身配置的调试</p>
 </li>
 <li>
 <p>deepin 开机中加入一些自启动项</p>
+</li>
+<li>
+<p>hugo 安装的版本过低，渲染org文件失败，折腾半天，升级最近的版本后
+支持渲染org文件,这点疏忽了，公司环境安装的比较新。</p>
 </li>
 <li>
 <p>rat checkstyle 查一些资料</p>
@@ -546,19 +602,19 @@ vim本身配置的调试</p>
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1610644224"></script>
-    <script src="/js/perfect-scrollbar.min.js?1610644224"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1610644224"></script>
-    <script src="/js/jquery.sticky.js?1610644224"></script>
-    <script src="/js/featherlight.min.js?1610644224"></script>
-    <script src="/js/highlight.pack.js?1610644224"></script>
+    <script src="/js/clipboard.min.js?1610665123"></script>
+    <script src="/js/perfect-scrollbar.min.js?1610665123"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1610665123"></script>
+    <script src="/js/jquery.sticky.js?1610665123"></script>
+    <script src="/js/featherlight.min.js?1610665123"></script>
+    <script src="/js/highlight.pack.js?1610665123"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1610644224"></script>
-    <script src="/js/learn.js?1610644224"></script>
-    <script src="/js/hugo-learn.js?1610644224"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1610665123"></script>
+    <script src="/js/learn.js?1610665123"></script>
+    <script src="/js/hugo-learn.js?1610665123"></script>
     
         
-            <script src="/mermaid/mermaid.js?1610644224"></script>
+            <script src="/mermaid/mermaid.js?1610665123"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
