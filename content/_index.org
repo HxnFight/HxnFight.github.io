@@ -2,7 +2,7 @@
 #+date: 2021-01-13T23:27:41+08:00
 #+weight: 5
 #+chapter: true
-#+pre: <b>1 </b>
+#+pre: <b></b>
 
 ** soul 学习笔记 
    - [[https://dromara.org/zh-cn/docs/soul/soul.html][官方文档]]

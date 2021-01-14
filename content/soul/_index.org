@@ -2,6 +2,6 @@
 #+date: 2021-01-13T23:27:41+08:00
 #+weight: 5
 #+chapter: true
-#+pre: <b>1. </b>
+#+pre: <b> </b>
 
 ** 开篇
