@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Categories :: Documentation for Hugo Learn Theme</title>
+    <title>divide 模块实践 :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1610734901" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/categories/">
+  <body class="" data-url="/soul/exercise/http-divie/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -96,7 +96,7 @@
   
     
     <li data-nav-id="/soul/" title="soul 学习笔记" class="dd-item
-        
+        parent
         
         
         ">
@@ -186,7 +186,7 @@
   
     
     <li data-nav-id="/soul/exercise/" title="模块实践" class="dd-item
-        
+        parent
         
         
         ">
@@ -214,7 +214,7 @@
  
   
     
-      <li data-nav-id="/soul/exercise/http-divie/" title="divide 模块实践" class="dd-item ">
+      <li data-nav-id="/soul/exercise/http-divie/" title="divide 模块实践" class="dd-item active">
         <a href="/soul/exercise/http-divie/">
         divide 模块实践
         <i class="fas fa-check read-icon"></i>
@@ -298,7 +298,19 @@
             
           
           
-            <a href='/'>soul 学习笔记</a> > Categories
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/exercise/'>模块实践</a> > divide 模块实践
+          
+        
+          
+        
           
         
           
@@ -309,7 +321,22 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">divide 模块</a>
+<ul>
+<li><a href="#headline-2">参考手册</a>
+</li>
+<li><a href="#headline-3">启动项目</a>
+</li>
+<li><a href="#headline-4">测试请求</a>
+</li>
+<li><a href="#headline-5">总结</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -325,9 +352,7 @@
           
             <h1>
               
-                category ::
-              
-              Categories
+              divide 模块实践
             </h1>
           
 
@@ -335,14 +360,131 @@
 
 
 
-
-
+<div id="outline-container-headline-1" class="outline-3">
+<h3 id="headline-1">
+divide 模块
+</h3>
+<div id="outline-text-headline-1" class="outline-text-3">
+<div id="outline-container-headline-2" class="outline-4">
+<h4 id="headline-2">
+参考手册
+</h4>
+<div id="outline-text-headline-2" class="outline-text-4">
+<p>在项目根目录下的doc</p>
+<div class="src src-sh">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">  doc
+  ├── user-http.md
+  └── plugin-divide.md</code></pre></div>
+</div>
+<p>
+    通过这两个文档的介绍，针对http的调用，明白两件事。</p>
 <ul>
-	
+<li>
+<p>会在自己的项目中引入soul依赖，并且配置相关的接口. 让soul代理自己的接口</p>
+</li>
+<li>
+<p>会调用soul的接口, 会配置admin中divide插件</p>
+</li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-4">
+<h4 id="headline-3">
+启动项目
+</h4>
+<div id="outline-text-headline-3" class="outline-text-4">
+<p>
+    启动没有什么特殊配置，idea下一键启动. 启动后注意下各个服务的端口号,soul默认的端口如下</p>
+<table>
+<thead>
+<tr>
+<th>server</th>
+<th class="align-right">port</th>
+<th>comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SoulAdminBootstrap</td>
+<td class="align-right">9095</td>
+<td>管理后台</td>
+</tr>
+<tr>
+<td>SoulBootstrapApplication</td>
+<td class="align-right">9195</td>
+<td>网关</td>
+</tr>
+<tr>
+<td>SoulTestHttpApplication</td>
+<td class="align-right">8188</td>
+<td>测试项目</td>
+</tr>
+</tbody>
+</table>
+<p>
+   在用soul 代理http接口后，请求地址和端口需要换成网关的。<br>
+   接口的url也需要按照管理后台中的配置请求. 具体的请求，后面有样例.</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-4">
+<h4 id="headline-4">
+测试请求
+</h4>
+<div id="outline-text-headline-4" class="outline-text-4">
+<ul>
+<li>
+<p>post 的请求方式 </p>
+</li>
+</ul>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  <span style="color:#75715e"># 项目自身的请求</span>
+  curl -s  -H <span style="color:#e6db74">&#34;Content-type: application/json&#34;</span> -d <span style="color:#e6db74">&#39;@./param.json&#39;</span>  -X POST localhost:8188//order/save   | jq  <span style="color:#e6db74">&#39;.&#39;</span>n
+  <span style="color:#75715e"># soul 代理的请求</span>
+  curl -s  -H <span style="color:#e6db74">&#34;Content-type: application/json&#34;</span> -d <span style="color:#e6db74">&#39;@./param.json&#39;</span>  -X POST localhost:9195/http/order/save   | jq  <span style="color:#e6db74">&#39;.&#39;</span>n</code></pre></div>
+</div>
+<p>
+  <img src="../images/http-post.png" alt="../images/http-post.png" title="../images/http-post.png" /></p>
+<ul>
+<li>
+<p>get 的请求方式</p>
+</li>
+</ul>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">  # 项目自身的请求
+curl -s  localhost:8188/order/findById\?id=1 | jq &#39;.&#39;
+  # soul 代理的请求
+curl -s  localhost:9195/http/order/findById\?id=1 | jq &#39;.&#39;</code></pre></div>
+</div>
+<p>
+  <img src="../images/http-get.png" alt="../images/http-get.png" title="../images/http-get.png" /></p>
+<p>
+
+<div class="notices tip" ><p>
+     补充：jq是终端下特好使的json 处理工具 –&gt; <a href="https://stedolan.github.io/jq/manual/">jq-manual</a></p>
+</div>
+ </p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-4">
+<h4 id="headline-5">
+总结
+</h4>
+<div id="outline-text-headline-5" class="outline-text-4">
+<p>
+    项目中使用到了webflux相关内容，这块之前没有接触过，周末会补充一下。<br>
+    通过项目中自带的docs、example-http.对soul的架构有了进一步的理解。</p>
+<p>
+    自己简要理解如下： <img src="../images/soul-fx.png" alt="../images/soul-fx.png" title="../images/soul-fx.png" /> . 后续会补充自己的认知流程图</p>
+<p>
+    官网的架构图如下:
+    <img src="https://yu199195.github.io/images/soul/soul-framework.png" alt="https://yu199195.github.io/images/soul/soul-framework.png" title="https://yu199195.github.io/images/soul/soul-framework.png" /></p>
+</div>
+</div>
+</div>
+</div>
 
 
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
@@ -377,8 +519,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -394,6 +534,9 @@
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -427,6 +570,7 @@
             
                 
                     
+                    
                 
                 
 
@@ -439,6 +583,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -466,8 +611,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="/soul/exercise/" title="模块实践"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="/soul/" title="soul 学习笔记" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="/soul/env/" title="环境搭建" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

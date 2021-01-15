@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>模块实践 on Documentation for Hugo Learn Theme</title>
+    <link>http://blog.valjean.cn/soul/exercise/</link>
+    <description>Recent content in 模块实践 on Documentation for Hugo Learn Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Fri, 15 Jan 2021 23:37:57 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/soul/exercise/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>divide 模块实践</title>
+      <link>http://blog.valjean.cn/soul/exercise/http-divie/</link>
+      <pubDate>Fri, 15 Jan 2021 23:38:49 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/exercise/http-divie/</guid>
+      <description>divide 模块  参考手册  在项目根目录下的doc
+doc ├── user-http.md └── plugin-divide.md   通过这两个文档的介绍，针对http的调用，明白两件事。
+  会在自己的项目中引入soul依赖，并且配置相关的接口. 让soul代理自己的接口
+  会调用soul的接口, 会配置admin中divide插件
+    启动项目   启动没有什么特殊配置，idea下一键启动. 启动后注意下各个服务的端口号,soul默认的端口如下
+   server port comment     SoulAdminBootstrap 9095 管理后台   SoulBootstrapApplication 9195 网关   SoulTestHttpApplication 8188 测试项目     在用soul 代理http接口后，请求地址和端口需要换成网关的。
+接口的url也需要按照管理后台中的配置请求. 具体的请求，后面有样例.
+  测试请求    post 的请求方式   # 项目自身的请求 curl -s -H &amp;#34;Content-type: application/json&amp;#34; -d &amp;#39;@.</description>
+    </item>
+    
+  </channel>
+</rss>

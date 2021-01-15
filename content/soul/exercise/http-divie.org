@@ -1,0 +1,70 @@
+#+title: divide 模块实践
+#+date:  2021-01-15T23:38:49+08:00
+#+weight: 5
+
+** divide 模块
+
+*** 参考手册
+    在项目根目录下的doc
+    #+begin_src sh 
+      doc
+      ├── user-http.md
+      └── plugin-divide.md
+    #+end_src
+    
+    通过这两个文档的介绍，针对http的调用，明白两件事。
+    - 会在自己的项目中引入soul依赖，并且配置相关的接口. 让soul代理自己的接口
+    - 会调用soul的接口, 会配置admin中divide插件
+      
+*** 启动项目
+    
+    启动没有什么特殊配置，idea下一键启动. 启动后注意下各个服务的端口号,soul默认的端口如下
+    
+   | server                   | port | comment  |
+   |--------------------------+------+----------|
+   | SoulAdminBootstrap       | 9095 | 管理后台 |
+   | SoulBootstrapApplication | 9195 | 网关     |
+   | SoulTestHttpApplication  | 8188 | 测试项目 |
+    
+   在用soul 代理http接口后，请求地址和端口需要换成网关的。\\
+   接口的url也需要按照管理后台中的配置请求. 具体的请求，后面有样例.
+
+*** 测试请求
+    
+    - post 的请求方式 
+#+begin_src shell
+  # 项目自身的请求
+  curl -s  -H "Content-type: application/json" -d '@./param.json'  -X POST localhost:8188//order/save   | jq  '.'n
+  # soul 代理的请求
+  curl -s  -H "Content-type: application/json" -d '@./param.json'  -X POST localhost:9195/http/order/save   | jq  '.'n
+#+end_src
+
+  [[../images/http-post.png]]
+  
+    - get 的请求方式
+#+begin_src 
+  # 项目自身的请求
+curl -s  localhost:8188/order/findById\?id=1 | jq '.'
+  # soul 代理的请求
+curl -s  localhost:9195/http/order/findById\?id=1 | jq '.'
+#+end_src
+
+  [[../images/http-get.png]]
+  
+{{% notice tip %}}
+     补充：jq是终端下特好使的json 处理工具 --> [[https://stedolan.github.io/jq/manual/][jq-manual]]
+{{% /notice %}} 
+      
+*** 总结
+    
+    项目中使用到了webflux相关内容，这块之前没有接触过，周末会补充一下。\\
+    通过项目中自带的docs、example-http.对soul的架构有了进一步的理解。
+    
+    自己简要理解如下： [[../images/soul-fx.png]] . 后续会补充自己的认知流程图
+    
+    官网的架构图如下:
+    [[https://yu199195.github.io/images/soul/soul-framework.png]]
+                  
+   
+
+
