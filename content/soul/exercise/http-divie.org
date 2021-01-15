@@ -52,7 +52,7 @@ curl -s  localhost:9195/http/order/findById\?id=1 | jq '.'
   [[../images/http-get.png]]
   
 {{% notice tip %}}
-     补充：jq是终端下特好使的json 处理工具 --> [[https://stedolan.github.io/jq/manual/][jq-manual]]
+     安利一下：  [[https://stedolan.github.io/jq/manual/][jq]] 终端下处理json 文本、文件的瑞士军刀 
 {{% /notice %}} 
       
 *** 总结
