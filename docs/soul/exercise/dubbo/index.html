@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Tags :: Documentation for Hugo Learn Theme</title>
+    <title>Dubbo 模块实践 :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1610811324" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/tags/">
+  <body class="" data-url="/soul/exercise/dubbo/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -96,7 +96,7 @@
   
     
     <li data-nav-id="/soul/" title="soul 学习笔记" class="dd-item
-        
+        parent
         
         
         ">
@@ -186,7 +186,7 @@
   
     
     <li data-nav-id="/soul/exercise/" title="模块实践" class="dd-item
-        
+        parent
         
         
         ">
@@ -214,7 +214,7 @@
  
   
     
-      <li data-nav-id="/soul/exercise/dubbo/" title="Dubbo 模块实践" class="dd-item ">
+      <li data-nav-id="/soul/exercise/dubbo/" title="Dubbo 模块实践" class="dd-item active">
         <a href="/soul/exercise/dubbo/">
         Dubbo 模块实践
         <i class="fas fa-check read-icon"></i>
@@ -1008,7 +1008,19 @@
             
           
           
-            <a href='/'>soul 学习笔记</a> > Tags
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/exercise/'>模块实践</a> > Dubbo 模块实践
+          
+        
+          
+        
           
         
           
@@ -1019,7 +1031,22 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">dubbo模块</a>
+<ul>
+<li><a href="#headline-2">参考手册</a>
+</li>
+<li><a href="#headline-3">实际测试</a>
+</li>
+<li><a href="#headline-4">遇到的问题</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-5">手册回顾</a>
+</li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -1035,9 +1062,7 @@
           
             <h1>
               
-                tag ::
-              
-              Tags
+              Dubbo 模块实践
             </h1>
           
 
@@ -1045,14 +1070,191 @@
 
 
 
-
-
+<div id="outline-container-headline-1" class="outline-4">
+<h4 id="headline-1">
+dubbo模块
+</h4>
+<div id="outline-text-headline-1" class="outline-text-4">
+<div id="outline-container-headline-2" class="outline-5">
+<h5 id="headline-2">
+参考手册
+</h5>
+<div id="outline-text-headline-2" class="outline-text-5">
+<p><a href="https://dromara.org/zh-cn/docs/soul/plugin-dubbo.html">官方:dubbo插件</a> 
+    <a href="https://dromara.org/zh-cn/docs/soul/user-dubbo.html">官方:dubbo用户</a> </p>
+<p>
+    文档说明很详细的,其中提到以下几个重点</p>
 <ul>
-	
+<li>
+<p>dubbo 服务接入soul的配置</p>
+</li>
+<li>
+<p>接入之后的调用方式, 参数传递方式. <span style="text-decoration: underline;">全部是post请求 Content-Type: application/json格式.</span></p>
+</li>
+<li>
+<p>将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.</p>
+</li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-5">
+<h5 id="headline-3">
+实际测试
+</h5>
+<div id="outline-text-headline-3" class="outline-text-5">
+<p>
+  
+<div class="notices tip" ><p>
+    偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. <br>
+    具体的使用可以参考官方文档: <a href="https://www.jetbrains.com/help/idea/2020.3/http-client-in-product-code-editor.html">idea tools http client</a> </p>
+</div>
+</p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> <span style="color:#75715e"># dubbo 插件的要用post请求,请求类型为 Content-Type: application/json</span>
+ <span style="color:#75715e"># 测试查询数据</span>
+ POST http://localhost:9195/dubbo/findById
+ Content-Type: application/json
+
+ <span style="color:#f92672">{</span>
+   <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;999&#34;</span>
+ <span style="color:#f92672">}</span>
+
+ <span style="color:#75715e"># 测试保存数据</span>
+ POST http://localhost:9195/dubbo/insert
+ Content-Type: application/json
+
+ <span style="color:#f92672">{</span>
+   <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;999&#34;</span>,
+   <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;valjean&#34;</span>
+ <span style="color:#f92672">}</span></code></pre></div>
+</div>
+<p>
+    Tip: 请求记录文件,可以直接导入idea中
+    
+<section class="attachments orange">
+	<label>
+		<i class="fas fa-paperclip" aria-hidden="true"></i>
+		
+	</label>
+	
+		
+	
+	<div class="attachments-files">
+	
+		
+		
+			<li>
+				<a href="/soul/exercise/dubbo.files/dubbo-test.http" >
+					dubbo-test.http
+				</a>
+				(0 )
+			</li>
+		
+	
+	</div>
+	
+</section>
+
+</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-5">
+<h5 id="headline-4">
+遇到的问题
+</h5>
+<div id="outline-text-headline-4" class="outline-text-5">
+<ul>
+<li>
+<p>dubbo 启动之后报错
+这个暂未定位到什么地方出错</p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">java.lang.IllegalStateException: No such application config! Please add &lt;dubbo:application name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;...&#34;</span> /&gt; to your spring config.
+at com.alibaba.dubbo.config.AbstractInterfaceConfig.checkApplication<span style="color:#f92672">(</span>AbstractInterfaceConfig.java:145<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>dubbo-2.6.5.jar:2.6.5<span style="color:#f92672">]</span>
+at com.alibaba.dubbo.config.ReferenceConfig.init<span style="color:#f92672">(</span>ReferenceConfig.java:278<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>dubbo-2.6.5.jar:2.6.5<span style="color:#f92672">]</span>
+at com.alibaba.dubbo.config.ReferenceConfig.get<span style="color:#f92672">(</span>ReferenceConfig.java:163<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>dubbo-2.6.5.jar:2.6.5<span style="color:#f92672">]</span>
+at org.dromara.soul.plugin.alibaba.dubbo.cache.ApplicationConfigCache.build<span style="color:#f92672">(</span>ApplicationConfigCache.java:166<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>classes/:na<span style="color:#f92672">]</span>
+at org.dromara.soul.plugin.alibaba.dubbo.cache.ApplicationConfigCache.initRef<span style="color:#f92672">(</span>ApplicationConfigCache.java:130<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>classes/:na<span style="color:#f92672">]</span>
+at org.dromara.soul.plugin.alibaba.dubbo.subscriber.AlibabaDubboMetaDataSubscriber.onSubscribe<span style="color:#f92672">(</span>AlibabaDubboMetaDataSubscriber.java:43<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>classes/:na<span style="color:#f92672">]</span></code></pre></div>
+</div>
+</li>
+<li>
+<p>soul-examples-dubbo 启动之后,访问显示的divide插件信息
+需要在soul-admin中打开dubbo的插件开关 <code>系统管理---&gt; 插件管理</code> <br>
+再个就是注意请求的数据类型,要个bean中定义的一致.</p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  <span style="color:#75715e">#网关报错如下</span>
+   can not match selector data: divide
+
+  <span style="color:#75715e"># 请求结果如下</span>
+  <span style="color:#f92672">{</span>
+    <span style="color:#e6db74">&#34;code&#34;</span>: -107,
+    <span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Can not find selector, please check your configuration!&#34;</span>,
+    <span style="color:#e6db74">&#34;data&#34;</span>: null
+  <span style="color:#f92672">}</span></code></pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-4">
+<h4 id="headline-5">
+手册回顾
+</h4>
+<div id="outline-text-headline-5" class="outline-text-4">
+<p>再回顾官方文档的过程中,记录一下新的兴趣点</p>
+<ul>
+<li>
+<p>soul 配置规则学习
+<a href="https://dromara.org/zh-cn/docs/soul/selector.html">官方文档说明</a> <br>
+其中最重要的三个概念: 插件 选择器 规则  <br>
+一个插件对应多个选择器, 一个选择器对应多个规则  <br>
+一个选择器对应多个匹配条件, 一个规则对应多个匹配条件  <br>
+反应到表结构上,可以参考 <a href="https://dromara.org/zh-cn/docs/soul/db.html">数据库设计</a> ,后续会记录详细的配置使用记录</p>
+</li>
+<li>
+<p>soul 插件
+soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能用到的有</p>
+<ul>
+<li>
+<p>divide </p>
+</li>
+<li>
+<p>sign</p>
+</li>
+<li>
+<p>rewrite</p>
+</li>
+<li>
+<p>waf</p>
+</li>
+<li>
+<p>monitor</p>
+</li>
+</ul>
+<p>会着重看一下的 </p>
+</li>
+<li>
+<p>如下几个功能点特感兴趣</p>
+<ul>
+<li>
+<p>soul-admin与soul网关数据同步的三种方式</p>
+</li>
+<li>
+<p>soul-client对本地接口数据的收集实现</p>
+</li>
+<li>
+<p>插件热插拔的实现机制</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
 
 
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
@@ -1087,8 +1289,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -1105,37 +1305,8 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
                         
-            
-            
-                
                     
                 
                 
@@ -1161,10 +1332,47 @@
             
         
                     
+            
+        
+                    
                         
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -1704,8 +1912,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="/soul/exercise/" title="模块实践"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="/soul/" title="soul 学习笔记" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="/soul/exercise/http-divie/" title="divide 模块实践" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

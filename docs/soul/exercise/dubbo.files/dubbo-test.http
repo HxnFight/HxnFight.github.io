@@ -1,0 +1,20 @@
+### dubbo 插件的要用post请求,请求类型为 Content-Type: application/json
+### 测试查询数据
+POST http://localhost:9195/dubbo/findById
+Content-Type: application/json
+
+{
+  "id": "999"
+}
+
+<> 2021-01-16T224625.200.json
+
+### 测试保存数据
+POST http://localhost:9195/dubbo/insert
+Content-Type: application/json
+
+{
+  "id": "999",
+  "name": "valjean"
+}
+

@@ -8,6 +8,19 @@
     <language>en-US</language>
     <lastBuildDate>Fri, 15 Jan 2021 23:37:57 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/soul/exercise/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Dubbo 模块实践</title>
+      <link>http://blog.valjean.cn/soul/exercise/dubbo/</link>
+      <pubDate>Sat, 16 Jan 2021 17:35:36 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/exercise/dubbo/</guid>
+      <description>dubbo模块  参考手册  官方:dubbo插件 官方:dubbo用户  文档说明很详细的,其中提到以下几个重点
+  dubbo 服务接入soul的配置
+  接入之后的调用方式, 参数传递方式. 全部是post请求 Content-Type: application/json格式.
+  将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.
+    实际测试    偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. 具体的使用可以参考官方文档: idea tools http client  # dubbo 插件的要用post请求,请求类型为 Content-Type: application/json # 测试查询数据 POST http://localhost:9195/dubbo/findById Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } # 测试保存数据 POST http://localhost:9195/dubbo/insert Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; }   Tip: 请求记录文件,可以直接导入idea中     dubbo-test.</description>
+    </item>
+    
+    <item>
       <title>divide 模块实践</title>
       <link>http://blog.valjean.cn/soul/exercise/http-divie/</link>
       <pubDate>Fri, 15 Jan 2021 23:38:49 +0800</pubDate>

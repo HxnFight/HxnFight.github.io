@@ -1,0 +1,96 @@
+#+title: Dubbo 模块实践
+#+date:  2021-01-16T17:35:36+08:00
+#+weight: 5
+
+
+*** dubbo模块
+**** 参考手册
+    [[https://dromara.org/zh-cn/docs/soul/plugin-dubbo.html][官方:dubbo插件]] 
+    [[https://dromara.org/zh-cn/docs/soul/user-dubbo.html][官方:dubbo用户]] 
+    
+    文档说明很详细的,其中提到以下几个重点
+      - dubbo 服务接入soul的配置
+      - 接入之后的调用方式, 参数传递方式. _全部是post请求 Content-Type: application/json格式._
+      - 将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.
+
+**** 实际测试
+    
+  {{% notice tip %}}
+    偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. \\
+    具体的使用可以参考官方文档: [[https://www.jetbrains.com/help/idea/2020.3/http-client-in-product-code-editor.html][idea tools http client]] 
+ {{% /notice %}}
+   
+    #+begin_src shell
+     # dubbo 插件的要用post请求,请求类型为 Content-Type: application/json
+     # 测试查询数据
+     POST http://localhost:9195/dubbo/findById
+     Content-Type: application/json
+
+     {
+       "id": "999"
+     }
+
+     # 测试保存数据
+     POST http://localhost:9195/dubbo/insert
+     Content-Type: application/json
+
+     {
+       "id": "999",
+       "name": "valjean"
+     }
+   
+    #+end_src
+   
+    Tip: 请求记录文件,可以直接导入idea中
+    {{%attachments style="orange" /%}}
+
+   
+**** 遇到的问题
+     - dubbo 启动之后报错
+      这个暂未定位到什么地方出错
+      #+begin_src shell
+ java.lang.IllegalStateException: No such application config! Please add <dubbo:application name="..." /> to your spring config.
+	 at com.alibaba.dubbo.config.AbstractInterfaceConfig.checkApplication(AbstractInterfaceConfig.java:145) ~[dubbo-2.6.5.jar:2.6.5]
+	 at com.alibaba.dubbo.config.ReferenceConfig.init(ReferenceConfig.java:278) ~[dubbo-2.6.5.jar:2.6.5]
+	 at com.alibaba.dubbo.config.ReferenceConfig.get(ReferenceConfig.java:163) ~[dubbo-2.6.5.jar:2.6.5]
+	 at org.dromara.soul.plugin.alibaba.dubbo.cache.ApplicationConfigCache.build(ApplicationConfigCache.java:166) ~[classes/:na]
+	 at org.dromara.soul.plugin.alibaba.dubbo.cache.ApplicationConfigCache.initRef(ApplicationConfigCache.java:130) ~[classes/:na]
+	 at org.dromara.soul.plugin.alibaba.dubbo.subscriber.AlibabaDubboMetaDataSubscriber.onSubscribe(AlibabaDubboMetaDataSubscriber.java:43) ~[classes/:na]
+      #+end_src
+     
+     - soul-examples-dubbo 启动之后,访问显示的divide插件信息
+      需要在soul-admin中打开dubbo的插件开关 ~系统管理---> 插件管理~ \\
+      再个就是注意请求的数据类型,要个bean中定义的一致.
+     
+      #+begin_src shell
+        #网关报错如下
+         can not match selector data: divide
+
+        # 请求结果如下
+        {
+          "code": -107,
+          "message": "Can not find selector, please check your configuration!",
+          "data": null
+        }
+      #+end_src
+     
+*** 手册回顾
+    再回顾官方文档的过程中,记录一下新的兴趣点
+    - soul 配置规则学习
+     [[https://dromara.org/zh-cn/docs/soul/selector.html][官方文档说明]] \\
+     其中最重要的三个概念: 插件 选择器 规则  \\
+     一个插件对应多个选择器, 一个选择器对应多个规则  \\
+     一个选择器对应多个匹配条件, 一个规则对应多个匹配条件  \\
+     反应到表结构上,可以参考 [[https://dromara.org/zh-cn/docs/soul/db.html][数据库设计]] ,后续会记录详细的配置使用记录
+    - soul 插件
+     soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能用到的有
+     * divide 
+     * sign
+     * rewrite
+     * waf
+     * monitor
+     会着重看一下的 
+    - 如下几个功能点特感兴趣
+     - soul-admin与soul网关数据同步的三种方式
+     - soul-client对本地接口数据的收集实现
+     - 插件热插拔的实现机制

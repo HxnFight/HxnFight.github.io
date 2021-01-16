@@ -8,6 +8,19 @@
     <language>en-US</language>
     <lastBuildDate>Wed, 13 Jan 2021 23:27:41 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Dubbo 模块实践</title>
+      <link>http://blog.valjean.cn/soul/exercise/dubbo/</link>
+      <pubDate>Sat, 16 Jan 2021 17:35:36 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/exercise/dubbo/</guid>
+      <description>dubbo模块  参考手册  官方:dubbo插件 官方:dubbo用户  文档说明很详细的,其中提到以下几个重点
+  dubbo 服务接入soul的配置
+  接入之后的调用方式, 参数传递方式. 全部是post请求 Content-Type: application/json格式.
+  将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.
+    实际测试    偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. 具体的使用可以参考官方文档: idea tools http client  # dubbo 插件的要用post请求,请求类型为 Content-Type: application/json # 测试查询数据 POST http://localhost:9195/dubbo/findById Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } # 测试保存数据 POST http://localhost:9195/dubbo/insert Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; }   Tip: 请求记录文件,可以直接导入idea中     dubbo-test.</description>
+    </item>
+    
+    <item>
       <title>divide 模块实践</title>
       <link>http://blog.valjean.cn/soul/exercise/http-divie/</link>
       <pubDate>Fri, 15 Jan 2021 23:38:49 +0800</pubDate>
@@ -29,14 +42,442 @@ doc ├── user-http.md └── plugin-divide.md   通过这两个文档的
       <pubDate>Thu, 14 Jan 2021 22:38:21 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/env/basic/</guid>
-      <description>hugo theme 选择    一直再找一个比较合适的blog生成工具. 最早的时候是自己编写markdown，上传到csdn中.
-  后来接触到vim emacs，使用emacs orgmode 自带的publish系统搭建了一套自己的wiki， 也整合上传到了github中，不过后续更少更新。所有的学习笔记、工作笔记也都是记录再本地中基本都是组内人再访问。
-  随后也尝试过jekyll，但是都不太理想。直到前段时间接触、学习了hugo。感觉还是比较符合自己的需求。
-  目前简单修改了一个主题来使用 hugo-theme-learn, 改的比较糙。也在慢慢的优化使用. 还有就是这个排版，也好头疼。等我再搞搞的
-    github pages 设置    早期在github page中搭建blog是建立一个&amp;lt;USERNAME&amp;gt;.github.io项目。 将编译后的静态内容作为内容提交。   这几天在查看hugo的发布时，发现在可以在github.io项目中，建立一个docs的文件夹，来存放 生成的静态网站内容，这样方便和源码以前存放。
+      <description>hugo theme 选择    一直再找一个比较合适的blog生成工具. 最早的时候是自己编写markdown，上传到csdn中. 后来接触到vim emacs，使用emacs orgmode 自带的publish系统搭建了一套自己的wiki 也整合上传到了github中，不过后续更少更新。所有的学习笔记、工作笔记也都是记录再本地中基本都是组内人再访问。 随后也尝试过jekyll，但是都不太理想。直到前段时间接触、学习了hugo。感觉还是比较符合自己的需求。 目前简单修改了一个主题来使用 hugo-theme-learn, 改的比较糙。也在慢慢的优化使用. 还有就是这个排版，也好头疼。等我再搞搞的
+    github pages 设置    早期在github page中搭建blog是建立一个&amp;lt;USERNAME&amp;gt;.github.io项目。 将编译后的静态内容作为内容提交。   这几天在查看hugo的发布时，发现在可以在github.io项目中，建立一个docs的文件夹，来存放 生成的静态网站内容，这样方便和源码存放。
     soul 代码编译    下载代码
 git clone https://github.com/dromara/soul.git    编译代码 shardingshpere 中也是采用这样的命令。 其中rat checkstyle 有空看看的，自己的项目中没有使用过.
-mvn clean package install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.</description>
+mvn clean package install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.skip=true -Dcheckstyle.skip=true    deepin install docker tutor</description>
+    </item>
+    
+    <item>
+      <title>divide插件</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-divide/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-divide/</guid>
+      <description>说明  divide插件是网关处理 http协议请求的核心处理插件。  插件设置   开启插件, soul-admin &amp;ndash;&amp;gt; 插件管理&amp;ndash;&amp;gt; divide 设置为启用。
+  divide插件，配合如下 starter一起才能生效，具体请看：http用户。
+  &amp;lt;!--if you use http proxy start this--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-divide&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-httpclient&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 插件讲解   divide插件是进行http正向代理的插件，所有http类型的请求，都是由该插件进行负载均衡的调用。
+  选择器和规则，请详细看 : 选择器规则。
+  http配置，是网关匹配到流量以后，真实调用的http配置，可以配置多个，设置负载均衡权重，具体的负载均衡策略，在规则中指定。
+  配置详解 ：
+  第一个框：hostName，一般填写 localhost，该字段暂时没使用。
+  第二个框：http协议，一般填写 http:// 或者 https:// ,不填写默认为:http://
+  第三个框：ip与端口，这里填写你真实服务的 ip + 端口。</description>
+    </item>
+    
+    <item>
+      <title>dubbo接入soul网关</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/user-dubbo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/user-dubbo/</guid>
+      <description>说明   此篇文章是dubbo用户使用dubbo插件支持，以及自己的dubbo服务接入soul网关的教程。
+  支持 alibaba dubbo（&amp;lt; 2.7.x） 以及 apache dubbo (&amp;gt;=2.7.x)。
+  接入前，请正确的启动 soul-admin , 以及搭建环境 Ok。
+  引入网关对dubbo支持的插件   在网关的 pom.xml 文件中增加如下依赖：
+ alibaba dubbo 用户, dubbo版本换成你的，注册中心的jar包换成你的，一下是参考。    &amp;lt;!--soul alibaba dubbo plugin start--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-alibaba-dubbo&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- soul alibaba dubbo plugin end--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alibaba&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;dubbo&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.6.5&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.curator&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;curator-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.1&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.curator&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;curator-framework&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.0.1&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.curator&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;curator-recipes&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;4.</description>
+    </item>
+    
+    <item>
+      <title>dubbo插件</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-dubbo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-dubbo/</guid>
+      <description>说明   dubbo插件是将http协议 转换成dubbo协议 的插件,也是网关实现dubbo泛化调用的关键。
+  dubbo插件需要配合元数据才能实现dubbo的调用，具体请看: 元数据。
+  apache dubbo 和 alibaba dubbo用户，都是使用该同一插件。
+  插件设置   在 soul-admin &amp;ndash;&amp;gt; 插件管理-&amp;gt; dubbo 设置为开启。
+  在dubbo插件的配置中，配置如下: 配置dubbo的注册中心。
+  {&amp;#34;register&amp;#34;:&amp;#34;zookeeper://localhost:2181&amp;#34;} or {&amp;#34;register&amp;#34;:&amp;#34;nacos://localhost:8848&amp;#34;}    插件需要配合依赖 starter 进行使用,具体请看: dubbo用户。
+  选择器和规则，请详细看 : 选择器规则。
+  元数据   每一个dubbo接口方法，都会对于一条元数据，可以在 soul-admin &amp;ndash;&amp;gt;元数据管理，进行查看。
+  路径：就是你http请求的路径。
+  rpc扩展参数,对应为dubbo接口的一些配置，调整的化，请在这里修改，支持json格式,以下字段：
+  {&amp;#34;timeout&amp;#34;:10000,&amp;#34;group&amp;#34;:&amp;#34;&amp;#34;,version&amp;#34;:&amp;#34;&amp;#34;,&amp;#34;loadbalance&amp;#34;:&amp;#34;&amp;#34;,&amp;#34;retries&amp;#34;:1,&amp;#34;url&amp;#34;:&amp;#34;&amp;#34;} </description>
+    </item>
+    
+    <item>
+      <title>filter扩展</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/dev-filter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/dev-filter/</guid>
+      <description>说明  本文是说明,如何进行 org.springframework.web.server.WebFliter 的扩展。  跨域支持  新增 org.dromara.soul.bootstrap.cors.CrossFilter 实现 WebFilter。  public class CrossFilter implements WebFilter { private static final String ALLOWED_HEADERS = &amp;#34;x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN,token,username,client&amp;#34;; private static final String ALLOWED_METHODS = &amp;#34;*&amp;#34;; private static final String ALLOWED_ORIGIN = &amp;#34;*&amp;#34;; private static final String ALLOWED_EXPOSE = &amp;#34;*&amp;#34;; private static final String MAX_AGE = &amp;#34;18000&amp;#34;; @Override @SuppressWarnings(&amp;#34;all&amp;#34;) public Mono&amp;lt;Void&amp;gt; filter(final ServerWebExchange exchange, final WebFilterChain chain) { ServerHttpRequest request = exchange.</description>
+    </item>
+    
+    <item>
+      <title>http用户</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/user-http/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/user-http/</guid>
+      <description>说明   本文旨在帮助http用户。
+  soul网关使用 divide 插件来处理http请求。请求在soul-admin后台开启它。
+  接入前，请正确的启动 soul-admin , 以及 搭建环境 OK。
+  引入网关对http的代理插件  在网关的 pom.xml 文件中增加如下依赖：  &amp;lt;!--if you use http proxy start this--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-divide&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-httpclient&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  当然是要重新启动网关。  Http请求接入网关（springMvc体系用户）  首先要确保在 soul-admin 后台 divide插件是否开启。  Soul-Client接入方式。 （此方式针对SpringMvc,SpringBoot用户）   SpringBoot用户
+ 在你的真实服务的 pom.xml 新增如下依赖:    &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-client-springmvc&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  在yml中新增如下配置 ：  soul: http: adminUrl: http://localhost:9095 port: 你本项目的启动端口 contextPath: /http appName: http full: false # adminUrl: 为你启动的soul-admin 项目的ip + 端口，注意要加http:// # port: 你本项目的启动端口 # contextPath: 为你的这个mvc项目在soul网关的路由前缀，这个你应该懂意思把？ 比如/order ，/product 等等，网关会根据你的这个前缀来进行路由.</description>
+    </item>
+    
+    <item>
+      <title>hystrix插件</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-hystrix/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-hystrix/</guid>
+      <description>说明   hystrix插件是网关用来对流量进行熔断的核心实现。
+  使用信号量的方式来处理请求。
+  插件设置   在 soul-admin &amp;ndash;&amp;gt; 插件管理 &amp;ndash;&amp;gt; hystrix ,设置为开启。
+  如果用户不使用，则在 soul-admin 后台把此插件停用。
+  插件使用  在网关的 pom.xml 文件中添加 hystrix的支持。  &amp;lt;!-- soul hystrix plugin start--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-hystrix&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- soul hystrix plugin end--&amp;gt;   选择器和规则，请详细看 : 选择器规则
+  Hystrix处理详解：
+  跳闸最小请求数量 ：最小的请求量，至少要达到这个量才会触发熔断
+  错误半分比阀值 ： 这段时间内，发生异常的百分比。
+  最大并发量 ： 最大的并发量</description>
+    </item>
+    
+    <item>
+      <title>monitor插件</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-monitor/</guid>
+      <description>说明  monitor插件是网关用来监控自身运行状态（JVM相关），请求的响应迟延，QPS,TPS等相关metrics。  技术方案   流程图   异步或者同步的方式，在soul网关里面进行 metrics 埋点。
+  prometheus 服务端通过 http 请求 来 拉取 metrics, 再使用 Grafana  展示。
+  插件设置   在 soul-admin&amp;ndash;&amp;gt; 插件管理-&amp;gt; monitor ,设置为开启。
+  在 monitor 插件中新增以下配置
+  {&amp;#34;metricsName&amp;#34;:&amp;#34;prometheus&amp;#34;,&amp;#34;host&amp;#34;:&amp;#34;localhost&amp;#34;,&amp;#34;port&amp;#34;:&amp;#34;9191&amp;#34;,&amp;#34;async&amp;#34;:&amp;#34;true&amp;#34;} # port : 为暴露给 prometheus服务来拉取的端口 # host : 不填写则为soul网关的host. # async :&amp;#34;true&amp;#34; 为异步埋点， false 为同步埋点  如果用户不使用，则在 soul-admin 后台把此插件停用.  插件使用  在网关的 pom.xml 文件中添加 monitor 的支持。  &amp;lt;!</description>
+    </item>
+    
+    <item>
+      <title>rateLimiter插件</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-ratelimiter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-ratelimiter/</guid>
+      <description>说明   限流插件，是网关对流量管控限制核心的实现。
+  可以到接口级别，也可以到参数级别，具体怎么用，还得看你对流量配置。
+  技术方案   采用redis令牌桶算法进行限流。
+  流程图：   插件设置   在 soul-admin&amp;ndash;&amp;gt; 插件管理&amp;ndash;&amp;gt; rate_limiter 将其设置为开启。
+  在插件中，对redis进行配置。
+  目前支持redis的单机，哨兵，以及集群模式。
+  如果是哨兵，集群等多节点的，在URL中的配置，请对每个实列使用 ; 分割. 如 192.168.1.1:6379;192.168.1.2:6379。
+  如果用户无需使用，在admin后台把插件禁用。
+  插件使用  在网关的 pom.xml 文件中添加 rateLimiter的支持。  &amp;lt;!-- soul ratelimiter plugin start--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-ratelimiter&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- soul ratelimiter plugin end--&amp;gt;   选择器和规则，请详细看 : 选择器规则。</description>
+    </item>
+    
+    <item>
+      <title>rewrite插件</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-rewrite/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-rewrite/</guid>
+      <description>说明  soul网关在对目标服务进行代理调用的时候，还容许用户使用 rewrite 插件来重写请求路径  插件设置   在 soul-admin &amp;ndash;&amp;gt; 插件管理 &amp;ndash;&amp;gt; rewrite ,设置为开启。
+  在网关的 pom.xml 文件中添加 rewrite 的支持。
+  如果用户不需要，可以把插件禁用。
+  &amp;lt;!-- soul rewrite plugin start--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-rewrite&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- soul rewrite plugin end--&amp;gt;   选择器和规则，请详细看 : 选择器规则。
+ 只有匹配的请求，才会进行重写。    场景   顾名思义，重新插件就是对uri的重新定义。
+  当匹配到请求后，设置自定义的路径，那么自定义的路径就会覆盖之前的真实路径。
+  在调用的时候，就会使用用户自定义的路径。
+  </description>
+    </item>
+    
+    <item>
+      <title>sign插件</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-sign/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-sign/</guid>
+      <description>说明  sign插件是 soul网关自带的，用来对请求进行签名认证的插件。  插件设置  在 soul-admin -&amp;gt; 插件管理中 &amp;ndash;&amp;gt; sign插件设置为开启。  插件使用  在网关的 pom.xml 文件中添加 sign 的支持。  &amp;lt;!-- soul sign plugin start--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-sign&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- soul sign plugin end--&amp;gt;   选择器和规则，请详细看 : 选择器规则。
+ 只有匹配的请求，才会进行签名认证。    新增 AK/SK  在soul-admin &amp;ndash;&amp;gt; 认证管理中，点击新增，新增一条 AK/SK。  网关技术实现  采用Ak/SK鉴权技术方案。 采用鉴权插件，责任链的模式的模式来完成。 当鉴权插件开启，并配置所有接口鉴权时候生效。  鉴权使用指南   第一步：AK/SK由网关来进行分配. 比如分配给你的AK为: 1TEST123456781 SK为：506EEB535CF740D7A755CB4B9F4A1536
+  第一步：确定好你要访问的网关路径 比如 /api/service/abc</description>
+    </item>
+    
+    <item>
+      <title>soul介绍</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/soul/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/soul/</guid>
+      <description>What is the Soul？ 这是一个异步的,高性能的,跨语言的,响应式的API网关。我希望能够有一样东西像灵魂一样，保护您的微服务。参考了Kong，Spring-Cloud-Gateway等优秀的网关后，站在巨人的肩膀上，Soul由此诞生！
+Features   支持各种语言(http协议)，支持 dubbo，springcloud协议。
+  插件化设计思想，插件热插拔,易扩展。
+  灵活的流量筛选，能满足各种流量控制。
+  内置丰富的插件支持，鉴权，限流，熔断，防火墙等等。
+  流量配置动态化，性能极高，网关消耗在 1~2ms。
+  支持集群部署，支持 A/B Test, 蓝绿发布。
+  架构图 Prerequisite   JDK 1.8+   Maven 3.2.x   Git   mysql   </description>
+    </item>
+    
+    <item>
+      <title>soul性能优化</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/dev-netty/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/dev-netty/</guid>
+      <description>说明  本文主要介绍如果对soul进行优化  本身消耗  soul本身所有的操作，都是基于jvm内存来匹配，本身消耗时间大概在 1-3 ms左右。  底层netty调优   soul内置依赖 spring-webflux 而其底层是使用的netty。这一块只要是使用的netty线程模型。
+  我们可以自定义netty的相关参数来对soul 进行优化,以下是示例：
+  @Bean public NettyReactiveWebServerFactory nettyReactiveWebServerFactory() { NettyReactiveWebServerFactory webServerFactory = new NettyReactiveWebServerFactory(); webServerFactory.addServerCustomizers(new EventLoopNettyCustomizer()); return webServerFactory; } private static class EventLoopNettyCustomizer implements NettyServerCustomizer { @Override public HttpServer apply(final HttpServer httpServer) { return httpServer .tcpConfiguration(tcpServer -&amp;gt; tcpServer .runOn(LoopResources.create(&amp;#34;soul-netty&amp;#34;, 1, DEFAULT_IO_WORKER_COUNT, true), false) .selectorOption(ChannelOption.SO_REUSEADDR, true) .selectorOption(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT) .option(ChannelOption.TCP_NODELAY, true) .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)); } }   这个类在 soul-bootstrap中已经内置，在压测的时候，可以根据自己的需求来进行优化设置。</description>
+    </item>
+    
+    <item>
+      <title>springCloud接入soul网关</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/user-springcloud/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/user-springcloud/</guid>
+      <description>说明   此篇文章是教你如何将springCloud接口，快速接入到soul网关。
+  请在 soul-admin 后台将 springCloud 插件设置为开启。
+  接入前，请正确的启动 soul-admin , 以及搭建环境 Ok。
+  引入网关 springCloud的插件支持  在网关的 pom.xml 文件中引入如下依赖。  &amp;lt;!--soul springCloud plugin start--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-springcloud&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!--soul springCloud plugin end--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-commons&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-netflix-ribbon&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;   如果你使用 eureka 作为 springCloud的注册中心
+ 新增如下依赖：    &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.cloud&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-cloud-starter-netflix-eureka-client&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0.RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  在网关的yml文件中 新增如下配置:  eureka: client: serviceUrl: defaultZone: http://localhost:8761/eureka/ # 你的eureka地址 instance: prefer-ip-address: true   如果你使用 nacos 作为 springCloud的注册中心</description>
+    </item>
+    
+    <item>
+      <title>springcloud插件</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-springcloud/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-springcloud/</guid>
+      <description>说明  该插件是用来将http协议 转成 springCloud协议 的核心。  插件设置   在 soul-admin &amp;ndash;&amp;gt; 插件管理-&amp;gt; springCloud ,设置为开启。
+  插件需要配合依赖 starter 进行使用 ,具体请看: springCloud用户。
+  选择器和规则，请详细看 : 选择器规则。
+  详解   应用名称：就是你根据条件匹配以后，需要调用的你的具体的应用名称。
+  soul会从springCloud的注册中心上面，根据应用名称获取对应的服务真实ip地址，发起http代理调用。
+  </description>
+    </item>
+    
+    <item>
+      <title>waf插件</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-waf/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-waf/</guid>
+      <description>说明  waf插件，是网关的用来对流量实现防火墙功能的核心实现。  插件设置   在 soul-admin &amp;ndash;&amp;gt; 插件管理-&amp;gt; waf 设置为开启。
+  如果用户不想使用此功能，请在admin后台停用此插件。
+  插件编辑里面新增配置模式。
+  {&amp;#34;model&amp;#34;:&amp;#34;black&amp;#34;} # 默认为黑名单模式，设置值为 mixed 则为混合模式，下面会专门进行讲解 插件使用  在网关的 pom.xml 文件中添加 waf 的支持。  &amp;lt;!-- soul waf plugin start--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-waf&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!-- soul waf plugin end--&amp;gt;   选择器和规则，请详细看 : 选择器规则
+  当 module 设置为 black 模式的时候, 只有匹配的流量才会执行拒绝策略，不匹配的，直接会跳过。
+  当 module 设置为 mixed 模式的时候，所有的流量都会通过 waf插件，针对不同的匹配流量，用户可以设置是 拒绝，还是通过。</description>
+    </item>
+    
+    <item>
+      <title>websocket支持</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/plugin-websocket/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/plugin-websocket/</guid>
+      <description>说明   soul网关是支持 websocket的代理。
+  websocket支持中，使用了divide插件。
+  插件设置   在 soul-admin &amp;ndash;&amp;gt; 插件管理 &amp;ndash;&amp;gt; divide,设置为开启。
+  在网关的 pom.xml 文件中新增依赖
+  &amp;lt;!--if you use http proxy start this--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-divide&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-httpclient&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 请求路径  使用soul代理websocket的时候，其请求路径为（列子）: ws://localhost:9195/?module=ws&amp;amp;method=/websocket&amp;amp;rpcType=websocket。  参数详解: 1.localhost:8080 是soul启动的ip和端口。 2.module（必填）:值是你用来匹配selector的关键 3.method （参数）: 你的 websocket路径，同时也用做匹配rule 4.rpcType ：websocket 必填，且必须为websocket  在 divide插件中选择器新增一条配置 ，如下   在这一条选择器下新增一条 规则 ：    总结 ，这个时候注意看你的路径 ws://localhost:9195/?</description>
+    </item>
+    
+    <item>
+      <title>使用不同的数据同步策略</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/user-datasync/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/user-datasync/</guid>
+      <description>说明   数据同步是指将 soul-admin 配置的数据，同步到 soul 集群中的JVM内存里面，是网关高性能的关键。
+  实现原理，请看： 数据同步。
+  文中所说的网关，是指你搭建的网关环境，请看：搭建环境。
+  websocket同步（默认方式，推荐）   网关配置（记得重启）
+ 首先在 pom.xml 文件中 引入以下依赖：    &amp;lt;!--soul data sync start use websocket--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-sync-data-websocket&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  在 springboot的 yml 文件中进行如下配置:  soul : sync: websocket : urls: ws://localhost:9095/websocket #urls:是指 soul-admin的地址，如果有多个，请使用（,）分割.   soul-admin 配置, 默认是开启 websocket 同步的，如果您想关闭，请指定soul.sync.websocket.enabled=false
+  当建立连接以后会全量获取一次数据，以后的数据都是增量的更新与新增，性能好。
+  支持断线重连 （默认30秒）。
+  zookeeper同步   网关配置（记得重启）</description>
+    </item>
+    
+    <item>
+      <title>元数据概念设计</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/metadata/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/metadata/</guid>
+      <description>说明  本篇主要讲解在soul网关中元数据的概念，设计，以及如何对接。  技术方案   在数据库中，新增了一张表，然后通过数据同步的方案，会把这张表的数据同步到网关JVM内存。
+  表结构如下:
+  CREATE TABLE IF NOT EXISTS `meta_data` ( `id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT &#39;id&#39;, `app_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT &#39;应用名称&#39;, `path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT &#39;路径,不能重复&#39;, `path_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT &#39;路径描述&#39;, `rpc_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT &#39;rpc类型&#39;, `service_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT &#39;服务名称&#39;, `method_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT &#39;方法名称&#39;, `parameter_types` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT &#39;参数类型 多给参数类型 逗号隔开&#39;, `rpc_ext` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT &#39;rpc的扩展信息，json格式&#39;, `date_created` datetime(0) NOT NULL COMMENT &#39;创建时间&#39;, `date_updated` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT &#39;更新时间&#39;, `enabled` tinyint(4) NOT NULL DEFAULT 0 COMMENT &#39;启用状态&#39;, PRIMARY KEY (`id`) USING BTREE ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;   元数据设计，目前最主要的是对dubbo的泛化调用上进行使用。</description>
+    </item>
+    
+    <item>
+      <title>启动admin</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/admin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/admin/</guid>
+      <description>说明   soul-admin 使用了mysql数据库,启动前请确保你正确安装了mysql.
+  soul-admin 是一个springboot的jar包,启动方式,可以直接 java -jar soul-admin.jar ,当然如果您也可以根据脚本来指定相关的jvm参数.
+  soul-admin 会自动创建数据库，以及表结构，并初始化默认数据.
+  服务端启动  拉取jar包，并启动  &amp;gt; wget https://yu199195.github.io/jar/soul-admin.jar &amp;gt; java -jar soul-admin.jar --spring.datasource.url=&amp;quot;jdbc:mysql://你的url:3306/soul?useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;zeroDateTimeBehavior=CONVERT_TO_NULL&amp;amp;failOverReadOnly=false&amp;amp;autoReconnect=true&amp;amp;useSSL=false&amp;quot; --spring.datasource.username=&#39;you username&#39; --spring.datasource.password=&#39;you password&#39;  数据库无访问密码,将 &amp;ndash;spring.datasource.password=&amp;lsquo;you password&amp;rsquo; 去掉即可  &amp;gt; java -jar soul-admin.jar --spring.datasource.url=&amp;quot;jdbc:mysql://你的url:3306/soul?useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;zerodatetimebehavior=CONVERT_TO_NULL&amp;amp;failOverReadOnly=false&amp;amp;autoReconnect=true&amp;amp;useSSL=false&amp;quot; --spring.datasource.username=&#39;you username&#39;  遇到如下错误,将 zerodatetimebehavior=CONVERT_TO_NULL 去掉即可  java.sql.SQLException: The connection property &amp;#39;zeroDateTimeBehavior&amp;#39; only accepts values of the form: &amp;#39;exception&amp;#39;, &amp;#39;round&amp;#39; or &amp;#39;convertToNull&amp;#39;. The value &amp;#39;CONVERT_TO_NULL&amp;#39; is not in this set.</description>
+    </item>
+    
+    <item>
+      <title>多语言http客户端</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/dev-client/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/dev-client/</guid>
+      <description>说明   本文主要讲解其他语言的http服务如何接入网关。
+  如何自定义开发 soul-http-client
+  自定义开发   请求方式: POST
+  请求路径
+ http://soul-admin/soul-client/springmvc-register soul-admin, 表示为 admin的 ip + port    请求参数
+  soul网关默认的需要参数,通过body里面传，json类型。
+  { &amp;#34;appName&amp;#34;: &amp;#34;xxx&amp;#34;, //应用名称 必填 &amp;#34;context&amp;#34;: &amp;#34;/xxx&amp;#34;, //请求前缀 必填 &amp;#34;path&amp;#34;: &amp;#34;xxx&amp;#34;, //路径需要唯一 必填 &amp;#34;rpcType&amp;#34;: &amp;#34;http&amp;#34;, //rpc类型 必填 &amp;#34;host&amp;#34;: &amp;#34;xxx&amp;#34;, //服务host 必填 &amp;#34;port&amp;#34;: xxx, //服务端口 必填 &amp;#34;ruleName&amp;#34;: &amp;#34;xxx&amp;#34;, //可以同path一样 必填 &amp;#34;enabled&amp;#34;: &amp;#34;true&amp;#34; } </description>
+    </item>
+    
+    <item>
+      <title>插件扩展</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/dev-plugin/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/dev-plugin/</guid>
+      <description>说明   插件是 soul 网关的核心执行者，每个插件在开启的情况下，都会对匹配的流量，进行自己的处理。
+  在soul 网关里面，插件其实分为2 类：
+  一类是单一职责的调用链，不能对流量进行自定义的筛选。
+  另一类，能对匹配的流量，执行自己的职责调用链。
+    用户可以参考 soul-plugin 模块，新增自己的插件处理，如果有好的公用插件，请把代码提交上来。
+  单一职责插件  引入如下依赖 :   &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-plugin-api&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt;  用户新增一个类 A,直接实现 org.dromara.soul.plugin.api.SoulPlugin  public interface SoulPlugin { /** * Process the Web request and (optionally) delegate to the next * {@code WebFilter} through the given {@link SoulPluginChain}. * * @param exchange the current server exchange * @param chain provides a way to delegate to the next filter * @return {@code Mono&amp;lt;Void&amp;gt;} to indicate when request processing is complete */ Mono&amp;lt;Void&amp;gt; execute(ServerWebExchange exchange, SoulPluginChain chain); /** * return plugin order .</description>
+    </item>
+    
+    <item>
+      <title>数据同步设计</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/datasync/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/datasync/</guid>
+      <description>说明  本篇主要讲解数据库同步的三种方式，以及原理  前言 网关是流量请求的入口，在微服务架构中承担了非常重要的角色，网关高可用的重要性不言而喻。在使用网关的过程中，为了满足业务诉求，经常需要变更配置，比如流控规则、路由规则等等。因此，网关动态配置是保障网关高可用的重要因素。那么，Soul 网关又是如何支持动态配置的呢?
+使用过 Soul 的同学都知道，Soul 的插件全都是热插拔的，并且所有插件的选择器、规则都是动态配置，立即生效，不需要重启服务。但是我们在使用 Soul 网关过程中，用户也反馈了不少问题
+ 依赖 zookeeper，这让使用 etcd、consul、nacos 注册中心的用户很是困扰 依赖 redis、influxdb，我还没有使用限流插件、监控插件，为什么需要这些  因此，我们对 Soul 进行了局部重构，历时两个月的版本迭代，我们发布了 2.0 版本
+ 数据同步方式移除了对 zookeeper 的强依赖，新增 http 长轮询 以及 websocket 限流插件与监控插件实现真正的动态配置，由之前的 yml 配置，改为 admin 后台用户动态配置  1.可能有人会问我，配置同步为什么不使用配置中心呢？ 答：首先，引入配置中心，会增加很多额外的成本，不管是运维，而且会让 Soul 变得很重；另外，使用配置中心，数据格式不可控，不便于 soul-admin 进行配置管理。
+2.可能还有人会问？动态配置更新？每次我查数据库，或者redis不就行了吗？拿到的就是最新的，哪里那么多事情呢？ 答：soul作为网关，为了提供更高的响应速度，所有的配置都缓存在JVM的Hashmap中，每次请求都走的本地缓存，速度非常快。所以本文也可以理解为分布式环境中，内存同步的三种方式。
+原理分析 先来张高清无码图，下图展示了 Soul 数据同步的流程，Soul 网关在启动时，会从从配置服务同步配置数据，并且支持推拉模式获取配置变更信息，并且更新本地缓存。而管理员在管理后台，变更用户、规则、插件、流量配置，通过推拉模式将变更信息同步给 Soul 网关，具体是 push 模式，还是 pull 模式取决于配置。关于配置同步模块，其实是一个简版的配置中心。 在 1.x 版本中，配置服务依赖 zookeeper 实现，管理后台将变更信息 push 给网关。而 2.x 版本支持 webosocket、http、zookeeper，通过 soul.sync.strategy 指定对应的同步策略，默认使用 http 长轮询同步策略，可以做到秒级数据同步。但是，有一点需要注意的是，soul-web 和 soul-admin 必须使用相同的同步机制。</description>
+    </item>
+    
+    <item>
+      <title>数据库设计</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/db/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/db/</guid>
+      <description>  插件采用数据库设计，来存储插件，选择器，规则配置数据，以及对应关系。
+  数据库表UML类图:
+    设计详解:
+  一个插件对应多个选择器，一个选择器对应多个规则。
+  一个选择器对应多个匹配条件，一个规则对应多个匹配条件。
+  每个规则在对应插件下，不同的处理表现为handle字段，这个一个不同处理的json字符串。具体的可以在admin使用过程中进行查看。
+    </description>
+    </item>
+    
+    <item>
+      <title>文件上传下载</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/dev-file/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/dev-file/</guid>
+      <description>说明  本文主要介绍soul的文件上传下载的支持。  文件上传   默认限制文件大小为 10M。
+  如果想修改,在启动服务的时候，使用--file.size = 30 ,为int 类型。
+  你之前怎么上传文件，还是怎么上传。
+  文件下载  soul支持流的方式进行下载，你之前的接口怎么写的，还是怎么写，根本不需要变.  </description>
+    </item>
+    
+    <item>
+      <title>正确获取Ip与host</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/dev-iphost/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/dev-iphost/</guid>
+      <description>说明   本文是说明，如果网关前面有一层nginx 的时候，如何获取正确的ip与端口。
+  获取正确的之后，在插件以及选择器中，可以根据 ip，与host来进行匹配。
+  默认实现   在soul网关自带实现为:org.dromara.soul.web.forwarde.ForwardedRemoteAddressResolver。
+  它需要你在 nginx 设置 X-Forwarded-For,以便来或者正确的 ip 与 host。
+  扩展实现  新增一个类A，实现org.dromara.soul.plugin.api.RemoteAddressResolver  public interface RemoteAddressResolver { /** * Resolve inet socket address. * * @param exchange the exchange * @return the inet socket address */ default InetSocketAddress resolve(ServerWebExchange exchange) { return exchange.getRequest().getRemoteAddress(); } }  把你新增的实现类注册成为spring的bean,如下  @Bean public SignService a() { return new A } </description>
+    </item>
+    
+    <item>
+      <title>环境搭建</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/setup/</guid>
+      <description>说明   soul 2.2.0以后都是基于插件化可插拔的思想，本文是说明,如何基于soul搭建属于你自己网关。
+  请确保你的机器安装了JDK 1.8+ , Mysql 5.0 + 。
+  启动 Soul-Admin  下载soul-admin.jar包，并启动.  &amp;gt; wget https://yu199195.github.io/jar/soul-admin.jar &amp;gt; java -jar soul-admin.jar --spring.datasource.url=&amp;#34;jdbc:mysql://你的url:3306/soul?useUnicode=true&amp;amp;characterEncoding=utf-8&amp;amp;useSSL=false&amp;#34;  --spring.datasource.username=&amp;#39;you username&amp;#39; --spring.datasource.password=&amp;#39;you password&amp;#39;  访问 http://localhost:9095/index.html  默认的用户名： admin 密码:123456。  搭建自己的网关（推荐）   首先你新建一个空的springboot项目，可以参考 soul-bootstrap. 也可以在spring官网:[https://spring.io/quickstart]
+  引入如下jar包：
+  &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-webflux&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.2-RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-actuator&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.2-RELEASE&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!--soul gateway start--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-gateway&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;!</description>
+    </item>
+    
+    <item>
+      <title>线程模型</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/dev-thread/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/dev-thread/</guid>
+      <description>说明  本文主要介绍soul的线程模型,以及各种场景的使用。  io与work线程  soul内置依赖 spring-webflux 而其底层是使用的netty。这一块只要是使用的netty线程模型。  业务线程   默认使用调度线程来执行。
+  默认使用固定的线程池来执行，其线程数为 cpu * 2 + 1。
+  切换类型   reactor.core.scheduler.Schedulers。
+  可以使用 -Dsoul.scheduler.type=fixed 这个是默认。 设置其他的值 就会使用弹性线程池来执行,Schedulers.elastic()。
+  可以使用 -Dsoul.work.threads = xx 来指定线程数量，默认为 cpu * 2 + 1 ,最小为16个线程。
+  </description>
+    </item>
+    
+    <item>
+      <title>自定义sign插件检验</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/dev-sign/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/dev-sign/</guid>
+      <description>说明  用户可以自定义签名认证算法来实现验证。  扩展   默认的实现为 org.dromara.soul.plugin.sign.service.DefaultSignService。
+  新增一个类 A 实现 org.dromara.soul.plugin.api.SignService。
+  public interface SignService { /** * Sign verify pair. * * @param exchange the exchange * @return the pair */ Pair&amp;lt;Boolean, String&amp;gt; signVerify(ServerWebExchange exchange); }   Pair中返回true,表示验证通过，为false的时候，会把String中的信息输出到前端。
+  把你新增的实现类注册成为spring的bean,如下
+  @Bean public SignService a() { return new A } </description>
+    </item>
+    
+    <item>
+      <title>自定义网关返回数据格式</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/dev-result/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/dev-result/</guid>
+      <description>说明   本文是说明,基于soul网关，返回自定义的数据个数。
+  网关需要统一的返回格式,而每个公司都有自己定义的一套，所以需要对次进行扩展。
+  默认实现   默认的实现为 org.dromara.soul.plugin.api.result.DefaultSoulResult
+  返回的数据格式如下：
+  public class SoulDefaultEntity implements Serializable { private static final long serialVersionUID = -2792556188993845048L; private Integer code; private String message; private Object data; }  返回的json 格式如下:  { &amp;#34;code&amp;#34;: -100, //返回码, &amp;#34;message&amp;#34;: &amp;#34;您的参数错误,请检查相关文档!&amp;#34;, //提示字段 &amp;#34;data&amp;#34;: null // 具体的数据 } 扩展  新增一个类 A 实现 org.dromara.soul.plugin.api.result.SoulResult  public interface SoulResult&amp;lt;T&amp;gt; { /** * Success t.</description>
+    </item>
+    
+    <item>
+      <title>选择器规则详解</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/selector/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/selector/</guid>
+      <description>说明   选择器和规则是soul网关中最灵魂的东西。掌握好它，你可以对任何流量进行管理。
+  本篇主要详解soul网关中，选择器与规则的概念，以及如何使用。
+  大体理解   一个插件有多个选择器，一个选择器对应多种规则。选择器相当于是对流量的第一次筛选，规则就是最终的筛选。
+  我们想象一下，在一个插件里面，我们是不是希望根据我们的配置，达到满足条件的流量，我们插件才去执行它？
+  选择器和规则就是为了让流量在满足特定的条件下，才去执行我们想要的，这个你首先头脑要点数。
+  数据结构可以参考之前的 数据库设计
+  选择器   选择器详解：
+ 名称：为你的选择器起一个容易分辨的名字 类型：custom flow 是自定义流量。full flow 是全流量。自定义流量就是请求会走你下面的匹配方式与条件。全流量则不走。 匹配方式：and 或者or 是指下面多个条件是按照and 还是or的方式来组合。 条件：  uri:是指你根据uri的方式来筛选流量，match的方式支持模糊匹配（/**） header:是指根据请求头里面的字段来筛选流量。 query: 是指根据uri的查询条件来进行筛选流量。 ip:是指根据你请求的真实ip，来筛选流量。 host:是指根据你请求的真实host，来筛选流量。 post:建议不要使用。 条件匹配:  match : 模糊匹配，建议和uri条件搭配，支持 restful风格的匹配。（/test/**） = : 前后值相等，才能匹配。 regEx : 正则匹配，表示前面一个值去匹配后面的正则表达式。 like ：字符串模糊匹配。     是否开启：打开才会生效 打印日志：打开的时候，当匹配上的时候，会打印匹配日志。 执行顺序：当多个选择器的时候，执行顺序小的优先执行。    上述图片中表示:当请求的uri前缀是 /test，并且header 头上 module 字段值为test 的时候，会转发到 1.</description>
+    </item>
+    
+    <item>
+      <title>配置流程介绍</title>
+      <link>http://blog.valjean.cn/soul/tmp_doc/config/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/tmp_doc/config/</guid>
+      <description>说明  本篇是对admin后台操作数据以后，同步到网关的流程介绍。  使用   用户可以在 soul-admin 后台任意修改数据，并马上同步到网关的jvm内存中。
+  同步soul的插件数据，选择器，规则数据，元数据，签名数据等等。
+  所有插件的选择器，规则都是动态配置，立即生效，不需要重启服务。
+  下面是数据流程图：   作用   用户所有的配置都可以动态的更新，任何修改不需要重启服务。
+  使用了本地缓存，在高并发的时候，提供高效的性能。
+  </description>
     </item>
     
   </channel>

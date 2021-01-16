@@ -1,21 +1,22 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-set -e 
+set -e
+#set -x
 cd $(pwd)
 
 rm -rf docs
+hugo
 
-hugo 
+git add .
 
-git add . 
+__msg=$@
+__len=$(echo $__msg |wc -c)
 
-
-__msg=$1
-
-
-if [ -z $__msg ]; then
+if [ $__len -lt 2 ];then
   __msg="routine commit"
 fi
+
+echo $__msg
 
 git commit -m "$__msg"
 git push
