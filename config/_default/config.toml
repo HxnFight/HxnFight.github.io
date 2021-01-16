@@ -1,7 +1,7 @@
 baseURL = "http://blog.valjean.cn/"
 languageCode = "en-US"
 defaultContentLanguage = "en"
-ignorefiles = [ "tmp_doc/.*" ]
+#ignorefiles = [ "tmp_doc/.*" ]
 
 title = "valjean blog"
 theme = "hugo-theme-learn"
