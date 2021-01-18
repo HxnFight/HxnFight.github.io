@@ -1,0 +1,65 @@
+#+title: Sofa
+#+date:  2021-01-17T22:28:39+08:00
+#+weight: 5
+
+** sofa调试
+
+*** 修改配置
+    - soul-boostrap pom 文件中增加相关依赖
+      #+begin_src xml
+        <dependency>
+            <groupId>org.dromara</groupId>
+            <artifactId>soul-spring-boot-starter-plugin-sofa</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alipay.sofa</groupId>
+            <artifactId>sofa-rpc-all</artifactId>
+        </dependency>
+
+      #+end_src
+    - 在soul-admin中打开sofa的插件开关
+      系统管理 --> 插件管理  (直接保存就ok)
+*** 请求调用
+    使用的idea http client 工具
+    #+begin_src shell
+### 测试保存数据
+post http://localhost:9195/sofa/insert
+content-type: application/json
+
+{
+  "id": "999",
+  "name": "valjean"
+}
+
+### 测试按条件查找数据
+post http://localhost:9195/sofa/findbyid
+content-type: application/json
+
+{
+  "id": "999"
+}
+
+### 测试无条件查询
+post http://localhost:9195/sofa/findall
+
+    #+end_src
+     
+*** 遇到的问题
+    - 不带参数请求ok,带参数出现序列化错误.
+      调试发现此处为空
+     [[../sofa.files/sofa-proxy-null.png]] 
+      按照[[https://dromara.org/zh-cn/docs/soul/user-sofa.html][官方文档sofa-user]],实现SofaParamResolveService 调试跟踪发现,请求已经进入到后端的服务中.
+      只是在rpc反序列化时出的错. 不过跟代码没找到具体的问题.
+
+      最后在csdn中发现有同学已经踩坑, 此bug也已经做了修复,在github上更新最新代码即可.
+      [[https://blog.csdn.net/baidu_27627251/article/details/112726694][另一个踩坑的同学]]
+      [[https://github.com/dromara/soul/pull/992][github pr]] 
+
+** 新内容预习
+
+*** webflux [[https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html][office]]
+   
+*** sofa [[https://tech.antfin.com/docs/2/56207][office]]
+

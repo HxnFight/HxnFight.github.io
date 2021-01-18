@@ -8,6 +8,18 @@
     <language>en-US</language>
     <lastBuildDate>Wed, 13 Jan 2021 23:27:41 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Sofa</title>
+      <link>http://blog.valjean.cn/soul/exercise/sofa/</link>
+      <pubDate>Sun, 17 Jan 2021 22:28:39 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/exercise/sofa/</guid>
+      <description>sofa调试  修改配置    soul-boostrap pom 文件中增加相关依赖
+&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-sofa&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${project.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alipay.sofa&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;sofa-rpc-all&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;    在soul-admin中打开sofa的插件开关 系统管理 –&amp;gt; 插件管理 (直接保存就ok)
+    请求调用  使用的idea http client 工具
+### 测试保存数据 post http://localhost:9195/sofa/insert content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; } ### 测试按条件查找数据 post http://localhost:9195/sofa/findbyid content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } ### 测试无条件查询 post http://localhost:9195/sofa/findall    遇到的问题    不带参数请求ok,带参数出现序列化错误.</description>
+    </item>
+    
+    <item>
       <title>Dubbo 模块实践</title>
       <link>http://blog.valjean.cn/soul/exercise/dubbo/</link>
       <pubDate>Sat, 16 Jan 2021 17:35:36 +0800</pubDate>

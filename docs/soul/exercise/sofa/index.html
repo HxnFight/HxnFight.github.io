@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Tags :: Documentation for Hugo Learn Theme</title>
+    <title>Sofa :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1610928479" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/tags/">
+  <body class="" data-url="/soul/exercise/sofa/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -96,7 +96,7 @@
   
     
     <li data-nav-id="/soul/" title="soul 学习笔记" class="dd-item
-        
+        parent
         
         
         ">
@@ -186,7 +186,7 @@
   
     
     <li data-nav-id="/soul/exercise/" title="模块实践" class="dd-item
-        
+        parent
         
         
         ">
@@ -214,7 +214,7 @@
  
   
     
-      <li data-nav-id="/soul/exercise/sofa/" title="Sofa" class="dd-item ">
+      <li data-nav-id="/soul/exercise/sofa/" title="Sofa" class="dd-item active">
         <a href="/soul/exercise/sofa/">
         Sofa
         <i class="fas fa-check read-icon"></i>
@@ -340,7 +340,19 @@
             
           
           
-            <a href='/'>soul 学习笔记</a> > Tags
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/exercise/'>模块实践</a> > Sofa
+          
+        
+          
+        
           
         
           
@@ -351,7 +363,28 @@
                 
                     <div class="progress">
     <div class="wrapper">
-
+<nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">sofa调试</a>
+<ul>
+<li><a href="#headline-2">修改配置</a>
+</li>
+<li><a href="#headline-3">请求调用</a>
+</li>
+<li><a href="#headline-4">遇到的问题</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-5">新内容预习</a>
+<ul>
+<li><a href="#headline-6">webflux office</a>
+</li>
+<li><a href="#headline-7">sofa office</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
     </div>
 </div>
 
@@ -367,9 +400,7 @@
           
             <h1>
               
-                tag ::
-              
-              Tags
+              Sofa
             </h1>
           
 
@@ -377,14 +408,110 @@
 
 
 
-
-
+<div id="outline-container-headline-1" class="outline-3">
+<h3 id="headline-1">
+sofa调试
+</h3>
+<div id="outline-text-headline-1" class="outline-text-3">
+<div id="outline-container-headline-2" class="outline-4">
+<h4 id="headline-2">
+修改配置
+</h4>
+<div id="outline-text-headline-2" class="outline-text-4">
 <ul>
-	
+<li>
+<p>soul-boostrap pom 文件中增加相关依赖</p>
+<div class="src src-xml">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">  <span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>org.dromara<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>soul-spring-boot-starter-plugin-sofa<span style="color:#f92672">&lt;/artifactId&gt;</span>
+      <span style="color:#f92672">&lt;version&gt;</span>${project.version}<span style="color:#f92672">&lt;/version&gt;</span>
+  <span style="color:#f92672">&lt;/dependency&gt;</span>
+
+  <span style="color:#f92672">&lt;dependency&gt;</span>
+      <span style="color:#f92672">&lt;groupId&gt;</span>com.alipay.sofa<span style="color:#f92672">&lt;/groupId&gt;</span>
+      <span style="color:#f92672">&lt;artifactId&gt;</span>sofa-rpc-all<span style="color:#f92672">&lt;/artifactId&gt;</span>
+  <span style="color:#f92672">&lt;/dependency&gt;</span></code></pre></div>
+</div>
+</li>
+<li>
+<p>在soul-admin中打开sofa的插件开关
+系统管理 –&gt; 插件管理  (直接保存就ok)</p>
+</li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-4">
+<h4 id="headline-3">
+请求调用
+</h4>
+<div id="outline-text-headline-3" class="outline-text-4">
+<p>使用的idea http client 工具</p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#75715e">### 测试保存数据</span>
+post http://localhost:9195/sofa/insert
+content-type: application/json
+
+<span style="color:#f92672">{</span>
+<span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;999&#34;</span>,
+<span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;valjean&#34;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">### 测试按条件查找数据</span>
+post http://localhost:9195/sofa/findbyid
+content-type: application/json
+
+<span style="color:#f92672">{</span>
+<span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;999&#34;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">### 测试无条件查询</span>
+post http://localhost:9195/sofa/findall</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-4">
+<h4 id="headline-4">
+遇到的问题
+</h4>
+<div id="outline-text-headline-4" class="outline-text-4">
+<ul>
+<li>
+<p>不带参数请求ok,带参数出现序列化错误.
+调试发现此处为空
+<img src="../sofa.files/sofa-proxy-null.png" alt="../sofa.files/sofa-proxy-null.png" title="../sofa.files/sofa-proxy-null.png" /> 
+按照<a href="https://dromara.org/zh-cn/docs/soul/user-sofa.html">官方文档sofa-user</a>,实现SofaParamResolveService 调试跟踪发现,请求已经进入到后端的服务中.
+只是在rpc反序列化时出的错. 不过跟代码没找到具体的问题.</p>
+<p>
+最后在csdn中发现有同学已经踩坑, 此bug也已经做了修复,在github上更新最新代码即可.
+<a href="https://blog.csdn.net/baidu_27627251/article/details/112726694">另一个踩坑的同学</a>
+<a href="https://github.com/dromara/soul/pull/992">github pr</a> </p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+新内容预习
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<div id="outline-container-headline-6" class="outline-4">
+<h4 id="headline-6">
+webflux <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html">office</a>
+</h4>
+</div>
+<div id="outline-container-headline-7" class="outline-4">
+<h4 id="headline-7">
+sofa <a href="https://tech.antfin.com/docs/2/56207">office</a>
+</h4>
+</div>
+</div>
+</div>
 
 
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
@@ -419,8 +546,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -437,37 +562,8 @@
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
                         
-            
-            
-                
                     
                 
                 
@@ -493,10 +589,47 @@
             
         
                     
+            
+        
+                    
                         
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -540,8 +673,10 @@
 	 
 	 
 		
+			<a class="nav nav-prev" href="/soul/exercise/" title="模块实践"> <i class="fa fa-chevron-left"></i></a>
 		
-			<a class="nav nav-next" href="/soul/" title="soul 学习笔记" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+			<a class="nav nav-next" href="/soul/exercise/dubbo/" title="Dubbo 模块实践" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
