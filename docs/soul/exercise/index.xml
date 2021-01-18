@@ -6,17 +6,27 @@
     <description>Recent content in 模块实践 on Documentation for Hugo Learn Theme</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Fri, 15 Jan 2021 23:37:57 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/soul/exercise/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 15 Jan 2021 23:37:57 +0800</lastBuildDate>
+    
+	<atom:link href="http://blog.valjean.cn/soul/exercise/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
-      <title>Sofa</title>
+      <title>Webflux</title>
+      <link>http://blog.valjean.cn/soul/exercise/webflux/</link>
+      <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/exercise/webflux/</guid>
+      <description> webflux   office docs </description>
+    </item>
+    
+    <item>
+      <title>Sofa 模块实践</title>
       <link>http://blog.valjean.cn/soul/exercise/sofa/</link>
       <pubDate>Sun, 17 Jan 2021 22:28:39 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/sofa/</guid>
-      <description>sofa调试  修改配置    soul-boostrap pom 文件中增加相关依赖
-&amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-sofa&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${project.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alipay.sofa&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;sofa-rpc-all&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;    在soul-admin中打开sofa的插件开关 系统管理 –&amp;gt; 插件管理 (直接保存就ok)
-    请求调用  使用的idea http client 工具
-### 测试保存数据 post http://localhost:9195/sofa/insert content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; } ### 测试按条件查找数据 post http://localhost:9195/sofa/findbyid content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } ### 测试无条件查询 post http://localhost:9195/sofa/findall    遇到的问题    不带参数请求ok,带参数出现序列化错误.</description>
+      <description>sofa调试  修改配置     soul-boostrap pom 文件中增加相关依赖   &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-sofa&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${project.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alipay.sofa&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;sofa-rpc-all&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;     在soul-admin中打开sofa的插件开关 系统管理 –&amp;gt; 插件管理 (直接保存就ok)   请求调用   使用的idea http client 工具 ### 测试保存数据 post http://localhost:9195/sofa/insert content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; } ### 测试按条件查找数据 post http://localhost:9195/sofa/findbyid content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } ### 测试无条件查询 post http://localhost:9195/sofa/findall  遇到的问题     不带参数请求ok,带参数出现序列化错误.</description>
     </item>
     
     <item>
@@ -25,11 +35,7 @@
       <pubDate>Sat, 16 Jan 2021 17:35:36 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/dubbo/</guid>
-      <description>dubbo模块  参考手册  官方:dubbo插件 官方:dubbo用户  文档说明很详细的,其中提到以下几个重点
-  dubbo 服务接入soul的配置
-  接入之后的调用方式, 参数传递方式. 全部是post请求 Content-Type: application/json格式.
-  将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.
-    实际测试    偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. 具体的使用可以参考官方文档: idea tools http client  # dubbo 插件的要用post请求,请求类型为 Content-Type: application/json # 测试查询数据 POST http://localhost:9195/dubbo/findById Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } # 测试保存数据 POST http://localhost:9195/dubbo/insert Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; }   Tip: 请求记录文件,可以直接导入idea中     dubbo-test.</description>
+      <description>dubbo模块  参考手册   官方:dubbo插件 官方:dubbo用户  文档说明很详细的,其中提到以下几个重点    dubbo 服务接入soul的配置    接入之后的调用方式, 参数传递方式. 全部是post请求 Content-Type: application/json格式.    将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.   实际测试    偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. 具体的使用可以参考官方文档: idea tools http client  # dubbo 插件的要用post请求,请求类型为 Content-Type: application/json # 测试查询数据 POST http://localhost:9195/dubbo/findById Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } # 测试保存数据 POST http://localhost:9195/dubbo/insert Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; }   Tip: 请求记录文件,可以直接导入idea中     dubbo-test.</description>
     </item>
     
     <item>
@@ -38,14 +44,8 @@
       <pubDate>Fri, 15 Jan 2021 23:38:49 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/http-divie/</guid>
-      <description>divide 模块  参考手册  在项目根目录下的doc
-doc ├── user-http.md └── plugin-divide.md   通过这两个文档的介绍，针对http的调用，明白两件事。
-  会在自己的项目中引入soul依赖，并且配置相关的接口. 让soul代理自己的接口
-  会调用soul的接口, 会配置admin中divide插件
-    启动项目   启动没有什么特殊配置，idea下一键启动. 启动后注意下各个服务的端口号,soul默认的端口如下
-   server port comment     SoulAdminBootstrap 9095 管理后台   SoulBootstrapApplication 9195 网关   SoulTestHttpApplication 8188 测试项目     在用soul 代理http接口后，请求地址和端口需要换成网关的。
-接口的url也需要按照管理后台中的配置请求. 具体的请求，后面有样例.
-  测试请求    post 的请求方式   # 项目自身的请求 curl -s -H &amp;#34;Content-type: application/json&amp;#34; -d &amp;#39;@.</description>
+      <description>divide 模块  参考手册   在项目根目录下的doc doc ├── user-http.md └── plugin-divide.md   通过这两个文档的介绍，针对http的调用，明白两件事。    会在自己的项目中引入soul依赖，并且配置相关的接口. 让soul代理自己的接口    会调用soul的接口, 会配置admin中divide插件   启动项目   启动没有什么特殊配置，idea下一键启动. 启动后注意下各个服务的端口号,soul默认的端口如下    server port comment     SoulAdminBootstrap 9095 管理后台   SoulBootstrapApplication 9195 网关   SoulTestHttpApplication 8188 测试项目     在用soul 代理http接口后，请求地址和端口需要换成网关的。
+接口的url也需要按照管理后台中的配置请求. 具体的请求，后面有样例. 测试请求     post 的请求方式   # 项目自身的请求 curl -s -H &amp;#34;Content-type: application/json&amp;#34; -d &amp;#39;@.</description>
     </item>
     
   </channel>

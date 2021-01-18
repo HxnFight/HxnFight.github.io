@@ -1,65 +1,85 @@
-#+title: Sofa
+#+title: Sofa 模块实践
 #+date:  2021-01-17T22:28:39+08:00
 #+weight: 5
 
-** sofa调试
+*** sofa调试
 
-*** 修改配置
-    - soul-boostrap pom 文件中增加相关依赖
-      #+begin_src xml
-        <dependency>
-            <groupId>org.dromara</groupId>
-            <artifactId>soul-spring-boot-starter-plugin-sofa</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+**** 修改配置
+     - soul-boostrap pom 文件中增加相关依赖
+     #+begin_src xml
+       <dependency>
+           <groupId>org.dromara</groupId>
+           <artifactId>soul-spring-boot-starter-plugin-sofa</artifactId>
+           <version>${project.version}</version>
+       </dependency>
+ 
+       <dependency>
+           <groupId>com.alipay.sofa</groupId>
+           <artifactId>sofa-rpc-all</artifactId>
+       </dependency>
+ 
+     #+end_src
+     - 在soul-admin中打开sofa的插件开关
+       系统管理 --> 插件管理  (直接保存就ok)
+**** 请求调用
+     使用的idea http client 工具
+     #+begin_src shell
+      ### 测试保存数据
+      post http://localhost:9195/sofa/insert
+      content-type: application/json
 
-        <dependency>
-            <groupId>com.alipay.sofa</groupId>
-            <artifactId>sofa-rpc-all</artifactId>
-        </dependency>
+      {
+        "id": "999",
+        "name": "valjean"
+      }
 
-      #+end_src
-    - 在soul-admin中打开sofa的插件开关
-      系统管理 --> 插件管理  (直接保存就ok)
-*** 请求调用
-    使用的idea http client 工具
-    #+begin_src shell
-### 测试保存数据
-post http://localhost:9195/sofa/insert
-content-type: application/json
+      ### 测试按条件查找数据
+      post http://localhost:9195/sofa/findbyid
+      content-type: application/json
 
-{
-  "id": "999",
-  "name": "valjean"
-}
+      {
+        "id": "999"
+      }
 
-### 测试按条件查找数据
-post http://localhost:9195/sofa/findbyid
-content-type: application/json
+      ### 测试无条件查询
+      post http://localhost:9195/sofa/findall
 
-{
-  "id": "999"
-}
-
-### 测试无条件查询
-post http://localhost:9195/sofa/findall
-
-    #+end_src
+     #+end_src
      
-*** 遇到的问题
-    - 不带参数请求ok,带参数出现序列化错误.
-      调试发现此处为空
-     [[../sofa.files/sofa-proxy-null.png]] 
-      按照[[https://dromara.org/zh-cn/docs/soul/user-sofa.html][官方文档sofa-user]],实现SofaParamResolveService 调试跟踪发现,请求已经进入到后端的服务中.
-      只是在rpc反序列化时出的错. 不过跟代码没找到具体的问题.
+**** 遇到的问题
+     - 不带参数请求ok,带参数出现序列化错误.
+       调试发现此处为空
+      [[../sofa.files/sofa-proxy-null.png]] 
+       按照[[https://dromara.org/zh-cn/docs/soul/user-sofa.html][官方文档sofa-user]],实现SofaParamResolveService 调试跟踪发现,请求已经进入到后端的服务中.
+       只是在rpc反序列化时出的错. 不过跟代码没找到具体的问题.
+       
+       最后在csdn中发现有同学已经踩坑, 此bug也已经做了修复,在github上更新最新代码即可. \\
+       [[https://blog.csdn.net/baidu_27627251/article/details/112726694][另一个踩坑的同学]] \\
+       [[https://github.com/dromara/soul/pull/992][github pr]]  
 
-      最后在csdn中发现有同学已经踩坑, 此bug也已经做了修复,在github上更新最新代码即可.
-      [[https://blog.csdn.net/baidu_27627251/article/details/112726694][另一个踩坑的同学]]
-      [[https://github.com/dromara/soul/pull/992][github pr]] 
+*** sofa 拓展
 
-** 新内容预习
+    第一次接触sofa项目. 大概浏览了一下官网的介绍。对其有个大概的了解。目前暂未学习使用的打算 \\
+    后续再说，目前仅记录于此。
+    + [[https://github.com/sofastack][sofastack github]] 
+    + [[https://www.sofastack.tech/][sofastack website]]
 
-*** webflux [[https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html][office]]
-   
-*** sofa [[https://tech.antfin.com/docs/2/56207][office]]
-
+**** 子项目
+#+begin_quote
+    * [[HTTPS://WWW.SOFASTACK.TECH/PROJECTS/SOFA-BOOT/OVERVIEW/][SOFABoot]] 是蚂蚁金服开源的基于 Spring Boot 的研发框架，它在 Spring Boot 的基础上， \\
+      提供了诸如 Readiness Check，类隔离，日志空间隔离等能力。在增强了 Spring Boot 的同时， \\
+      SOFABoot 提供了让用户可以在 Spring Boot 中非常方便地使用 SOFA 中间件的能力。
+    * [[HTTPS://WWW.SOFASTACK.TECH/PROJECTS/SOFA-RPC/OVERVIEW/][SOFARpc]] 是蚂蚁金服开源的一款基于 Java 实现的 RPC 服务框架，为应用之间提供远程服务调用能力，\\
+      具有高可伸缩性，高容错性，目前蚂蚁金服所有的业务的相互间的 RPC 调用都是采用 SOFARPC。\\
+      SOFARPC 为用户提供了负载均衡，流量转发，链路追踪，链路数据透传，故障剔除等功能。 
+    * [[https://www.sofastack.tech/projects/sofa-tracer/overview/][SOFATracer]] 是蚂蚁金服开发的基于 OpenTracing 规范 的分布式链路跟踪系统，\\
+      其核心理念就是通过一个全局的 TraceId 将分布在各个服务节点上的同一次请求串联起来。\\
+      通过统一的 TraceId 将调用链路中的各种网络调用情况以日志的方式记录下来同时也提供远程汇报到 Zipkin 进行展示的能力， \\
+      以此达到透视化网络调用的目的。 
+    * [[HTTPS://WWW.SOFASTACK.TECH/PROJECTS/SOFA-REGISTRY/OVERVIEW/][SOFARegistry]] 是蚂蚁金服开源的一个生产级、高时效、高可用的服务注册中心。 \\
+      SOFARegistry 最早源自于淘宝的 ConfigServer，十年来，随着蚂蚁金服的业务发展，注册中心架构已经演进至第五代。 \\
+      目前 SOFARegistry 不仅全面服务于蚂蚁金服的自有业务，还随着蚂蚁金融科技服务众多合作伙伴，同时也兼容开源生态。  \\
+      SOFARegistry 采用 AP 架构，支持秒级时效性推送，同时采用分层架构支持无限水平扩展。   
+    * [[https://www.sofastack.tech/projects/sofa-lookout/overview/][SOFALookout]] 是蚂蚁金服开源的一款解决系统的度量和监控问题的轻量级中间件服务。 \\
+      它提供的服务包括：Metrics 的埋点、收集、加工、存储与查询等。该开源项目包括了两个独立部分，分别是客户端与服务器端服务。
+#+end_quote
