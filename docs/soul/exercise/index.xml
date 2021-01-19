@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>Springcloud</title>
+      <link>http://blog.valjean.cn/soul/exercise/springcloud/</link>
+      <pubDate>Tue, 19 Jan 2021 11:12:46 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/exercise/springcloud/</guid>
+      <description> soul springcloud  环境搭建     docker 安装注册中心，eureka nacos 任选其一 docker pull springcloud/eureka docker pull nacos/nacos-server     eureka 项目启动 https://www.baeldung.com/spring-cloud-netflix-eureka     启动服务  </description>
+    </item>
+    
+    <item>
       <title>Webflux</title>
       <link>http://blog.valjean.cn/soul/exercise/webflux/</link>
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>

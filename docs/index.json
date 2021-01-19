@@ -14,6 +14,13 @@
 	"content": ""
 },
 {
+	"uri": "http://blog.valjean.cn/soul/exercise/springcloud/",
+	"title": "Springcloud",
+	"tags": [],
+	"description": "",
+	"content": " soul springcloud  环境搭建     docker 安装注册中心，eureka nacos 任选其一 docker pull springcloud/eureka docker pull nacos/nacos-server     eureka 项目启动 https://www.baeldung.com/spring-cloud-netflix-eureka     启动服务  "
+},
+{
 	"uri": "http://blog.valjean.cn/soul/exercise/webflux/",
 	"title": "Webflux",
 	"tags": [],

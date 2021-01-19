@@ -1,0 +1,19 @@
+#+title: Springcloud
+#+date:  2021-01-19T11:12:46+08:00
+#+weight: 5
+
+
+** soul springcloud 
+
+*** 环境搭建
+    - docker 安装注册中心，eureka nacos 任选其一
+      #+begin_src shell
+ docker pull springcloud/eureka
+ docker pull nacos/nacos-server 
+      #+end_src
+    - eureka 项目启动
+      https://www.baeldung.com/spring-cloud-netflix-eureka
+    - 
+
+*** 启动服务
+
