@@ -1,0 +1,170 @@
+#+title: Tars 学习练习
+#+date:  2021-01-20T18:52:44+08:00
+#+weight: 5
+
+** tencent tars-cloud 实践
+   昨天调试soul-tars 插件，后台服务tars一直启动失败。 \\
+   今天参考 [[https://tarscloud.github.io/TarsDocs/dev/tarsjava/tars-quick-start.html][office quick start]] ，总算启动成功，不过其中还有很多需要注意的点，在此记录一下。
+
+*** 注意事项
+    - 对tars的整体结构得有个大概的认识，自己再部署后面的 tars-framework, tars-nodes 一直不成功 \\
+      文档中介绍， ~Tars 框架, 有两个镜像可供选择: framework / tars~ .自己一直理解成了是framework/nodes \\
+      framework 、 nodes 两码事. 如果将来拿framework作为节点发布服务，会出现pid not exist. 因其没有java环境 [[https://github.com/TarsCloud/TarsDocker/issues/11][issues]]
+      
+      #+begin_quote
+      framework: Tars 框架 Docker 制作脚本, 制作的 docker 包含了框架核心服务和 web 管理平台 \\
+      tars: Tars 框架 Docker 制作脚本, 和 framework 比, 增加了 java, nodejs 等运行时支持, \\
+      即可以把 java, nodejs 服务发布到 docker 里面(docker 里面安装了 jdk, node, php 环境) \\
+      nodes: 是正常的代码运行环境，包含基本的开发环境。
+
+      #+end_quote
+    - 在使用docker快速搭建环境时，在Linux环境下，官方提供了国内的镜像地址  \\
+      一下的命令执行后，发现是修改的docker  daemon 配置文件，将镜像仓库地址更改为了aliyun的。 \\
+      目前测试在此仓库下，安装mysql 也挺快的，其他镜像未测试，在测试完tars最好还手动更改回去。 \\
+      其实这块配置的是数组形式，应该可以添加多个.  国内镜像地址: ~https://registry.docker-cn.com~ \\
+      再个如果curl 报  ~curl: (60) Peer's Certificate has expired~ 按提示，添加 -k 指令即可
+
+      #+begin_src shell
+      curl -sSL https://doc.tarsdoc.com/docker_set_mirror.sh | sh -s https://w1mnep2c.mirror.aliyuncs.com
+      systemctl restart docker
+      #+end_src
+      
+     /etc/docker/daemon.json 内容如下
+      #+begin_src json
+      {
+        "registry-mirrors": ["https://w1mnep2c.mirror.aliyuncs.com"]
+      }
+
+      #+end_src
+      
+    - 用docker启动时，参数中的port ~不要随便更改~. 因本地3000， 3306 端口有他用，更改了启动脚本的端口. \\
+      3306 --> 3307 tarscloud/framework 报连不上mysql， 而且mysql的port依旧是3306 \\
+      3000 --> 3010 tarscloud/tars-node 启动后不能自动注册到tarscloud/framework. \\
+      随后将其他服务关闭，改回原来的port启动成功.
+
+    - 官方启动脚本中，有一个 ~-e INET~ , 如果启动报错，删除即可
+
+*** 服务部署
+    目前使用docker 单独启动各个服务，官方提供的docker-compose暂未测试，调试麻烦。  \\
+    注意将镜像的相关目录，映射到宿主机后。在清理环境的时候，删除对应的目录，以免污染测试环境。
+
+**** 启动脚本如下   
+#+begin_src shell
+  #所用系统信息
+  #LSB Version:    :core-4.1-amd64:core-4.1-noarch
+  #Distributor ID: CentOS
+  #Description:    CentOS Linux release 7.6.1810 (Core)
+  #Release:        7.6.1810
+  #Codename:       Core
+
+# 创建一个名为tars的桥接(bridge)虚拟网络，网关172.25.0.1，网段为172.25.0.0
+docker network create -d bridge --subnet=172.25.0.0/16 --gateway=172.25.0.1 tars
+
+docker run -d \
+    --net=tars \
+    -e MYSQL_ROOT_PASSWORD="123456" \
+    --ip="172.25.0.2" \
+    -v /data/workspace/tars-cloud/mysql:/var/lib/mysql \
+    -v /etc/localtime:/etc/localtime \
+    --name=tars-mysql \
+    mysql:5.6
+
+
+# 挂载的/etc/localtime是用来设置容器时区的，若没有可以去掉
+# 3000端口为web程序端口
+# 3001端口为web授权相关服务端口
+docker run -d \
+    --name=tars-framework \
+    --net=tars \
+    -e MYSQL_HOST="172.25.0.2" \
+    -e MYSQL_ROOT_PASSWORD="123456" \
+    -e MYSQL_USER=root \
+    -e MYSQL_PORT=3306 \
+    -e REBUILD=false \
+    -e SLAVE=false \
+    --ip="172.25.0.3" \
+    -v /data/workspace/tars-cloud/tars:/data/tars \
+    -v /etc/localtime:/etc/localtime \
+    -p 3000:3000 \
+    -p 3001:3001 \
+    tarscloud/framework:stable
+
+docker run -d \
+    --name=tars-node \
+    --net=tars \
+    #-e INET=enp2s0 \
+    -e WEB_HOST="http://172.25.0.3:3000" \
+    --ip="172.25.0.5" \
+    -v /data/workspace/tars-cloud/tars:/data/tars \
+    -v /etc/localtime:/etc/localtime \
+    -p 9000-9010:9000-9010 \
+    tarscloud/tars-node:stable
+
+#+end_src
+
+**** 测试代码
+[[https://tarscloud.gitbook.io/tarsdocs/rumen/hello-world/tarsjava][java 快速入门]] 直接下载官方的代码，使用其中的example测试即可, 使用springboot项目 ~tars-spring-boot-server~ 测试 \\
+在其pom中需要添加编译插件，依赖如下:
+#+begin_src  xml
+   <plugin>
+                <groupId>com.tencent.tars</groupId>
+                <artifactId>tars-maven-plugin</artifactId>
+                <version>1.6.1</version>
+                <configuration>
+                    <tars2JavaConfig>
+                        <!-- tars文件位置 -->
+                        <tarsFiles>
+                            <tarsFile>${basedir}/src/main/resources/hello.tars</tarsFile>
+                        </tarsFiles>
+                        <!-- 源文件编码 -->
+                        <tarsFileCharset>UTF-8</tarsFileCharset>
+                        <!-- 生成服务端代码 -->
+                        <servant>true</servant>
+                        <!-- 生成源代码编码 -->
+                        <charset>UTF-8</charset>
+                        <!-- 生成的源代码目录 -->
+                        <srcPath>${basedir}/src/main/java</srcPath>
+                        <!-- 生成源代码包前缀 -->
+                        <packagePrefixName>com.qq.tars.quickstart.server.</packagePrefixName>
+                    </tars2JavaConfig>
+                </configuration>
+            </plugin>
+#+end_src
+
+**** 日志路径
+     tars 的日志都在/data/tars/ 已经映射到宿主机， 本机情况如下, 如果有问题，可以在此查看。
+    [[file:../images/tars-log-dir.png]] 
+
+**** tars配置与使用
+     - 配置应用, 这里基础概念很重要
+#+begin_quote
+    [[https://tarscloud.gitbook.io/tarsdocs/rumen/tars-concept][tars 基础概念]] \\
+    应用名：表示一组服务的集合 --> APP \\
+    服务名称：提供服务的进程名称  --> Server \\
+    OBJ：提供具体服务的接口 --> Servant 
+#+end_quote
+    web的配置需要和程序中的命名一一对应, examples中可以按照下图识别 
+    [[file:../images/tars-app-server.png]] 
+
+    web中配置如下：
+    [[file:../images/tar-web-cfg.png]] 
+    
+   
+     - 发布服务
+     配置节点: 这里的172.25.0.5 即为tarscloud/tars-node, 如果程序正常启动，是可以自动注册到web端的.
+    [[file:../images/tars-node.png]] 
+
+    发布服务: 有历史记录的功能
+    [[file:../images/tar-public-server.png]] 
+
+    服务状态: 双~Active~ 代表配置成功。失败的话，得查看log
+    [[file:../images/tar-server-status.png]] 
+    
+    接口调试. 在web中，上次对应的tars文件，即可对接口进行调试. 
+    [[file:../images/tars-api-debug.png]] 
+    
+    在web直接查看日志log. 这个确实方便，我们目前的日志，有部分发往es，而绝大部分的日志，只能在服务器上查看。
+    [[file:../images/tars-web-log.png]] 
+
+*** 后期
+    再尝试启动soul中的tars插件，目前还在调试中

@@ -6,18 +6,18 @@
     <description>Recent content in 环境搭建 on Documentation for Hugo Learn Theme</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 13 Jan 2021 23:30:36 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/soul/env/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Jan 2021 23:30:36 +0800</lastBuildDate>
+    
+	<atom:link href="http://blog.valjean.cn/soul/env/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>文档环境、代码环境</title>
       <link>http://blog.valjean.cn/soul/env/basic/</link>
       <pubDate>Thu, 14 Jan 2021 22:38:21 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/env/basic/</guid>
-      <description>hugo theme 选择    一直再找一个比较合适的blog生成工具. 最早的时候是自己编写markdown，上传到csdn中. 后来接触到vim emacs，使用emacs orgmode 自带的publish系统搭建了一套自己的wiki 也整合上传到了github中，不过后续更少更新。所有的学习笔记、工作笔记也都是记录再本地中基本都是组内人再访问。 随后也尝试过jekyll，但是都不太理想。直到前段时间接触、学习了hugo。感觉还是比较符合自己的需求。 目前简单修改了一个主题来使用 hugo-theme-learn, 改的比较糙。也在慢慢的优化使用. 还有就是这个排版，也好头疼。等我再搞搞的
-    github pages 设置    早期在github page中搭建blog是建立一个&amp;lt;USERNAME&amp;gt;.github.io项目。 将编译后的静态内容作为内容提交。   这几天在查看hugo的发布时，发现在可以在github.io项目中，建立一个docs的文件夹，来存放 生成的静态网站内容，这样方便和源码存放。
-    soul 代码编译    下载代码
-git clone https://github.com/dromara/soul.git    编译代码 shardingshpere 中也是采用这样的命令。 其中rat checkstyle 有空看看的，自己的项目中没有使用过.
-mvn clean package install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.skip=true -Dcheckstyle.skip=true    deepin install docker tutor</description>
+      <description>hugo theme 选择     一直再找一个比较合适的blog生成工具. 最早的时候是自己编写markdown，上传到csdn中. 后来接触到vim emacs，使用emacs orgmode 自带的publish系统搭建了一套自己的wiki 也整合上传到了github中，不过后续更少更新。所有的学习笔记、工作笔记也都是记录再本地中基本都是组内人再访问。 随后也尝试过jekyll，但是都不太理想。直到前段时间接触、学习了hugo。感觉还是比较符合自己的需求。 目前简单修改了一个主题来使用 hugo-theme-learn, 改的比较糙。也在慢慢的优化使用. 还有就是这个排版，也好头疼。等我再搞搞的   github pages 设置     早期在github page中搭建blog是建立一个&amp;lt;USERNAME&amp;gt;.github.io项目。 将编译后的静态内容作为内容提交。    这几天在查看hugo的发布时，发现在可以在github.io项目中，建立一个docs的文件夹，来存放 生成的静态网站内容，这样方便和源码存放。   soul 代码编译     下载代码 git clone https://github.com/dromara/soul.git     编译代码 shardingshpere 中也是采用这样的命令。 其中rat checkstyle 有空看看的，自己的项目中没有使用过. mvn clean package install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.skip=true -Dcheckstyle.skip=true     deepin install docker tutor sudo apt-get remove -y docker docker-engine docker.</description>
     </item>
     
   </channel>
