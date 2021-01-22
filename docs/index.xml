@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>soul-tars 插件实践</title>
+      <link>http://blog.valjean.cn/soul/exercise/tars-2/</link>
+      <pubDate>Fri, 22 Jan 2021 15:11:27 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/exercise/tars-2/</guid>
+      <description>soul-tars 后续  1. tars cloud 中尝试添加soul依赖   tarscloud的demo跑起来后，想着在其上引入 soul-spring-boot-starter-client-tars 依赖，来测试soul-tars。 但是将打好的jar发布到tars框架中，一直报jvm错误，也尝试调整jvm参数，但是均启动失败。 这块应该还是tars框架的使用问题 暂时未深入研究，随后开始尝试 soul-examples-tars.  2. soul-example-tars配置   和使用其他的插件一样， 需要先打开插件开关。 但是不同点是在官方的说明中，并未有tars的使用教程。 这点只能自己摸索。 我在配置的过程中，soul相关的项目是在本机启动， tarscloud是在另一台机器的。 故在配置application.yml的过程中，有一下几点需要注意。 #application.yml soul: tars: adminUrl: http://172.16.0.35:9095 contextPath: /tars appName: tars ipAndPort: 192.168.1.110:9002     soul.tars.adminUrl需要更改为实际的ip地址，    soul.tars.ipAndPort 配置要根据tars-node 启动脚本中暴露的端口来选择一个。 因为应用将来是部署在docker容器内的。
+而服务本身的端口与tars框架暴露的端口可以通过tars控制台来更改。       tars-node的启动脚本指定了9000 –&amp;gt; 9010之间的端口对外暴露   docker run -d \ --name=tars-node \ --net=tars \ #-e INET=enp2s0 \ -e WEB_HOST=&amp;#34;http://172.</description>
+    </item>
+    
+    <item>
       <title>心得体会</title>
       <link>http://blog.valjean.cn/soul/exercise/summary/</link>
       <pubDate>Thu, 21 Jan 2021 22:45:24 +0800</pubDate>

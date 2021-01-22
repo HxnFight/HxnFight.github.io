@@ -1,0 +1,86 @@
+#+title: soul-tars 插件实践
+#+date:  2021-01-22T15:11:27+08:00
+#+weight: 5
+
+** soul-tars 后续
+
+*** 1. tars cloud 中尝试添加soul依赖
+      
+     tarscloud的demo跑起来后，想着在其上引入 soul-spring-boot-starter-client-tars 依赖，来测试soul-tars。  \\
+     但是将打好的jar发布到tars框架中，一直报jvm错误，也尝试调整jvm参数，但是均启动失败。 这块应该还是tars框架的使用问题 \\
+     暂时未深入研究，随后开始尝试 soul-examples-tars. 
+      
+   [[file:../images/tars-demo-erro.png]] 
+      
+*** 2. soul-example-tars配置
+      
+     和使用其他的插件一样， 需要先打开插件开关。 但是不同点是在官方的说明中，并未有tars的使用教程。 这点只能自己摸索。  \\
+     我在配置的过程中，soul相关的项目是在本机启动， tarscloud是在另一台机器的。 故在配置application.yml的过程中，有一下几点需要注意。
+     
+#+begin_src 
+#application.yml
+soul:
+  tars:
+    adminUrl: http://172.16.0.35:9095
+    contextPath: /tars
+    appName: tars
+    ipAndPort: 192.168.1.110:9002
+#+end_src
+     - soul.tars.adminUrl需要更改为实际的ip地址，
+     - soul.tars.ipAndPort 配置要根据tars-node 启动脚本中暴露的端口来选择一个。 因为应用将来是部署在docker容器内的。\\
+       而服务本身的端口与tars框架暴露的端口可以通过tars控制台来更改。
+
+    [[file:../images/soul-tars-cnf.png]] 
+
+     - tars-node的启动脚本指定了9000 --> 9010之间的端口对外暴露
+#+begin_src 
+docker run -d \
+    --name=tars-node \
+    --net=tars \
+    #-e INET=enp2s0 \
+    -e WEB_HOST="http://172.25.0.3:3000" \
+    --ip="172.25.0.5" \
+    -v /data/workspace/tars-cloud/tars:/data/tars \
+    -v /etc/localtime:/etc/localtime \
+    -p 9000-9010:9000-9010 \
+    tarscloud/tars-node:stable
+
+#+end_src
+      
+     - 将SoulExampleServer.SoulExampleApp.config.conf文件中 192.168.41.103 全部替换为127.0.0.1. 因其在容器内部调用
+
+*** 3. 接口测试调用
+    在tars中部署应用完成后， 可以在soul-admin 中tars的接口已经注册好了
+     
+   [[file:../images/soul-tars-select.png]]
+
+    tars 平台中调用soul-example
+   [[file:../images/soul-tars-api.png]] 
+
+*** 4. soul-gateway 调用
+   通用gateway的调用报的404，这个还在排查中.
+
+#+begin_src  shell
+
+POST http://localhost:9195/tars/hello
+
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+Content-Length: 136
+
+{
+  "timestamp": "2021-01-22T08:04:09.878+0000",
+  "path": "/tars/hello",
+  "status": 404,
+  "error": "Not Found",
+  "message": null,
+  "requestId": "2adfe3bc"
+}
+
+Response code: 404 (Not Found); Time: 258ms; Content length: 136 bytes
+
+
+#+end_src
+
+*** 5. 其他内容
+    
