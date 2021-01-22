@@ -1,4 +1,4 @@
-#+title: Tars 学习练习
+#+title: Tars 学习
 #+date:  2021-01-20T18:52:44+08:00
 #+weight: 5
 

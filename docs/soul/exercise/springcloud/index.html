@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.80.0" />
     <meta name="description" content="Documentation for Hugo Learn Theme">
 <meta name="author" content="Mathieu Cornic">
 
@@ -12,19 +12,19 @@
     <title>Springcloud :: Documentation for Hugo Learn Theme</title>
 
     
-    <link href="/css/nucleus.css?1611298137" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1611298137" rel="stylesheet">
-    <link href="/css/hybrid.css?1611298137" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1611298137" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1611298137" rel="stylesheet">
-    <link href="/css/auto-complete.css?1611298137" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1611298137" rel="stylesheet">
-    <link href="/css/theme.css?1611298137" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1611298137" rel="stylesheet">
+    <link href="/css/nucleus.css?1611243245" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611243245" rel="stylesheet">
+    <link href="/css/hybrid.css?1611243245" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611243245" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611243245" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611243245" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1611243245" rel="stylesheet">
+    <link href="/css/theme.css?1611243245" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611243245" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1611298137"></script>
+    <script src="/js/jquery-3.3.1.min.js?1611243245"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -69,14 +69,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1611298137"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1611298137"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1611243245"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611243245"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/blog.valjean.cn\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1611298137"></script>
+<script type="text/javascript" src="/js/search.js?1611243245"></script>
 
     
   </div>
@@ -214,9 +214,30 @@
  
   
     
-      <li data-nav-id="/soul/exercise/tars/" title="Tars 学习练习" class="dd-item ">
+      <li data-nav-id="/soul/exercise/summary/" title="心得体会" class="dd-item ">
+        <a href="/soul/exercise/summary/">
+        心得体会
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/soul/exercise/tars/" title="Tars 学习" class="dd-item ">
         <a href="/soul/exercise/tars/">
-        Tars 学习练习
+        Tars 学习
         <i class="fas fa-check read-icon"></i>
         </a>
     </li>
@@ -467,33 +488,39 @@
 
 
 
+<div id="outline-container-headline-1" class="outline-3">
 <h3 id="headline-1">
 soul springcloud 
 </h3>
+<div id="outline-text-headline-1" class="outline-text-3">
+<div id="outline-container-headline-2" class="outline-4">
 <h4 id="headline-2">
 实践
 </h4>
+<div id="outline-text-headline-2" class="outline-text-4">
+<div id="outline-container-headline-3" class="outline-5">
 <h5 id="headline-3">
 在soul中增加springcloud配置
 </h5>
+<div id="outline-text-headline-3" class="outline-text-5">
 <ul>
 <li>
-<p>
-将soul-boostrap中有关springcloud的依赖注释打开,注册中心选用的eureka.
+<p>将soul-boostrap中有关springcloud的依赖注释打开,注册中心选用的eureka.
 docker镜像没下载成功,按照教程 <a href="https://www.baeldung.com/spring-cloud-netflix-eureka">eureka tutor</a>, 创建springboot项目,引入
-eureka相关依赖,搞定eureka的server服务.
-</p>
+eureka相关依赖,搞定eureka的server服务.</p>
 </li>
 <li>
-<p>
-soul-admin 中 打开springcloud插件开关
-系统管理 –&gt; 插件管理  (直接保存就ok)
-</p>
+<p>soul-admin 中 打开springcloud插件开关
+系统管理 –&gt; 插件管理  (直接保存就ok)</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-5">
 <h5 id="headline-4">
 请求调用
 </h5>
+<div id="outline-text-headline-4" class="outline-text-5">
 <div class="src src-shell">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> <span style="color:#75715e">### 测试查询数据</span>
  GET http://localhost:9195/springcloud/order/findById?id<span style="color:#f92672">=</span><span style="color:#ae81ff">999</span>
@@ -516,28 +543,32 @@ soul-admin 中 打开springcloud插件开关
     <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;hello world spring cloud save order&#34;</span>
   <span style="color:#f92672">}</span></code></pre></div>
 </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
 <h3 id="headline-5">
 tars cloud
 </h3>
-<p>
-又发现一个新的rpc框架<a href="https://tarscloud.org/">tarscloud</a>, 原来以为是个压缩相关的模块的呢, ~tars~嘛.  引用下官方的一个项目说明
-</p>
+<div id="outline-text-headline-5" class="outline-text-3">
+<p>又发现一个新的rpc框架<a href="https://tarscloud.org/">tarscloud</a>, 原来以为是个压缩相关的模块的呢, ~tars~嘛.  引用下官方的一个项目说明</p>
 <blockquote>
-<p>
-TARS是Linux基金会的开源项目，它是基于名字服务使用TARS协议的高性能RPC开发框架， <br>
+<p>TARS是Linux基金会的开源项目，它是基于名字服务使用TARS协议的高性能RPC开发框架， <br>
    配套一体化的运营管理平台，并通过伸缩调度，实现运维半托管服务。
    TARS是腾讯从2008年到今天一直在使用的后台逻辑层的统一应用框架，覆盖腾讯100多个产品。<br>
    目前支持C++,Java,PHP,Nodejs,Go语言。该框架为用户提供了涉及到开发、运维、以及测试的一整套解决方案，<br>
    帮助一个产品或者服务快速开发、部署、测试、上线。 它集可扩展协议编解码、高性能RPC通信框架、名字路由与发现、发布监控、日志统计、配置管理等于一体， <br>
    通过它可以快速用微服务的方式构建自己的稳定可靠的分布式应用，并实现完整有效的服务治理。 <br>
-   目前该框架在腾讯内部，各大核心业务都在使用，颇受欢迎，基于该框架部署运行的服务节点规模达到上万个。
-</p>
+   目前该框架在腾讯内部，各大核心业务都在使用，颇受欢迎，基于该框架部署运行的服务节点规模达到上万个。</p>
 </blockquote>
-<p>
-<a href="https://tarscloud.github.io/TarsDocs/">office docs</a> 
+<p><a href="https://tarscloud.github.io/TarsDocs/">office docs</a> 
   通过soul,前几天接触到阿里的sofa,今天又接触到腾讯的tars. 虽说目前用不上,但是真的蛮开眼界的
-  只大概看了一些官方文档的资料,目前还没有跑起来. 明天继续.
-</p>
+  只大概看了一些官方文档的资料,目前还没有跑起来. 明天继续.</p>
+</div>
+</div>
 
 
 <footer class="footline">
@@ -659,6 +690,22 @@ TARS是Linux基金会的开源项目，它是基于名字服务使用TARS协议�
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -753,7 +800,7 @@ TARS是Linux基金会的开源项目，它是基于名字服务使用TARS协议�
 	 
 	 
 		
-			<a class="nav nav-prev" href="/soul/exercise/tars/" title="Tars 学习练习"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/soul/exercise/tars/" title="Tars 学习"> <i class="fa fa-chevron-left"></i></a>
 		
 		
 			<a class="nav nav-next" href="/soul/exercise/webflux/" title="Webflux" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
@@ -766,19 +813,19 @@ TARS是Linux基金会的开源项目，它是基于名字服务使用TARS协议�
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1611298137"></script>
-    <script src="/js/perfect-scrollbar.min.js?1611298137"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1611298137"></script>
-    <script src="/js/jquery.sticky.js?1611298137"></script>
-    <script src="/js/featherlight.min.js?1611298137"></script>
-    <script src="/js/highlight.pack.js?1611298137"></script>
+    <script src="/js/clipboard.min.js?1611243245"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611243245"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611243245"></script>
+    <script src="/js/jquery.sticky.js?1611243245"></script>
+    <script src="/js/featherlight.min.js?1611243245"></script>
+    <script src="/js/highlight.pack.js?1611243245"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1611298137"></script>
-    <script src="/js/learn.js?1611298137"></script>
-    <script src="/js/hugo-learn.js?1611298137"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611243245"></script>
+    <script src="/js/learn.js?1611243245"></script>
+    <script src="/js/hugo-learn.js?1611243245"></script>
     
         
-            <script src="/mermaid/mermaid.js?1611298137"></script>
+            <script src="/mermaid/mermaid.js?1611243245"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
