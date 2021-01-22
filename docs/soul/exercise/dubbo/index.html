@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta name="description" content="Documentation for Hugo Learn Theme">
 <meta name="author" content="Mathieu Cornic">
 
@@ -12,19 +12,19 @@
     <title>Dubbo 模块实践 :: Documentation for Hugo Learn Theme</title>
 
     
-    <link href="/css/nucleus.css?1611243245" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1611243245" rel="stylesheet">
-    <link href="/css/hybrid.css?1611243245" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1611243245" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1611243245" rel="stylesheet">
-    <link href="/css/auto-complete.css?1611243245" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1611243245" rel="stylesheet">
-    <link href="/css/theme.css?1611243245" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1611243245" rel="stylesheet">
+    <link href="/css/nucleus.css?1611298687" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611298687" rel="stylesheet">
+    <link href="/css/hybrid.css?1611298687" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611298687" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611298687" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611298687" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1611298687" rel="stylesheet">
+    <link href="/css/theme.css?1611298687" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611298687" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1611243245"></script>
+    <script src="/js/jquery-3.3.1.min.js?1611298687"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -69,14 +69,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1611243245"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1611243245"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1611298687"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611298687"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/blog.valjean.cn\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1611243245"></script>
+<script type="text/javascript" src="/js/search.js?1611298687"></script>
 
     
   </div>
@@ -486,44 +486,47 @@
 
 
 
-<div id="outline-container-headline-1" class="outline-4">
 <h4 id="headline-1">
 dubbo模块
 </h4>
-<div id="outline-text-headline-1" class="outline-text-4">
-<div id="outline-container-headline-2" class="outline-5">
 <h5 id="headline-2">
 参考手册
 </h5>
-<div id="outline-text-headline-2" class="outline-text-5">
-<p><a href="https://dromara.org/zh-cn/docs/soul/plugin-dubbo.html">官方:dubbo插件</a> 
-    <a href="https://dromara.org/zh-cn/docs/soul/user-dubbo.html">官方:dubbo用户</a> </p>
 <p>
-    文档说明很详细的,其中提到以下几个重点</p>
+<a href="https://dromara.org/zh-cn/docs/soul/plugin-dubbo.html">官方:dubbo插件</a> 
+    <a href="https://dromara.org/zh-cn/docs/soul/user-dubbo.html">官方:dubbo用户</a> 
+</p>
+<p>
+    文档说明很详细的,其中提到以下几个重点
+</p>
 <ul>
 <li>
-<p>dubbo 服务接入soul的配置</p>
+<p>
+dubbo 服务接入soul的配置
+</p>
 </li>
 <li>
-<p>接入之后的调用方式, 参数传递方式. <span style="text-decoration: underline;">全部是post请求 Content-Type: application/json格式.</span></p>
+<p>
+接入之后的调用方式, 参数传递方式. <span style="text-decoration: underline;">全部是post请求 Content-Type: application/json格式.</span>
+</p>
 </li>
 <li>
-<p>将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.</p>
+<p>
+将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.
+</p>
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-headline-3" class="outline-5">
 <h5 id="headline-3">
 实际测试
 </h5>
-<div id="outline-text-headline-3" class="outline-text-5">
 <p>
   
 <div class="notices tip" ><p>
     偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. <br>
-    具体的使用可以参考官方文档: <a href="https://www.jetbrains.com/help/idea/2020.3/http-client-in-product-code-editor.html">idea tools http client</a> </p>
+    具体的使用可以参考官方文档: <a href="https://www.jetbrains.com/help/idea/2020.3/http-client-in-product-code-editor.html">idea tools http client</a> 
+</p>
 </div>
+
 </p>
 <div class="src src-shell">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> <span style="color:#75715e"># dubbo 插件的要用post请求,请求类型为 Content-Type: application/json</span>
@@ -571,18 +574,17 @@ dubbo模块
 	
 </section>
 
+
 </p>
-</div>
-</div>
-<div id="outline-container-headline-4" class="outline-5">
 <h5 id="headline-4">
 遇到的问题
 </h5>
-<div id="outline-text-headline-4" class="outline-text-5">
 <ul>
 <li>
-<p>dubbo 启动之后报错
-这个暂未定位到什么地方出错</p>
+<p>
+dubbo 启动之后报错
+这个暂未定位到什么地方出错
+</p>
 <div class="src src-shell">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">java.lang.IllegalStateException: No such application config! Please add &lt;dubbo:application name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;...&#34;</span> /&gt; to your spring config.
 at com.alibaba.dubbo.config.AbstractInterfaceConfig.checkApplication<span style="color:#f92672">(</span>AbstractInterfaceConfig.java:145<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>dubbo-2.6.5.jar:2.6.5<span style="color:#f92672">]</span>
@@ -594,9 +596,11 @@ at org.dromara.soul.plugin.alibaba.dubbo.subscriber.AlibabaDubboMetaDataSubscrib
 </div>
 </li>
 <li>
-<p>soul-examples-dubbo 启动之后,访问显示的divide插件信息
+<p>
+soul-examples-dubbo 启动之后,访问显示的divide插件信息
 需要在soul-admin中打开dubbo的插件开关 <code>系统管理---&gt; 插件管理</code> <br>
-再个就是注意请求的数据类型,要个bean中定义的一致.</p>
+再个就是注意请求的数据类型,要个bean中定义的一致.
+</p>
 <div class="src src-shell">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  <span style="color:#75715e">#网关报错如下</span>
    can not match selector data: divide
@@ -610,64 +614,82 @@ at org.dromara.soul.plugin.alibaba.dubbo.subscriber.AlibabaDubboMetaDataSubscrib
 </div>
 </li>
 </ul>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-5" class="outline-4">
 <h4 id="headline-5">
 手册回顾
 </h4>
-<div id="outline-text-headline-5" class="outline-text-4">
-<p>再回顾官方文档的过程中,记录一下新的兴趣点</p>
+<p>
+再回顾官方文档的过程中,记录一下新的兴趣点
+</p>
 <ul>
 <li>
-<p>soul 配置规则学习
+<p>
+soul 配置规则学习
 <a href="https://dromara.org/zh-cn/docs/soul/selector.html">官方文档说明</a> <br>
 其中最重要的三个概念: 插件 选择器 规则  <br>
 一个插件对应多个选择器, 一个选择器对应多个规则  <br>
 一个选择器对应多个匹配条件, 一个规则对应多个匹配条件  <br>
-反应到表结构上,可以参考 <a href="https://dromara.org/zh-cn/docs/soul/db.html">数据库设计</a> ,后续会记录详细的配置使用记录</p>
+反应到表结构上,可以参考 <a href="https://dromara.org/zh-cn/docs/soul/db.html">数据库设计</a> ,后续会记录详细的配置使用记录
+</p>
 </li>
 <li>
-<p>soul 插件
-soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能用到的有</p>
+<p>
+soul 插件
+soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能用到的有
+</p>
 <ul>
 <li>
-<p>divide </p>
+<p>
+divide 
+</p>
 </li>
 <li>
-<p>sign</p>
+<p>
+sign
+</p>
 </li>
 <li>
-<p>rewrite</p>
+<p>
+rewrite
+</p>
 </li>
 <li>
-<p>waf</p>
+<p>
+waf
+</p>
 </li>
 <li>
-<p>monitor</p>
+<p>
+monitor
+</p>
 </li>
 </ul>
-<p>会着重看一下的 </p>
+<p>
+会着重看一下的 
+</p>
 </li>
 <li>
-<p>如下几个功能点特感兴趣</p>
+<p>
+如下几个功能点特感兴趣
+</p>
 <ul>
 <li>
-<p>soul-admin与soul网关数据同步的三种方式</p>
+<p>
+soul-admin与soul网关数据同步的三种方式
+</p>
 </li>
 <li>
-<p>soul-client对本地接口数据的收集实现</p>
+<p>
+soul-client对本地接口数据的收集实现
+</p>
 </li>
 <li>
-<p>插件热插拔的实现机制</p>
+<p>
+插件热插拔的实现机制
+</p>
 </li>
 </ul>
 </li>
 </ul>
-</div>
-</div>
 
 
 <footer class="footline">
@@ -912,19 +934,19 @@ soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能�
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1611243245"></script>
-    <script src="/js/perfect-scrollbar.min.js?1611243245"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1611243245"></script>
-    <script src="/js/jquery.sticky.js?1611243245"></script>
-    <script src="/js/featherlight.min.js?1611243245"></script>
-    <script src="/js/highlight.pack.js?1611243245"></script>
+    <script src="/js/clipboard.min.js?1611298687"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611298687"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611298687"></script>
+    <script src="/js/jquery.sticky.js?1611298687"></script>
+    <script src="/js/featherlight.min.js?1611298687"></script>
+    <script src="/js/highlight.pack.js?1611298687"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1611243245"></script>
-    <script src="/js/learn.js?1611243245"></script>
-    <script src="/js/hugo-learn.js?1611243245"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611298687"></script>
+    <script src="/js/learn.js?1611298687"></script>
+    <script src="/js/hugo-learn.js?1611298687"></script>
     
         
-            <script src="/mermaid/mermaid.js?1611243245"></script>
+            <script src="/mermaid/mermaid.js?1611298687"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
