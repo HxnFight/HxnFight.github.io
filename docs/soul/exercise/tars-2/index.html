@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.80.0" />
     <meta name="description" content="Documentation for Hugo Learn Theme">
 <meta name="author" content="Mathieu Cornic">
 
@@ -12,19 +12,19 @@
     <title>soul-tars 插件实践 :: Documentation for Hugo Learn Theme</title>
 
     
-    <link href="/css/nucleus.css?1611303097" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1611303097" rel="stylesheet">
-    <link href="/css/hybrid.css?1611303097" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1611303097" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1611303097" rel="stylesheet">
-    <link href="/css/auto-complete.css?1611303097" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1611303097" rel="stylesheet">
-    <link href="/css/theme.css?1611303097" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1611303097" rel="stylesheet">
+    <link href="/css/nucleus.css?1611423480" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611423480" rel="stylesheet">
+    <link href="/css/hybrid.css?1611423480" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611423480" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611423480" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611423480" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1611423480" rel="stylesheet">
+    <link href="/css/theme.css?1611423480" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611423480" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1611303097"></script>
+    <script src="/js/jquery-3.3.1.min.js?1611423480"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -69,14 +69,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1611303097"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1611303097"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1611423480"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611423480"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/blog.valjean.cn\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1611303097"></script>
+<script type="text/javascript" src="/js/search.js?1611423480"></script>
 
     
   </div>
@@ -204,6 +204,27 @@
           
 
         
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/soul/exercise/websocket/" title="Soul 数据同步-Websocket初探" class="dd-item ">
+        <a href="/soul/exercise/websocket/">
+        Soul 数据同步-Websocket初探
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
           
             
             
@@ -509,27 +530,32 @@
 
 
 
+<div id="outline-container-headline-1" class="outline-3">
 <h3 id="headline-1">
 soul-tars 后续
 </h3>
+<div id="outline-text-headline-1" class="outline-text-3">
+<div id="outline-container-headline-2" class="outline-4">
 <h4 id="headline-2">
 1. tars cloud 中尝试添加soul依赖
 </h4>
+<div id="outline-text-headline-2" class="outline-text-4">
 <p>
      tarscloud的demo跑起来后，想着在其上引入 soul-spring-boot-starter-client-tars 依赖，来测试soul-tars。  <br>
      但是将打好的jar发布到tars框架中，一直报jvm错误，也尝试调整jvm参数，但是均启动失败。 这块应该还是tars框架的使用问题 <br>
-     暂时未深入研究，随后开始尝试 soul-examples-tars. 
-</p>
+     暂时未深入研究，随后开始尝试 soul-examples-tars. </p>
 <p>
-   <img src="../images/tars-demo-erro.png" alt="../images/tars-demo-erro.png" title="../images/tars-demo-erro.png" /> 
-</p>
+   <img src="../images/tars-demo-erro.png" alt="../images/tars-demo-erro.png" title="../images/tars-demo-erro.png" /> </p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-4">
 <h4 id="headline-3">
 2. soul-example-tars配置
 </h4>
+<div id="outline-text-headline-3" class="outline-text-4">
 <p>
      和使用其他的插件一样， 需要先打开插件开关。 但是不同点是在官方的说明中，并未有tars的使用教程。 这点只能自己摸索。  <br>
-     我在配置的过程中，soul相关的项目是在本机启动， tarscloud是在另一台机器的。 故在配置application.yml的过程中，有一下几点需要注意。
-</p>
+     我在配置的过程中，soul相关的项目是在本机启动， tarscloud是在另一台机器的。 故在配置application.yml的过程中，有一下几点需要注意。</p>
 <div class="src src-text">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#application.yml
 soul:
@@ -541,25 +567,17 @@ soul:
 </div>
 <ul>
 <li>
-<p>
-soul.tars.adminUrl需要更改为实际的ip地址，
-</p>
+<p>soul.tars.adminUrl需要更改为实际的ip地址，</p>
 </li>
 <li>
-<p>
-soul.tars.ipAndPort 配置要根据tars-node 启动脚本中暴露的端口来选择一个。 因为应用将来是部署在docker容器内的。<br>
-而服务本身的端口与tars框架暴露的端口可以通过tars控制台来更改。
-</p>
+<p>soul.tars.ipAndPort 配置要根据tars-node 启动脚本中暴露的端口来选择一个。 因为应用将来是部署在docker容器内的。<br>
+而服务本身的端口与tars框架暴露的端口可以通过tars控制台来更改。</p>
 </li>
 </ul>
-<p>
-<img src="../images/soul-tars-cnf.png" alt="../images/soul-tars-cnf.png" title="../images/soul-tars-cnf.png" /> 
-</p>
+<p><img src="../images/soul-tars-cnf.png" alt="../images/soul-tars-cnf.png" title="../images/soul-tars-cnf.png" /> </p>
 <ul>
 <li>
-<p>
-tars-node的启动脚本指定了9000 –&gt; 9010之间的端口对外暴露
-</p>
+<p>tars-node的启动脚本指定了9000 –&gt; 9010之间的端口对外暴露</p>
 </li>
 </ul>
 <div class="src src-text">
@@ -576,30 +594,30 @@ tars-node的启动脚本指定了9000 –&gt; 9010之间的端口对外暴露
 </div>
 <ul>
 <li>
-<p>
-将SoulExampleServer.SoulExampleApp.config.conf文件中 192.168.41.103 全部替换为127.0.0.1. 因其在容器内部调用
-</p>
+<p>将SoulExampleServer.SoulExampleApp.config.conf文件中 192.168.41.103 全部替换为127.0.0.1. 因其在容器内部调用</p>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-4">
 <h4 id="headline-4">
 3. 接口测试调用
 </h4>
+<div id="outline-text-headline-4" class="outline-text-4">
+<p>在tars中部署应用完成后， 可以在soul-admin 中tars的接口已经注册好了</p>
 <p>
-在tars中部署应用完成后， 可以在soul-admin 中tars的接口已经注册好了
-</p>
-<p>
-   <img src="../images/soul-tars-select.png" alt="../images/soul-tars-select.png" title="../images/soul-tars-select.png" />
-</p>
+   <img src="../images/soul-tars-select.png" alt="../images/soul-tars-select.png" title="../images/soul-tars-select.png" /></p>
 <p>
     tars 平台中调用soul-example
-   <img src="../images/soul-tars-api.png" alt="../images/soul-tars-api.png" title="../images/soul-tars-api.png" /> 
-</p>
+   <img src="../images/soul-tars-api.png" alt="../images/soul-tars-api.png" title="../images/soul-tars-api.png" /> </p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-4">
 <h4 id="headline-5">
 4. soul-gateway 调用
 </h4>
-<p>
-通用gateway的调用报的404，这个还在排查中.
-</p>
+<div id="outline-text-headline-5" class="outline-text-4">
+<p>通用gateway的调用报的404，这个还在排查中.</p>
 <div class="src src-shell">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
 POST http://localhost:9195/tars/hello
@@ -619,9 +637,15 @@ Content-Length: <span style="color:#ae81ff">136</span>
 
 Response code: <span style="color:#ae81ff">404</span> <span style="color:#f92672">(</span>Not Found<span style="color:#f92672">)</span>; Time: 258ms; Content length: <span style="color:#ae81ff">136</span> bytes</code></pre></div>
 </div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-4">
 <h4 id="headline-6">
 5. 其他内容
 </h4>
+</div>
+</div>
+</div>
 
 
 <footer class="footline">
@@ -724,6 +748,25 @@ Response code: <span style="color:#ae81ff">404</span> <span style="color:#f92672
             
                 
                     
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -866,7 +909,7 @@ Response code: <span style="color:#ae81ff">404</span> <span style="color:#f92672
 	 
 	 
 		
-			<a class="nav nav-prev" href="/soul/exercise/" title="模块实践"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/soul/exercise/websocket/" title="Soul 数据同步-Websocket初探"> <i class="fa fa-chevron-left"></i></a>
 		
 		
 			<a class="nav nav-next" href="/soul/exercise/summary/" title="心得体会" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
@@ -879,19 +922,19 @@ Response code: <span style="color:#ae81ff">404</span> <span style="color:#f92672
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1611303097"></script>
-    <script src="/js/perfect-scrollbar.min.js?1611303097"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1611303097"></script>
-    <script src="/js/jquery.sticky.js?1611303097"></script>
-    <script src="/js/featherlight.min.js?1611303097"></script>
-    <script src="/js/highlight.pack.js?1611303097"></script>
+    <script src="/js/clipboard.min.js?1611423480"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611423480"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611423480"></script>
+    <script src="/js/jquery.sticky.js?1611423480"></script>
+    <script src="/js/featherlight.min.js?1611423480"></script>
+    <script src="/js/highlight.pack.js?1611423480"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1611303097"></script>
-    <script src="/js/learn.js?1611303097"></script>
-    <script src="/js/hugo-learn.js?1611303097"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611423480"></script>
+    <script src="/js/learn.js?1611423480"></script>
+    <script src="/js/hugo-learn.js?1611423480"></script>
     
         
-            <script src="/mermaid/mermaid.js?1611303097"></script>
+            <script src="/mermaid/mermaid.js?1611423480"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
