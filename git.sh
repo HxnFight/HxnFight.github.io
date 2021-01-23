@@ -17,7 +17,7 @@ if [ $__len -lt 2 ];then
   __msg="routine commit"
 fi
 
-rsync -vazu -progress -e "ssh -F $HOME/.ssh/config"   ./docs  ec2:/data/repo/web/docs
+rsync -vazu -progress -e "ssh -F $HOME/.ssh/config"   ./docs  ec2:/data/repo/web/
 
 git commit -m "$__msg"
 git push
