@@ -1,56 +1,213 @@
 #+title: Soul 数据同步-Websocket初探
 #+date:  2021-01-23T19:58:20+08:00
 #+weight: 5
+#+OPTIONS: toc:2
+#+OPTIONS: toc:t
+#+STARTUP: overview
+#+COLUMNS: %25ITEM %TAGS %TODO %3PRIORITYd
+#+OPTIONS: ^:nil
+#+OPTIONS: email:t
+#+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
+#+setupfile: http://css.valjean.cn/css/org-theme/setup/nginx/readtheorg-ng.setup
 
 ** soul-admin 侧的数据同步
-   
+
    在soul-admin启动时, ~DataSyncConfiguration~ 配置类会根据配置文件加载对应的同步策略 \\
    其内有4个内部类,分别对应4中数据同步策略
    [[../images/soul-web-data-cnf.png]]
 
    不同策略在初始化时,均会通过spring容器构建一个DataChangedListener的实现类,用于后续的事件监听 \\
-   websocket同步策略除了注入一个DataChangedListener bean,还会分别注入 WebsocketCollector ServerEndpointExporter 
-   
-   WebsocketCollector 其实就是soul-admin通过websocket 与soul-bootstrasp数据交互的入口. 包括接受链接,同步消息,处理链接 \\
-   错误信息等. 
+   websocket同步策略除了注入一个DataChangedListener bean,还会分别注入 WebsocketCollector ServerEndpointExporter
+
+   WebsocketCollector 其实就是soul-admin通过websocket 与soul-bootstrasp数据交互的入口. 包括接受链接,同步消息,处理链接错误信息等.
 
    soul-admin 中业务层基本类似cms系统的增删改查功能,但是在数据变化的时候,均推送相应的事件
    [[../images/soul-web-data-event.png]]
-   
+
    DataChangedEventDispatcher 里在对推送过来的事件,进行分门别类的处理.
-    
+
 ** soul-bootstrap
 
    *这块的逻辑调用功能目前还有点凌乱* 待后续画图补充完善
-   
-   #+begin_quote
-   
-   该模块使用 spring-boot-starter. 项目结构分层确实清晰明了.以下提到的spring-boot-starter简写starter-xx \\
-   在starter-sync-data-websocket中 WebsocketSyncDataConfiguration完成初始化,其参数分别来自其他的starter. \\
-   
-   WebsocketConfig --> WebsocketSyncDataConfiguration.websocketConfig()
-   PluginDataSubscriber --> starter-gateway --> soul-web --> SoulConfiguration--> CommonPluginDataSubscriber
-   metaSubscribers,authSubscribers 为空后续同步的时候,添加数据.
-   
-   WebsocketSyncDataService --> SoulWebsocketClient -->WebsocketDataHandler
-   websocketSyncDataService
 
-   BaseDataCache
-   subscribeDataHandler
-   
-   #+end_quote
-   
+*** 引用基本start
+
+    在soul-bootstrap中只引入以下的start进行分析
+
+#+BEGIN_SRC plantuml :file images/soul-boostarp-start.png :exports results :eval query-export
+  @startmindmap
+  *[#Orange] springboot-start
+  **[#lightgreen] soul-spring-boot-starter-gateway 
+  ** soul-spring-boot-starter-plugin-divide
+  **[#lightgreen] soul-spring-boot-starter-plugin-global
+  ** soul-spring-boot-starter-plugin-httpclient
+  **[#lightgreen] soul-spring-boot-starter-sync-data-websocket
+  @endmindmap
+#+END_SRC
+
+#+RESULTS:
+[[file:../images/soul-boostarp-start.png]]
+
+*** 各个start分别引入的依赖以及进行的初始配置
+
+    - soul-spring-boot-starter-gateway 这个start中仅仅引入的是soul-web相关的包,相关的初始化工作其实是在soul-web中进行的。
+
+#+BEGIN_SRC plantuml :file images/soul-boostarp-gateway.png :exports results :eval query-export
+  @startmindmap
+  * soul-spring-boot-starter-gateway : soul-web
+  ** soul-plugin-api
+  ** soul-spring-boot-starter-plugin-global
+  ** soul-plugin-base
+  ** soul-metrics-facade
+  ** soul-metrics-prometheus
+  ** spring-boot-configuration-processor
+  @endmindmap
+#+END_SRC
+
+#+RESULTS:
+[[file:../images/soul-boostarp-gateway.png]]
+
+    - soul-spring-boot-starter-plugin-divide 该start引入的是 soul-plugin-divide 包. 其中主要的依赖如下. 可以看到起引入了spi相关的包。\\
+      其内的DividePluginConfiguration 分别初始化了SoulPlugin、PluginDataHandler、WebSocketPlugin、ReactorNettyWebSocketClient、\\
+      WebSocketService
+
+#+begin_src plantuml :file images/soul-boostarp-divide.png :exports results :eval query-export
+  @startmindmap
+  * soul-plugin-divide
+  ** soul-plugin-base
+  ** soul-spi
+  @endmindmap
+#+end_src
+
+#+RESULTS:
+[[file:../images/soul-boostarp-divide.png]]
+
+    - soul-spring-boot-starter-plugin-global
+     该start引入的事soul-plugin-global相关依赖,其内有个GlobalPluginConfiguration初始化类，\\
+     利用spring注入这三种bean SoulPlugin、SoulContextBuilder、MetaDataSubscriber
+#+begin_src plantuml :file images/soul-boostarp-global.png :exports results :eval query-export
+  @startmindmap
+  * soul-plugin-global
+  ** soul-plugin-api
+  ** soul-sync-data-api 
+  @endmindmap
+#+end_src
+
+#+RESULTS:
+[[file:../images/soul-boostarp-global.png]]
+
+**** soul-spring-boot-starter-plugin-httpclient
+     该start引入的是soul-plugin-httpclient 的相关依赖,其中有HttpClientPluginConfiguration配置类，\\
+     其内部类WebClientConfiguration,NettyHttpClientConfiguration 分别可以指定不同的httpclient类型
+     [[file:../images/soul-start-httpclient.png]]
+     
+#+begin_src plantuml :file images/soul-boostarp-httpclient.png :exports results :eval query-export
+  @startmindmap
+  * soul-plugin-httpclient
+  ** soul-plugin-base
+  ** netty-codec-http
+  ** reactor-netty
+  ** reactor-extra
+  ** wiremock-standalone
+  @endmindmap
+#+end_src
+
+#+RESULTS:
+[[file:../images/soul-boostarp-httpclient.png]]
+
+**** soul-spring-boot-starter-sync-data-websocket
+     该start引入的是soul-sync-data-websocket，其内的WebsocketSyncDataConfiguration向spring中注入SyncDataService、WebsocketConfig \\
+     两种类型的bean
+#+begin_src plantuml :file images/soul-boostarp-websocket.png :exports results :eval query-export
+  @startmindmap
+  * soul-sync-data-websocket
+  ** soul-sync-data-api
+  ** Java-WebSocket
+  @endmindmap
+#+end_src
+
+#+RESULTS:
+[[file:../images/soul-boostarp-websocket.png]]
+
+*** websocket 中同步
+    - WebsocketSyncDataConfiguration的初始化过程该模块使用 spring-boot-starter. 项目结构分层确实清晰明了.  \\
+      在starter-sync-data-websocket中 WebsocketSyncDataConfiguration初始化流程如下：
+#+begin_src plantuml :exports results :file images/soul-boostarp-websocket-init.png :cmdline -charset utf-8  :eval query-export
+
+@startuml
+:WebsocketSyncDataConfiguration;
+floating note left: start 中的配置bean
+:websocketSyncDataService();
+note right
+  进行SyncDataService的初始化，这里调用的其子类  
+  WebsocketSyncDataService的构造函数进行初始化
+end note
+:WebsocketSyncDataService 有参构造函数;
+note left
+       websocketConfig  
+       pluginSubscriber 
+       metaSubscribers  
+       authSubscribers 
+end note
+:根据配置生成一个WebSocketClient的list;
+:针对每个WebSocketClient启动一个线程;
+floating note right: ScheduledThreadPoolExecutor类型
+
+@enduml
+
+#+end_src
+
+#+RESULTS:
+[[file:../images/soul-boostarp-websocket-init.png]]
+
+    - WebSocketClient的调用过程
+#+begin_src plantuml :exports results :file images/soul-boostarp-websocket-init.png :cmdline -charset utf-8 :exports results :eval query-export
+@startuml
+
+start
+:SoulWebsocketClient-onMessage;
+  note left
+    该类继承WebSocketClient,故在有消息来的时候
+    会触发onMessage方法
+  end note
+:handleResult;
+:WebsocketDataHandler.executor;
+:AbstractDataHandler.handle;
+  note right
+    各种类型的handler均继承自AbstractDataHandler. 
+    故都带有handle方法的实现. 在调用该方法的时候，会根据 
+    不同的类型进行不同业务处理 
+  end note 
+fork
+:doRefresh;
+detach
+fork again
+:doUpdate;
+detach
+fork again
+:doDelete;
+detach
+endfork
+stop
+
+@enduml
+
+#+end_src
+
+#+RESULTS:
+[[file:../images/soul-boostarp-websocket-init.png]]
+
+
+
 ** springboot相关的bean,待完善学习
-    
+
     项目中有些bean的初始化是用到了spring框架的相关特性,但是知其然不知其所以然. \\
     比如:DataChangedEventDispatcher.afterPropertiesSet方法是将所有的DataChangedListener实现类赋值给自己的属性listeners \\
     随后进行业务操作.另外还有以下几个:
-    
+
   - ApplicationListener
   - InitializingBean
   - InstantiationAwareBeanPostProcessor
   - ApplicationContextAware
   - EnumMap
   - LocalDataSourceLoader 中实现了项目的sql初始化操作. 因建库、建表的sql语句中均有 ~IF NOT EXISTS~. 故不会重复创建表
-
-

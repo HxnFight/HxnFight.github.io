@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-01-25 Mon 19:37 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Soul 数据同步-Websocket初探</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="valjean" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://css.valjean.cn/css/org-theme/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://css.valjean.cn/css/org-theme/styles/readtheorg/css/readtheorg.css"/>
+<script type="text/javascript" src="http://css.valjean.cn/css/org-theme/styles/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="http://css.valjean.cn/css/org-theme/styles/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://css.valjean.cn/css/org-theme/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="http://css.valjean.cn/css/org-theme/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Soul 数据同步-Websocket初探</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org65f16b3">1. soul-admin 侧的数据同步</a></li>
+<li><a href="#org7cb40d2">2. soul-bootstrap</a>
+<ul>
+<li><a href="#org8967f8e">2.1. 引用基本start</a></li>
+<li><a href="#org9c6db00">2.2. 各个start加入的配置</a>
+<ul>
+<li><a href="#orgbeada26">2.2.1. soul-spring-boot-starter-gateway 这个start中仅仅引入的是soul-web相关的包,相关的初始化工作 \\</a></li>
+<li><a href="#org8197535">2.2.2. soul-spring-boot-starter-plugin-divide</a></li>
+<li><a href="#orgdcec5e4">2.2.3. soul-spring-boot-starter-plugin-global</a></li>
+<li><a href="#orgfe43319">2.2.4. soul-spring-boot-starter-plugin-httpclient</a></li>
+<li><a href="#orgdc68c15">2.2.5. soul-spring-boot-starter-sync-data-websocket</a></li>
+</ul>
+</li>
+<li><a href="#org1d86ff1">2.3. websocket 中同步</a></li>
+</ul>
+</li>
+<li><a href="#org3fd08a3">3. springboot相关的bean,待完善学习</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org65f16b3" class="outline-2">
+<h2 id="org65f16b3"><span class="section-number-2">1</span> soul-admin 侧的数据同步</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+在soul-admin启动时, <code>DataSyncConfiguration</code> 配置类会根据配置文件加载对应的同步策略 <br />
+其内有4个内部类,分别对应4中数据同步策略
+<img src="../images/soul-web-data-cnf.png" alt="soul-web-data-cnf.png" />
+</p>
+
+<p>
+不同策略在初始化时,均会通过spring容器构建一个DataChangedListener的实现类,用于后续的事件监听 <br />
+websocket同步策略除了注入一个DataChangedListener bean,还会分别注入 WebsocketCollector ServerEndpointExporter
+</p>
+
+<p>
+WebsocketCollector 其实就是soul-admin通过websocket 与soul-bootstrasp数据交互的入口. 包括接受链接,同步消息,处理链接 <br />
+错误信息等.
+</p>
+
+<p>
+soul-admin 中业务层基本类似cms系统的增删改查功能,但是在数据变化的时候,均推送相应的事件
+<img src="../images/soul-web-data-event.png" alt="soul-web-data-event.png" />
+</p>
+
+<p>
+DataChangedEventDispatcher 里在对推送过来的事件,进行分门别类的处理.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7cb40d2" class="outline-2">
+<h2 id="org7cb40d2"><span class="section-number-2">2</span> soul-bootstrap</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+<b>这块的逻辑调用功能目前还有点凌乱</b> 待后续画图补充完善
+</p>
+</div>
+
+<div id="outline-container-org8967f8e" class="outline-3">
+<h3 id="org8967f8e"><span class="section-number-3">2.1</span> 引用基本start</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<div class="figure">
+<p><img src="./images/soul-boostarp-start.png" alt="soul-boostarp-start.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9c6db00" class="outline-3">
+<h3 id="org9c6db00"><span class="section-number-3">2.2</span> 各个start加入的配置</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<div id="outline-container-orgbeada26" class="outline-4">
+<h4 id="orgbeada26"><span class="section-number-4">2.2.1</span> soul-spring-boot-starter-gateway 这个start中仅仅引入的是soul-web相关的包,相关的初始化工作 \\</h4>
+<div class="outline-text-4" id="text-2-2-1">
+<p>
+其实是在soul-web中进行的。
+</p>
+
+
+<div class="figure">
+<p><img src="images/soul-boostarp-gateway.png" alt="soul-boostarp-gateway.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8197535" class="outline-4">
+<h4 id="org8197535"><span class="section-number-4">2.2.2</span> soul-spring-boot-starter-plugin-divide</h4>
+<div class="outline-text-4" id="text-2-2-2">
+<p>
+该start引入的是 soul-plugin-divide 包. 其中主要的依赖如下. 可以看到起引入了spi相关的包。
+</p>
+
+<div class="figure">
+<p><img src="images/soul-boostarp-divide.png" alt="soul-boostarp-divide.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdcec5e4" class="outline-4">
+<h4 id="orgdcec5e4"><span class="section-number-4">2.2.3</span> soul-spring-boot-starter-plugin-global</h4>
+<div class="outline-text-4" id="text-2-2-3">
+<p>
+该start引入的事soul-plugin-global相关依赖,其内有个GlobalPluginConfiguration初始化类，<br />
+利用spring注入这三种bean SoulPlugin、SoulContextBuilder、MetaDataSubscriber
+</p>
+
+<div class="figure">
+<p><img src="images/soul-boostarp-global.png" alt="soul-boostarp-global.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfe43319" class="outline-4">
+<h4 id="orgfe43319"><span class="section-number-4">2.2.4</span> soul-spring-boot-starter-plugin-httpclient</h4>
+<div class="outline-text-4" id="text-2-2-4">
+<p>
+该start引入的是soul-plugin-httpclient 的相关依赖,其中有HttpClientPluginConfiguration配置类，<br />
+其内部类WebClientConfiguration,NettyHttpClientConfiguration 分别可以指定不同的httpclient类型
+<img src="images/soul-start-httpclient.png" alt="soul-start-httpclient.png" />
+</p>
+
+
+<div class="figure">
+<p><img src="images/soul-boostarp-httpclient.png" alt="soul-boostarp-httpclient.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdc68c15" class="outline-4">
+<h4 id="orgdc68c15"><span class="section-number-4">2.2.5</span> soul-spring-boot-starter-sync-data-websocket</h4>
+<div class="outline-text-4" id="text-2-2-5">
+<p>
+该start引入的是soul-sync-data-websocket，其内的WebsocketSyncDataConfiguration向spring中注入SyncDataService、WebsocketConfig <br />
+两种类型的bean
+</p>
+
+<div class="figure">
+<p><img src="images/soul-boostarp-websocket.png" alt="soul-boostarp-websocket.png" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org1d86ff1" class="outline-3">
+<h3 id="org1d86ff1"><span class="section-number-3">2.3</span> websocket 中同步</h3>
+<div class="outline-text-3" id="text-2-3">
+<blockquote>
+<p>
+
+</p>
+
+<p>
+该模块使用 spring-boot-starter. 项目结构分层确实清晰明了.以下提到的spring-boot-starter简写starter-xx <br />
+在starter-sync-data-websocket中 WebsocketSyncDataConfiguration完成初始化,其参数分别来自其他的starter. <br />
+</p>
+
+<p>
+WebsocketConfig &#x2013;&gt; WebsocketSyncDataConfiguration.websocketConfig()
+PluginDataSubscriber &#x2013;&gt; starter-gateway &#x2013;&gt; soul-web &#x2013;&gt; SoulConfiguration&#x2013;&gt; CommonPluginDataSubscriber
+metaSubscribers,authSubscribers 为空后续同步的时候,添加数据.
+</p>
+
+<p>
+WebsocketSyncDataService &#x2013;&gt; SoulWebsocketClient &#x2013;&gt;WebsocketDataHandler
+websocketSyncDataService
+</p>
+
+<p>
+BaseDataCache
+subscribeDataHandler
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3fd08a3" class="outline-2">
+<h2 id="org3fd08a3"><span class="section-number-2">3</span> springboot相关的bean,待完善学习</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+项目中有些bean的初始化是用到了spring框架的相关特性,但是知其然不知其所以然. <br />
+比如:DataChangedEventDispatcher.afterPropertiesSet方法是将所有的DataChangedListener实现类赋值给自己的属性listeners <br />
+随后进行业务操作.另外还有以下几个:
+</p>
+
+<ul class="org-ul">
+<li>ApplicationListener</li>
+<li>InitializingBean</li>
+<li>InstantiationAwareBeanPostProcessor</li>
+<li>ApplicationContextAware</li>
+<li>EnumMap</li>
+<li>LocalDataSourceLoader 中实现了项目的sql初始化操作. 因建库、建表的sql语句中均有 <code>IF NOT EXISTS</code>. 故不会重复创建表</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2021-01-23T19:58:20+08:00</p>
+<p class="author">Author: valjean</p>
+<p class="email">Email: <a href="mailto:valjean@v-mpb.local">valjean@v-mpb.local</a></p>
+<p class="date">Created: 2021-01-25 Mon 19:37</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

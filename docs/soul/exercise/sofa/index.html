@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta name="description" content="Documentation for Hugo Learn Theme">
 <meta name="author" content="Mathieu Cornic">
 
@@ -12,19 +12,19 @@
     <title>Sofa 模块实践 :: Documentation for Hugo Learn Theme</title>
 
     
-    <link href="/css/nucleus.css?1611423605" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1611423605" rel="stylesheet">
-    <link href="/css/hybrid.css?1611423605" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1611423605" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1611423605" rel="stylesheet">
-    <link href="/css/auto-complete.css?1611423605" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1611423605" rel="stylesheet">
-    <link href="/css/theme.css?1611423605" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1611423605" rel="stylesheet">
+    <link href="/css/nucleus.css?1611578364" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611578364" rel="stylesheet">
+    <link href="/css/hybrid.css?1611578364" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611578364" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611578364" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611578364" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1611578364" rel="stylesheet">
+    <link href="/css/theme.css?1611578364" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611578364" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1611423605"></script>
+    <script src="/js/jquery-3.3.1.min.js?1611578364"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -69,14 +69,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1611423605"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1611423605"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1611578364"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611578364"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/blog.valjean.cn\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1611423605"></script>
+<script type="text/javascript" src="/js/search.js?1611578364"></script>
 
     
   </div>
@@ -532,19 +532,17 @@
 
 
 
-<div id="outline-container-headline-1" class="outline-4">
 <h4 id="headline-1">
 sofa调试
 </h4>
-<div id="outline-text-headline-1" class="outline-text-4">
-<div id="outline-container-headline-2" class="outline-5">
 <h5 id="headline-2">
 修改配置
 </h5>
-<div id="outline-text-headline-2" class="outline-text-5">
 <ul>
 <li>
-<p>soul-boostrap pom 文件中增加相关依赖</p>
+<p>
+soul-boostrap pom 文件中增加相关依赖
+</p>
 </li>
 </ul>
 <div class="src src-xml">
@@ -561,18 +559,18 @@ sofa调试
 </div>
 <ul>
 <li>
-<p>在soul-admin中打开sofa的插件开关
-系统管理 –&gt; 插件管理  (直接保存就ok)</p>
+<p>
+在soul-admin中打开sofa的插件开关
+系统管理 –&gt; 插件管理  (直接保存就ok)
+</p>
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-headline-3" class="outline-5">
 <h5 id="headline-3">
 请求调用
 </h5>
-<div id="outline-text-headline-3" class="outline-text-5">
-<p>使用的idea http client 工具</p>
+<p>
+使用的idea http client 工具
+</p>
 <div class="src src-shell">
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> <span style="color:#75715e">### 测试保存数据</span>
  post http://localhost:9195/sofa/insert
@@ -594,85 +592,87 @@ sofa调试
  <span style="color:#75715e">### 测试无条件查询</span>
  post http://localhost:9195/sofa/findall</code></pre></div>
 </div>
-</div>
-</div>
-<div id="outline-container-headline-4" class="outline-5">
 <h5 id="headline-4">
 遇到的问题
 </h5>
-<div id="outline-text-headline-4" class="outline-text-5">
 <ul>
 <li>
-<p>不带参数请求ok,带参数出现序列化错误.
+<p>
+不带参数请求ok,带参数出现序列化错误.
 调试发现此处为空
 <img src="../sofa.files/sofa-proxy-null.png" alt="../sofa.files/sofa-proxy-null.png" title="../sofa.files/sofa-proxy-null.png" /> 
 按照<a href="https://dromara.org/zh-cn/docs/soul/user-sofa.html">官方文档sofa-user</a>,实现SofaParamResolveService 调试跟踪发现,请求已经进入到后端的服务中.
-只是在rpc反序列化时出的错. 不过跟代码没找到具体的问题.</p>
+只是在rpc反序列化时出的错. 不过跟代码没找到具体的问题.
+</p>
 <p>
 最后在csdn中发现有同学已经踩坑, 此bug也已经做了修复,在github上更新最新代码即可. <br>
 <a href="https://blog.csdn.net/baidu_27627251/article/details/112726694">另一个踩坑的同学</a> <br>
-<a href="https://github.com/dromara/soul/pull/992">github pr</a>  </p>
+<a href="https://github.com/dromara/soul/pull/992">github pr</a>  
+</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-5" class="outline-4">
 <h4 id="headline-5">
 sofa 拓展
 </h4>
-<div id="outline-text-headline-5" class="outline-text-4">
 <p>
     第一次接触sofa项目. 大概浏览了一下官网的介绍。对其有个大概的了解。目前暂未学习使用的打算 <br>
-    后续再说，目前仅记录于此。</p>
+    后续再说，目前仅记录于此。
+</p>
 <ul>
 <li>
-<p><a href="https://github.com/sofastack">sofastack github</a> </p>
+<p>
+<a href="https://github.com/sofastack">sofastack github</a> 
+</p>
 </li>
 <li>
-<p><a href="https://www.sofastack.tech/">sofastack website</a></p>
+<p>
+<a href="https://www.sofastack.tech/">sofastack website</a>
+</p>
 </li>
 </ul>
-<div id="outline-container-headline-6" class="outline-5">
 <h5 id="headline-6">
 子项目
 </h5>
-<div id="outline-text-headline-6" class="outline-text-5">
 <blockquote>
 <ul>
 <li>
-<p><a href="HTTPS://WWW.SOFASTACK.TECH/PROJECTS/SOFA-BOOT/OVERVIEW/">SOFABoot</a> 是蚂蚁金服开源的基于 Spring Boot 的研发框架，它在 Spring Boot 的基础上， <br>
+<p>
+<a href="HTTPS://WWW.SOFASTACK.TECH/PROJECTS/SOFA-BOOT/OVERVIEW/">SOFABoot</a> 是蚂蚁金服开源的基于 Spring Boot 的研发框架，它在 Spring Boot 的基础上， <br>
 提供了诸如 Readiness Check，类隔离，日志空间隔离等能力。在增强了 Spring Boot 的同时， <br>
-SOFABoot 提供了让用户可以在 Spring Boot 中非常方便地使用 SOFA 中间件的能力。</p>
+SOFABoot 提供了让用户可以在 Spring Boot 中非常方便地使用 SOFA 中间件的能力。
+</p>
 </li>
 <li>
-<p><a href="HTTPS://WWW.SOFASTACK.TECH/PROJECTS/SOFA-RPC/OVERVIEW/">SOFARpc</a> 是蚂蚁金服开源的一款基于 Java 实现的 RPC 服务框架，为应用之间提供远程服务调用能力，<br>
+<p>
+<a href="HTTPS://WWW.SOFASTACK.TECH/PROJECTS/SOFA-RPC/OVERVIEW/">SOFARpc</a> 是蚂蚁金服开源的一款基于 Java 实现的 RPC 服务框架，为应用之间提供远程服务调用能力，<br>
 具有高可伸缩性，高容错性，目前蚂蚁金服所有的业务的相互间的 RPC 调用都是采用 SOFARPC。<br>
-SOFARPC 为用户提供了负载均衡，流量转发，链路追踪，链路数据透传，故障剔除等功能。 </p>
+SOFARPC 为用户提供了负载均衡，流量转发，链路追踪，链路数据透传，故障剔除等功能。 
+</p>
 </li>
 <li>
-<p><a href="https://www.sofastack.tech/projects/sofa-tracer/overview/">SOFATracer</a> 是蚂蚁金服开发的基于 OpenTracing 规范 的分布式链路跟踪系统，<br>
+<p>
+<a href="https://www.sofastack.tech/projects/sofa-tracer/overview/">SOFATracer</a> 是蚂蚁金服开发的基于 OpenTracing 规范 的分布式链路跟踪系统，<br>
 其核心理念就是通过一个全局的 TraceId 将分布在各个服务节点上的同一次请求串联起来。<br>
 通过统一的 TraceId 将调用链路中的各种网络调用情况以日志的方式记录下来同时也提供远程汇报到 Zipkin 进行展示的能力， <br>
-以此达到透视化网络调用的目的。 </p>
+以此达到透视化网络调用的目的。 
+</p>
 </li>
 <li>
-<p><a href="HTTPS://WWW.SOFASTACK.TECH/PROJECTS/SOFA-REGISTRY/OVERVIEW/">SOFARegistry</a> 是蚂蚁金服开源的一个生产级、高时效、高可用的服务注册中心。 <br>
+<p>
+<a href="HTTPS://WWW.SOFASTACK.TECH/PROJECTS/SOFA-REGISTRY/OVERVIEW/">SOFARegistry</a> 是蚂蚁金服开源的一个生产级、高时效、高可用的服务注册中心。 <br>
 SOFARegistry 最早源自于淘宝的 ConfigServer，十年来，随着蚂蚁金服的业务发展，注册中心架构已经演进至第五代。 <br>
 目前 SOFARegistry 不仅全面服务于蚂蚁金服的自有业务，还随着蚂蚁金融科技服务众多合作伙伴，同时也兼容开源生态。  <br>
-SOFARegistry 采用 AP 架构，支持秒级时效性推送，同时采用分层架构支持无限水平扩展。   </p>
+SOFARegistry 采用 AP 架构，支持秒级时效性推送，同时采用分层架构支持无限水平扩展。   
+</p>
 </li>
 <li>
-<p><a href="https://www.sofastack.tech/projects/sofa-lookout/overview/">SOFALookout</a> 是蚂蚁金服开源的一款解决系统的度量和监控问题的轻量级中间件服务。 <br>
-它提供的服务包括：Metrics 的埋点、收集、加工、存储与查询等。该开源项目包括了两个独立部分，分别是客户端与服务器端服务。</p>
+<p>
+<a href="https://www.sofastack.tech/projects/sofa-lookout/overview/">SOFALookout</a> 是蚂蚁金服开源的一款解决系统的度量和监控问题的轻量级中间件服务。 <br>
+它提供的服务包括：Metrics 的埋点、收集、加工、存储与查询等。该开源项目包括了两个独立部分，分别是客户端与服务器端服务。
+</p>
 </li>
 </ul>
 </blockquote>
-</div>
-</div>
-</div>
-</div>
 
 
 <footer class="footline">
@@ -949,19 +949,19 @@ SOFARegistry 采用 AP 架构，支持秒级时效性推送，同时采用分层
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1611423605"></script>
-    <script src="/js/perfect-scrollbar.min.js?1611423605"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1611423605"></script>
-    <script src="/js/jquery.sticky.js?1611423605"></script>
-    <script src="/js/featherlight.min.js?1611423605"></script>
-    <script src="/js/highlight.pack.js?1611423605"></script>
+    <script src="/js/clipboard.min.js?1611578364"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611578364"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611578364"></script>
+    <script src="/js/jquery.sticky.js?1611578364"></script>
+    <script src="/js/featherlight.min.js?1611578364"></script>
+    <script src="/js/highlight.pack.js?1611578364"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1611423605"></script>
-    <script src="/js/learn.js?1611423605"></script>
-    <script src="/js/hugo-learn.js?1611423605"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611578364"></script>
+    <script src="/js/learn.js?1611578364"></script>
+    <script src="/js/hugo-learn.js?1611578364"></script>
     
         
-            <script src="/mermaid/mermaid.js?1611423605"></script>
+            <script src="/mermaid/mermaid.js?1611578364"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
