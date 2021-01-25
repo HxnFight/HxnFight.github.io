@@ -161,11 +161,11 @@ floating note right: ScheduledThreadPoolExecutor类型
 [[file:../images/soul-boostarp-websocket-init.png]]
 
     - WebSocketClient的调用过程
-#+begin_src plantuml :exports results :file images/soul-boostarp-websocket-init.png :cmdline -charset utf-8 :exports results :eval query-export
+#+begin_src plantuml :exports results :file images/soul-boostarp-WebSocketClient-invoke.png :cmdline -charset utf-8 :exports results :eval query-export
 @startuml
 
 start
-:SoulWebsocketClient-onMessage;
+:SoulWebsocketClient.onMessage;
   note left
     该类继承WebSocketClient,故在有消息来的时候
     会触发onMessage方法
@@ -195,7 +195,7 @@ stop
 #+end_src
 
 #+RESULTS:
-[[file:../images/soul-boostarp-websocket-init.png]]
+[[file:../images/soul-boostarp-WebSocketClient-invoke.png]]
 
 
 
