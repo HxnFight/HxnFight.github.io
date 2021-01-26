@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>源码学习 on Documentation for Hugo Learn Theme</title>
+    <link>http://blog.valjean.cn/soul/src_learn/</link>
+    <description>Recent content in 源码学习 on Documentation for Hugo Learn Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Tue, 26 Jan 2021 16:05:11 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/soul/src_learn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>spring相关内容补充</title>
+      <link>http://blog.valjean.cn/soul/src_learn/spring_learn/</link>
+      <pubDate>Tue, 26 Jan 2021 16:05:44 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/src_learn/spring_learn/</guid>
+      <description>spring 相关内容补充    ApplicationListener : baeldung tutor office-tutor , 自定义的实现可以通过实现特定类或者利用相关注解是实现 默认情况下是同步的，可以通过配置更改为异步执行. 这个功能是在单个项目内流转，数据也是在内部流转. 适用于业务在单个实例中
+能全部解决的情况. 类似cmsweb这种项目. 分布式之类的项目需要考虑其他mq之类的方案.
+ soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-client-springcloud、soul-client-springmvc soul-client-alibaba-dubbo soul-client-apache-dubbo 均为监控的spirng容器的特殊事件.
+    InitializingBean InstantiationAwareBeanPostProcessor spring bean initial 文中介绍了spring springboot中各种各样的初始化bean的方式。 自己只是用到一部分，后续会尝试其他的方式
+   tutor BeanPostProcessor 相关的实现太多，目前只是粗略了解一下。 idea 中查看类关系的uml蛮好使的，在生成的uml中，点击右键可以添加其他的相关类 只添加了相关的几个. spring 注入方式 构造函数注入、字段注入、set方法注入. 自己平时员工字段注入较多，其他的类型有空尝试一下
+  bean liftcycle callback
+ soul-admin 使用到的类有以下几个
+  ApplicationContextAware contextaware spring上下文 将spring上下文保存下来，可以随时获取容器内bean的. soul中使用的有以下两个类
+    ObjectProvider tutor office   EnumMap tutor 以enum作为key的map，简单了解</description>
+    </item>
+    
+    <item>
+      <title>Webflux</title>
+      <link>http://blog.valjean.cn/soul/src_learn/webflux/</link>
+      <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/src_learn/webflux/</guid>
+      <description> webflux  office docs
+  </description>
+    </item>
+    
+  </channel>
+</rss>

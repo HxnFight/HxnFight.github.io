@@ -1,0 +1,88 @@
+#+title: spring相关内容补充
+#+date:  2021-01-26T16:05:44+08:00
+#+weight: 1
+
+
+** spring 相关内容补充
+
+  - ApplicationListener : [[https://www.baeldung.com/spring-events][baeldung tutor]]  [[https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-functionality-events-annotation][office-tutor]] , 自定义的实现可以通过实现特定类或者利用相关注解是实现 \\
+    默认情况下是同步的，可以通过配置更改为异步执行. 这个功能是在单个项目内流转，数据也是在内部流转. 适用于业务在单个实例中\\
+    能全部解决的情况. 类似cmsweb这种项目. 分布式之类的项目需要考虑其他mq之类的方案.
+    
+    soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-client-springcloud、soul-client-springmvc soul-client-alibaba-dubbo soul-client-apache-dubbo
+    均为监控的spirng容器的特殊事件.
+
+#+BEGIN_SRC plantuml :file ../images/applicationListener.png :exports results :eval query-export
+  @startmindmap
+  * Spring Events
+  ** ApplicationEventPublisher
+  ** ApplicationListener
+  ** ApplicationEvent
+  @endmindmap
+#+END_SRC
+
+#+RESULTS:
+[[file:../images/applicationListener.png]]
+    
+
+  - InitializingBean InstantiationAwareBeanPostProcessor 
+    [[https://www.baeldung.com/running-setup-logic-on-startup-in-spring][spring bean initial]] 文中介绍了spring springboot中各种各样的初始化bean的方式。 自己只是用到一部分，后续会尝试其他的方式
+    
+#+BEGIN_SRC plantuml :file ../images/init-methon.png :exports results :eval query-export
+  @startmindmap
+  * spring-init
+  ** @PostConstruct Annotation
+  ** InitializingBean Interface
+  ** ApplicationListener
+  ** @Bean Initmethod Attribute
+  ** Constructor Injection
+  ** Spring Boot CommandLineRunner
+  ** Spring Boot ApplicationRunner
+  @endmindmap
+#+END_SRC
+
+#+RESULTS:
+[[file:../images/init-methon.png]]
+
+    [[https://fangjian0423.github.io/2017/06/20/spring-bean-post-processor/][tutor]] BeanPostProcessor 相关的实现太多，目前只是粗略了解一下。 idea 中查看类关系的uml蛮好使的，在生成的uml中，点击右键可以添加其他的相关类 \\
+    只添加了相关的几个. spring 注入方式 构造函数注入、字段注入、set方法注入. 自己平时员工字段注入较多，其他的类型有空尝试一下
+
+[[file:../images/bean_post_processor.png]]
+    
+    [[https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle][bean liftcycle callback]]
+    
+    soul-admin 使用到的类有以下几个
+    
+#+BEGIN_SRC plantuml :file ../images/initializingBean.png :exports results :eval query-export
+  @startmindmap
+  * soul-admin
+  ** AbstractDataChangedListener
+  ** DataChangedEventDispatcher
+  ** LocalDataSourceLoader
+  @endmindmap
+#+END_SRC
+
+#+RESULTS:
+[[file:../images/initializingBean.png]]
+
+    
+  - ApplicationContextAware
+    [[https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-method-injection][contextaware spring上下文]] 将spring上下文保存下来，可以随时获取容器内bean的. soul中使用的有以下两个类
+    
+#+BEGIN_SRC plantuml :file ./images/spring-ctx.png :exports results :eval query-export
+  @startmindmap
+  * spring-ctx
+  ** SpringExtConfiguration (soul-web)
+  ** SoulApplicationContextAware (soul-admin)
+  @endmindmap
+#+END_SRC
+
+#+RESULTS:
+[[file:../images/spring-ctx.png]]
+
+  - ObjectProvider
+    [[https://spring.io/blog/2016/03/04/core-container-refinements-in-spring-framework-4-3][tutor office]] 
+  - EnumMap
+    [[https://www.baeldung.com/java-enum-map][tutor]] 以enum作为key的map，简单了解
+  - websocket
+    [[https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-websockets][office tutor]]

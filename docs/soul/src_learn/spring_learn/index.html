@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Tars 学习 :: Documentation for Hugo Learn Theme</title>
+    <title>spring相关内容补充 :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1611675440" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/soul/exercise/tars/">
+  <body class="" data-url="/soul/src_learn/spring_learn/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -186,7 +186,7 @@
   
     
     <li data-nav-id="/soul/exercise/" title="模块实践" class="dd-item
-        parent
+        
         
         
         ">
@@ -277,7 +277,7 @@
  
   
     
-      <li data-nav-id="/soul/exercise/tars/" title="Tars 学习" class="dd-item active">
+      <li data-nav-id="/soul/exercise/tars/" title="Tars 学习" class="dd-item ">
         <a href="/soul/exercise/tars/">
         Tars 学习
         <i class="fas fa-check read-icon"></i>
@@ -413,7 +413,7 @@
   
     
     <li data-nav-id="/soul/src_learn/" title="源码学习" class="dd-item
-        
+        parent
         
         
         ">
@@ -441,7 +441,7 @@
  
   
     
-      <li data-nav-id="/soul/src_learn/spring_learn/" title="spring相关内容补充" class="dd-item ">
+      <li data-nav-id="/soul/src_learn/spring_learn/" title="spring相关内容补充" class="dd-item active">
         <a href="/soul/src_learn/spring_learn/">
         spring相关内容补充
         <i class="fas fa-check read-icon"></i>
@@ -554,7 +554,7 @@
             
           
           
-            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/exercise/'>模块实践</a> > Tars 学习
+            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/src_learn/'>源码学习</a> > spring相关内容补充
           
         
           
@@ -571,25 +571,7 @@
     <div class="wrapper">
 <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">tencent tars-cloud 实践</a>
-<ul>
-<li><a href="#headline-2">注意事项</a>
-</li>
-<li><a href="#headline-3">服务部署</a>
-<ul>
-<li><a href="#headline-4">启动脚本如下   </a>
-</li>
-<li><a href="#headline-5">测试代码</a>
-</li>
-<li><a href="#headline-6">日志路径</a>
-</li>
-<li><a href="#headline-7">tars配置与使用</a>
-</li>
-</ul>
-</li>
-<li><a href="#headline-8">后期</a>
-</li>
-</ul>
+<li><a href="#headline-1">spring 相关内容补充</a>
 </li>
 </ul>
 </nav>
@@ -608,7 +590,7 @@
           
             <h1>
               
-              Tars 学习
+              spring相关内容补充
             </h1>
           
 
@@ -618,218 +600,58 @@
 
 <div id="outline-container-headline-1" class="outline-3">
 <h3 id="headline-1">
-tencent tars-cloud 实践
+spring 相关内容补充
 </h3>
 <div id="outline-text-headline-1" class="outline-text-3">
-<p>昨天调试soul-tars 插件，后台服务tars一直启动失败。 <br>
-   今天参考 <a href="https://tarscloud.github.io/TarsDocs/dev/tarsjava/tars-quick-start.html">office quick start</a> ，总算启动成功，不过其中还有很多需要注意的点，在此记录一下。</p>
-<div id="outline-container-headline-2" class="outline-4">
-<h4 id="headline-2">
-注意事项
-</h4>
-<div id="outline-text-headline-2" class="outline-text-4">
 <ul>
 <li>
-<p>对tars的整体结构得有个大概的认识，自己再部署后面的 tars-framework, tars-nodes 一直不成功 <br>
-文档中介绍， <code>Tars 框架, 有两个镜像可供选择: framework / tars</code> .自己一直理解成了是framework/nodes <br>
-framework 、 nodes 两码事. 如果将来拿framework作为节点发布服务，会出现pid not exist. 因其没有java环境 <a href="https://github.com/TarsCloud/TarsDocker/issues/11">issues</a></p>
-<blockquote>
-<p>framework: Tars 框架 Docker 制作脚本, 制作的 docker 包含了框架核心服务和 web 管理平台 <br>
-tars: Tars 框架 Docker 制作脚本, 和 framework 比, 增加了 java, nodejs 等运行时支持, <br>
-即可以把 java, nodejs 服务发布到 docker 里面(docker 里面安装了 jdk, node, php 环境) <br>
-nodes: 是正常的代码运行环境，包含基本的开发环境。</p>
-</blockquote>
-</li>
-<li>
-<p>在使用docker快速搭建环境时，在Linux环境下，官方提供了国内的镜像地址  <br>
-一下的命令执行后，发现是修改的docker  daemon 配置文件，将镜像仓库地址更改为了aliyun的。 <br>
-目前测试在此仓库下，安装mysql 也挺快的，其他镜像未测试，在测试完tars最好还手动更改回去。 <br>
-其实这块配置的是数组形式，应该可以添加多个.  国内镜像地址: <code>https://registry.docker-cn.com</code> <br>
-再个如果curl 报  <code>curl: (60) Peer&#39;s Certificate has expired</code> 按提示，添加 -k 指令即可</p>
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">curl -sSL https://doc.tarsdoc.com/docker_set_mirror.sh | sh -s https://w1mnep2c.mirror.aliyuncs.com
-systemctl restart docker</code></pre></div>
-</div>
+<p>ApplicationListener : <a href="https://www.baeldung.com/spring-events">baeldung tutor</a>  <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-functionality-events-annotation">office-tutor</a> , 自定义的实现可以通过实现特定类或者利用相关注解是实现 <br>
+默认情况下是同步的，可以通过配置更改为异步执行. 这个功能是在单个项目内流转，数据也是在内部流转. 适用于业务在单个实例中<br>
+能全部解决的情况. 类似cmsweb这种项目. 分布式之类的项目需要考虑其他mq之类的方案.</p>
 <p>
-/etc/docker/daemon.json 内容如下</p>
-<div class="src src-json">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;registry-mirrors&#34;</span>: [<span style="color:#e6db74">&#34;https://w1mnep2c.mirror.aliyuncs.com&#34;</span>]
-}</code></pre></div>
-</div>
-</li>
-<li>
-<p>用docker启动时，参数中的port <code>不要随便更改</code>. 因本地3000， 3306 端口有他用，更改了启动脚本的端口. <br>
-3306 –&gt; 3307 tarscloud/framework 报连不上mysql， 而且mysql的port依旧是3306 <br>
-3000 –&gt; 3010 tarscloud/tars-node 启动后不能自动注册到tarscloud/framework. <br>
-随后将其他服务关闭，改回原来的port启动成功.</p>
-</li>
-<li>
-<p>官方启动脚本中，有一个 <code>-e INET</code> , 如果启动报错，删除即可</p>
+soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-client-springcloud、soul-client-springmvc soul-client-alibaba-dubbo soul-client-apache-dubbo
+均为监控的spirng容器的特殊事件.</p>
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-headline-3" class="outline-4">
-<h4 id="headline-3">
-服务部署
-</h4>
-<div id="outline-text-headline-3" class="outline-text-4">
-<p>目前使用docker 单独启动各个服务，官方提供的docker-compose暂未测试，调试麻烦。  <br>
-    注意将镜像的相关目录，映射到宿主机后。在清理环境的时候，删除对应的目录，以免污染测试环境。</p>
-<div id="outline-container-headline-4" class="outline-5">
-<h5 id="headline-4">
-启动脚本如下   
-</h5>
-<div id="outline-text-headline-4" class="outline-text-5">
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  <span style="color:#75715e">#所用系统信息</span>
-  <span style="color:#75715e">#LSB Version:    :core-4.1-amd64:core-4.1-noarch</span>
-  <span style="color:#75715e">#Distributor ID: CentOS</span>
-  <span style="color:#75715e">#Description:    CentOS Linux release 7.6.1810 (Core)</span>
-  <span style="color:#75715e">#Release:        7.6.1810</span>
-  <span style="color:#75715e">#Codename:       Core</span>
-
-<span style="color:#75715e"># 创建一个名为tars的桥接(bridge)虚拟网络，网关172.25.0.1，网段为172.25.0.0</span>
-docker network create -d bridge --subnet<span style="color:#f92672">=</span>172.25.0.0/16 --gateway<span style="color:#f92672">=</span>172.25.0.1 tars
-
-docker run -d <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --net<span style="color:#f92672">=</span>tars <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -e MYSQL_ROOT_PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;123456&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ip<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;172.25.0.2&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -v /data/workspace/tars-cloud/mysql:/var/lib/mysql <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -v /etc/localtime:/etc/localtime <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --name<span style="color:#f92672">=</span>tars-mysql <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    mysql:5.6
-
-
-<span style="color:#75715e"># 挂载的/etc/localtime是用来设置容器时区的，若没有可以去掉</span>
-<span style="color:#75715e"># 3000端口为web程序端口</span>
-<span style="color:#75715e"># 3001端口为web授权相关服务端口</span>
-docker run -d <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --name<span style="color:#f92672">=</span>tars-framework <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --net<span style="color:#f92672">=</span>tars <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -e MYSQL_HOST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;172.25.0.2&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -e MYSQL_ROOT_PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;123456&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -e MYSQL_USER<span style="color:#f92672">=</span>root <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -e MYSQL_PORT<span style="color:#f92672">=</span><span style="color:#ae81ff">3306</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -e REBUILD<span style="color:#f92672">=</span>false <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -e SLAVE<span style="color:#f92672">=</span>false <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ip<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;172.25.0.3&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -v /data/workspace/tars-cloud/tars:/data/tars <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -v /etc/localtime:/etc/localtime <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -p 3000:3000 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -p 3001:3001 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    tarscloud/framework:stable
-
-docker run -d <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --name<span style="color:#f92672">=</span>tars-node <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --net<span style="color:#f92672">=</span>tars <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#75715e">#-e INET=enp2s0 \</span>
-    -e WEB_HOST<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;http://172.25.0.3:3000&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --ip<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;172.25.0.5&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -v /data/workspace/tars-cloud/tars:/data/tars <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -v /etc/localtime:/etc/localtime <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -p 9000-9010:9000-9010 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    tarscloud/tars-node:stable</code></pre></div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-5" class="outline-5">
-<h5 id="headline-5">
-测试代码
-</h5>
-<div id="outline-text-headline-5" class="outline-text-5">
-<p><a href="https://tarscloud.gitbook.io/tarsdocs/rumen/hello-world/tarsjava">java 快速入门</a> 直接下载官方的代码，使用其中的example测试即可, 使用springboot项目 <code>tars-spring-boot-server</code> 测试 <br>
-在其pom中需要添加编译插件，依赖如下:</p>
-<div class="src src-xml">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">   <span style="color:#f92672">&lt;plugin&gt;</span>
-                <span style="color:#f92672">&lt;groupId&gt;</span>com.tencent.tars<span style="color:#f92672">&lt;/groupId&gt;</span>
-                <span style="color:#f92672">&lt;artifactId&gt;</span>tars-maven-plugin<span style="color:#f92672">&lt;/artifactId&gt;</span>
-                <span style="color:#f92672">&lt;version&gt;</span>1.6.1<span style="color:#f92672">&lt;/version&gt;</span>
-                <span style="color:#f92672">&lt;configuration&gt;</span>
-                    <span style="color:#f92672">&lt;tars2JavaConfig&gt;</span>
-                        <span style="color:#75715e">&lt;!-- tars文件位置 --&gt;</span>
-                        <span style="color:#f92672">&lt;tarsFiles&gt;</span>
-                            <span style="color:#f92672">&lt;tarsFile&gt;</span>${basedir}/src/main/resources/hello.tars<span style="color:#f92672">&lt;/tarsFile&gt;</span>
-                        <span style="color:#f92672">&lt;/tarsFiles&gt;</span>
-                        <span style="color:#75715e">&lt;!-- 源文件编码 --&gt;</span>
-                        <span style="color:#f92672">&lt;tarsFileCharset&gt;</span>UTF-8<span style="color:#f92672">&lt;/tarsFileCharset&gt;</span>
-                        <span style="color:#75715e">&lt;!-- 生成服务端代码 --&gt;</span>
-                        <span style="color:#f92672">&lt;servant&gt;</span>true<span style="color:#f92672">&lt;/servant&gt;</span>
-                        <span style="color:#75715e">&lt;!-- 生成源代码编码 --&gt;</span>
-                        <span style="color:#f92672">&lt;charset&gt;</span>UTF-8<span style="color:#f92672">&lt;/charset&gt;</span>
-                        <span style="color:#75715e">&lt;!-- 生成的源代码目录 --&gt;</span>
-                        <span style="color:#f92672">&lt;srcPath&gt;</span>${basedir}/src/main/java<span style="color:#f92672">&lt;/srcPath&gt;</span>
-                        <span style="color:#75715e">&lt;!-- 生成源代码包前缀 --&gt;</span>
-                        <span style="color:#f92672">&lt;packagePrefixName&gt;</span>com.qq.tars.quickstart.server.<span style="color:#f92672">&lt;/packagePrefixName&gt;</span>
-                    <span style="color:#f92672">&lt;/tars2JavaConfig&gt;</span>
-                <span style="color:#f92672">&lt;/configuration&gt;</span>
-            <span style="color:#f92672">&lt;/plugin&gt;</span></code></pre></div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-6" class="outline-5">
-<h5 id="headline-6">
-日志路径
-</h5>
-<div id="outline-text-headline-6" class="outline-text-5">
-<p>tars 的日志都在/data/tars/ 已经映射到宿主机， 本机情况如下, 如果有问题，可以在此查看。
-    <img src="../images/tars-log-dir.png" alt="../images/tars-log-dir.png" title="../images/tars-log-dir.png" /> </p>
-</div>
-</div>
-<div id="outline-container-headline-7" class="outline-5">
-<h5 id="headline-7">
-tars配置与使用
-</h5>
-<div id="outline-text-headline-7" class="outline-text-5">
+<p><img src="../images/applicationListener.png" alt="../images/applicationListener.png" title="../images/applicationListener.png" /></p>
 <ul>
 <li>
-<p>配置应用, 这里基础概念很重要</p>
+<p>InitializingBean InstantiationAwareBeanPostProcessor 
+<a href="https://www.baeldung.com/running-setup-logic-on-startup-in-spring">spring bean initial</a> 文中介绍了spring springboot中各种各样的初始化bean的方式。 自己只是用到一部分，后续会尝试其他的方式</p>
 </li>
 </ul>
-<blockquote>
-<p><a href="https://tarscloud.gitbook.io/tarsdocs/rumen/tars-concept">tars 基础概念</a> <br>
-    应用名：表示一组服务的集合 –&gt; APP <br>
-    服务名称：提供服务的进程名称  –&gt; Server <br>
-    OBJ：提供具体服务的接口 –&gt; Servant </p>
-</blockquote>
-<p>web的配置需要和程序中的命名一一对应, examples中可以按照下图识别 
-    <img src="../images/tars-app-server.png" alt="../images/tars-app-server.png" title="../images/tars-app-server.png" /> </p>
+<p><img src="../images/init-methon.png" alt="../images/init-methon.png" title="../images/init-methon.png" /></p>
 <p>
-    web中配置如下：
-    <img src="../images/tar-web-cfg.png" alt="../images/tar-web-cfg.png" title="../images/tar-web-cfg.png" /> </p>
+    <a href="https://fangjian0423.github.io/2017/06/20/spring-bean-post-processor/">tutor</a> BeanPostProcessor 相关的实现太多，目前只是粗略了解一下。 idea 中查看类关系的uml蛮好使的，在生成的uml中，点击右键可以添加其他的相关类 <br>
+    只添加了相关的几个. spring 注入方式 构造函数注入、字段注入、set方法注入. 自己平时员工字段注入较多，其他的类型有空尝试一下</p>
+<p>
+<img src="../images/bean_post_processor.png" alt="../images/bean_post_processor.png" title="../images/bean_post_processor.png" /></p>
+<p>
+    <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle">bean liftcycle callback</a></p>
+<p>
+    soul-admin 使用到的类有以下几个</p>
+<p><img src="../images/initializingBean.png" alt="../images/initializingBean.png" title="../images/initializingBean.png" /></p>
 <ul>
 <li>
-<p>发布服务</p>
+<p>ApplicationContextAware
+<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-method-injection">contextaware spring上下文</a> 将spring上下文保存下来，可以随时获取容器内bean的. soul中使用的有以下两个类</p>
 </li>
 </ul>
-<p>配置节点: 这里的172.25.0.5 即为tarscloud/tars-node, 如果程序正常启动，是可以自动注册到web端的.
-    <img src="../images/tars-node.png" alt="../images/tars-node.png" title="../images/tars-node.png" /> </p>
-<p>
-    发布服务: 有历史记录的功能
-    <img src="../images/tar-public-server.png" alt="../images/tar-public-server.png" title="../images/tar-public-server.png" /> </p>
-<p>
-    服务状态: 双~Active~ 代表配置成功。失败的话，得查看log
-    <img src="../images/tar-server-status.png" alt="../images/tar-server-status.png" title="../images/tar-server-status.png" /> </p>
-<p>
-    接口调试. 在web中，上次对应的tars文件，即可对接口进行调试. 
-    <img src="../images/tars-api-debug.png" alt="../images/tars-api-debug.png" title="../images/tars-api-debug.png" /> </p>
-<p>
-    在web直接查看日志log. 这个确实方便，我们目前的日志，有部分发往es，而绝大部分的日志，只能在服务器上查看。
-    <img src="../images/tars-web-log.png" alt="../images/tars-web-log.png" title="../images/tars-web-log.png" /> </p>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-8" class="outline-4">
-<h4 id="headline-8">
-后期
-</h4>
-<div id="outline-text-headline-8" class="outline-text-4">
-<p>再尝试启动soul中的tars插件，目前还在调试中</p>
-</div>
-</div>
+<p><img src="../images/spring-ctx.png" alt="../images/spring-ctx.png" title="../images/spring-ctx.png" /></p>
+<ul>
+<li>
+<p>ObjectProvider
+<a href="https://spring.io/blog/2016/03/04/core-container-refinements-in-spring-framework-4-3">tutor office</a> </p>
+</li>
+<li>
+<p>EnumMap
+<a href="https://www.baeldung.com/java-enum-map">tutor</a> 以enum作为key的map，简单了解</p>
+</li>
+<li>
+<p>websocket
+<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-websockets">office tutor</a></p>
+</li>
+</ul>
 </div>
 </div>
 
@@ -920,7 +742,6 @@ tars配置与使用
             
                 
                     
-                    
                 
                 
 
@@ -933,9 +754,6 @@ tars配置与使用
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -985,7 +803,6 @@ tars配置与使用
             
                 
                     
-                    
                 
                 
 
@@ -1001,9 +818,6 @@ tars配置与使用
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -1088,6 +902,7 @@ tars配置与使用
             
                 
                     
+                    
                 
                 
 
@@ -1100,6 +915,7 @@ tars配置与使用
             
             
                 
+                    
                     
                 
                 
@@ -1116,6 +932,9 @@ tars配置与使用
             
             
                 
+                    
+                        
+                        
                     
                 
                 
@@ -1143,10 +962,10 @@ tars配置与使用
 	 
 	 
 		
-			<a class="nav nav-prev" href="/soul/exercise/summary/" title="心得体会"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/soul/src_learn/" title="源码学习"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/soul/exercise/springcloud/" title="Springcloud" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/soul/src_learn/webflux/" title="Webflux" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

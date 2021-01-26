@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.70.0" />
+    <meta name="generator" content="Hugo 0.80.0" />
     <meta name="description" content="Documentation for Hugo Learn Theme">
 <meta name="author" content="Mathieu Cornic">
 
@@ -12,19 +12,19 @@
     <title>Soul 数据同步-Websocket初探 :: Documentation for Hugo Learn Theme</title>
 
     
-    <link href="/css/nucleus.css?1611578540" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1611578540" rel="stylesheet">
-    <link href="/css/hybrid.css?1611578540" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1611578540" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1611578540" rel="stylesheet">
-    <link href="/css/auto-complete.css?1611578540" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1611578540" rel="stylesheet">
-    <link href="/css/theme.css?1611578540" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1611578540" rel="stylesheet">
+    <link href="/css/nucleus.css?1611675440" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1611675440" rel="stylesheet">
+    <link href="/css/hybrid.css?1611675440" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1611675440" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1611675440" rel="stylesheet">
+    <link href="/css/auto-complete.css?1611675440" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1611675440" rel="stylesheet">
+    <link href="/css/theme.css?1611675440" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1611675440" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1611578540"></script>
+    <script src="/js/jquery-3.3.1.min.js?1611675440"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -69,14 +69,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1611578540"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1611578540"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1611675440"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1611675440"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/blog.valjean.cn\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1611578540"></script>
+<script type="text/javascript" src="/js/search.js?1611675440"></script>
 
     
   </div>
@@ -403,6 +403,86 @@
 
             
           
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/soul/src_learn/" title="源码学习" class="dd-item
+        
+        
+        
+        ">
+      <a href="/soul/src_learn/">
+          <b>3. </b>源码学习
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/soul/src_learn/spring_learn/" title="spring相关内容补充" class="dd-item ">
+        <a href="/soul/src_learn/spring_learn/">
+        spring相关内容补充
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+      <li data-nav-id="/soul/src_learn/webflux/" title="Webflux" class="dd-item ">
+        <a href="/soul/src_learn/webflux/">
+        Webflux
+        <i class="fas fa-check read-icon"></i>
+        </a>
+    </li>
+     
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+            
+          
         
         </ul>
       
@@ -509,8 +589,6 @@
 </li>
 </ul>
 </li>
-<li><a href="#headline-8">springboot相关的bean,待完善学习</a>
-</li>
 </ul>
 </nav>
     </div>
@@ -536,165 +614,116 @@
 
 
 
+<div id="outline-container-headline-1" class="outline-3">
 <h3 id="headline-1">
 soul-admin 侧的数据同步
 </h3>
+<div id="outline-text-headline-1" class="outline-text-3">
 <p>
    在soul-admin启动时, <code>DataSyncConfiguration</code> 配置类会根据配置文件加载对应的同步策略 <br>
    其内有4个内部类,分别对应4中数据同步策略
-   <img src="../images/soul-web-data-cnf.png" alt="../images/soul-web-data-cnf.png" title="../images/soul-web-data-cnf.png" />
-</p>
+   <img src="../images/soul-web-data-cnf.png" alt="../images/soul-web-data-cnf.png" title="../images/soul-web-data-cnf.png" /></p>
 <p>
    不同策略在初始化时,均会通过spring容器构建一个DataChangedListener的实现类,用于后续的事件监听 <br>
-   websocket同步策略除了注入一个DataChangedListener bean,还会分别注入 WebsocketCollector ServerEndpointExporter
-</p>
+   websocket同步策略除了注入一个DataChangedListener bean,还会分别注入 WebsocketCollector ServerEndpointExporter</p>
 <p>
-   WebsocketCollector 其实就是soul-admin通过websocket 与soul-bootstrasp数据交互的入口. 包括接受链接,同步消息,处理链接错误信息等.
-</p>
+   WebsocketCollector 其实就是soul-admin通过websocket 与soul-bootstrasp数据交互的入口. 包括接受链接,同步消息,处理链接错误信息等.</p>
 <p>
    soul-admin 中业务层基本类似cms系统的增删改查功能,但是在数据变化的时候,均推送相应的事件
-   <img src="../images/soul-web-data-event.png" alt="../images/soul-web-data-event.png" title="../images/soul-web-data-event.png" />
-</p>
+   <img src="../images/soul-web-data-event.png" alt="../images/soul-web-data-event.png" title="../images/soul-web-data-event.png" /></p>
 <p>
-   DataChangedEventDispatcher 里在对推送过来的事件,进行分门别类的处理.
-</p>
+   DataChangedEventDispatcher 里在对推送过来的事件,进行分门别类的处理.</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-3">
 <h3 id="headline-2">
 soul-bootstrap
 </h3>
+<div id="outline-text-headline-2" class="outline-text-3">
 <p>
-   <strong>这块的逻辑调用功能目前还有点凌乱</strong> 待后续画图补充完善
-</p>
+   <strong>这块的逻辑调用功能目前还有点凌乱</strong> 待后续画图补充完善</p>
+<div id="outline-container-headline-3" class="outline-4">
 <h4 id="headline-3">
 引用基本start
 </h4>
+<div id="outline-text-headline-3" class="outline-text-4">
 <p>
-    在soul-bootstrap中只引入以下的start进行分析
-</p>
-<p>
-<img src="../images/soul-boostarp-start.png" alt="../images/soul-boostarp-start.png" title="../images/soul-boostarp-start.png" />
-</p>
+    在soul-bootstrap中只引入以下的start进行分析</p>
+<p><img src="../images/soul-boostarp-start.png" alt="../images/soul-boostarp-start.png" title="../images/soul-boostarp-start.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-4">
 <h4 id="headline-4">
 各个start分别引入的依赖以及进行的初始配置
 </h4>
+<div id="outline-text-headline-4" class="outline-text-4">
 <ul>
 <li>
-<p>
-soul-spring-boot-starter-gateway 这个start中仅仅引入的是soul-web相关的包,相关的初始化工作其实是在soul-web中进行的。
-</p>
+<p>soul-spring-boot-starter-gateway 这个start中仅仅引入的是soul-web相关的包,相关的初始化工作其实是在soul-web中进行的。</p>
 </li>
 </ul>
-<p>
-<img src="../images/soul-boostarp-gateway.png" alt="../images/soul-boostarp-gateway.png" title="../images/soul-boostarp-gateway.png" />
-</p>
+<p><img src="../images/soul-boostarp-gateway.png" alt="../images/soul-boostarp-gateway.png" title="../images/soul-boostarp-gateway.png" /></p>
 <ul>
 <li>
-<p>
-soul-spring-boot-starter-plugin-divide 该start引入的是 soul-plugin-divide 包. 其中主要的依赖如下. 可以看到起引入了spi相关的包。<br>
+<p>soul-spring-boot-starter-plugin-divide 该start引入的是 soul-plugin-divide 包. 其中主要的依赖如下. 可以看到起引入了spi相关的包。<br>
 其内的DividePluginConfiguration 分别初始化了SoulPlugin、PluginDataHandler、WebSocketPlugin、ReactorNettyWebSocketClient、<br>
-WebSocketService
-</p>
+WebSocketService</p>
 </li>
 </ul>
-<p>
-<img src="../images/soul-boostarp-divide.png" alt="../images/soul-boostarp-divide.png" title="../images/soul-boostarp-divide.png" />
-</p>
+<p><img src="../images/soul-boostarp-divide.png" alt="../images/soul-boostarp-divide.png" title="../images/soul-boostarp-divide.png" /></p>
 <ul>
 <li>
-<p>
-soul-spring-boot-starter-plugin-global
+<p>soul-spring-boot-starter-plugin-global
 该start引入的事soul-plugin-global相关依赖,其内有个GlobalPluginConfiguration初始化类，<br>
-利用spring注入这三种bean SoulPlugin、SoulContextBuilder、MetaDataSubscriber
-</p>
+利用spring注入这三种bean SoulPlugin、SoulContextBuilder、MetaDataSubscriber</p>
 </li>
 </ul>
-<p>
-<img src="../images/soul-boostarp-global.png" alt="../images/soul-boostarp-global.png" title="../images/soul-boostarp-global.png" />
-</p>
+<p><img src="../images/soul-boostarp-global.png" alt="../images/soul-boostarp-global.png" title="../images/soul-boostarp-global.png" /></p>
+<div id="outline-container-headline-5" class="outline-5">
 <h5 id="headline-5">
 soul-spring-boot-starter-plugin-httpclient
 </h5>
-<p>
-该start引入的是soul-plugin-httpclient 的相关依赖,其中有HttpClientPluginConfiguration配置类，<br>
+<div id="outline-text-headline-5" class="outline-text-5">
+<p>该start引入的是soul-plugin-httpclient 的相关依赖,其中有HttpClientPluginConfiguration配置类，<br>
      其内部类WebClientConfiguration,NettyHttpClientConfiguration 分别可以指定不同的httpclient类型
-     <img src="../images/soul-start-httpclient.png" alt="../images/soul-start-httpclient.png" title="../images/soul-start-httpclient.png" />
-</p>
-<p>
-<img src="../images/soul-boostarp-httpclient.png" alt="../images/soul-boostarp-httpclient.png" title="../images/soul-boostarp-httpclient.png" />
-</p>
+     <img src="../images/soul-start-httpclient.png" alt="../images/soul-start-httpclient.png" title="../images/soul-start-httpclient.png" /></p>
+<p><img src="../images/soul-boostarp-httpclient.png" alt="../images/soul-boostarp-httpclient.png" title="../images/soul-boostarp-httpclient.png" /></p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-5">
 <h5 id="headline-6">
 soul-spring-boot-starter-sync-data-websocket
 </h5>
-<p>
-该start引入的是soul-sync-data-websocket，其内的WebsocketSyncDataConfiguration向spring中注入SyncDataService、WebsocketConfig <br>
-     两种类型的bean
-</p>
-<p>
-<img src="../images/soul-boostarp-websocket.png" alt="../images/soul-boostarp-websocket.png" title="../images/soul-boostarp-websocket.png" />
-</p>
+<div id="outline-text-headline-6" class="outline-text-5">
+<p>该start引入的是soul-sync-data-websocket，其内的WebsocketSyncDataConfiguration向spring中注入SyncDataService、WebsocketConfig <br>
+     两种类型的bean</p>
+<p><img src="../images/soul-boostarp-websocket.png" alt="../images/soul-boostarp-websocket.png" title="../images/soul-boostarp-websocket.png" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-4">
 <h4 id="headline-7">
 websocket 中同步
 </h4>
+<div id="outline-text-headline-7" class="outline-text-4">
 <ul>
 <li>
-<p>
-WebsocketSyncDataConfiguration的初始化过程该模块使用 spring-boot-starter. 项目结构分层确实清晰明了.  <br>
-在starter-sync-data-websocket中 WebsocketSyncDataConfiguration初始化流程如下：
-</p>
+<p>WebsocketSyncDataConfiguration的初始化过程该模块使用 spring-boot-starter. 项目结构分层确实清晰明了.  <br>
+在starter-sync-data-websocket中 WebsocketSyncDataConfiguration初始化流程如下：</p>
 </li>
 </ul>
-<p>
-<img src="../images/soul-boostarp-websocket-init.png" alt="../images/soul-boostarp-websocket-init.png" title="../images/soul-boostarp-websocket-init.png" />
-</p>
+<p><img src="../images/soul-boostarp-websocket-init.png" alt="../images/soul-boostarp-websocket-init.png" title="../images/soul-boostarp-websocket-init.png" /></p>
 <ul>
 <li>
-<p>
-WebSocketClient的调用过程
-</p>
+<p>WebSocketClient的调用过程</p>
 </li>
 </ul>
-<p>
-<img src="../images/soul-boostarp-WebSocketClient-invoke.png" alt="../images/soul-boostarp-WebSocketClient-invoke.png" title="../images/soul-boostarp-WebSocketClient-invoke.png" />
-</p>
-<h3 id="headline-8">
-springboot相关的bean,待完善学习
-</h3>
-<p>
-    项目中有些bean的初始化是用到了spring框架的相关特性,但是知其然不知其所以然. <br>
-    比如:DataChangedEventDispatcher.afterPropertiesSet方法是将所有的DataChangedListener实现类赋值给自己的属性listeners <br>
-    随后进行业务操作.另外还有以下几个:
-</p>
-<ul>
-<li>
-<p>
-ApplicationListener
-</p>
-</li>
-<li>
-<p>
-InitializingBean
-</p>
-</li>
-<li>
-<p>
-InstantiationAwareBeanPostProcessor
-</p>
-</li>
-<li>
-<p>
-ApplicationContextAware
-</p>
-</li>
-<li>
-<p>
-EnumMap
-</p>
-</li>
-<li>
-<p>
-LocalDataSourceLoader 中实现了项目的sql初始化操作. 因建库、建表的sql语句中均有 <code>IF NOT EXISTS</code>. 故不会重复创建表
-</p>
-</li>
-</ul>
+<p><img src="../images/soul-boostarp-WebSocketClient-invoke.png" alt="../images/soul-boostarp-WebSocketClient-invoke.png" title="../images/soul-boostarp-WebSocketClient-invoke.png" /></p>
+</div>
+</div>
+</div>
+</div>
 
 
 <footer class="footline">
@@ -943,6 +972,54 @@ LocalDataSourceLoader 中实现了项目的sql初始化操作. 因建库、建�
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
             
         
                     
@@ -968,19 +1045,19 @@ LocalDataSourceLoader 中实现了项目的sql初始化操作. 因建库、建�
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1611578540"></script>
-    <script src="/js/perfect-scrollbar.min.js?1611578540"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1611578540"></script>
-    <script src="/js/jquery.sticky.js?1611578540"></script>
-    <script src="/js/featherlight.min.js?1611578540"></script>
-    <script src="/js/highlight.pack.js?1611578540"></script>
+    <script src="/js/clipboard.min.js?1611675440"></script>
+    <script src="/js/perfect-scrollbar.min.js?1611675440"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1611675440"></script>
+    <script src="/js/jquery.sticky.js?1611675440"></script>
+    <script src="/js/featherlight.min.js?1611675440"></script>
+    <script src="/js/highlight.pack.js?1611675440"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1611578540"></script>
-    <script src="/js/learn.js?1611578540"></script>
-    <script src="/js/hugo-learn.js?1611578540"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1611675440"></script>
+    <script src="/js/learn.js?1611675440"></script>
+    <script src="/js/hugo-learn.js?1611675440"></script>
     
         
-            <script src="/mermaid/mermaid.js?1611578540"></script>
+            <script src="/mermaid/mermaid.js?1611675440"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -3,13 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://blog.valjean.cn/soul/src_learn/spring_learn/</loc>
+    <lastmod>2021-01-26T16:05:44+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.valjean.cn/soul/env/</loc>
     <lastmod>2021-01-13T23:30:36+08:00</lastmod>
   </url>
   
   <url>
+    <loc>http://blog.valjean.cn/soul/src_learn/webflux/</loc>
+    <lastmod>2021-01-18T16:42:43+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.valjean.cn/soul/exercise/</loc>
     <lastmod>2021-01-15T23:37:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.valjean.cn/soul/src_learn/</loc>
+    <lastmod>2021-01-26T16:05:11+08:00</lastmod>
   </url>
   
   <url>
