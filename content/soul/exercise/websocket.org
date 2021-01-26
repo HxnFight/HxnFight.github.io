@@ -1,14 +1,6 @@
 #+title: Soul 数据同步-Websocket初探
 #+date:  2021-01-23T19:58:20+08:00
 #+weight: 5
-#+OPTIONS: toc:2
-#+OPTIONS: toc:t
-#+STARTUP: overview
-#+COLUMNS: %25ITEM %TAGS %TODO %3PRIORITYd
-#+OPTIONS: ^:nil
-#+OPTIONS: email:t
-#+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
-#+setupfile: http://css.valjean.cn/css/org-theme/setup/nginx/readtheorg-ng.setup
 
 ** soul-admin 侧的数据同步
 
@@ -196,8 +188,6 @@ stop
 
 #+RESULTS:
 [[file:../images/soul-boostarp-WebSocketClient-invoke.png]]
-
-
 
 ** springboot相关的bean,待完善学习
 
