@@ -1,0 +1,42 @@
+#+title: 相关内容补充
+#+date:  2021-01-26T16:05:44+08:00
+#+weight: 1
+
+** spring 相关
+
+** springboot相关的bean,待完善学习
+
+  - ApplicationListener : [[https://www.baeldung.com/spring-events][tutor]]  [[https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-functionality-events-annotation][office-tutor]]
+    ApplicationEvent
+    ApplicationEventPublisher
+    ApplicationListener
+
+    在单个项目内流转，内部bus
+    默认是同步的，可以通过配置更改为异步
+
+  - InitializingBean
+    [[https://www.baeldung.com/running-setup-logic-on-startup-in-spring][spring bean initial]]
+    spring ioc 构造函数注入、字段注入、set方法注入
+
+    soul-admin --> AbstractDataChangedListener
+    soul-admin --> DataChangedEventDispatcher
+
+
+  - InstantiationAwareBeanPostProcessor
+    soul-admin -->  LocalDataSourceLoader
+
+    [[https://fangjian0423.github.io/2017/06/20/spring-bean-post-processor/][tutor]]
+    [[https://cloud.tencent.com/developer/article/1409273][tutor-2]]
+    [[https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle][bean liftcycle callback]]
+  - ApplicationContextAware
+    [[https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-method-injection][contextaware spring上线文]]
+    将spring上下文保存下来，可以随时获取容器内bean的
+    soul-web --> SpringExtConfiguration
+    soul-admin --> SoulApplicationContextAware
+
+  - ObjectProvider
+    [[https://spring.io/blog/2016/03/04/core-container-refinements-in-spring-framework-4-3][tutor office]]
+  - EnumMap
+    [[https://www.baeldung.com/java-enum-map][tutor]]
+  - websocket
+    [[https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-websockets][office tutor]]

@@ -198,16 +198,3 @@ stop
 [[file:../images/soul-boostarp-WebSocketClient-invoke.png]]
 
 
-
-** springboot相关的bean,待完善学习
-
-    项目中有些bean的初始化是用到了spring框架的相关特性,但是知其然不知其所以然. \\
-    比如:DataChangedEventDispatcher.afterPropertiesSet方法是将所有的DataChangedListener实现类赋值给自己的属性listeners \\
-    随后进行业务操作.另外还有以下几个:
-
-  - ApplicationListener
-  - InitializingBean
-  - InstantiationAwareBeanPostProcessor
-  - ApplicationContextAware
-  - EnumMap
-  - LocalDataSourceLoader 中实现了项目的sql初始化操作. 因建库、建表的sql语句中均有 ~IF NOT EXISTS~. 故不会重复创建表
