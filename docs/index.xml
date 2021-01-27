@@ -35,6 +35,19 @@
     </item>
     
     <item>
+      <title>soul plugin 调用链</title>
+      <link>http://blog.valjean.cn/soul/src_learn/soul-chain/</link>
+      <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/src_learn/soul-chain/</guid>
+      <description> 插件链初探  soul-bootstrap启动,相关初始化工作完毕之后，当外部发起一个请求到soul-bootstrap,其内部是如何进行过滤、筛选的. 此次拿divide插件来做简单分析。 SoulWebHandler是程序的一个入口点，目前soul代理的服务，都是通过http请求调用的。该类在初始化的时候，会获取到pom中配置的相关插件依赖创建的spring bean. 其handle方法会被触发执行，（这块应该是框架调用的，待确认）.随后会创建一个 DefaultSoulPluginChain 并发起插件链的调用。
+   插件的分类  soul的插件有个基础接口SoulPlugin和一个实现了execute方法的 AbstractSoulPlugin. 其他的类型的插件，要么直接继承AbstractSoulPlugin 实现doExecute对 对插件进行扩展。 要么直接实现SoulPlugin。 下图是抽取一部分的plugin之间的关系。
+   待补充    对webflux的了解，能看明白相关代码
+  SoulWebHandler是怎么被拉起的
+    </description>
+    </item>
+    
+    <item>
       <title>Soul 数据同步-Websocket初探</title>
       <link>http://blog.valjean.cn/soul/exercise/websocket/</link>
       <pubDate>Sat, 23 Jan 2021 19:58:20 +0800</pubDate>
