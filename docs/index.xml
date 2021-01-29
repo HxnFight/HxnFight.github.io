@@ -6,22 +6,19 @@
     <description>Recent content in soul 学习笔记 on Documentation for Hugo Learn Theme</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 13 Jan 2021 23:27:41 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 13 Jan 2021 23:27:41 +0800</lastBuildDate>
+    
+	<atom:link href="http://blog.valjean.cn/index.xml" rel="self" type="application/rss+xml" />
+    
+    
     <item>
       <title>spring相关内容补充</title>
       <link>http://blog.valjean.cn/soul/src_learn/spring_learn/</link>
       <pubDate>Tue, 26 Jan 2021 16:05:44 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/spring_learn/</guid>
-      <description>spring 相关内容补充    ApplicationListener : baeldung tutor office-tutor , 自定义的实现可以通过实现特定类或者利用相关注解是实现 默认情况下是同步的，可以通过配置更改为异步执行. 这个功能是在单个项目内流转，数据也是在内部流转. 适用于业务在单个实例中
-能全部解决的情况. 类似cmsweb这种项目. 分布式之类的项目需要考虑其他mq之类的方案.
- soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-client-springcloud、soul-client-springmvc soul-client-alibaba-dubbo soul-client-apache-dubbo 均为监控的spirng容器的特殊事件.
-    InitializingBean InstantiationAwareBeanPostProcessor spring bean initial 文中介绍了spring springboot中各种各样的初始化bean的方式。 自己只是用到一部分，后续会尝试其他的方式
-   tutor BeanPostProcessor 相关的实现太多，目前只是粗略了解一下。 idea 中查看类关系的uml蛮好使的，在生成的uml中，点击右键可以添加其他的相关类 只添加了相关的几个. spring 注入方式 构造函数注入、字段注入、set方法注入. 自己平时员工字段注入较多，其他的类型有空尝试一下
-  bean liftcycle callback
- soul-admin 使用到的类有以下几个
-  ApplicationContextAware contextaware spring上下文 将spring上下文保存下来，可以随时获取容器内bean的. soul中使用的有以下两个类
-    ObjectProvider tutor office   EnumMap tutor 以enum作为key的map，简单了解</description>
+      <description> spring 相关内容补充     ApplicationListener : baeldung tutor office-tutor , 自定义的实现可以通过实现特定类或者利用相关注解是实现 默认情况下是同步的，可以通过配置更改为异步执行. 这个功能是在单个项目内流转，数据也是在内部流转. 适用于业务在单个实例中
+能全部解决的情况. 类似cmsweb这种项目. 分布式之类的项目需要考虑其他mq之类的方案.  soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-client-springcloud、soul-client-springmvc soul-client-alibaba-dubbo soul-client-apache-dubbo 均为监控的spirng容器的特殊事件.       InitializingBean InstantiationAwareBeanPostProcessor spring bean initial 文中介绍了spring springboot中各种各样的初始化bean的方式。 自己只是用到一部分，后续会尝试其他的方式     tutor BeanPostProcessor 相关的实现太多，目前只是粗略了解一下。 idea 中查看类关系的uml蛮好使的，在生成的uml中，点击右键可以添加其他的相关类 只添加了相关的几个. spring 注入方式 构造函数注入、字段注入、set方法注入. 自己平时员工字段注入较多，其他的类型有空尝试一下   bean liftcycle callback  soul-admin 使用到的类有以下几个     ApplicationContextAware contextaware spring上下文 将spring上下文保存下来，可以随时获取容器内bean的. soul中使用的有以下两个类       ObjectProvider tutor office    EnumMap tutor 以enum作为key的map，简单了解    websocket office tutor   </description>
     </item>
     
     <item>
@@ -30,8 +27,7 @@
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/webflux/</guid>
-      <description> webflux  office docs
-  </description>
+      <description> webflux   office docs </description>
     </item>
     
     <item>
@@ -40,18 +36,10 @@
       <pubDate>Sat, 23 Jan 2021 19:58:20 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/websocket/</guid>
-      <description>soul-admin 侧的数据同步   在soul-admin启动时, DataSyncConfiguration 配置类会根据配置文件加载对应的同步策略 其内有4个内部类,分别对应4中数据同步策略  不同策略在初始化时,均会通过spring容器构建一个DataChangedListener的实现类,用于后续的事件监听 websocket同步策略除了注入一个DataChangedListener bean,还会分别注入 WebsocketCollector ServerEndpointExporter
- WebsocketCollector 其实就是soul-admin通过websocket 与soul-bootstrasp数据交互的入口. 包括接受链接,同步消息,处理链接错误信息等.
- soul-admin 中业务层基本类似cms系统的增删改查功能,但是在数据变化的时候,均推送相应的事件  DataChangedEventDispatcher 里在对推送过来的事件,进行分门别类的处理.
-  soul-bootstrap   这块的逻辑调用功能目前还有点凌乱 待后续画图补充完善
-引用基本start   在soul-bootstrap中只引入以下的start进行分析
-  各个start分别引入的依赖以及进行的初始配置    soul-spring-boot-starter-gateway 这个start中仅仅引入的是soul-web相关的包,相关的初始化工作其实是在soul-web中进行的。
-    soul-spring-boot-starter-plugin-divide 该start引入的是 soul-plugin-divide 包. 其中主要的依赖如下. 可以看到起引入了spi相关的包。
+      <description>soul-admin 侧的数据同步   在soul-admin启动时, DataSyncConfiguration 配置类会根据配置文件加载对应的同步策略 其内有4个内部类,分别对应4中数据同步策略  不同策略在初始化时,均会通过spring容器构建一个DataChangedListener的实现类,用于后续的事件监听 websocket同步策略除了注入一个DataChangedListener bean,还会分别注入 WebsocketCollector ServerEndpointExporter  WebsocketCollector 其实就是soul-admin通过websocket 与soul-bootstrasp数据交互的入口. 包括接受链接,同步消息,处理链接错误信息等.  soul-admin 中业务层基本类似cms系统的增删改查功能,但是在数据变化的时候,均推送相应的事件  DataChangedEventDispatcher 里在对推送过来的事件,进行分门别类的处理. soul-bootstrap   这块的逻辑调用功能目前还有点凌乱 待后续画图补充完善 引用基本start   在soul-bootstrap中只引入以下的start进行分析  各个start分别引入的依赖以及进行的初始配置     soul-spring-boot-starter-gateway 这个start中仅仅引入的是soul-web相关的包,相关的初始化工作其实是在soul-web中进行的。       soul-spring-boot-starter-plugin-divide 该start引入的是 soul-plugin-divide 包. 其中主要的依赖如下. 可以看到起引入了spi相关的包。
 其内的DividePluginConfiguration 分别初始化了SoulPlugin、PluginDataHandler、WebSocketPlugin、ReactorNettyWebSocketClient、
-WebSocketService
-    soul-spring-boot-starter-plugin-global 该start引入的事soul-plugin-global相关依赖,其内有个GlobalPluginConfiguration初始化类，
-利用spring注入这三种bean SoulPlugin、SoulContextBuilder、MetaDataSubscriber
-  soul-spring-boot-starter-plugin-httpclient  该start引入的是soul-plugin-httpclient 的相关依赖,其中有HttpClientPluginConfiguration配置类，</description>
+WebSocketService       soul-spring-boot-starter-plugin-global 该start引入的事soul-plugin-global相关依赖,其内有个GlobalPluginConfiguration初始化类，
+利用spring注入这三种bean SoulPlugin、SoulContextBuilder、MetaDataSubscriber    soul-spring-boot-starter-plugin-httpclient   该start引入的是soul-plugin-httpclient 的相关依赖,其中有HttpClientPluginConfiguration配置类，</description>
     </item>
     
     <item>
@@ -60,12 +48,8 @@ WebSocketService
       <pubDate>Fri, 22 Jan 2021 15:11:27 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/tars-2/</guid>
-      <description>soul-tars 后续  1. tars cloud 中尝试添加soul依赖   tarscloud的demo跑起来后，想着在其上引入 soul-spring-boot-starter-client-tars 依赖，来测试soul-tars。 但是将打好的jar发布到tars框架中，一直报jvm错误，也尝试调整jvm参数，但是均启动失败。 这块应该还是tars框架的使用问题 暂时未深入研究，随后开始尝试 soul-examples-tars.    2. soul-example-tars配置   和使用其他的插件一样， 需要先打开插件开关。 但是不同点是在官方的说明中，并未有tars的使用教程。 这点只能自己摸索。 我在配置的过程中，soul相关的项目是在本机启动， tarscloud是在另一台机器的。 故在配置application.yml的过程中，有一下几点需要注意。
-#application.yml soul: tars: adminUrl: http://172.16.0.35:9095 contextPath: /tars appName: tars ipAndPort: 192.168.1.110:9002    soul.tars.adminUrl需要更改为实际的ip地址，
-  soul.tars.ipAndPort 配置要根据tars-node 启动脚本中暴露的端口来选择一个。 因为应用将来是部署在docker容器内的。
-而服务本身的端口与tars框架暴露的端口可以通过tars控制台来更改。
-    tars-node的启动脚本指定了9000 –&amp;gt; 9010之间的端口对外暴露
-  docker run -d \ --name=tars-node \ --net=tars \ #-e INET=enp2s0 \ -e WEB_HOST=&amp;#34;http://172.</description>
+      <description>soul-tars 后续  1. tars cloud 中尝试添加soul依赖   tarscloud的demo跑起来后，想着在其上引入 soul-spring-boot-starter-client-tars 依赖，来测试soul-tars。 但是将打好的jar发布到tars框架中，一直报jvm错误，也尝试调整jvm参数，但是均启动失败。 这块应该还是tars框架的使用问题 暂时未深入研究，随后开始尝试 soul-examples-tars.  2. soul-example-tars配置   和使用其他的插件一样， 需要先打开插件开关。 但是不同点是在官方的说明中，并未有tars的使用教程。 这点只能自己摸索。 我在配置的过程中，soul相关的项目是在本机启动， tarscloud是在另一台机器的。 故在配置application.yml的过程中，有一下几点需要注意。 #application.yml soul: tars: adminUrl: http://172.16.0.35:9095 contextPath: /tars appName: tars ipAndPort: 192.168.1.110:9002     soul.tars.adminUrl需要更改为实际的ip地址，    soul.tars.ipAndPort 配置要根据tars-node 启动脚本中暴露的端口来选择一个。 因为应用将来是部署在docker容器内的。
+而服务本身的端口与tars框架暴露的端口可以通过tars控制台来更改。       tars-node的启动脚本指定了9000 –&amp;gt; 9010之间的端口对外暴露   docker run -d \ --name=tars-node \ --net=tars \ #-e INET=enp2s0 \ -e WEB_HOST=&amp;#34;http://172.</description>
     </item>
     
     <item>
@@ -74,13 +58,7 @@ WebSocketService
       <pubDate>Thu, 21 Jan 2021 22:45:24 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/summary/</guid>
-      <description>一 做到、学到的   在这6天里,不管记录的多少、了解的深浅. 在这个大的环境中,一直跟着大家在坚持. 每天多多少少都学到了新的东西. 从第一天的环境搭建,正好将自己刚学习的hugo+github 搭建个人博客的给充分的实践起来. 目前不仅在记录学习使用soul的点点滴滴,也在小组内部 逐步推广起来. 完善工作中的一些琐碎内容的收集和展示.
- 再有之后,学习soul的使用从 divide–&amp;gt; http –&amp;gt; sofa –&amp;gt; springcloud –&amp;gt; tars. 自己暂时还没有太多的 源码解读,但是整个过程也是收货颇丰的,拓展了视野的范围. 比如: soul作为业务网关,可以 在自己的打点项目中,对在流量网关之后做些数据分流、数据复制,相对的比openresty之类的 流量网关好维护、控制一些.再个就是新了解到的sofa和tars,虽没有太深入的了解,但是通过 简单的搭建使用,至少知道有些事情确实可以做到的. 这点确实特别兴奋.
- 当然,在这段时间里,自己做的确实不够好. 有些时候也有点马虎. 看着其他的小伙伴那么认真 投入. 真的特别敬佩他们. 想起一句话 以大多数人的努力程度之低，根本轮不到拼天赋 . 再努力和坚持,希望能和大家走到最后的.
-  二 待改善的    时间安排 睡的太晚,确实有点吃不消的. 尽量将学习的时间调的早一些. 还得以工作内容为主,在soul学习 这块坚持每天有输出就好. 在完成基础任务之上,跟着大家学习.
-  任务安排 按照自己的时间和精力,规划好自己的节奏和目标. 没法像其他同学那么拼,但至少每天要有一点进步 每天要成长一些.   落下的任务 在过去几天落下的一些任务
-  soul-tars 的实践,tars的环境已经搭建完毕,尝试将soul-tars的模块跑起来.
-  webflux的学习实践</description>
+      <description>一 做到、学到的   在这6天里,不管记录的多少、了解的深浅. 在这个大的环境中,一直跟着大家在坚持. 每天多多少少都学到了新的东西. 从第一天的环境搭建,正好将自己刚学习的hugo+github 搭建个人博客的给充分的实践起来. 目前不仅在记录学习使用soul的点点滴滴,也在小组内部 逐步推广起来. 完善工作中的一些琐碎内容的收集和展示.  再有之后,学习soul的使用从 divide–&amp;gt; http –&amp;gt; sofa –&amp;gt; springcloud –&amp;gt; tars. 自己暂时还没有太多的 源码解读,但是整个过程也是收货颇丰的,拓展了视野的范围. 比如: soul作为业务网关,可以 在自己的打点项目中,对在流量网关之后做些数据分流、数据复制,相对的比openresty之类的 流量网关好维护、控制一些.再个就是新了解到的sofa和tars,虽没有太深入的了解,但是通过 简单的搭建使用,至少知道有些事情确实可以做到的. 这点确实特别兴奋.  当然,在这段时间里,自己做的确实不够好. 有些时候也有点马虎. 看着其他的小伙伴那么认真 投入. 真的特别敬佩他们. 想起一句话 以大多数人的努力程度之低，根本轮不到拼天赋 . 再努力和坚持,希望能和大家走到最后的. 二 待改善的     时间安排 睡的太晚,确实有点吃不消的. 尽量将学习的时间调的早一些. 还得以工作内容为主,在soul学习 这块坚持每天有输出就好. 在完成基础任务之上,跟着大家学习.    任务安排 按照自己的时间和精力,规划好自己的节奏和目标. 没法像其他同学那么拼,但至少每天要有一点进步 每天要成长一些.    落下的任务 在过去几天落下的一些任务    soul-tars 的实践,tars的环境已经搭建完毕,尝试将soul-tars的模块跑起来.    webflux的学习实践    soul http dubbo插件的学习     三 下周目标     完成基本的任务.</description>
     </item>
     
     <item>
@@ -89,9 +67,7 @@ WebSocketService
       <pubDate>Wed, 20 Jan 2021 18:52:44 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/tars/</guid>
-      <description>tencent tars-cloud 实践  昨天调试soul-tars 插件，后台服务tars一直启动失败。 今天参考 office quick start ，总算启动成功，不过其中还有很多需要注意的点，在此记录一下。
-注意事项    对tars的整体结构得有个大概的认识，自己再部署后面的 tars-framework, tars-nodes 一直不成功 文档中介绍， Tars 框架, 有两个镜像可供选择: framework / tars .自己一直理解成了是framework/nodes framework 、 nodes 两码事. 如果将来拿framework作为节点发布服务，会出现pid not exist. 因其没有java环境 issues
- framework: Tars 框架 Docker 制作脚本, 制作的 docker 包含了框架核心服务和 web 管理平台 tars: Tars 框架 Docker 制作脚本, 和 framework 比, 增加了 java, nodejs 等运行时支持, 即可以把 java, nodejs 服务发布到 docker 里面(docker 里面安装了 jdk, node, php 环境) nodes: 是正常的代码运行环境，包含基本的开发环境。</description>
+      <description>tencent tars-cloud 实践   昨天调试soul-tars 插件，后台服务tars一直启动失败。 今天参考 office quick start ，总算启动成功，不过其中还有很多需要注意的点，在此记录一下。 注意事项     对tars的整体结构得有个大概的认识，自己再部署后面的 tars-framework, tars-nodes 一直不成功 文档中介绍， Tars 框架, 有两个镜像可供选择: framework / tars .自己一直理解成了是framework/nodes framework 、 nodes 两码事. 如果将来拿framework作为节点发布服务，会出现pid not exist. 因其没有java环境 issues   framework: Tars 框架 Docker 制作脚本, 制作的 docker 包含了框架核心服务和 web 管理平台 tars: Tars 框架 Docker 制作脚本, 和 framework 比, 增加了 java, nodejs 等运行时支持, 即可以把 java, nodejs 服务发布到 docker 里面(docker 里面安装了 jdk, node, php 环境) nodes: 是正常的代码运行环境，包含基本的开发环境。     在使用docker快速搭建环境时，在Linux环境下，官方提供了国内的镜像地址 一下的命令执行后，发现是修改的docker daemon 配置文件，将镜像仓库地址更改为了aliyun的。 目前测试在此仓库下，安装mysql 也挺快的，其他镜像未测试，在测试完tars最好还手动更改回去。 其实这块配置的是数组形式，应该可以添加多个.</description>
     </item>
     
     <item>
@@ -100,9 +76,7 @@ WebSocketService
       <pubDate>Tue, 19 Jan 2021 11:12:46 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/springcloud/</guid>
-      <description>soul springcloud  实践  在soul中增加springcloud配置    将soul-boostrap中有关springcloud的依赖注释打开,注册中心选用的eureka. docker镜像没下载成功,按照教程 eureka tutor, 创建springboot项目,引入 eureka相关依赖,搞定eureka的server服务.
-  soul-admin 中 打开springcloud插件开关 系统管理 –&amp;gt; 插件管理 (直接保存就ok)
-    请求调用  ### 测试查询数据 GET http://localhost:9195/springcloud/order/findById?id=999 { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;hello world spring cloud findById&amp;#34; } ### 测试保存数据 POST http://localhost:9195/springcloud/order/save Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; } { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;hello world spring cloud save order&amp;#34; }        tars cloud  又发现一个新的rpc框架tarscloud, 原来以为是个压缩相关的模块的呢, ~tars~嘛.</description>
+      <description>soul springcloud  实践  在soul中增加springcloud配置     将soul-boostrap中有关springcloud的依赖注释打开,注册中心选用的eureka. docker镜像没下载成功,按照教程 eureka tutor, 创建springboot项目,引入 eureka相关依赖,搞定eureka的server服务.    soul-admin 中 打开springcloud插件开关 系统管理 –&amp;gt; 插件管理 (直接保存就ok)   请求调用  ### 测试查询数据 GET http://localhost:9195/springcloud/order/findById?id=999 { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;hello world spring cloud findById&amp;#34; } ### 测试保存数据 POST http://localhost:9195/springcloud/order/save Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; } { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;hello world spring cloud save order&amp;#34; }  tars cloud   又发现一个新的rpc框架tarscloud, 原来以为是个压缩相关的模块的呢, ~tars~嘛.</description>
     </item>
     
     <item>
@@ -111,8 +85,7 @@ WebSocketService
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/webflux/</guid>
-      <description> webflux  office docs
-  </description>
+      <description> webflux   office docs </description>
     </item>
     
     <item>
@@ -121,10 +94,7 @@ WebSocketService
       <pubDate>Sun, 17 Jan 2021 22:28:39 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/sofa/</guid>
-      <description>sofa调试  修改配置    soul-boostrap pom 文件中增加相关依赖
-  &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-sofa&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${project.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alipay.sofa&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;sofa-rpc-all&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;    在soul-admin中打开sofa的插件开关 系统管理 –&amp;gt; 插件管理 (直接保存就ok)
-    请求调用  使用的idea http client 工具
-### 测试保存数据 post http://localhost:9195/sofa/insert content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; } ### 测试按条件查找数据 post http://localhost:9195/sofa/findbyid content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } ### 测试无条件查询 post http://localhost:9195/sofa/findall    遇到的问题    不带参数请求ok,带参数出现序列化错误.</description>
+      <description>sofa调试  修改配置     soul-boostrap pom 文件中增加相关依赖   &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.dromara&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;soul-spring-boot-starter-plugin-sofa&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;${project.version}&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;com.alipay.sofa&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;sofa-rpc-all&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt;     在soul-admin中打开sofa的插件开关 系统管理 –&amp;gt; 插件管理 (直接保存就ok)   请求调用   使用的idea http client 工具 ### 测试保存数据 post http://localhost:9195/sofa/insert content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; } ### 测试按条件查找数据 post http://localhost:9195/sofa/findbyid content-type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } ### 测试无条件查询 post http://localhost:9195/sofa/findall  遇到的问题     不带参数请求ok,带参数出现序列化错误.</description>
     </item>
     
     <item>
@@ -133,11 +103,7 @@ WebSocketService
       <pubDate>Sat, 16 Jan 2021 17:35:36 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/dubbo/</guid>
-      <description>dubbo模块  参考手册  官方:dubbo插件 官方:dubbo用户  文档说明很详细的,其中提到以下几个重点
-  dubbo 服务接入soul的配置
-  接入之后的调用方式, 参数传递方式. 全部是post请求 Content-Type: application/json格式.
-  将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.
-    实际测试    偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. 具体的使用可以参考官方文档: idea tools http client  # dubbo 插件的要用post请求,请求类型为 Content-Type: application/json # 测试查询数据 POST http://localhost:9195/dubbo/findById Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } # 测试保存数据 POST http://localhost:9195/dubbo/insert Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; }   Tip: 请求记录文件,可以直接导入idea中     dubbo-test.</description>
+      <description>dubbo模块  参考手册   官方:dubbo插件 官方:dubbo用户  文档说明很详细的,其中提到以下几个重点    dubbo 服务接入soul的配置    接入之后的调用方式, 参数传递方式. 全部是post请求 Content-Type: application/json格式.    将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.   实际测试    偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. 具体的使用可以参考官方文档: idea tools http client  # dubbo 插件的要用post请求,请求类型为 Content-Type: application/json # 测试查询数据 POST http://localhost:9195/dubbo/findById Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34; } # 测试保存数据 POST http://localhost:9195/dubbo/insert Content-Type: application/json { &amp;#34;id&amp;#34;: &amp;#34;999&amp;#34;, &amp;#34;name&amp;#34;: &amp;#34;valjean&amp;#34; }   Tip: 请求记录文件,可以直接导入idea中     dubbo-test.</description>
     </item>
     
     <item>
@@ -146,14 +112,8 @@ WebSocketService
       <pubDate>Fri, 15 Jan 2021 23:38:49 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/exercise/http-divie/</guid>
-      <description>divide 模块  参考手册  在项目根目录下的doc
-doc ├── user-http.md └── plugin-divide.md   通过这两个文档的介绍，针对http的调用，明白两件事。
-  会在自己的项目中引入soul依赖，并且配置相关的接口. 让soul代理自己的接口
-  会调用soul的接口, 会配置admin中divide插件
-    启动项目   启动没有什么特殊配置，idea下一键启动. 启动后注意下各个服务的端口号,soul默认的端口如下
-   server port comment     SoulAdminBootstrap 9095 管理后台   SoulBootstrapApplication 9195 网关   SoulTestHttpApplication 8188 测试项目     在用soul 代理http接口后，请求地址和端口需要换成网关的。
-接口的url也需要按照管理后台中的配置请求. 具体的请求，后面有样例.
-  测试请求    post 的请求方式   # 项目自身的请求 curl -s -H &amp;#34;Content-type: application/json&amp;#34; -d &amp;#39;@.</description>
+      <description>divide 模块  参考手册   在项目根目录下的doc doc ├── user-http.md └── plugin-divide.md   通过这两个文档的介绍，针对http的调用，明白两件事。    会在自己的项目中引入soul依赖，并且配置相关的接口. 让soul代理自己的接口    会调用soul的接口, 会配置admin中divide插件   启动项目   启动没有什么特殊配置，idea下一键启动. 启动后注意下各个服务的端口号,soul默认的端口如下    server port comment     SoulAdminBootstrap 9095 管理后台   SoulBootstrapApplication 9195 网关   SoulTestHttpApplication 8188 测试项目     在用soul 代理http接口后，请求地址和端口需要换成网关的。
+接口的url也需要按照管理后台中的配置请求. 具体的请求，后面有样例. 测试请求     post 的请求方式   # 项目自身的请求 curl -s -H &amp;#34;Content-type: application/json&amp;#34; -d &amp;#39;@.</description>
     </item>
     
     <item>
@@ -162,11 +122,7 @@ doc ├── user-http.md └── plugin-divide.md   通过这两个文档的
       <pubDate>Thu, 14 Jan 2021 22:38:21 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/env/basic/</guid>
-      <description>hugo theme 选择    一直再找一个比较合适的blog生成工具. 最早的时候是自己编写markdown，上传到csdn中. 后来接触到vim emacs，使用emacs orgmode 自带的publish系统搭建了一套自己的wiki 也整合上传到了github中，不过后续更少更新。所有的学习笔记、工作笔记也都是记录再本地中基本都是组内人再访问。 随后也尝试过jekyll，但是都不太理想。直到前段时间接触、学习了hugo。感觉还是比较符合自己的需求。 目前简单修改了一个主题来使用 hugo-theme-learn, 改的比较糙。也在慢慢的优化使用. 还有就是这个排版，也好头疼。等我再搞搞的
-    github pages 设置    早期在github page中搭建blog是建立一个&amp;lt;USERNAME&amp;gt;.github.io项目。 将编译后的静态内容作为内容提交。   这几天在查看hugo的发布时，发现在可以在github.io项目中，建立一个docs的文件夹，来存放 生成的静态网站内容，这样方便和源码存放。
-    soul 代码编译    下载代码
-git clone https://github.com/dromara/soul.git    编译代码 shardingshpere 中也是采用这样的命令。 其中rat checkstyle 有空看看的，自己的项目中没有使用过.
-mvn clean package install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.skip=true -Dcheckstyle.skip=true    deepin install docker tutor</description>
+      <description>hugo theme 选择     一直再找一个比较合适的blog生成工具. 最早的时候是自己编写markdown，上传到csdn中. 后来接触到vim emacs，使用emacs orgmode 自带的publish系统搭建了一套自己的wiki 也整合上传到了github中，不过后续更少更新。所有的学习笔记、工作笔记也都是记录再本地中基本都是组内人再访问。 随后也尝试过jekyll，但是都不太理想。直到前段时间接触、学习了hugo。感觉还是比较符合自己的需求。 目前简单修改了一个主题来使用 hugo-theme-learn, 改的比较糙。也在慢慢的优化使用. 还有就是这个排版，也好头疼。等我再搞搞的   github pages 设置     早期在github page中搭建blog是建立一个&amp;lt;USERNAME&amp;gt;.github.io项目。 将编译后的静态内容作为内容提交。    这几天在查看hugo的发布时，发现在可以在github.io项目中，建立一个docs的文件夹，来存放 生成的静态网站内容，这样方便和源码存放。   soul 代码编译     下载代码 git clone https://github.com/dromara/soul.git     编译代码 shardingshpere 中也是采用这样的命令。 其中rat checkstyle 有空看看的，自己的项目中没有使用过. mvn clean package install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.skip=true -Dcheckstyle.skip=true     deepin install docker tutor sudo apt-get remove -y docker docker-engine docker.</description>
     </item>
     
   </channel>

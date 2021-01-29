@@ -166,5 +166,5 @@ docker run -d \
     在web直接查看日志log. 这个确实方便，我们目前的日志，有部分发往es，而绝大部分的日志，只能在服务器上查看。
     [[file:../images/tars-web-log.png]] 
 
-*** 后期
-    再尝试启动soul中的tars插件，目前还在调试中
+
+

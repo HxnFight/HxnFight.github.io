@@ -82,5 +82,144 @@ Response code: 404 (Not Found); Time: 258ms; Content length: 136 bytes
 
 #+end_src
 
-*** 5. 其他内容
+
+** soul-tar客户端调试
+  今天将剩下的tars调试走通了，大致过程记录如下。 tars 部署的应用还是老的代码，本地的soul-bootstrap是最近的代码。\\
+  随后将所有代码更新，再跑一边流程。 目前调试中遇到的情况记录如下。
+  
+*** 1. 加入pom依赖
+    soul-bootstrap pom中单加入soul-spring-boot-starter-plugin-tars 启动报错。 
+
+#+begin_src shell
+  Exception in thread "WebSocketConnectReadThread-22" java.lang.NoClassDefFoundError: com/qq/tars/client/CommunicatorFactory
+	at org.dromara.soul.plugin.tars.cache.ApplicationConfigCache.<init>(ApplicationConfigCache.java:87)
+	at org.dromara.soul.plugin.tars.cache.ApplicationConfigCache.<init>(ApplicationConfigCache.java:61)
+	at org.dromara.soul.plugin.tars.cache.ApplicationConfigCache$ApplicationConfigCacheInstance.<clinit>(ApplicationConfigCache.java:208)
+	at org.dromara.soul.plugin.tars.cache.ApplicationConfigCache.getInstance(ApplicationConfigCache.java:198)
+	at org.dromara.soul.plugin.tars.subscriber.TarsMetaDataSubscriber.onSubscribe(TarsMetaDataSubscriber.java:49)
+	at org.dromara.soul.plugin.sync.data.websocket.handler.MetaDataHandler.lambda$null$0(MetaDataHandler.java:42)
+
+#+end_src
+
+    ~CommunicatorFactory~ 查看该类是属于com.tencent.tars 下的依赖，在pom中添加如下依赖。在项目中添加相关依赖后，不是立即生效的，\\
+    这个时候打包还是会出错。 可以安装 [[https://plugins.jetbrains.com/plugin/7179-maven-helper][maven-helper]] 插件，点击Reimport 再查询相关依赖是否引入，很方便
+
+#+begin_src xml
+       <dependency>
+            <groupId>com.tencent.tars</groupId>
+            <artifactId>tars-client</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+#+end_src
+
+[[file:../images/tars-maven.png]]
+
+*** 2. 更改元数据
+    在tars中的应用启动后，相关的元数据信息已经注册到soul-admin中。 但是执行请求的时候，还是会报如下错误。
+
+[[file:../images/tar-param-error.png]]
+
+   随后在相关的test中发现，soul-bootstrap使用功能的元数据中的params是left、right的，而应用上报上来的事key、value的 \\
+   我的元数据信息：
+#+begin_src json
+{
+  "methodInfo": [
+    {
+      "methodName": "hello",
+      "params": [
+        {
+          "key": "int",
+          "value": "no"
+        },
+        {
+          "key": "java.lang.String",
+          "value": "name"
+        }
+      ],
+      "returnType": "java.lang.String"
+    },
+    {
+      "methodName": "helloInt",
+      "params": [
+        {
+          "key": "int",
+          "value": "no"
+        },
+        {
+          "key": "java.lang.String",
+          "value": "name"
+        }
+      ],
+      "returnType": "java.lang.Integer"
+    }
+  ]
+}
+
+#+end_src
+
+
+   按照test中的示例，将元数据更新成如下的形式.
+#+begin_src json
+{
+  "methodInfo": [
+    {
+      "methodName": "hello",
+      "params": [
+        {
+          "left": "int",
+          "right": "no"
+        },
+        {
+          "left": "java.lang.String",
+          "right": "name"
+        }
+      ],
+      "returnType": "java.lang.String"
+    },
+    {
+      "methodName": "helloInt",
+      "params": [
+        {
+          "left": "int",
+          "right": "no"
+        },
+        {
+          "left": "java.lang.String",
+          "right": "name"
+        }
+      ],
+      "returnType": "java.lang.Integer"
+    }
+  ]
+}
+
+#+end_src
+
+*** 3. 更改解析参数
+    在元数据更改成功后，测试调用的请求依然失败，打断点跟踪发现类型转换错误。
+[[file:../images/tar-param-cast.png]]
+
+    随后将这块的改成String.valueOf(). 再重启应用,发起调用顺利通过。
+[[file:../images/tar-param-change.png]]
+
+*** 4. 请求测试
+#+begin_src  shell
+POST http://localhost:9195/tars/hello
+
+HTTP/1.1 200 OK
+Content-Type: application/json
+content-length: 97
+
+{
+  "code": 200,
+  "message": "Access to success!",
+  "data": "hello no=1, name=valjean, time=1611916346616"
+}
+
+Response code: 200 (OK); Time: 10652ms; Content length: 97 bytes
+
+
+#+end_src
+
+    虽然，目前测试通过。 但是还知道为啥，tars的上报的数据和test中的数据格式不一致，这块明天再跟踪一下。 这块总算告一段落。
     
