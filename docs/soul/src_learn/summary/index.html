@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Dubbo 模块实践 :: Documentation for Hugo Learn Theme</title>
+    <title>tars summary :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1612026539" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/soul/exercise/dubbo/">
+  <body class="" data-url="/soul/src_learn/summary/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -186,7 +186,7 @@
   
     
     <li data-nav-id="/soul/exercise/" title="模块实践" class="dd-item
-        parent
+        
         
         
         ">
@@ -361,7 +361,7 @@
  
   
     
-      <li data-nav-id="/soul/exercise/dubbo/" title="Dubbo 模块实践" class="dd-item active">
+      <li data-nav-id="/soul/exercise/dubbo/" title="Dubbo 模块实践" class="dd-item ">
         <a href="/soul/exercise/dubbo/">
         Dubbo 模块实践
         <i class="fas fa-check read-icon"></i>
@@ -413,7 +413,7 @@
   
     
     <li data-nav-id="/soul/src_learn/" title="源码学习" class="dd-item
-        
+        parent
         
         
         ">
@@ -504,7 +504,7 @@
  
   
     
-      <li data-nav-id="/soul/src_learn/summary/" title="tars summary" class="dd-item ">
+      <li data-nav-id="/soul/src_learn/summary/" title="tars summary" class="dd-item active">
         <a href="/soul/src_learn/summary/">
         tars summary
         <i class="fas fa-check read-icon"></i>
@@ -596,7 +596,7 @@
             
           
           
-            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/exercise/'>模块实践</a> > Dubbo 模块实践
+            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/src_learn/'>源码学习</a> > tars summary
           
         
           
@@ -613,17 +613,19 @@
     <div class="wrapper">
 <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">dubbo模块</a>
+<li><a href="#headline-1">分享</a>
 <ul>
-<li><a href="#headline-2">参考手册</a>
+<li><a href="#headline-2">tarscloud 由来</a>
 </li>
-<li><a href="#headline-3">实际测试</a>
+<li><a href="#headline-3">环境搭建</a>
 </li>
-<li><a href="#headline-4">遇到的问题</a>
+<li><a href="#headline-4">联调测试,带演示过程</a>
+</li>
+<li><a href="#headline-5">问题汇总</a>
+</li>
+<li><a href="#headline-6">总结</a>
 </li>
 </ul>
-</li>
-<li><a href="#headline-5">手册回顾</a>
 </li>
 </ul>
 </nav>
@@ -642,7 +644,7 @@
           
             <h1>
               
-              Dubbo 模块实践
+              tars summary
             </h1>
           
 
@@ -650,186 +652,163 @@
 
 
 
-<div id="outline-container-headline-1" class="outline-4">
-<h4 id="headline-1">
-dubbo模块
+<div id="outline-container-headline-1" class="outline-3">
+<h3 id="headline-1">
+分享
+</h3>
+<div id="outline-text-headline-1" class="outline-text-3">
+<div id="outline-container-headline-2" class="outline-4">
+<h4 id="headline-2">
+tarscloud 由来
 </h4>
-<div id="outline-text-headline-1" class="outline-text-4">
-<div id="outline-container-headline-2" class="outline-5">
-<h5 id="headline-2">
-参考手册
-</h5>
-<div id="outline-text-headline-2" class="outline-text-5">
-<p><a href="https://dromara.org/zh-cn/docs/soul/plugin-dubbo.html">官方:dubbo插件</a> 
-    <a href="https://dromara.org/zh-cn/docs/soul/user-dubbo.html">官方:dubbo用户</a> </p>
-<p>
-    文档说明很详细的,其中提到以下几个重点</p>
+<div id="outline-text-headline-2" class="outline-text-4">
 <ul>
 <li>
-<p>dubbo 服务接入soul的配置</p>
+<p>tars 简介 <a href="https://tarscloud.github.io/TarsDocs/dev/tarsjava/tars-quick-start.html">office website</a> </p>
 </li>
 <li>
-<p>接入之后的调用方式, 参数传递方式. <span style="text-decoration: underline;">全部是post请求 Content-Type: application/json格式.</span></p>
+<p><a href="https://tarscloud.github.io/TarsDocs/dev/tarsjava/tars-quick-start.html">office quick start</a></p>
 </li>
 <li>
-<p>将dubbo服务转成http形式, 感觉可以用在项目中,省去给dubbo服务搭建的空壳子api.</p>
+<p>配置应用, 这里基础概念很重要</p>
+</li>
+</ul>
+<blockquote>
+<p><a href="https://tarscloud.gitbook.io/tarsdocs/rumen/tars-concept">tars 基础概念</a> <br>
+    应用名：表示一组服务的集合 –&gt; APP <br>
+    服务名称：提供服务的进程名称  –&gt; Server <br>
+    OBJ：提供具体服务的接口 –&gt; Servant </p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-4">
+<h4 id="headline-3">
+环境搭建
+</h4>
+<div id="outline-text-headline-3" class="outline-text-4">
+<ul>
+<li>
+<p>搞明白tars-framework, tars-nodesd的不同</p>
+<blockquote>
+<p>framework: Tars 框架 Docker 制作脚本, 制作的 docker 包含了框架核心服务和 web 管理平台 <br>
+  tars: Tars 框架 Docker 制作脚本, 和 framework 比, 增加了 java, nodejs 等运行时支持, <br>
+  即可以把 java, nodejs 服务发布到 docker 里面(docker 里面安装了 jdk, node, php 环境) <br>
+  nodes: 是正常的代码运行环境，包含基本的开发环境。</p>
+</blockquote>
+</li>
+<li>
+<p>拉取配置国内源，拉取docker 镜像.</p>
+<ul>
+<li>
+<p>创建docker network</p>
+</li>
+<li>
+<p>在启动docker的过程中，不要修改默认的端口</p>
+</li>
+<li>
+<p>在控制台能看到nodes的就算启动成功</p>
+</li>
+<li>
+</li>
+</ul>
+</li>
+<li>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-headline-3" class="outline-5">
-<h5 id="headline-3">
-实际测试
-</h5>
-<div id="outline-text-headline-3" class="outline-text-5">
-<p>
-  
-<div class="notices tip" ><p>
-    偶尔发现idea自带的 http client,比之前有了很大的改善,可以支持将请求放在文本中. <br>
-    具体的使用可以参考官方文档: <a href="https://www.jetbrains.com/help/idea/2020.3/http-client-in-product-code-editor.html">idea tools http client</a> </p>
-</div>
-</p>
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"> <span style="color:#75715e"># dubbo 插件的要用post请求,请求类型为 Content-Type: application/json</span>
- <span style="color:#75715e"># 测试查询数据</span>
- POST http://localhost:9195/dubbo/findById
- Content-Type: application/json
-
- <span style="color:#f92672">{</span>
-   <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;999&#34;</span>
- <span style="color:#f92672">}</span>
-
- <span style="color:#75715e"># 测试保存数据</span>
- POST http://localhost:9195/dubbo/insert
- Content-Type: application/json
-
- <span style="color:#f92672">{</span>
-   <span style="color:#e6db74">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;999&#34;</span>,
-   <span style="color:#e6db74">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;valjean&#34;</span>
- <span style="color:#f92672">}</span></code></pre></div>
-</div>
-<p>
-    Tip: 请求记录文件,可以直接导入idea中
-    
-<section class="attachments orange">
-	<label>
-		<i class="fas fa-paperclip" aria-hidden="true"></i>
-		
-	</label>
-	
-		
-	
-	<div class="attachments-files">
-	
-		
-		
-			<li>
-				<a href="/soul/exercise/dubbo.files/dubbo-test.http" >
-					dubbo-test.http
-				</a>
-				(0 )
-			</li>
-		
-	
-	</div>
-	
-</section>
-
-</p>
-</div>
-</div>
-<div id="outline-container-headline-4" class="outline-5">
-<h5 id="headline-4">
-遇到的问题
-</h5>
-<div id="outline-text-headline-4" class="outline-text-5">
+<div id="outline-container-headline-4" class="outline-4">
+<h4 id="headline-4">
+联调测试,带演示过程
+</h4>
+<div id="outline-text-headline-4" class="outline-text-4">
 <ul>
 <li>
-<p>dubbo 启动之后报错
-这个暂未定位到什么地方出错</p>
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">java.lang.IllegalStateException: No such application config! Please add &lt;dubbo:application name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;...&#34;</span> /&gt; to your spring config.
-at com.alibaba.dubbo.config.AbstractInterfaceConfig.checkApplication<span style="color:#f92672">(</span>AbstractInterfaceConfig.java:145<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>dubbo-2.6.5.jar:2.6.5<span style="color:#f92672">]</span>
-at com.alibaba.dubbo.config.ReferenceConfig.init<span style="color:#f92672">(</span>ReferenceConfig.java:278<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>dubbo-2.6.5.jar:2.6.5<span style="color:#f92672">]</span>
-at com.alibaba.dubbo.config.ReferenceConfig.get<span style="color:#f92672">(</span>ReferenceConfig.java:163<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>dubbo-2.6.5.jar:2.6.5<span style="color:#f92672">]</span>
-at org.dromara.soul.plugin.alibaba.dubbo.cache.ApplicationConfigCache.build<span style="color:#f92672">(</span>ApplicationConfigCache.java:166<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>classes/:na<span style="color:#f92672">]</span>
-at org.dromara.soul.plugin.alibaba.dubbo.cache.ApplicationConfigCache.initRef<span style="color:#f92672">(</span>ApplicationConfigCache.java:130<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>classes/:na<span style="color:#f92672">]</span>
-at org.dromara.soul.plugin.alibaba.dubbo.subscriber.AlibabaDubboMetaDataSubscriber.onSubscribe<span style="color:#f92672">(</span>AlibabaDubboMetaDataSubscriber.java:43<span style="color:#f92672">)</span> ~<span style="color:#f92672">[</span>classes/:na<span style="color:#f92672">]</span></code></pre></div>
+<p>节点配置</p>
+</li>
+<li>
+<p>项目部署</p>
+</li>
+<li>
+<p>接口调试</p>
+</li>
+<li>
+<p>查看日志</p>
+<ul>
+<li>
+<p>web 日志</p>
+</li>
+<li>
+<p>本机日志</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-4">
+<h4 id="headline-5">
+问题汇总
+</h4>
+<div id="outline-text-headline-5" class="outline-text-4">
+<ul>
+<li>
+<p>pom 中加入相关依赖</p>
+<div class="src src-xml">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#f92672">&lt;dependency&gt;</span>
+        <span style="color:#f92672">&lt;groupId&gt;</span>com.tencent.tars<span style="color:#f92672">&lt;/groupId&gt;</span>
+        <span style="color:#f92672">&lt;artifactId&gt;</span>tars-client<span style="color:#f92672">&lt;/artifactId&gt;</span>
+        <span style="color:#f92672">&lt;version&gt;</span>1.7.2<span style="color:#f92672">&lt;/version&gt;</span>
+    <span style="color:#f92672">&lt;/dependency&gt;</span></code></pre></div>
 </div>
 </li>
 <li>
-<p>soul-examples-dubbo 启动之后,访问显示的divide插件信息
-需要在soul-admin中打开dubbo的插件开关 <code>系统管理---&gt; 插件管理</code> <br>
-再个就是注意请求的数据类型,要个bean中定义的一致.</p>
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  <span style="color:#75715e">#网关报错如下</span>
-   can not match selector data: divide
-
-  <span style="color:#75715e"># 请求结果如下</span>
-  <span style="color:#f92672">{</span>
-    <span style="color:#e6db74">&#34;code&#34;</span>: -107,
-    <span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Can not find selector, please check your configuration!&#34;</span>,
-    <span style="color:#e6db74">&#34;data&#34;</span>: null
+<p>更改元数据
+gson Pair json话的问题，目前跟踪发现，是soul-client-tars 中向soul-admin注册的元数据有问题。可以查看tarscloud的日志 <br>
+暂时没有找到具体的原因，本地的test跑不通. 强行修改元数据跑通</p>
+<p>
+soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/cache/ApplicationConfigCache.java:123 这行</p>
+<div class="src src-java">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String clazzName <span style="color:#f92672">=</span> PrxInfoUtil<span style="color:#f92672">.</span><span style="color:#a6e22e">getPrxName</span><span style="color:#f92672">(</span>metaData<span style="color:#f92672">);</span>
+TarsParamExtInfo tarsParamExtInfo <span style="color:#f92672">=</span> GsonUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">getInstance</span><span style="color:#f92672">().</span><span style="color:#a6e22e">fromJson</span><span style="color:#f92672">(</span>metaData<span style="color:#f92672">.</span><span style="color:#a6e22e">getRpcExt</span><span style="color:#f92672">(),</span> TarsParamExtInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
+DynamicType<span style="color:#f92672">.</span><span style="color:#a6e22e">Builder</span><span style="color:#f92672">&lt;?&gt;</span> classDefinition <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteBuddy<span style="color:#f92672">()</span>
+      <span style="color:#f92672">.</span><span style="color:#a6e22e">makeInterface</span><span style="color:#f92672">()</span>
+      <span style="color:#f92672">.</span><span style="color:#a6e22e">name</span><span style="color:#f92672">(</span>clazzName<span style="color:#f92672">);</span></code></pre></div>
+</div>
+</li>
+<li>
+<p>类型转换的错误
+soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/PrxInfoUtil.java</p>
+<div class="src src-java">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> paramNames<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+      String paramName <span style="color:#f92672">=</span> paramNames<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+      Class<span style="color:#f92672">&lt;?&gt;</span> paramType <span style="color:#f92672">=</span> paramTypes<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+      <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>PRIMITIVE_TYPE<span style="color:#f92672">.</span><span style="color:#a6e22e">containsKey</span><span style="color:#f92672">(</span>paramType<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()))</span> <span style="color:#f92672">{</span>
+          param<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> PRIMITIVE_TYPE<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>paramType<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">getFunc</span><span style="color:#f92672">().</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>bodyMap<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>paramName<span style="color:#f92672">))</span> <span style="color:#f92672">);</span>
+      <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+          param<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> bodyMap<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>paramName<span style="color:#f92672">);</span>
+      <span style="color:#f92672">}</span>
   <span style="color:#f92672">}</span></code></pre></div>
 </div>
 </li>
 </ul>
 </div>
 </div>
-</div>
-</div>
-<div id="outline-container-headline-5" class="outline-4">
-<h4 id="headline-5">
-手册回顾
+<div id="outline-container-headline-6" class="outline-4">
+<h4 id="headline-6">
+总结
 </h4>
-<div id="outline-text-headline-5" class="outline-text-4">
-<p>再回顾官方文档的过程中,记录一下新的兴趣点</p>
+<div id="outline-text-headline-6" class="outline-text-4">
 <ul>
 <li>
-<p>soul 配置规则学习
-<a href="https://dromara.org/zh-cn/docs/soul/selector.html">官方文档说明</a> <br>
-其中最重要的三个概念: 插件 选择器 规则  <br>
-一个插件对应多个选择器, 一个选择器对应多个规则  <br>
-一个选择器对应多个匹配条件, 一个规则对应多个匹配条件  <br>
-反应到表结构上,可以参考 <a href="https://dromara.org/zh-cn/docs/soul/db.html">数据库设计</a> ,后续会记录详细的配置使用记录</p>
+<p>拓展了眼界，学习到很多新的东西</p>
 </li>
 <li>
-<p>soul 插件
-soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能用到的有</p>
-<ul>
-<li>
-<p>divide </p>
-</li>
-<li>
-<p>sign</p>
-</li>
-<li>
-<p>rewrite</p>
-</li>
-<li>
-<p>waf</p>
-</li>
-<li>
-<p>monitor</p>
+<p>生态的多样性</p>
 </li>
 </ul>
-<p>会着重看一下的 </p>
-</li>
-<li>
-<p>如下几个功能点特感兴趣</p>
-<ul>
-<li>
-<p>soul-admin与soul网关数据同步的三种方式</p>
-</li>
-<li>
-<p>soul-client对本地接口数据的收集实现</p>
-</li>
-<li>
-<p>插件热插拔的实现机制</p>
-</li>
-</ul>
-</li>
-</ul>
+</div>
+</div>
 </div>
 </div>
 
@@ -920,7 +899,6 @@ soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能�
             
                 
                     
-                    
                 
                 
 
@@ -934,8 +912,53 @@ soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能�
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1028,19 +1051,6 @@ soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能�
             
         
                     
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
             
         
                     
@@ -1058,9 +1068,6 @@ soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能�
                     
 
                     
-            
-        
-                    
                         
             
             
@@ -1068,38 +1075,6 @@ soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能�
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -1148,6 +1123,7 @@ soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能�
             
             
                 
+                    
                     
                 
                 
@@ -1175,10 +1151,10 @@ soul 目前的插件有十几种,其中自己感兴趣以及目前工作中能�
 	 
 	 
 		
-			<a class="nav nav-prev" href="/soul/exercise/sofa/" title="Sofa 模块实践"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/soul/src_learn/soul-chain/" title="soul plugin 调用链"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/soul/exercise/http-divie/" title="divide 模块实践" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/soul/src_learn/spring_learn/" title="spring相关内容补充" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
