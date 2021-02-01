@@ -2,6 +2,78 @@
 #+date:  2021-01-18T16:42:43+08:00
 #+weight: 2
 
-*** webflux
-    [[https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html][office docs]]
+** webflux
+   soul-bootstrap中实现高吞吐量的关键就在于webflux的异步非阻塞特性。在网上查了相关的资料， \\
+   有个大概的了解,后续会在项目中慢慢实践一下。
    
+*** 为什么会创建webflux
+    [[https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-new-framework][office docs]] 官网上给出了两点的解释. 使用相对少的线程数和硬件资源去处理并发,再个就是函数编程. 
+    
+    #+begin_quote
+    Part of the answer is the need for a non-blocking web stack to handle concurrency with a small number \\
+      of threads and scale with fewer hardware resources.
+      
+    The other part of the answer is functional programming.
+    #+end_quote
+    其中关于阻塞请求和非阻塞请求，参考[[https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/][website docs]]
+    - 阻塞请求
+    [[file:../images/Blocking-request-processing.png]]
+    - 非阻塞请求
+    [[file:../images/Non-blocking-request-processing.png]]
+
+*** 支持的模型[fn:1]
+    - Java 注解编程模型
+      这种编程模型，类似spring mvc,相对来说学习成本不高。
+    - 函数式编程模型
+      与基于 Java 注解的编程模型相比，函数式编程模型的抽象层次更低，代码编写更灵活， \\
+      可以满足一些对动态性要求更高的场景。不过在编写时的代码复杂度也较高，学习曲线也较陡。
+*** spring-webflux & spring-web[fn:2]
+    具体选择webflux,还是mvc这块还得看具体的业务场景，阻塞请求较多的场景还是mvc编写相对容易一些的。但是像我们现在的打点服务其实蛮适合webflux的\\
+    没有太多的业务逻辑: 接收数据-->处理格式-->写入文件
+
+    文章也提到了一点， webflux并不能提高单次请求的处理速度，但是其能提高整个服务器的吞吐量。
+*** Reactive Streams API[fn:3]
+    
+    其api有以下几类的概念，从中也体现了背压的特点
+    
+    - Publisher (生产者）
+      
+      Emits a sequence of events to subscribers according to the demand received from its subscribers.
+      A publisher can serve multiple subscribers. 
+    - Subscriber (消费者）
+      
+      Receives and processes events emitted by a Publisher. Please note that no notifications will be
+      received until Subscription#request(long) is called to signal the demand
+    - Subscription (组织生产者和消费者的关系）
+      
+      Defines a one-to-one relationship between a Publisher and a Subscriber.
+      It can only be used once by a single Subscriber. It is used to both signal desire for data
+      and cancel demand (and allow resource cleanup).
+    - Processor (处理过程）
+      
+      Represents a processing stage consisting of both a Subscriber and a Publisher and obeys the contracts of both
+
+    被大量使用的发布者有如下两个：
+    - Mono：返回0或1个元素
+    - Flux ：返回0…N个元素。 助焊剂可以是无穷无尽的，这意味着它可以永远保持发光。 它还可以返回一系列元素，然后在返回所有元素后发送完成通知。
+** backpressure[fn:4]
+*** 概念
+    在查阅资料的过程中，看到好几处背压。webflux 也一直提到支持背压的。 像上面提的publisher、subscriber的api就是，subscriber在发起请求的时候、
+    是会告诉publisher，自己需要多少个消息的。像这种将下游的压力传导至上游，就是被压的概念。这也牵涉到流量控制的策略。
+    
+*** 策略[fn:5]
+    - 控制: 降低生产速率，从源头减少流量
+    - 缓冲: 管道将多余的流量存储起来`
+    - 丢弃: 消费者将无暇处理的流量丢弃
+* Footnotes
+
+
+[fn:1] https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-programming-models
+
+[fn:2] https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-framework-choice
+
+[fn:3] https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-reactive-api
+
+[fn:4] https://lotabout.me/2020/Back-Pressure/
+[fn:5] https://www.cnblogs.com/iceTing/p/6238207.html
+

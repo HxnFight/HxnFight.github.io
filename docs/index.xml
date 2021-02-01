@@ -30,8 +30,13 @@
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/webflux/</guid>
-      <description> webflux  office docs
-  </description>
+      <description>webflux  soul-bootstrap中实现高吞吐量的关键就在于webflux的异步非阻塞特性。在网上查了相关的资料， 有个大概的了解,后续会在项目中慢慢实践一下。
+为什么会创建webflux  office docs 官网上给出了两点的解释. 使用相对少的线程数和硬件资源去处理并发,再个就是函数编程.  Part of the answer is the need for a non-blocking web stack to handle concurrency with a small number of threads and scale with fewer hardware resources.
+ The other part of the answer is functional programming.
+ 其中关于阻塞请求和非阻塞请求，参考website docs
+  阻塞请求
+    非阻塞请求
+    支持的模型1    Java 注解编程模型 这种编程模型，类似spring mvc,相对来说学习成本不高。</description>
     </item>
     
     <item>
