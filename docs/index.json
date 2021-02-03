@@ -35,6 +35,13 @@
 	"content": " soul 源码学习、研究   "
 },
 {
+	"uri": "http://blog.valjean.cn/soul/src_learn/webflux-api/",
+	"title": "Reactor-Api",
+	"tags": [],
+	"description": "",
+	"content": " webflux 的由来发展  上次查完webflux的资料，对其有了个大概的了解。随后在深入了解Mono、flux中才理清了响应式编程的由来。\n引用一位博主的话：源文章\n 反应式编程最早由 .NET 平台上的 Reactive Extensions (Rx) 库来实现。后来迁移到 Java 平台之后就产生了著名的 RxJava 库， 并产生了很多其他编程语言上的对应实现。在这些实现的基础上产生了后来的反应式流（Reactive Streams）规范。 该规范定义了反应式流的相关接口，并将集成到 Java 9 中。  前面提到的 RxJava 库是 JVM 上反应式编程的先驱，也是反应式流规范的基础。RxJava 2 在 RxJava 的基础上做了很多的更新。 不过 RxJava 库也有其不足的地方。RxJava 产生于反应式流规范之前，虽然可以和反应式流的接口进行转换，但是由于底层实现的原因， 使用起来并不是很直观。RxJava 2 在设计和实现时考虑到了与规范的整合，不过为了保持与 RxJava 的兼容性，很多地方在使用时也并不直观。 Reactor 则是完全基于反应式流规范设计和实现的库，没有 RxJava 那样的历史包袱，在使用上更加的直观易懂。Reactor 也是 Spring 5 中反应式编程的基础。\n   具体Api探索  查阅office website 时，发现mono、flux的方法虽然有很多，但是文档都很详实，有些方法还都有配图，虽然有的还看的不太明白\n下面找了soul-bootstrap中Mono、flux常用的方法。\nMono (java doc)    just 按给定的内容创建一个mono对象，并在实例化时，就会被消费者捕获. 相关的方法还有justOrEmpty会对空值进行判断处理 just: justOrEmpty:   defer 延迟创建一个mono供订阅消费   create 创建一个延迟的发送者，用来使用callback api，发送相关事件   empty 创建一个mono，在其完成时，没有任何事件发出     Flux (java docs)    timeout 在上一次事件发出之后，间隔固定时间之后，发出并传播一个超时异常   just 创建一个flux对象，发送给定的对象并发出完成信号   then 在flux完成之后，返回一个mono对象，这个方法会忽略顺序，仅仅返回完成或者错误的信号   from 将指定的publisher利用flux来表示，或者说来创建flux对象   empty 创建一个flux对象，在其完成时，不发送任何信号   onErrorResume 当错误发生时，来处理相关错误的函数       "
+},
+{
 	"uri": "http://blog.valjean.cn/soul/src_learn/soul-chain/",
 	"title": "soul plugin 调用链",
 	"tags": [],

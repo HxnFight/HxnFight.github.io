@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>环境搭建 :: Documentation for Hugo Learn Theme</title>
+    <title>Reactor-Api :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1612394318" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/soul/env/">
+  <body class="" data-url="/soul/src_learn/webflux-api/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -127,8 +127,8 @@
   
     
     <li data-nav-id="/soul/env/" title="环境搭建" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/soul/env/">
@@ -413,7 +413,7 @@
   
     
     <li data-nav-id="/soul/src_learn/" title="源码学习" class="dd-item
-        
+        parent
         
         
         ">
@@ -483,7 +483,7 @@
  
   
     
-      <li data-nav-id="/soul/src_learn/webflux-api/" title="Reactor-Api" class="dd-item ">
+      <li data-nav-id="/soul/src_learn/webflux-api/" title="Reactor-Api" class="dd-item active">
         <a href="/soul/src_learn/webflux-api/">
         Reactor-Api
         <i class="fas fa-check read-icon"></i>
@@ -597,6 +597,8 @@
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -611,7 +613,13 @@
             
           
           
-            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > 环境搭建
+            
+            
+          
+          
+            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/src_learn/'>源码学习</a> > Reactor-Api
+          
+        
           
         
           
@@ -622,6 +630,26 @@
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">webflux 的由来发展</a>
+</li>
+<li><a href="#headline-2">具体Api探索</a>
+<ul>
+<li><a href="#headline-3">Mono (java doc)</a>
+</li>
+<li><a href="#headline-4">Flux (java docs)</a>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -629,50 +657,124 @@
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              Reactor-Api
+            </h1>
           
 
         
 
 
 
-
-<div id="outline-container-headline-1" class="outline-4">
-<h4 id="headline-1">
-开篇随笔
+<div id="outline-container-headline-1" class="outline-3">
+<h3 id="headline-1">
+webflux 的由来发展
+</h3>
+<div id="outline-text-headline-1" class="outline-text-3">
+<p>上次查完webflux的资料，对其有了个大概的了解。随后在深入了解Mono、flux中才理清了响应式编程的由来。<br>
+   引用一位博主的话：<a href="https://zyc88.blog.csdn.net/article/details/103679605">源文章</a></p>
+<blockquote>
+<p>反应式编程最早由 .NET 平台上的 Reactive Extensions (Rx) 库来实现。后来迁移到 Java 平台之后就产生了著名的 RxJava 库，
+   并产生了很多其他编程语言上的对应实现。在这些实现的基础上产生了后来的反应式流（Reactive Streams）规范。
+   该规范定义了反应式流的相关接口，并将集成到 Java 9 中。 </p>
+<p>
+   前面提到的 RxJava 库是 JVM 上反应式编程的先驱，也是反应式流规范的基础。RxJava 2 在 RxJava 的基础上做了很多的更新。
+   不过 RxJava 库也有其不足的地方。RxJava 产生于反应式流规范之前，虽然可以和反应式流的接口进行转换，但是由于底层实现的原因，
+   使用起来并不是很直观。RxJava 2 在设计和实现时考虑到了与规范的整合，不过为了保持与 RxJava 的兼容性，很多地方在使用时也并不直观。
+   Reactor 则是完全基于反应式流规范设计和实现的库，没有 RxJava 那样的历史包袱，在使用上更加的直观易懂。Reactor 也是 Spring 5
+   中反应式编程的基础。</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+具体Api探索
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>查阅<a href="https://projectreactor.io/docs/core/release/api/overview-summary.html">office website</a> 时，发现mono、flux的方法虽然有很多，但是文档都很详实，有些方法还都有配图，虽然有的还看的不太明白<br>
+   下面找了soul-bootstrap中Mono、flux常用的方法。</p>
+<div id="outline-container-headline-3" class="outline-4">
+<h4 id="headline-3">
+Mono <a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Mono.html">(java doc)</a>
 </h4>
-<div id="outline-text-headline-1" class="outline-text-4">
-<p>
-   自己的学习随笔和感想. 自己还没有做过这样正式的学习记录。</p>
-<p>
-   希望在这一个月的学习过程中，不断提升自己的能力。</p>
-<p>
-   进行开发环境、blog环境的搭建。</p>
-<p>
-   搞得还是有点仓促，只记录一下一些大致过程。</p>
-<p>
-   本来也有个国内ec2的环境，但是最近访问报网站未审核，</p>
-<p>
-   今天刚提了审核，可能得过几天才会下来。随后会迁移到自己的ec2上.</p>
-<p>
-   刚从manjaro 换到deepin系统上。有些软件还未安装完毕，先将就的用着</p>
-<p>
-   等周末将环境好好的整理一下</p>
+<div id="outline-text-headline-3" class="outline-text-4">
+<ul>
+<li>
+<p>just
+按给定的内容创建一个mono对象，并在实例化时，就会被消费者捕获. 相关的方法还有justOrEmpty会对空值进行判断处理
+just:
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/just.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/just.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/just.svg" />
+justOrEmpty:
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justOrEmpty.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justOrEmpty.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justOrEmpty.svg" /></p>
+</li>
+<li>
+<p>defer
+延迟创建一个mono供订阅消费
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/deferForMono.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/deferForMono.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/deferForMono.svg" /></p>
+</li>
+<li>
+<p>create
+创建一个延迟的发送者，用来使用callback api，发送相关事件
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/createForMono.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/createForMono.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/createForMono.svg" /></p>
+</li>
+<li>
+<p>empty
+创建一个mono，在其完成时，没有任何事件发出
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justOrEmpty.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justOrEmpty.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justOrEmpty.svg" /></p>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-4">
+<h4 id="headline-4">
+Flux <a href="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/Flux.html">(java docs)</a>
+</h4>
+<div id="outline-text-headline-4" class="outline-text-4">
+<ul>
+<li>
+<p>timeout
+在上一次事件发出之后，间隔固定时间之后，发出并传播一个超时异常
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/timeoutForFlux.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/timeoutForFlux.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/timeoutForFlux.svg" /></p>
+</li>
+<li>
+<p>just
+创建一个flux对象，发送给定的对象并发出完成信号
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justMultiple.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justMultiple.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justMultiple.svg" /></p>
+</li>
+<li>
+<p>then
+在flux完成之后，返回一个mono对象，这个方法会忽略顺序，仅仅返回完成或者错误的信号
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/thenForFlux.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/thenForFlux.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/thenForFlux.svg" /></p>
+</li>
+<li>
+<p>from
+将指定的publisher利用flux来表示，或者说来创建flux对象
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/fromForFlux.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/fromForFlux.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/fromForFlux.svg" /></p>
+</li>
+<li>
+<p>empty
+创建一个flux对象，在其完成时，不发送任何信号
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justOrEmpty.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justOrEmpty.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/justOrEmpty.svg" /></p>
+</li>
+<li>
+<p>onErrorResume
+当错误发生时，来处理相关错误的函数
+<img src="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/onErrorResumeForFlux.svg" alt="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/onErrorResumeForFlux.svg" title="https://projectreactor.io/docs/core/release/api/reactor/core/publisher/doc-files/marbles/onErrorResumeForFlux.svg" /></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 </div>
 
 
-
-
-
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
-        
-            </div> 
         
         </div>
         
@@ -720,41 +822,8 @@
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
                         
                         
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -779,6 +848,22 @@
                     
             
         
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
                         
             
@@ -908,22 +993,6 @@
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
             
             
@@ -940,10 +1009,30 @@
             
         
                     
+            
+        
+                    
                         
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -976,6 +1065,26 @@
             
             
                 
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -1019,10 +1128,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="/soul/" title="soul 学习笔记"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/soul/src_learn/webflux/" title="Webflux"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/soul/env/basic/" title="文档环境、代码环境" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/soul/src_learn/soul-chain/" title="soul plugin 调用链" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
