@@ -67,6 +67,20 @@ Mono (java doc)    just 按给定的内容创建一个mono对象，并在实例�
     </item>
     
     <item>
+      <title>soul-client</title>
+      <link>http://blog.valjean.cn/soul/src_learn/soul-client/</link>
+      <pubDate>Fri, 05 Feb 2021 06:09:43 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/src_learn/soul-client/</guid>
+      <description>soul-client 初探   soul-client 目前支持的协议有一下几种，分为两大类rpc和http。 其中都实现BeanPostProcessor.postProcessAfterInitialization 方法，在spring容器实例化bean时，做一些业务处理。 http类型的还会实现一个ApplicationListener,对全代理进行处理。
+ 总之，在spring容器真正启动起来后，soul-client会将收集到的相关代理配置信息全部提交给soul-admin。
+soul-client ├── soul-client-dubbo │ ├── soul-client-alibaba-dubbo │ ├── soul-client-apache-dubbo ├── soul-client-http │ ├── soul-client-springcloud │ └── soul-client-springmvc ├── soul-client-sofa └── soul-client-tars  注册的相关信息   soul-client-springcloud, soul-client-springmvc client在实现 BeanPostProcessor之外，还实现了ApplicationListener对容器 ContextRefreshedEvent的事件进行监听。 这块主要处理http是否全由soul来代理的判断，配置文件中soul.http.full选项来控制这个开关。 如果为true的话，BeanPostProcessor的判断逻辑会直接返回bean，不再进行额外的处理。
+ http类型注册的信息主要是地址、端口、路径等接口信息。 而rpc类型的注册的主要是元数据相关的，包括对象名称、方法名称、参数信息等。rpc中不存在全部代理的 配置，因为在调用rpc的时候，必须有其相关的信息才能发起调用。
+    spring内容补充  Spring的BeanPostProcessor接口   BeanPostProcessor接口有两个回调方法。当一个BeanPostProcessor的实现类注册到Spring IOC容器后， 对于该Spring IOC容器所创建的每个bean实例在初始化方法（如afterPropertiesSet和任意已声明的init方法）调用前， 将会调用BeanPostProcessor中的postProcessBeforeInitialization方法，而在bean实例初始化方法调用完成后， 则会调用BeanPostProcessor中的postProcessAfterInitialization方法
+  ApplicationListener接口   方法：onApplicationEvent 如果在上下文中部署一个实现了ApplicationListener接口的bean,那么每当在一个ApplicationEvent发布到 ApplicationContext时， 这个bean得到通知。 如果追踪的是ContextRefreshedEvent事件：当Spring的Context初始化完后，会触发这个事件.</description>
+    </item>
+    
+    <item>
       <title>tars summary</title>
       <link>http://blog.valjean.cn/soul/src_learn/summary/</link>
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>

@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Webflux :: Documentation for Hugo Learn Theme</title>
+    <title>soul-client :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1612478882" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/soul/exercise/webflux/">
+  <body class="" data-url="/soul/src_learn/soul-client/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -186,7 +186,7 @@
   
     
     <li data-nav-id="/soul/exercise/" title="模块实践" class="dd-item
-        parent
+        
         
         
         ">
@@ -319,7 +319,7 @@
  
   
     
-      <li data-nav-id="/soul/exercise/webflux/" title="Webflux" class="dd-item active">
+      <li data-nav-id="/soul/exercise/webflux/" title="Webflux" class="dd-item ">
         <a href="/soul/exercise/webflux/">
         Webflux
         <i class="fas fa-check read-icon"></i>
@@ -413,7 +413,7 @@
   
     
     <li data-nav-id="/soul/src_learn/" title="源码学习" class="dd-item
-        
+        parent
         
         
         ">
@@ -525,7 +525,7 @@
  
   
     
-      <li data-nav-id="/soul/src_learn/soul-client/" title="soul-client" class="dd-item ">
+      <li data-nav-id="/soul/src_learn/soul-client/" title="soul-client" class="dd-item active">
         <a href="/soul/src_learn/soul-client/">
         soul-client
         <i class="fas fa-check read-icon"></i>
@@ -638,7 +638,7 @@
             
           
           
-            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/exercise/'>模块实践</a> > Webflux
+            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/src_learn/'>源码学习</a> > soul-client
           
         
           
@@ -655,7 +655,19 @@
     <div class="wrapper">
 <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">webflux</a>
+<li><a href="#headline-1">soul-client 初探</a>
+<ul>
+<li><a href="#headline-2">注册的相关信息</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-3">spring内容补充</a>
+<ul>
+<li><a href="#headline-4">Spring的BeanPostProcessor接口</a>
+</li>
+<li><a href="#headline-5">ApplicationListener接口</a>
+</li>
+</ul>
 </li>
 </ul>
 </nav>
@@ -674,7 +686,7 @@
           
             <h1>
               
-              Webflux
+              soul-client
             </h1>
           
 
@@ -682,12 +694,70 @@
 
 
 
-<div id="outline-container-headline-1" class="outline-4">
-<h4 id="headline-1">
-webflux
+<div id="outline-container-headline-1" class="outline-3">
+<h3 id="headline-1">
+soul-client 初探
+</h3>
+<div id="outline-text-headline-1" class="outline-text-3">
+<p>
+   soul-client 目前支持的协议有一下几种，分为两大类rpc和http。 其中都实现BeanPostProcessor.postProcessAfterInitialization <br>
+   方法，在spring容器实例化bean时，做一些业务处理。 http类型的还会实现一个ApplicationListener,对全代理进行处理。</p>
+<p>
+   总之，在spring容器真正启动起来后，soul-client会将收集到的相关代理配置信息全部提交给soul-admin。</p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  soul-client
+  ├── soul-client-dubbo
+  │   ├── soul-client-alibaba-dubbo
+  │   ├── soul-client-apache-dubbo
+  ├── soul-client-http
+  │   ├── soul-client-springcloud
+  │   └── soul-client-springmvc
+  ├── soul-client-sofa
+  └── soul-client-tars</code></pre></div>
+</div>
+<div id="outline-container-headline-2" class="outline-4">
+<h4 id="headline-2">
+注册的相关信息
 </h4>
-<div id="outline-text-headline-1" class="outline-text-4">
-<p><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html">office docs</a></p>
+<div id="outline-text-headline-2" class="outline-text-4">
+<p>
+    soul-client-springcloud, soul-client-springmvc client在实现 BeanPostProcessor之外，还实现了ApplicationListener对容器 <br>
+    ContextRefreshedEvent的事件进行监听。 这块主要处理http是否全由soul来代理的判断，配置文件中soul.http.full选项来控制这个开关。 <br>
+    如果为true的话，BeanPostProcessor的判断逻辑会直接返回bean，不再进行额外的处理。</p>
+<p>
+    http类型注册的信息主要是地址、端口、路径等接口信息。 而rpc类型的注册的主要是元数据相关的，包括对象名称、方法名称、参数信息等。rpc中不存在全部代理的 <br>
+    配置，因为在调用rpc的时候，必须有其相关的信息才能发起调用。</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+spring内容补充
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<div id="outline-container-headline-4" class="outline-4">
+<h4 id="headline-4">
+Spring的BeanPostProcessor接口
+</h4>
+<div id="outline-text-headline-4" class="outline-text-4">
+<p>
+    BeanPostProcessor接口有两个回调方法。当一个BeanPostProcessor的实现类注册到Spring IOC容器后，  <br>
+    对于该Spring IOC容器所创建的每个bean实例在初始化方法（如afterPropertiesSet和任意已声明的init方法）调用前， <br>
+    将会调用BeanPostProcessor中的postProcessBeforeInitialization方法，而在bean实例初始化方法调用完成后， <br>
+    则会调用BeanPostProcessor中的postProcessAfterInitialization方法</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-4">
+<h4 id="headline-5">
+ApplicationListener接口
+</h4>
+<div id="outline-text-headline-5" class="outline-text-4">
+<p>
+    方法：onApplicationEvent 如果在上下文中部署一个实现了ApplicationListener接口的bean,那么每当在一个ApplicationEvent发布到 ApplicationContext时， <br>
+    这个bean得到通知。 如果追踪的是ContextRefreshedEvent事件：当Spring的Context初始化完后，会触发这个事件. ApplicationListener的调用时机要晚于BeanPostProcessor</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -778,174 +848,6 @@ webflux
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                 
                 
 
@@ -1038,6 +940,174 @@ webflux
             
             
                 
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
                     
                 
                 
@@ -1065,10 +1135,10 @@ webflux
 	 
 	 
 		
-			<a class="nav nav-prev" href="/soul/exercise/springcloud/" title="Springcloud"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/soul/src_learn/soul-chain/" title="soul plugin 调用链"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/soul/exercise/sofa/" title="Sofa 模块实践" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/soul/src_learn/summary/" title="tars summary" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
