@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>spring相关内容补充 :: Documentation for Hugo Learn Theme</title>
+    <title>spi 机制 :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1612536640" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/soul/src_learn/spring_learn/">
+  <body class="" data-url="/soul/src_learn/spi/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -441,7 +441,7 @@
  
   
     
-      <li data-nav-id="/soul/src_learn/spring_learn/" title="spring相关内容补充" class="dd-item active">
+      <li data-nav-id="/soul/src_learn/spring_learn/" title="spring相关内容补充" class="dd-item ">
         <a href="/soul/src_learn/spring_learn/">
         spring相关内容补充
         <i class="fas fa-check read-icon"></i>
@@ -567,7 +567,7 @@
  
   
     
-      <li data-nav-id="/soul/src_learn/spi/" title="spi 机制" class="dd-item ">
+      <li data-nav-id="/soul/src_learn/spi/" title="spi 机制" class="dd-item active">
         <a href="/soul/src_learn/spi/">
         spi 机制
         <i class="fas fa-check read-icon"></i>
@@ -659,7 +659,7 @@
             
           
           
-            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/src_learn/'>源码学习</a> > spring相关内容补充
+            <a href='/'>soul 学习笔记</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/src_learn/'>源码学习</a> > spi 机制
           
         
           
@@ -676,7 +676,11 @@
     <div class="wrapper">
 <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">spring 相关内容补充</a>
+<li><a href="#headline-1">SPI简介</a>
+</li>
+<li><a href="#headline-2">SPI使用</a>
+</li>
+<li><a href="#headline-3">SpringFactoriesLoader</a>
 </li>
 </ul>
 </nav>
@@ -695,7 +699,7 @@
           
             <h1>
               
-              spring相关内容补充
+              spi 机制
             </h1>
           
 
@@ -705,58 +709,64 @@
 
 <div id="outline-container-headline-1" class="outline-3">
 <h3 id="headline-1">
-spring 相关内容补充
+SPI简介
 </h3>
 <div id="outline-text-headline-1" class="outline-text-3">
+<p>soul 中有部分功能的扩展是通过spi方式实现的,可以找下 <code>spring.factories</code> 文件，每一个这样的文件，就是一个spi。大致意思如下：</p>
+<blockquote>
+<p>SPI（Service Provider Interface），是JDK内置的一种 服务提供发现机制，可以用来启用框架扩展和替换组件，主要是被框架的开发人员使用， <br>
+   比如java.sql.Driver接口，其他不同厂商可以针对同一接口做出不同的实现，MySQL和PostgreSQL都有不同的实现提供给用户， <br>
+   而Java的SPI机制可以为某个接口寻zhao服务实现。Java中SPI机制主要思想是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要，其核心思想就是 解耦。</p>
+</blockquote>
+<p>
+   整体的机制，如下图：
+   <img src="../images/spi.png" alt="../images/spi.png" title="../images/spi.png" /></p>
 <ul>
 <li>
-<p>ApplicationListener : <a href="https://www.baeldung.com/spring-events">baeldung tutor</a>  <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#context-functionality-events-annotation">office-tutor</a> , 自定义的实现可以通过实现特定类或者利用相关注解是实现 <br>
-默认情况下是同步的，可以通过配置更改为异步执行. 这个功能是在单个项目内流转，数据也是在内部流转. 适用于业务在单个实例中<br>
-能全部解决的情况. 类似cmsweb这种项目. 分布式之类的项目需要考虑其他mq之类的方案.</p>
-<p>
-soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-client-springcloud、soul-client-springmvc soul-client-alibaba-dubbo soul-client-apache-dubbo
-均为监控的spirng容器的特殊事件.</p>
-</li>
-</ul>
-<p><img src="../images/applicationListener.png" alt="../images/applicationListener.png" title="../images/applicationListener.png" /></p>
+<p>SPI 和API区别
+  一个是直接拿来使用的，另一个则是拿来进行扩展的</p>
 <ul>
 <li>
-<p>InitializingBean InstantiationAwareBeanPostProcessor 
-<a href="https://www.baeldung.com/running-setup-logic-on-startup-in-spring">spring bean initial</a> 文中介绍了spring springboot中各种各样的初始化bean的方式。 自己只是用到一部分，后续会尝试其他的方式</p>
+<p>API是调用并用于实现目标的类、接口、方法等的描述</p>
+</li>
+<li>
+<p>SPI是扩展和实现以实现目标的类、接口、方法等的描述</p>
 </li>
 </ul>
-<p><img src="../images/init-methon.png" alt="../images/init-methon.png" title="../images/init-methon.png" /></p>
-<p>
-    <a href="https://fangjian0423.github.io/2017/06/20/spring-bean-post-processor/">tutor</a> BeanPostProcessor 相关的实现太多，目前只是粗略了解一下。 idea 中查看类关系的uml蛮好使的，在生成的uml中，点击右键可以添加其他的相关类 <br>
-    只添加了相关的几个. spring 注入方式 构造函数注入、字段注入、set方法注入. 自己平时员工字段注入较多，其他的类型有空尝试一下</p>
-<p>
-<img src="../images/bean_post_processor.png" alt="../images/bean_post_processor.png" title="../images/bean_post_processor.png" /></p>
-<p>
-    <a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-lifecycle">bean liftcycle callback</a></p>
-<p>
-    soul-admin 使用到的类有以下几个</p>
-<p><img src="../images/initializingBean.png" alt="../images/initializingBean.png" title="../images/initializingBean.png" /></p>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+SPI使用
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>要使用Java SPI，需要遵循如下约定：</p>
 <ul>
 <li>
-<p>ApplicationContextAware
-<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-method-injection">contextaware spring上下文</a> 将spring上下文保存下来，可以随时获取容器内bean的. soul中使用的有以下两个类</p>
+<p>当服务提供者提供了接口的一种具体实现后，在jar包的META-INF/services目录下创建一个以“接口全限定名”为命名的文件，内容为实现类的全限定名</p>
+</li>
+<li>
+<p>接口实现类所在的jar包放在主程序的classpath中</p>
+</li>
+<li>
+<p>主程序通过java.util.ServiceLoder动态装载实现模块，它通过扫描META-INF/services目录下的配置文件找到实现类的全限定名，把类加载到JVM</p>
+</li>
+<li>
+<p>SPI的实现类必须携带一个不带参数的构造方法</p>
 </li>
 </ul>
-<p><img src="../images/spring-ctx.png" alt="../images/spring-ctx.png" title="../images/spring-ctx.png" /></p>
-<ul>
-<li>
-<p>ObjectProvider
-<a href="https://spring.io/blog/2016/03/04/core-container-refinements-in-spring-framework-4-3">tutor office</a> </p>
-</li>
-<li>
-<p>EnumMap
-<a href="https://www.baeldung.com/java-enum-map">tutor</a> 以enum作为key的map，简单了解</p>
-</li>
-<li>
-<p>websocket
-<a href="https://docs.spring.io/spring-boot/docs/current/reference/html/spring-boot-features.html#boot-features-websockets">office tutor</a></p>
-</li>
-</ul>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+SpringFactoriesLoader
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<p>SpringFactoriesLoader 是 Spring 中十分重要的一个扩展机制之一，它的使用方式和实现原理和 SPI 十分相似，只不过，提供了更加强大的功能。 <br>
+    和 SPI 不同，由于 SpringFactoriesLoader 中的配置文件格式是 properties 文件，因此，不需要要像 SPI 中那样为每个服务都创建一个文件， <br>
+    而是选择直接把所有服务都扔到 META-INF/spring.factories 文件中。</p>
 </div>
 </div>
 
@@ -1021,23 +1031,6 @@ soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-clie
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                         
                         
                     
@@ -1120,6 +1113,23 @@ soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-clie
             
             
                 
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -1147,10 +1157,10 @@ soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-clie
 	 
 	 
 		
-			<a class="nav nav-prev" href="/soul/src_learn/" title="源码学习"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/soul/src_learn/summary/" title="tars summary"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/soul/src_learn/webflux/" title="Webflux" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/soul/src_learn/spring_learn/" title="spring相关内容补充" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
