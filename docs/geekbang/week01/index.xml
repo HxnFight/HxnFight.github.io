@@ -21,14 +21,5 @@
  在user-web/src/main/webapp　目录下，按照样例sign_up.jsp 修改得来的sign_ip.jsp, form 上添加 action=&amp;#34;/op/signUp&amp;#34; method=&amp;#34;post&amp;#34; 将有关数据提交到后端接口 user-web/src/main/webapp ├── index.jsp ├── sign_in.jsp ├── sign_up.jsp ├── static ├── success.jsp └── WEB-INF    二、 注册功能相关  1&amp;gt; controller    SignInController : /user/signIn 提供页面访问能力</description>
     </item>
     
-    <item>
-      <title>Note</title>
-      <link>http://blog.valjean.cn/geekbang/week01/note/</link>
-      <pubDate>Wed, 03 Mar 2021 18:41:46 +0800</pubDate>
-      
-      <guid>http://blog.valjean.cn/geekbang/week01/note/</guid>
-      <description> week01  servlet   jndi     </description>
-    </item>
-    
   </channel>
 </rss>
