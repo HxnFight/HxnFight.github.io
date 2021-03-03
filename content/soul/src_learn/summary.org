@@ -38,6 +38,9 @@
 
 *** 联调测试,带演示过程
     - 节点配置
+      app=SoulExampleServer
+      server=SoulExampleApp
+
     - 项目部署
     - 接口调试
     - 查看日志

@@ -1,0 +1,12 @@
+#+title: Note
+#+date: 2021-03-03T18:41:46+08:00
+#+weight: 1
+#+chapter: true
+#+pre: <b>1. </b>
+
+* week01
+
+** servlet
+
+** jndi
+

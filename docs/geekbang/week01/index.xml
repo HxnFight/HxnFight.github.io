@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>week01 on Documentation for Hugo Learn Theme</title>
+    <link>http://blog.valjean.cn/geekbang/week01/</link>
+    <description>Recent content in week01 on Documentation for Hugo Learn Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Wed, 03 Mar 2021 18:41:37 +0800</lastBuildDate>
+    
+	<atom:link href="http://blog.valjean.cn/geekbang/week01/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Homework</title>
+      <link>http://blog.valjean.cn/geekbang/week01/homework/</link>
+      <pubDate>Wed, 03 Mar 2021 18:47:29 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/geekbang/week01/homework/</guid>
+      <description> 作业信息     链接     作业思路  </description>
+    </item>
+    
+    <item>
+      <title>Note</title>
+      <link>http://blog.valjean.cn/geekbang/week01/note/</link>
+      <pubDate>Wed, 03 Mar 2021 18:41:46 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/geekbang/week01/note/</guid>
+      <description> week01  servlet  jndi  </description>
+    </item>
+    
+  </channel>
+</rss>
