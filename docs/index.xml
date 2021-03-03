@@ -69,6 +69,15 @@
     </item>
     
     <item>
+      <title>soul-client</title>
+      <link>http://blog.valjean.cn/soul/src_learn/soul-client/</link>
+      <pubDate>Fri, 05 Feb 2021 06:09:43 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/src_learn/soul-client/</guid>
+      <description> soul-client 初探   soul-client 目前支持的协议有一下几种，分为两大类rpc和http。 其中都实现BeanPostProcessor.postProcessAfterInitialization 方法，在spring容器实例化bean时，做一些业务处理。 http类型的还会实现一个ApplicationListener,对全代理进行处理。  总之，在spring容器真正启动起来后，soul-client会将收集到的相关代理配置信息全部提交给soul-admin。 soul-client ├── soul-client-dubbo │ ├── soul-client-alibaba-dubbo │ ├── soul-client-apache-dubbo ├── soul-client-http │ ├── soul-client-springcloud │ └── soul-client-springmvc ├── soul-client-sofa └── soul-client-tars  注册的相关信息   soul-client-springcloud, soul-client-springmvc client在实现 BeanPostProcessor之外，还实现了ApplicationListener对容器 ContextRefreshedEvent的事件进行监听。 这块主要处理http是否全由soul来代理的判断，配置文件中soul.http.full选项来控制这个开关。 如果为true的话，BeanPostProcessor的判断逻辑会直接返回bean，不再进行额外的处理。  http类型注册的信息主要是地址、端口、路径等接口信息。 而rpc类型的注册的主要是元数据相关的，包括对象名称、方法名称、参数信息等。rpc中不存在全部代理的 配置，因为在调用rpc的时候，必须有其相关的信息才能发起调用。 spring内容补充  Spring的BeanPostProcessor接口   BeanPostProcessor接口有两个回调方法。当一个BeanPostProcessor的实现类注册到Spring IOC容器后， 对于该Spring IOC容器所创建的每个bean实例在初始化方法（如afterPropertiesSet和任意已声明的init方法）调用前， 将会调用BeanPostProcessor中的postProcessBeforeInitialization方法，而在bean实例初始化方法调用完成后， 则会调用BeanPostProcessor中的postProcessAfterInitialization方法 ApplicationListener接口   方法：onApplicationEvent 如果在上下文中部署一个实现了ApplicationListener接口的bean,那么每当在一个ApplicationEvent发布到 ApplicationContext时， 这个bean得到通知。 如果追踪的是ContextRefreshedEvent事件：当Spring的Context初始化完后，会触发这个事件. ApplicationListener的调用时机要晚于BeanPostProcessor </description>
+    </item>
+    
+    <item>
       <title>tars summary</title>
       <link>http://blog.valjean.cn/soul/src_learn/summary/</link>
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
@@ -170,6 +179,15 @@ WebSocketService       soul-spring-boot-starter-plugin-global 该start引入的�
       
       <guid>http://blog.valjean.cn/soul/env/basic/</guid>
       <description>hugo theme 选择     一直再找一个比较合适的blog生成工具. 最早的时候是自己编写markdown，上传到csdn中. 后来接触到vim emacs，使用emacs orgmode 自带的publish系统搭建了一套自己的wiki 也整合上传到了github中，不过后续更少更新。所有的学习笔记、工作笔记也都是记录再本地中基本都是组内人再访问。 随后也尝试过jekyll，但是都不太理想。直到前段时间接触、学习了hugo。感觉还是比较符合自己的需求。 目前简单修改了一个主题来使用 hugo-theme-learn, 改的比较糙。也在慢慢的优化使用. 还有就是这个排版，也好头疼。等我再搞搞的   github pages 设置     早期在github page中搭建blog是建立一个&amp;lt;USERNAME&amp;gt;.github.io项目。 将编译后的静态内容作为内容提交。    这几天在查看hugo的发布时，发现在可以在github.io项目中，建立一个docs的文件夹，来存放 生成的静态网站内容，这样方便和源码存放。   soul 代码编译     下载代码 git clone https://github.com/dromara/soul.git     编译代码 shardingshpere 中也是采用这样的命令。 其中rat checkstyle 有空看看的，自己的项目中没有使用过. mvn clean package install -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -Drat.skip=true -Dcheckstyle.skip=true     deepin install docker tutor sudo apt-get remove -y docker docker-engine docker.</description>
+    </item>
+    
+    <item>
+      <title>spi 机制</title>
+      <link>http://blog.valjean.cn/soul/src_learn/spi/</link>
+      <pubDate>Tue, 26 Jan 2021 16:05:44 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/soul/src_learn/spi/</guid>
+      <description>SPI简介   soul 中有部分功能的扩展是通过spi方式实现的,可以找下 spring.factories 文件，每一个这样的文件，就是一个spi。大致意思如下：   SPI（Service Provider Interface），是JDK内置的一种 服务提供发现机制，可以用来启用框架扩展和替换组件，主要是被框架的开发人员使用， 比如java.sql.Driver接口，其他不同厂商可以针对同一接口做出不同的实现，MySQL和PostgreSQL都有不同的实现提供给用户， 而Java的SPI机制可以为某个接口寻zhao服务实现。Java中SPI机制主要思想是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要，其核心思想就是 解耦。   整体的机制，如下图：    SPI 和API区别 一个是直接拿来使用的，另一个则是拿来进行扩展的    API是调用并用于实现目标的类、接口、方法等的描述    SPI是扩展和实现以实现目标的类、接口、方法等的描述     SPI使用   要使用Java SPI，需要遵循如下约定：    当服务提供者提供了接口的一种具体实现后，在jar包的META-INF/services目录下创建一个以“接口全限定名”为命名的文件，内容为实现类的全限定名    接口实现类所在的jar包放在主程序的classpath中    主程序通过java.util.ServiceLoder动态装载实现模块，它通过扫描META-INF/services目录下的配置文件找到实现类的全限定名，把类加载到JVM    SPI的实现类必须携带一个不带参数的构造方法   SpringFactoriesLoader   SpringFactoriesLoader 是 Spring 中十分重要的一个扩展机制之一，它的使用方式和实现原理和 SPI 十分相似，只不过，提供了更加强大的功能。 和 SPI 不同，由于 SpringFactoriesLoader 中的配置文件格式是 properties 文件，因此，不需要要像 SPI 中那样为每个服务都创建一个文件， 而是选择直接把所有服务都扔到 META-INF/spring.</description>
     </item>
     
   </channel>

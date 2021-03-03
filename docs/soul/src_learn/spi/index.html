@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>Geekbang :: Documentation for Hugo Learn Theme</title>
+    <title>spi 机制 :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1614770963" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/geekbang/">
+  <body class="" data-url="/soul/src_learn/spi/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -96,8 +96,8 @@
   
     
     <li data-nav-id="/geekbang/" title="Geekbang" class="dd-item
-        parent
-        active
+        
+        
         
         ">
       <a href="/geekbang/">
@@ -214,7 +214,7 @@
   
     
     <li data-nav-id="/soul/" title="soul 学习笔记" class="dd-item
-        
+        parent
         
         
         ">
@@ -531,7 +531,7 @@
   
     
     <li data-nav-id="/soul/src_learn/" title="源码学习" class="dd-item
-        
+        parent
         
         
         ">
@@ -685,7 +685,7 @@
  
   
     
-      <li data-nav-id="/soul/src_learn/spi/" title="spi 机制" class="dd-item ">
+      <li data-nav-id="/soul/src_learn/spi/" title="spi 机制" class="dd-item active">
         <a href="/soul/src_learn/spi/">
         spi 机制
         <i class="fas fa-check read-icon"></i>
@@ -757,6 +757,8 @@
                         </a>
                     </span>
                   
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
                   <span class="links">
                  
                  
@@ -767,7 +769,19 @@
             
           
           
-            <a href='/'>Documentation for Hugo Learn Theme</a> > Geekbang
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/'>Documentation for Hugo Learn Theme</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/src_learn/'>源码学习</a> > spi 机制
+          
+        
+          
+        
           
         
           
@@ -776,6 +790,22 @@
                   </span>
                 </div>
                 
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">SPI简介</a>
+</li>
+<li><a href="#headline-2">SPI使用</a>
+</li>
+<li><a href="#headline-3">SpringFactoriesLoader</a>
+</li>
+</ul>
+</nav>
+    </div>
+</div>
+
+                
               </div>
             </div>
             
@@ -783,30 +813,97 @@
         
         </div>
         
-          <div id="chapter">
-        
         <div id="body-inner">
+          
+            <h1>
+              
+              spi 机制
+            </h1>
           
 
         
 
 
 
+<h3 id="headline-1">
+SPI简介
+</h3>
+<p>
+soul 中有部分功能的扩展是通过spi方式实现的,可以找下 <code>spring.factories</code> 文件，每一个这样的文件，就是一个spi。大致意思如下：
+</p>
+<blockquote>
+<p>
+SPI（Service Provider Interface），是JDK内置的一种 服务提供发现机制，可以用来启用框架扩展和替换组件，主要是被框架的开发人员使用， <br>
+   比如java.sql.Driver接口，其他不同厂商可以针对同一接口做出不同的实现，MySQL和PostgreSQL都有不同的实现提供给用户， <br>
+   而Java的SPI机制可以为某个接口寻zhao服务实现。Java中SPI机制主要思想是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要，其核心思想就是 解耦。
+</p>
+</blockquote>
+<p>
+   整体的机制，如下图：
+   <img src="../images/spi.png" alt="../images/spi.png" title="../images/spi.png" />
+</p>
+<ul>
+<li>
+<p>
+SPI 和API区别
+  一个是直接拿来使用的，另一个则是拿来进行扩展的
+</p>
+<ul>
+<li>
+<p>
+API是调用并用于实现目标的类、接口、方法等的描述
+</p>
+</li>
+<li>
+<p>
+SPI是扩展和实现以实现目标的类、接口、方法等的描述
+</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="headline-2">
+SPI使用
+</h3>
+<p>
+要使用Java SPI，需要遵循如下约定：
+</p>
+<ul>
+<li>
+<p>
+当服务提供者提供了接口的一种具体实现后，在jar包的META-INF/services目录下创建一个以“接口全限定名”为命名的文件，内容为实现类的全限定名
+</p>
+</li>
+<li>
+<p>
+接口实现类所在的jar包放在主程序的classpath中
+</p>
+</li>
+<li>
+<p>
+主程序通过java.util.ServiceLoder动态装载实现模块，它通过扫描META-INF/services目录下的配置文件找到实现类的全限定名，把类加载到JVM
+</p>
+</li>
+<li>
+<p>
+SPI的实现类必须携带一个不带参数的构造方法
+</p>
+</li>
+</ul>
+<h3 id="headline-3">
+SpringFactoriesLoader
+</h3>
+<p>
+SpringFactoriesLoader 是 Spring 中十分重要的一个扩展机制之一，它的使用方式和实现原理和 SPI 十分相似，只不过，提供了更加强大的功能。 <br>
+    和 SPI 不同，由于 SpringFactoriesLoader 中的配置文件格式是 properties 文件，因此，不需要要像 SPI 中那样为每个服务都创建一个文件， <br>
+    而是选择直接把所有服务都扔到 META-INF/spring.factories 文件中。
+</p>
 
-<h2 id="headline-1">
-Geekbang 小马哥训练营笔记
-</h2>
 
-
-
-
-
-<footer class=" footline" >
+<footer class="footline">
 	
 </footer>
 
-        
-            </div> 
         
         </div>
         
@@ -838,6 +935,8 @@ Geekbang 小马哥训练营笔记
             
                 
                     
+                        
+                        
                     
                 
                 
@@ -848,107 +947,6 @@ Geekbang 小马哥训练营笔记
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
                     
                         
             
@@ -995,18 +993,8 @@ Geekbang 小马哥训练营笔记
             
         
                     
-                        
             
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
+        
                     
             
         
@@ -1016,53 +1004,24 @@ Geekbang 小马哥训练营笔记
             
                 
                     
+                    
                 
                 
 
                     
                     
+                        
+                    
                     
 
-                    
-            
-        
                     
                         
             
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
                         
-            
-            
-                
                     
                 
                 
@@ -1071,25 +1030,6 @@ Geekbang 小马哥训练营笔记
                     
                     
 
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -1223,6 +1163,171 @@ Geekbang 小马哥训练营笔记
             
             
                 
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
                     
                 
                 
@@ -1250,10 +1355,10 @@ Geekbang 小马哥训练营笔记
 	 
 	 
 		
-			<a class="nav nav-prev" href="/" title="Documentation for Hugo Learn Theme"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/soul/src_learn/summary/" title="tars summary"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/geekbang/week01/" title="week01" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/soul/src_learn/spring_learn/" title="spring相关内容补充" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
