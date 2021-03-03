@@ -6,19 +6,22 @@
     <description>Recent content in 源码学习 on Documentation for Hugo Learn Theme</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 26 Jan 2021 16:05:11 +0800</lastBuildDate>
-    
-	<atom:link href="http://blog.valjean.cn/soul/src_learn/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 26 Jan 2021 16:05:11 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/soul/src_learn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>spring相关内容补充</title>
       <link>http://blog.valjean.cn/soul/src_learn/spring_learn/</link>
       <pubDate>Tue, 26 Jan 2021 16:05:44 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/spring_learn/</guid>
-      <description> spring 相关内容补充     ApplicationListener : baeldung tutor office-tutor , 自定义的实现可以通过实现特定类或者利用相关注解是实现 默认情况下是同步的，可以通过配置更改为异步执行. 这个功能是在单个项目内流转，数据也是在内部流转. 适用于业务在单个实例中
-能全部解决的情况. 类似cmsweb这种项目. 分布式之类的项目需要考虑其他mq之类的方案.  soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-client-springcloud、soul-client-springmvc soul-client-alibaba-dubbo soul-client-apache-dubbo 均为监控的spirng容器的特殊事件.       InitializingBean InstantiationAwareBeanPostProcessor spring bean initial 文中介绍了spring springboot中各种各样的初始化bean的方式。 自己只是用到一部分，后续会尝试其他的方式     tutor BeanPostProcessor 相关的实现太多，目前只是粗略了解一下。 idea 中查看类关系的uml蛮好使的，在生成的uml中，点击右键可以添加其他的相关类 只添加了相关的几个. spring 注入方式 构造函数注入、字段注入、set方法注入. 自己平时员工字段注入较多，其他的类型有空尝试一下   bean liftcycle callback  soul-admin 使用到的类有以下几个     ApplicationContextAware contextaware spring上下文 将spring上下文保存下来，可以随时获取容器内bean的. soul中使用的有以下两个类       ObjectProvider tutor office    EnumMap tutor 以enum作为key的map，简单了解    websocket office tutor   </description>
+      <description>spring 相关内容补充    ApplicationListener : baeldung tutor office-tutor , 自定义的实现可以通过实现特定类或者利用相关注解是实现 默认情况下是同步的，可以通过配置更改为异步执行. 这个功能是在单个项目内流转，数据也是在内部流转. 适用于业务在单个实例中
+能全部解决的情况. 类似cmsweb这种项目. 分布式之类的项目需要考虑其他mq之类的方案.
+ soul-admin中有自定义的ApplicationEvent事件,其他的soul-web、soul-client-springcloud、soul-client-springmvc soul-client-alibaba-dubbo soul-client-apache-dubbo 均为监控的spirng容器的特殊事件.
+    InitializingBean InstantiationAwareBeanPostProcessor spring bean initial 文中介绍了spring springboot中各种各样的初始化bean的方式。 自己只是用到一部分，后续会尝试其他的方式
+   tutor BeanPostProcessor 相关的实现太多，目前只是粗略了解一下。 idea 中查看类关系的uml蛮好使的，在生成的uml中，点击右键可以添加其他的相关类 只添加了相关的几个. spring 注入方式 构造函数注入、字段注入、set方法注入. 自己平时员工字段注入较多，其他的类型有空尝试一下
+  bean liftcycle callback
+ soul-admin 使用到的类有以下几个
+  ApplicationContextAware contextaware spring上下文 将spring上下文保存下来，可以随时获取容器内bean的. soul中使用的有以下两个类
+    ObjectProvider tutor office   EnumMap tutor 以enum作为key的map，简单了解</description>
     </item>
     
     <item>
@@ -27,7 +30,13 @@
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/webflux/</guid>
-      <description>webflux   soul-bootstrap中实现高吞吐量的关键就在于webflux的异步非阻塞特性。在网上查了相关的资料， 有个大概的了解,后续会在项目中慢慢实践一下。 为什么会创建webflux   office docs 官网上给出了两点的解释. 使用相对少的线程数和硬件资源去处理并发,再个就是函数编程.   Part of the answer is the need for a non-blocking web stack to handle concurrency with a small number of threads and scale with fewer hardware resources.  The other part of the answer is functional programming.   其中关于阻塞请求和非阻塞请求，参考website docs    阻塞请求       非阻塞请求    支持的模型1     Java 注解编程模型 这种编程模型，类似spring mvc,相对来说学习成本不高。    函数式编程模型 与基于 Java 注解的编程模型相比，函数式编程模型的抽象层次更低，代码编写更灵活， 可以满足一些对动态性要求更高的场景。不过在编写时的代码复杂度也较高，学习曲线也较陡。   spring-webflux &amp;amp; spring-web2   具体选择webflux,还是mvc这块还得看具体的业务场景，阻塞请求较多的场景还是mvc编写相对容易一些的。但是像我们现在的打点服务其实蛮适合webflux的</description>
+      <description>webflux  soul-bootstrap中实现高吞吐量的关键就在于webflux的异步非阻塞特性。在网上查了相关的资料， 有个大概的了解,后续会在项目中慢慢实践一下。
+为什么会创建webflux  office docs 官网上给出了两点的解释. 使用相对少的线程数和硬件资源去处理并发,再个就是函数编程.  Part of the answer is the need for a non-blocking web stack to handle concurrency with a small number of threads and scale with fewer hardware resources.
+ The other part of the answer is functional programming.
+ 其中关于阻塞请求和非阻塞请求，参考website docs
+  阻塞请求
+    非阻塞请求
+    支持的模型1    Java 注解编程模型 这种编程模型，类似spring mvc,相对来说学习成本不高。</description>
     </item>
     
     <item>
@@ -36,9 +45,12 @@
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/webflux-api/</guid>
-      <description> webflux 的由来发展   上次查完webflux的资料，对其有了个大概的了解。随后在深入了解Mono、flux中才理清了响应式编程的由来。
-引用一位博主的话：源文章   反应式编程最早由 .NET 平台上的 Reactive Extensions (Rx) 库来实现。后来迁移到 Java 平台之后就产生了著名的 RxJava 库， 并产生了很多其他编程语言上的对应实现。在这些实现的基础上产生了后来的反应式流（Reactive Streams）规范。 该规范定义了反应式流的相关接口，并将集成到 Java 9 中。  前面提到的 RxJava 库是 JVM 上反应式编程的先驱，也是反应式流规范的基础。RxJava 2 在 RxJava 的基础上做了很多的更新。 不过 RxJava 库也有其不足的地方。RxJava 产生于反应式流规范之前，虽然可以和反应式流的接口进行转换，但是由于底层实现的原因， 使用起来并不是很直观。RxJava 2 在设计和实现时考虑到了与规范的整合，不过为了保持与 RxJava 的兼容性，很多地方在使用时也并不直观。 Reactor 则是完全基于反应式流规范设计和实现的库，没有 RxJava 那样的历史包袱，在使用上更加的直观易懂。Reactor 也是 Spring 5 中反应式编程的基础。  具体Api探索   查阅office website 时，发现mono、flux的方法虽然有很多，但是文档都很详实，有些方法还都有配图，虽然有的还看的不太明白
-下面找了soul-bootstrap中Mono、flux常用的方法。 Mono (java doc)     just 按给定的内容创建一个mono对象，并在实例化时，就会被消费者捕获. 相关的方法还有justOrEmpty会对空值进行判断处理 just: justOrEmpty:    defer 延迟创建一个mono供订阅消费    create 创建一个延迟的发送者，用来使用callback api，发送相关事件    empty 创建一个mono，在其完成时，没有任何事件发出   Flux (java docs)     timeout 在上一次事件发出之后，间隔固定时间之后，发出并传播一个超时异常    just 创建一个flux对象，发送给定的对象并发出完成信号    then 在flux完成之后，返回一个mono对象，这个方法会忽略顺序，仅仅返回完成或者错误的信号    from 将指定的publisher利用flux来表示，或者说来创建flux对象    empty 创建一个flux对象，在其完成时，不发送任何信号    onErrorResume 当错误发生时，来处理相关错误的函数   </description>
+      <description> webflux 的由来发展  上次查完webflux的资料，对其有了个大概的了解。随后在深入了解Mono、flux中才理清了响应式编程的由来。
+引用一位博主的话：源文章
+ 反应式编程最早由 .NET 平台上的 Reactive Extensions (Rx) 库来实现。后来迁移到 Java 平台之后就产生了著名的 RxJava 库， 并产生了很多其他编程语言上的对应实现。在这些实现的基础上产生了后来的反应式流（Reactive Streams）规范。 该规范定义了反应式流的相关接口，并将集成到 Java 9 中。  前面提到的 RxJava 库是 JVM 上反应式编程的先驱，也是反应式流规范的基础。RxJava 2 在 RxJava 的基础上做了很多的更新。 不过 RxJava 库也有其不足的地方。RxJava 产生于反应式流规范之前，虽然可以和反应式流的接口进行转换，但是由于底层实现的原因， 使用起来并不是很直观。RxJava 2 在设计和实现时考虑到了与规范的整合，不过为了保持与 RxJava 的兼容性，很多地方在使用时也并不直观。 Reactor 则是完全基于反应式流规范设计和实现的库，没有 RxJava 那样的历史包袱，在使用上更加的直观易懂。Reactor 也是 Spring 5 中反应式编程的基础。
+   具体Api探索  查阅office website 时，发现mono、flux的方法虽然有很多，但是文档都很详实，有些方法还都有配图，虽然有的还看的不太明白
+下面找了soul-bootstrap中Mono、flux常用的方法。
+Mono (java doc)    just 按给定的内容创建一个mono对象，并在实例化时，就会被消费者捕获. 相关的方法还有justOrEmpty会对空值进行判断处理 just: justOrEmpty:   defer 延迟创建一个mono供订阅消费   create 创建一个延迟的发送者，用来使用callback api，发送相关事件   empty 创建一个mono，在其完成时，没有任何事件发出     Flux (java docs)    timeout 在上一次事件发出之后，间隔固定时间之后，发出并传播一个超时异常   just 创建一个flux对象，发送给定的对象并发出完成信号   then 在flux完成之后，返回一个mono对象，这个方法会忽略顺序，仅仅返回完成或者错误的信号   from 将指定的publisher利用flux来表示，或者说来创建flux对象   empty 创建一个flux对象，在其完成时，不发送任何信号   onErrorResume 当错误发生时，来处理相关错误的函数       </description>
     </item>
     
     <item>
@@ -47,7 +59,11 @@
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/soul-chain/</guid>
-      <description> 插件链初探   soul-bootstrap启动,相关初始化工作完毕之后，当外部发起一个请求到soul-bootstrap,其内部是如何进行过滤、筛选的. 此次拿divide插件来做简单分析。 SoulWebHandler是程序的一个入口点，目前soul代理的服务，都是通过http请求调用的。该类在初始化的时候，会获取到pom中配置的相关插件依赖创建的spring bean. 其handle方法会被触发执行，（这块应该是框架调用的，待确认）.随后会创建一个 DefaultSoulPluginChain 并发起插件链的调用。  插件的分类   soul的插件有个基础接口SoulPlugin和一个实现了execute方法的 AbstractSoulPlugin. 其他的类型的插件，要么直接继承AbstractSoulPlugin 实现doExecute对 对插件进行扩展。 要么直接实现SoulPlugin。 下图是抽取一部分的plugin之间的关系。  待补充     对webflux的了解，能看明白相关代码    SoulWebHandler是怎么被拉起的   </description>
+      <description> 插件链初探  soul-bootstrap启动,相关初始化工作完毕之后，当外部发起一个请求到soul-bootstrap,其内部是如何进行过滤、筛选的. 此次拿divide插件来做简单分析。 SoulWebHandler是程序的一个入口点，目前soul代理的服务，都是通过http请求调用的。该类在初始化的时候，会获取到pom中配置的相关插件依赖创建的spring bean. 其handle方法会被触发执行，（这块应该是框架调用的，待确认）.随后会创建一个 DefaultSoulPluginChain 并发起插件链的调用。
+   插件的分类  soul的插件有个基础接口SoulPlugin和一个实现了execute方法的 AbstractSoulPlugin. 其他的类型的插件，要么直接继承AbstractSoulPlugin 实现doExecute对 对插件进行扩展。 要么直接实现SoulPlugin。 下图是抽取一部分的plugin之间的关系。
+   待补充    对webflux的了解，能看明白相关代码
+  SoulWebHandler是怎么被拉起的
+    </description>
     </item>
     
     <item>
@@ -56,7 +72,12 @@
       <pubDate>Fri, 05 Feb 2021 06:09:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/soul-client/</guid>
-      <description> soul-client 初探   soul-client 目前支持的协议有一下几种，分为两大类rpc和http。 其中都实现BeanPostProcessor.postProcessAfterInitialization 方法，在spring容器实例化bean时，做一些业务处理。 http类型的还会实现一个ApplicationListener,对全代理进行处理。  总之，在spring容器真正启动起来后，soul-client会将收集到的相关代理配置信息全部提交给soul-admin。 soul-client ├── soul-client-dubbo │ ├── soul-client-alibaba-dubbo │ ├── soul-client-apache-dubbo ├── soul-client-http │ ├── soul-client-springcloud │ └── soul-client-springmvc ├── soul-client-sofa └── soul-client-tars  注册的相关信息   soul-client-springcloud, soul-client-springmvc client在实现 BeanPostProcessor之外，还实现了ApplicationListener对容器 ContextRefreshedEvent的事件进行监听。 这块主要处理http是否全由soul来代理的判断，配置文件中soul.http.full选项来控制这个开关。 如果为true的话，BeanPostProcessor的判断逻辑会直接返回bean，不再进行额外的处理。  http类型注册的信息主要是地址、端口、路径等接口信息。 而rpc类型的注册的主要是元数据相关的，包括对象名称、方法名称、参数信息等。rpc中不存在全部代理的 配置，因为在调用rpc的时候，必须有其相关的信息才能发起调用。 spring内容补充  Spring的BeanPostProcessor接口   BeanPostProcessor接口有两个回调方法。当一个BeanPostProcessor的实现类注册到Spring IOC容器后， 对于该Spring IOC容器所创建的每个bean实例在初始化方法（如afterPropertiesSet和任意已声明的init方法）调用前， 将会调用BeanPostProcessor中的postProcessBeforeInitialization方法，而在bean实例初始化方法调用完成后， 则会调用BeanPostProcessor中的postProcessAfterInitialization方法 ApplicationListener接口   方法：onApplicationEvent 如果在上下文中部署一个实现了ApplicationListener接口的bean,那么每当在一个ApplicationEvent发布到 ApplicationContext时， 这个bean得到通知。 如果追踪的是ContextRefreshedEvent事件：当Spring的Context初始化完后，会触发这个事件. ApplicationListener的调用时机要晚于BeanPostProcessor </description>
+      <description>soul-client 初探   soul-client 目前支持的协议有一下几种，分为两大类rpc和http。 其中都实现BeanPostProcessor.postProcessAfterInitialization 方法，在spring容器实例化bean时，做一些业务处理。 http类型的还会实现一个ApplicationListener,对全代理进行处理。
+ 总之，在spring容器真正启动起来后，soul-client会将收集到的相关代理配置信息全部提交给soul-admin。
+soul-client ├── soul-client-dubbo │ ├── soul-client-alibaba-dubbo │ ├── soul-client-apache-dubbo ├── soul-client-http │ ├── soul-client-springcloud │ └── soul-client-springmvc ├── soul-client-sofa └── soul-client-tars  注册的相关信息   soul-client-springcloud, soul-client-springmvc client在实现 BeanPostProcessor之外，还实现了ApplicationListener对容器 ContextRefreshedEvent的事件进行监听。 这块主要处理http是否全由soul来代理的判断，配置文件中soul.http.full选项来控制这个开关。 如果为true的话，BeanPostProcessor的判断逻辑会直接返回bean，不再进行额外的处理。
+ http类型注册的信息主要是地址、端口、路径等接口信息。 而rpc类型的注册的主要是元数据相关的，包括对象名称、方法名称、参数信息等。rpc中不存在全部代理的 配置，因为在调用rpc的时候，必须有其相关的信息才能发起调用。
+    spring内容补充  Spring的BeanPostProcessor接口   BeanPostProcessor接口有两个回调方法。当一个BeanPostProcessor的实现类注册到Spring IOC容器后， 对于该Spring IOC容器所创建的每个bean实例在初始化方法（如afterPropertiesSet和任意已声明的init方法）调用前， 将会调用BeanPostProcessor中的postProcessBeforeInitialization方法，而在bean实例初始化方法调用完成后， 则会调用BeanPostProcessor中的postProcessAfterInitialization方法
+  ApplicationListener接口   方法：onApplicationEvent 如果在上下文中部署一个实现了ApplicationListener接口的bean,那么每当在一个ApplicationEvent发布到 ApplicationContext时， 这个bean得到通知。 如果追踪的是ContextRefreshedEvent事件：当Spring的Context初始化完后，会触发这个事件.</description>
     </item>
     
     <item>
@@ -65,7 +86,10 @@
       <pubDate>Mon, 18 Jan 2021 16:42:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/summary/</guid>
-      <description>分享  tarscloud 由来     tars 简介 office website    office quick start    配置应用, 这里基础概念很重要     tars 基础概念 应用名：表示一组服务的集合 –&amp;gt; APP 服务名称：提供服务的进程名称 –&amp;gt; Server OBJ：提供具体服务的接口 –&amp;gt; Servant  环境搭建     搞明白tars-framework, tars-nodesd的不同   framework: Tars 框架 Docker 制作脚本, 制作的 docker 包含了框架核心服务和 web 管理平台 tars: Tars 框架 Docker 制作脚本, 和 framework 比, 增加了 java, nodejs 等运行时支持, 即可以把 java, nodejs 服务发布到 docker 里面(docker 里面安装了 jdk, node, php 环境) nodes: 是正常的代码运行环境，包含基本的开发环境。     拉取配置国内源，拉取docker 镜像.</description>
+      <description>分享  tarscloud 由来    tars 简介 office website   office quick start
+  配置应用, 这里基础概念很重要
+   tars 基础概念 应用名：表示一组服务的集合 –&amp;gt; APP 服务名称：提供服务的进程名称 –&amp;gt; Server OBJ：提供具体服务的接口 –&amp;gt; Servant    环境搭建    搞明白tars-framework, tars-nodesd的不同
+ framework: Tars 框架 Docker 制作脚本, 制作的 docker 包含了框架核心服务和 web 管理平台 tars: Tars 框架 Docker 制作脚本, 和 framework 比, 增加了 java, nodejs 等运行时支持, 即可以把 java, nodejs 服务发布到 docker 里面(docker 里面安装了 jdk, node, php 环境) nodes: 是正常的代码运行环境，包含基本的开发环境。</description>
     </item>
     
     <item>
@@ -74,7 +98,17 @@
       <pubDate>Tue, 26 Jan 2021 16:05:44 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/soul/src_learn/spi/</guid>
-      <description>SPI简介   soul 中有部分功能的扩展是通过spi方式实现的,可以找下 spring.factories 文件，每一个这样的文件，就是一个spi。大致意思如下：   SPI（Service Provider Interface），是JDK内置的一种 服务提供发现机制，可以用来启用框架扩展和替换组件，主要是被框架的开发人员使用， 比如java.sql.Driver接口，其他不同厂商可以针对同一接口做出不同的实现，MySQL和PostgreSQL都有不同的实现提供给用户， 而Java的SPI机制可以为某个接口寻zhao服务实现。Java中SPI机制主要思想是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要，其核心思想就是 解耦。   整体的机制，如下图：    SPI 和API区别 一个是直接拿来使用的，另一个则是拿来进行扩展的    API是调用并用于实现目标的类、接口、方法等的描述    SPI是扩展和实现以实现目标的类、接口、方法等的描述     SPI使用   要使用Java SPI，需要遵循如下约定：    当服务提供者提供了接口的一种具体实现后，在jar包的META-INF/services目录下创建一个以“接口全限定名”为命名的文件，内容为实现类的全限定名    接口实现类所在的jar包放在主程序的classpath中    主程序通过java.util.ServiceLoder动态装载实现模块，它通过扫描META-INF/services目录下的配置文件找到实现类的全限定名，把类加载到JVM    SPI的实现类必须携带一个不带参数的构造方法   SpringFactoriesLoader   SpringFactoriesLoader 是 Spring 中十分重要的一个扩展机制之一，它的使用方式和实现原理和 SPI 十分相似，只不过，提供了更加强大的功能。 和 SPI 不同，由于 SpringFactoriesLoader 中的配置文件格式是 properties 文件，因此，不需要要像 SPI 中那样为每个服务都创建一个文件， 而是选择直接把所有服务都扔到 META-INF/spring.</description>
+      <description>SPI简介  soul 中有部分功能的扩展是通过spi方式实现的,可以找下 spring.factories 文件，每一个这样的文件，就是一个spi。大致意思如下：
+ SPI（Service Provider Interface），是JDK内置的一种 服务提供发现机制，可以用来启用框架扩展和替换组件，主要是被框架的开发人员使用， 比如java.sql.Driver接口，其他不同厂商可以针对同一接口做出不同的实现，MySQL和PostgreSQL都有不同的实现提供给用户， 而Java的SPI机制可以为某个接口寻zhao服务实现。Java中SPI机制主要思想是将装配的控制权移到程序之外，在模块化设计中这个机制尤其重要，其核心思想就是 解耦。
+  整体的机制，如下图：   SPI 和API区别 一个是直接拿来使用的，另一个则是拿来进行扩展的
+  API是调用并用于实现目标的类、接口、方法等的描述
+  SPI是扩展和实现以实现目标的类、接口、方法等的描述
+      SPI使用  要使用Java SPI，需要遵循如下约定：
+  当服务提供者提供了接口的一种具体实现后，在jar包的META-INF/services目录下创建一个以“接口全限定名”为命名的文件，内容为实现类的全限定名
+  接口实现类所在的jar包放在主程序的classpath中
+  主程序通过java.util.ServiceLoder动态装载实现模块，它通过扫描META-INF/services目录下的配置文件找到实现类的全限定名，把类加载到JVM
+  SPI的实现类必须携带一个不带参数的构造方法
+    SpringFactoriesLoader  SpringFactoriesLoader 是 Spring 中十分重要的一个扩展机制之一，它的使用方式和实现原理和 SPI 十分相似，只不过，提供了更加强大的功能。 和 SPI 不同，由于 SpringFactoriesLoader 中的配置文件格式是 properties 文件，因此，不需要要像 SPI 中那样为每个服务都创建一个文件， 而是选择直接把所有服务都扔到 META-INF/spring.</description>
     </item>
     
   </channel>

@@ -6,18 +6,16 @@
     <description>Recent content in week01 on Documentation for Hugo Learn Theme</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 03 Mar 2021 18:41:37 +0800</lastBuildDate>
-    
-	<atom:link href="http://blog.valjean.cn/geekbang/week01/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 03 Mar 2021 18:41:37 +0800</lastBuildDate><atom:link href="http://blog.valjean.cn/geekbang/week01/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Homework</title>
       <link>http://blog.valjean.cn/geekbang/week01/homework/</link>
       <pubDate>Wed, 03 Mar 2021 18:47:29 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/geekbang/week01/homework/</guid>
-      <description> 作业信息     链接     作业思路  </description>
+      <description> 作业信息    链接: https://gitee.com/valjean/mercyblitz-projects
+  分支: valjean
+    作业思路   </description>
     </item>
     
     <item>
@@ -26,7 +24,7 @@
       <pubDate>Wed, 03 Mar 2021 18:41:46 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/geekbang/week01/note/</guid>
-      <description> week01  servlet  jndi  </description>
+      <description> week01  servlet   jndi     </description>
     </item>
     
   </channel>
