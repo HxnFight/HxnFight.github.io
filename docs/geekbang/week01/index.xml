@@ -13,9 +13,12 @@
       <pubDate>Wed, 03 Mar 2021 18:47:29 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/geekbang/week01/homework/</guid>
-      <description> 作业信息    链接: https://gitee.com/valjean/mercyblitz-projects
+      <description>作业信息   要求： 通过自研 Web MVC 框架实现（可以自己实现）一个用户注册，forward 到一个成功的页面（JSP 用法）/register 通过 Controller -&amp;gt; Service -&amp;gt; Repository 实现（数据库实现） (非必须）JDNI 的方式获取数据库源（DataSource），在获取 Connection
+  作业复用老师的架构，做了简单的修改，实现页面和注册的要求，jndi暂未实现,作业链接和分支如下
+  链接: https://gitee.com/valjean/mercyblitz-projects
   分支: valjean
-    作业思路   </description>
+    作业思路  一、 页面相关   项目启动后，访问http://localhost:8080/user/signIn 即可
+ 在user-web/src/main/webapp　目录下，按照样例sign_up.jsp 修改得来的sign_ip.jsp, form 上添加 action=&amp;#34;/op/signUp&amp;#34; method=&amp;#34;post&amp;#34; 将有关数据提交到后端接口 user-web/src/main/webapp ├── index.jsp ├── sign_in.jsp ├── sign_up.jsp ├── static ├── success.jsp └── WEB-INF    二、 注册功能相关  1&amp;gt; controller    SignInController : /user/signIn 提供页面访问能力</description>
     </item>
     
     <item>

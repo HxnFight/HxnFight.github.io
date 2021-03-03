@@ -12,19 +12,19 @@
     <title>Homework :: Documentation for Hugo Learn Theme</title>
 
     
-    <link href="/css/nucleus.css?1614783486" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1614783486" rel="stylesheet">
-    <link href="/css/hybrid.css?1614783486" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1614783486" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1614783486" rel="stylesheet">
-    <link href="/css/auto-complete.css?1614783486" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1614783486" rel="stylesheet">
-    <link href="/css/theme.css?1614783486" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1614783486" rel="stylesheet">
+    <link href="/css/nucleus.css?1614786428" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1614786428" rel="stylesheet">
+    <link href="/css/hybrid.css?1614786428" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1614786428" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1614786428" rel="stylesheet">
+    <link href="/css/auto-complete.css?1614786428" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1614786428" rel="stylesheet">
+    <link href="/css/theme.css?1614786428" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1614786428" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1614783486"></script>
+    <script src="/js/jquery-3.3.1.min.js?1614786428"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -69,14 +69,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1614783486"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1614783486"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1614786428"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1614786428"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/blog.valjean.cn\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1614783486"></script>
+<script type="text/javascript" src="/js/search.js?1614786428"></script>
 
     
   </div>
@@ -797,6 +797,22 @@
 <li><a href="#headline-1">作业信息</a>
 </li>
 <li><a href="#headline-2">作业思路</a>
+<ul>
+<li><a href="#headline-3">一、 页面相关</a>
+</li>
+<li><a href="#headline-4">二、 注册功能相关</a>
+<ul>
+<li><a href="#headline-5">1&gt; controller</a>
+</li>
+<li><a href="#headline-6">2&gt; db相关</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-7">三、 其他事项</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-8">总结</a>
 </li>
 </ul>
 </nav>
@@ -828,12 +844,20 @@
 作业信息
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
+<blockquote>
+<p>要求：
+  通过自研 Web MVC 框架实现（可以自己实现）一个用户注册，forward 到一个成功的页面（JSP 用法）/register <br>
+  通过 Controller -&gt; Service -&gt; Repository 实现（数据库实现） <br>
+  (非必须）JDNI 的方式获取数据库源（DataSource），在获取 Connection</p>
+</blockquote>
+<p>
+  作业复用老师的架构，做了简单的修改，实现页面和注册的要求，jndi暂未实现,作业链接和分支如下</p>
 <ul>
 <li>
 <p>链接: <a href="https://gitee.com/valjean/mercyblitz-projects">https://gitee.com/valjean/mercyblitz-projects</a></p>
 </li>
 <li>
-<p>分支: valjean</p>
+<p>分支: <code>valjean</code></p>
 </li>
 </ul>
 </div>
@@ -842,6 +866,85 @@
 <h2 id="headline-2">
 作业思路
 </h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<div id="outline-container-headline-3" class="outline-4">
+<h4 id="headline-3">
+一、 页面相关
+</h4>
+<div id="outline-text-headline-3" class="outline-text-4">
+<p>
+    项目启动后，访问<a href="http://localhost:8080/user/signIn">http://localhost:8080/user/signIn</a> 即可</p>
+<p>
+    在user-web/src/main/webapp　目录下，按照样例sign_up.jsp 修改得来的sign_ip.jsp, form 上添加 <code>action=&#34;/op/signUp&#34; method=&#34;post&#34;</code> <br>
+    将有关数据提交到后端接口 </p>
+<div class="src src-shell">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">user-web/src/main/webapp
+├── index.jsp
+├── sign_in.jsp
+├── sign_up.jsp
+├── static
+├── success.jsp
+└── WEB-INF</code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-4">
+<h4 id="headline-4">
+二、 注册功能相关
+</h4>
+<div id="outline-text-headline-4" class="outline-text-4">
+<div id="outline-container-headline-5" class="outline-5">
+<h5 id="headline-5">
+1&gt; controller
+</h5>
+<div id="outline-text-headline-5" class="outline-text-5">
+<ul>
+<li>
+<p><code>SignInController</code> : /user/signIn  提供页面访问能力</p>
+</li>
+<li>
+<p><code>SignInOpController</code>: /op/signIn   提供接口访问能力</p>
+</li>
+</ul>
+<p>原本打算利用javascript来做提交的，但是界面调起来太麻烦，直接用form做了个简单的提交. <br>
+    另外在写作业的时候发现，一个control里目前不能写多个接口，故定义了好几个control来做不同的模块。 后续再跟着迭代完善</p>
+<p>
+    新加的control均需要在 <code>src/main/resources/META-INF/services/org.geektimes.web.mvc.controller.Controller</code> 中添加，这样spi才能读取到</p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-5">
+<h5 id="headline-6">
+2&gt; db相关
+</h5>
+<div id="outline-text-headline-6" class="outline-text-5">
+<p>目前的自研框架中，没有像 <code>@Resource</code> <code>@Autowrite</code> 自动注入依赖的功能。 但是看老师留有 <code>DBConnectionInitializerListener implements ServletContextListener</code>  <br>
+     仿照这个示例，写了 <code>RepoInitializerListener</code>,分别在servlet启动的时候，将db和repo 实例化后的对象放入到 <code>ServletContext</code>, 在以后的接口调用中，直接从context中获取使用。</p>
+<p>
+     作业只是简单使用 <code>InMemoryUserRepository</code> 实现了注册功能，并没有用derby 或者mysql实现</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-4">
+<h4 id="headline-7">
+三、 其他事项
+</h4>
+<div id="outline-text-headline-7" class="outline-text-4">
+<p>在开发调试的时候，借助idea进行调试，配置如下：
+    <img src="../images/idea-jar-cnf.png" alt="../images/idea-jar-cnf.png" title="../images/idea-jar-cnf.png" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+总结
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<p>
+  作业做的有点仓促，有很多的点还可以深挖。 这个自研的框架，开阔了自己的眼界，以前还真没想过有些事情还能这样做。 
+  调整好自己的状态、再接再厉。</p>
+</div>
 </div>
 
 
@@ -1307,19 +1410,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1614783486"></script>
-    <script src="/js/perfect-scrollbar.min.js?1614783486"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1614783486"></script>
-    <script src="/js/jquery.sticky.js?1614783486"></script>
-    <script src="/js/featherlight.min.js?1614783486"></script>
-    <script src="/js/highlight.pack.js?1614783486"></script>
+    <script src="/js/clipboard.min.js?1614786428"></script>
+    <script src="/js/perfect-scrollbar.min.js?1614786428"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1614786428"></script>
+    <script src="/js/jquery.sticky.js?1614786428"></script>
+    <script src="/js/featherlight.min.js?1614786428"></script>
+    <script src="/js/highlight.pack.js?1614786428"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1614783486"></script>
-    <script src="/js/learn.js?1614783486"></script>
-    <script src="/js/hugo-learn.js?1614783486"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1614786428"></script>
+    <script src="/js/learn.js?1614786428"></script>
+    <script src="/js/hugo-learn.js?1614786428"></script>
     
         
-            <script src="/mermaid/mermaid.js?1614783486"></script>
+            <script src="/mermaid/mermaid.js?1614786428"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

@@ -4,7 +4,7 @@
 	"title": "Homework",
 	"tags": [],
 	"description": "",
-	"content": " 作业信息    链接: https://gitee.com/valjean/mercyblitz-projects\n  分支: valjean\n    作业思路   "
+	"content": " 作业信息   要求： 通过自研 Web MVC 框架实现（可以自己实现）一个用户注册，forward 到一个成功的页面（JSP 用法）/register 通过 Controller -\u0026gt; Service -\u0026gt; Repository 实现（数据库实现） (非必须）JDNI 的方式获取数据库源（DataSource），在获取 Connection\n  作业复用老师的架构，做了简单的修改，实现页面和注册的要求，jndi暂未实现,作业链接和分支如下\n  链接: https://gitee.com/valjean/mercyblitz-projects\n  分支: valjean\n    作业思路  一、 页面相关   项目启动后，访问http://localhost:8080/user/signIn 即可\n 在user-web/src/main/webapp　目录下，按照样例sign_up.jsp 修改得来的sign_ip.jsp, form 上添加 action=\u0026#34;/op/signUp\u0026#34; method=\u0026#34;post\u0026#34; 将有关数据提交到后端接口 user-web/src/main/webapp ├── index.jsp ├── sign_in.jsp ├── sign_up.jsp ├── static ├── success.jsp └── WEB-INF    二、 注册功能相关  1\u0026gt; controller    SignInController : /user/signIn 提供页面访问能力\n  SignInOpController: /op/signIn 提供接口访问能力\n  原本打算利用javascript来做提交的，但是界面调起来太麻烦，直接用form做了个简单的提交. 另外在写作业的时候发现，一个control里目前不能写多个接口，故定义了好几个control来做不同的模块。 后续再跟着迭代完善\n 新加的control均需要在 src/main/resources/META-INF/services/org.geektimes.web.mvc.controller.Controller 中添加，这样spi才能读取到\n  2\u0026gt; db相关  目前的自研框架中，没有像 @Resource @Autowrite 自动注入依赖的功能。 但是看老师留有 DBConnectionInitializerListener implements ServletContextListener 仿照这个示例，写了 RepoInitializerListener,分别在servlet启动的时候，将db和repo 实例化后的对象放入到 ServletContext, 在以后的接口调用中，直接从context中获取使用。\n 作业只是简单使用 InMemoryUserRepository 实现了注册功能，并没有用derby 或者mysql实现\n    三、 其他事项  在开发调试的时候，借助idea进行调试，配置如下：     总结   作业做的有点仓促，有很多的点还可以深挖。 这个自研的框架，开阔了自己的眼界，以前还真没想过有些事情还能这样做。 调整好自己的状态、再接再厉。\n  "
 },
 {
 	"uri": "http://blog.valjean.cn/geekbang/week01/note/",
