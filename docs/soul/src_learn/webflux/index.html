@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta name="description" content="Documentation for Hugo Learn Theme">
 <meta name="author" content="Mathieu Cornic">
 
@@ -12,19 +12,19 @@
     <title>Webflux :: Documentation for Hugo Learn Theme</title>
 
     
-    <link href="/css/nucleus.css?1614786481" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1614786481" rel="stylesheet">
-    <link href="/css/hybrid.css?1614786481" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1614786481" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1614786481" rel="stylesheet">
-    <link href="/css/auto-complete.css?1614786481" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1614786481" rel="stylesheet">
-    <link href="/css/theme.css?1614786481" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1614786481" rel="stylesheet">
+    <link href="/css/nucleus.css?1614953762" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1614953762" rel="stylesheet">
+    <link href="/css/hybrid.css?1614953762" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1614953762" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1614953762" rel="stylesheet">
+    <link href="/css/auto-complete.css?1614953762" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1614953762" rel="stylesheet">
+    <link href="/css/theme.css?1614953762" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1614953762" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1614786481"></script>
+    <script src="/js/jquery-3.3.1.min.js?1614953762"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -69,14 +69,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1614786481"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1614786481"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1614953762"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1614953762"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/blog.valjean.cn\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1614786481"></script>
+<script type="text/javascript" src="/js/search.js?1614953762"></script>
 
     
   </div>
@@ -820,185 +820,212 @@
 
 
 
-<div id="outline-container-headline-1" class="outline-3">
 <h3 id="headline-1">
 webflux
 </h3>
-<div id="outline-text-headline-1" class="outline-text-3">
-<p>soul-bootstrap中实现高吞吐量的关键就在于webflux的异步非阻塞特性。在网上查了相关的资料， <br>
-   有个大概的了解,后续会在项目中慢慢实践一下。</p>
-<div id="outline-container-headline-2" class="outline-4">
+<p>
+soul-bootstrap中实现高吞吐量的关键就在于webflux的异步非阻塞特性。在网上查了相关的资料， <br>
+   有个大概的了解,后续会在项目中慢慢实践一下。
+</p>
 <h4 id="headline-2">
 为什么会创建webflux
 </h4>
-<div id="outline-text-headline-2" class="outline-text-4">
-<p><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-new-framework">office docs</a> 官网上给出了两点的解释. 使用相对少的线程数和硬件资源去处理并发,再个就是函数编程. </p>
-<blockquote>
-<p>Part of the answer is the need for a non-blocking web stack to handle concurrency with a small number <br>
-      of threads and scale with fewer hardware resources.</p>
 <p>
-    The other part of the answer is functional programming.</p>
+<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-new-framework">office docs</a> 官网上给出了两点的解释. 使用相对少的线程数和硬件资源去处理并发,再个就是函数编程. 
+</p>
+<blockquote>
+<p>
+Part of the answer is the need for a non-blocking web stack to handle concurrency with a small number <br>
+      of threads and scale with fewer hardware resources.
+</p>
+<p>
+    The other part of the answer is functional programming.
+</p>
 </blockquote>
-<p>其中关于阻塞请求和非阻塞请求，参考<a href="https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/">website docs</a></p>
+<p>
+其中关于阻塞请求和非阻塞请求，参考<a href="https://howtodoinjava.com/spring-webflux/spring-webflux-tutorial/">website docs</a>
+</p>
 <ul>
 <li>
-<p>阻塞请求</p>
+<p>
+阻塞请求
+</p>
 </li>
 </ul>
-<p><img src="../images/Blocking-request-processing.png" alt="../images/Blocking-request-processing.png" title="../images/Blocking-request-processing.png" /></p>
+<p>
+<img src="../images/Blocking-request-processing.png" alt="../images/Blocking-request-processing.png" title="../images/Blocking-request-processing.png" />
+</p>
 <ul>
 <li>
-<p>非阻塞请求</p>
+<p>
+非阻塞请求
+</p>
 </li>
 </ul>
-<p><img src="../images/Non-blocking-request-processing.png" alt="../images/Non-blocking-request-processing.png" title="../images/Non-blocking-request-processing.png" /></p>
-</div>
-</div>
-<div id="outline-container-headline-3" class="outline-4">
+<p>
+<img src="../images/Non-blocking-request-processing.png" alt="../images/Non-blocking-request-processing.png" title="../images/Non-blocking-request-processing.png" />
+</p>
 <h4 id="headline-3">
 支持的模型<sup class="footnote-reference"><a id="footnote-reference-1" href="#footnote-1">1</a></sup>
 </h4>
-<div id="outline-text-headline-3" class="outline-text-4">
 <ul>
 <li>
-<p>Java 注解编程模型
-这种编程模型，类似spring mvc,相对来说学习成本不高。</p>
+<p>
+Java 注解编程模型
+这种编程模型，类似spring mvc,相对来说学习成本不高。
+</p>
 </li>
 <li>
-<p>函数式编程模型
+<p>
+函数式编程模型
 与基于 Java 注解的编程模型相比，函数式编程模型的抽象层次更低，代码编写更灵活， <br>
-可以满足一些对动态性要求更高的场景。不过在编写时的代码复杂度也较高，学习曲线也较陡。</p>
+可以满足一些对动态性要求更高的场景。不过在编写时的代码复杂度也较高，学习曲线也较陡。
+</p>
 </li>
 </ul>
-</div>
-</div>
-<div id="outline-container-headline-4" class="outline-4">
 <h4 id="headline-4">
 spring-webflux &amp; spring-web<sup class="footnote-reference"><a id="footnote-reference-2" href="#footnote-2">2</a></sup>
 </h4>
-<div id="outline-text-headline-4" class="outline-text-4">
-<p>具体选择webflux,还是mvc这块还得看具体的业务场景，阻塞请求较多的场景还是mvc编写相对容易一些的。但是像我们现在的打点服务其实蛮适合webflux的<br>
-    没有太多的业务逻辑: 接收数据–&gt;处理格式–&gt;写入文件</p>
 <p>
-    文章也提到了一点， webflux并不能提高单次请求的处理速度，但是其能提高整个服务器的吞吐量。</p>
-</div>
-</div>
-<div id="outline-container-headline-5" class="outline-4">
+具体选择webflux,还是mvc这块还得看具体的业务场景，阻塞请求较多的场景还是mvc编写相对容易一些的。但是像我们现在的打点服务其实蛮适合webflux的<br>
+    没有太多的业务逻辑: 接收数据–&gt;处理格式–&gt;写入文件
+</p>
+<p>
+    文章也提到了一点， webflux并不能提高单次请求的处理速度，但是其能提高整个服务器的吞吐量。
+</p>
 <h4 id="headline-5">
 Reactive Streams API<sup class="footnote-reference"><a id="footnote-reference-3" href="#footnote-3">3</a></sup>
 </h4>
-<div id="outline-text-headline-5" class="outline-text-4">
 <p>
-    其api有以下几类的概念，从中也体现了背压的特点</p>
+    其api有以下几类的概念，从中也体现了背压的特点
+</p>
 <ul>
 <li>
-<p>Publisher (生产者）</p>
+<p>
+Publisher (生产者）
+</p>
 <p>
 Emits a sequence of events to subscribers according to the demand received from its subscribers.
-A publisher can serve multiple subscribers. </p>
+A publisher can serve multiple subscribers. 
+</p>
 </li>
 <li>
-<p>Subscriber (消费者）</p>
+<p>
+Subscriber (消费者）
+</p>
 <p>
 Receives and processes events emitted by a Publisher. Please note that no notifications will be
-received until Subscription#request(long) is called to signal the demand</p>
+received until Subscription#request(long) is called to signal the demand
+</p>
 </li>
 <li>
-<p>Subscription (组织生产者和消费者的关系）</p>
+<p>
+Subscription (组织生产者和消费者的关系）
+</p>
 <p>
 Defines a one-to-one relationship between a Publisher and a Subscriber.
 It can only be used once by a single Subscriber. It is used to both signal desire for data
-and cancel demand (and allow resource cleanup).</p>
+and cancel demand (and allow resource cleanup).
+</p>
 </li>
 <li>
-<p>Processor (处理过程）</p>
 <p>
-Represents a processing stage consisting of both a Subscriber and a Publisher and obeys the contracts of both</p>
+Processor (处理过程）
+</p>
+<p>
+Represents a processing stage consisting of both a Subscriber and a Publisher and obeys the contracts of both
+</p>
 </li>
 </ul>
-<p>被大量使用的发布者有如下两个：</p>
+<p>
+被大量使用的发布者有如下两个：
+</p>
 <ul>
 <li>
-<p>Mono：返回0或1个元素</p>
+<p>
+Mono：返回0或1个元素
+</p>
 </li>
 <li>
-<p>Flux ：返回0…N个元素。 助焊剂可以是无穷无尽的，这意味着它可以永远保持发光。 它还可以返回一系列元素，然后在返回所有元素后发送完成通知。</p>
+<p>
+Flux ：返回0…N个元素。 助焊剂可以是无穷无尽的，这意味着它可以永远保持发光。 它还可以返回一系列元素，然后在返回所有元素后发送完成通知。
+</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-6" class="outline-3">
 <h3 id="headline-6">
 backpressure<sup class="footnote-reference"><a id="footnote-reference-4" href="#footnote-4">4</a></sup>
 </h3>
-<div id="outline-text-headline-6" class="outline-text-3">
-<div id="outline-container-headline-7" class="outline-4">
 <h4 id="headline-7">
 概念
 </h4>
-<div id="outline-text-headline-7" class="outline-text-4">
-<p>在查阅资料的过程中，看到好几处背压。webflux 也一直提到支持背压的。 像上面提的publisher、subscriber的api就是，subscriber在发起请求的时候、
-    是会告诉publisher，自己需要多少个消息的。像这种将下游的压力传导至上游，就是被压的概念。这也牵涉到流量控制的策略。</p>
-</div>
-</div>
-<div id="outline-container-headline-8" class="outline-4">
+<p>
+在查阅资料的过程中，看到好几处背压。webflux 也一直提到支持背压的。 像上面提的publisher、subscriber的api就是，subscriber在发起请求的时候、
+    是会告诉publisher，自己需要多少个消息的。像这种将下游的压力传导至上游，就是被压的概念。这也牵涉到流量控制的策略。
+</p>
 <h4 id="headline-8">
 策略<sup class="footnote-reference"><a id="footnote-reference-5" href="#footnote-5">5</a></sup>
 </h4>
-<div id="outline-text-headline-8" class="outline-text-4">
 <ul>
 <li>
-<p>控制: 降低生产速率，从源头减少流量</p>
+<p>
+控制: 降低生产速率，从源头减少流量
+</p>
 </li>
 <li>
-<p>缓冲: 管道将多余的流量存储起来`</p>
+<p>
+缓冲: 管道将多余的流量存储起来`
+</p>
 </li>
 <li>
-<p>丢弃: 消费者将无暇处理的流量丢弃</p>
+<p>
+丢弃: 消费者将无暇处理的流量丢弃
+</p>
 </li>
 </ul>
-</div>
-</div>
-</div>
-</div>
-<div id="outline-container-headline-9" class="outline-2">
 <h2 id="headline-9">
 Footnotes
 </h2>
-</div>
 <div class="footnotes">
 <hr class="footnotes-separatator">
 <div class="footnote-definitions">
 <div class="footnote-definition">
 <sup id="footnote-1"><a href="#footnote-reference-1">1</a></sup>
 <div class="footnote-body">
-<p><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-programming-models">https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-programming-models</a></p>
+<p>
+<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-programming-models">https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-programming-models</a>
+</p>
 </div>
 </div>
 <div class="footnote-definition">
 <sup id="footnote-2"><a href="#footnote-reference-2">2</a></sup>
 <div class="footnote-body">
-<p><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-framework-choice">https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-framework-choice</a></p>
+<p>
+<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-framework-choice">https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-framework-choice</a>
+</p>
 </div>
 </div>
 <div class="footnote-definition">
 <sup id="footnote-3"><a href="#footnote-reference-3">3</a></sup>
 <div class="footnote-body">
-<p><a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-reactive-api">https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-reactive-api</a></p>
+<p>
+<a href="https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-reactive-api">https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-reactive-api</a>
+</p>
 </div>
 </div>
 <div class="footnote-definition">
 <sup id="footnote-4"><a href="#footnote-reference-4">4</a></sup>
 <div class="footnote-body">
-<p><a href="https://lotabout.me/2020/Back-Pressure/">https://lotabout.me/2020/Back-Pressure/</a></p>
+<p>
+<a href="https://lotabout.me/2020/Back-Pressure/">https://lotabout.me/2020/Back-Pressure/</a>
+</p>
 </div>
 </div>
 <div class="footnote-definition">
 <sup id="footnote-5"><a href="#footnote-reference-5">5</a></sup>
 <div class="footnote-body">
-<p><a href="https://www.cnblogs.com/iceTing/p/6238207.html">https://www.cnblogs.com/iceTing/p/6238207.html</a></p>
+<p>
+<a href="https://www.cnblogs.com/iceTing/p/6238207.html">https://www.cnblogs.com/iceTing/p/6238207.html</a>
+</p>
 </div>
 </div>
 </div>
@@ -1460,19 +1487,19 @@ Footnotes
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1614786481"></script>
-    <script src="/js/perfect-scrollbar.min.js?1614786481"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1614786481"></script>
-    <script src="/js/jquery.sticky.js?1614786481"></script>
-    <script src="/js/featherlight.min.js?1614786481"></script>
-    <script src="/js/highlight.pack.js?1614786481"></script>
+    <script src="/js/clipboard.min.js?1614953762"></script>
+    <script src="/js/perfect-scrollbar.min.js?1614953762"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1614953762"></script>
+    <script src="/js/jquery.sticky.js?1614953762"></script>
+    <script src="/js/featherlight.min.js?1614953762"></script>
+    <script src="/js/highlight.pack.js?1614953762"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1614786481"></script>
-    <script src="/js/learn.js?1614786481"></script>
-    <script src="/js/hugo-learn.js?1614786481"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1614953762"></script>
+    <script src="/js/learn.js?1614953762"></script>
+    <script src="/js/hugo-learn.js?1614953762"></script>
     
         
-            <script src="/mermaid/mermaid.js?1614786481"></script>
+            <script src="/mermaid/mermaid.js?1614953762"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

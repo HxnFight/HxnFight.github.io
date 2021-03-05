@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.80.0" />
+    <meta name="generator" content="Hugo 0.70.0" />
     <meta name="description" content="Documentation for Hugo Learn Theme">
 <meta name="author" content="Mathieu Cornic">
 
@@ -12,19 +12,19 @@
     <title>soul plugin 调用链 :: Documentation for Hugo Learn Theme</title>
 
     
-    <link href="/css/nucleus.css?1614786481" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1614786481" rel="stylesheet">
-    <link href="/css/hybrid.css?1614786481" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1614786481" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1614786481" rel="stylesheet">
-    <link href="/css/auto-complete.css?1614786481" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1614786481" rel="stylesheet">
-    <link href="/css/theme.css?1614786481" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1614786481" rel="stylesheet">
+    <link href="/css/nucleus.css?1614953762" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1614953762" rel="stylesheet">
+    <link href="/css/hybrid.css?1614953762" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1614953762" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1614953762" rel="stylesheet">
+    <link href="/css/auto-complete.css?1614953762" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1614953762" rel="stylesheet">
+    <link href="/css/theme.css?1614953762" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1614953762" rel="stylesheet">
     
     
 
-    <script src="/js/jquery-3.3.1.min.js?1614786481"></script>
+    <script src="/js/jquery-3.3.1.min.js?1614953762"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -69,14 +69,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1614786481"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1614786481"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1614953762"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1614953762"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/blog.valjean.cn\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1614786481"></script>
+<script type="text/javascript" src="/js/search.js?1614953762"></script>
 
     
   </div>
@@ -804,44 +804,42 @@
 
 
 
-<div id="outline-container-headline-1" class="outline-4">
 <h4 id="headline-1">
 插件链初探
 </h4>
-<div id="outline-text-headline-1" class="outline-text-4">
-<p>soul-bootstrap启动,相关初始化工作完毕之后，当外部发起一个请求到soul-bootstrap,其内部是如何进行过滤、筛选的. 此次拿divide插件来做简单分析。 <br>
-    SoulWebHandler是程序的一个入口点，目前soul代理的服务，都是通过http请求调用的。该类在初始化的时候，会获取到pom中配置的相关插件依赖创建的spring bean.
-    其handle方法会被触发执行，（这块应该是框架调用的，待确认）.随后会创建一个 DefaultSoulPluginChain 并发起插件链的调用。</p>
 <p>
-<img src="../images/soul-plugin-invoke.png" alt="../images/soul-plugin-invoke.png" title="../images/soul-plugin-invoke.png" /></p>
-</div>
-</div>
-<div id="outline-container-headline-2" class="outline-4">
+soul-bootstrap启动,相关初始化工作完毕之后，当外部发起一个请求到soul-bootstrap,其内部是如何进行过滤、筛选的. 此次拿divide插件来做简单分析。 <br>
+    SoulWebHandler是程序的一个入口点，目前soul代理的服务，都是通过http请求调用的。该类在初始化的时候，会获取到pom中配置的相关插件依赖创建的spring bean.
+    其handle方法会被触发执行，（这块应该是框架调用的，待确认）.随后会创建一个 DefaultSoulPluginChain 并发起插件链的调用。
+</p>
+<p>
+<img src="../images/soul-plugin-invoke.png" alt="../images/soul-plugin-invoke.png" title="../images/soul-plugin-invoke.png" />
+</p>
 <h4 id="headline-2">
 插件的分类
 </h4>
-<div id="outline-text-headline-2" class="outline-text-4">
-<p>soul的插件有个基础接口SoulPlugin和一个实现了execute方法的 AbstractSoulPlugin. 其他的类型的插件，要么直接继承AbstractSoulPlugin 实现doExecute对
-    对插件进行扩展。 要么直接实现SoulPlugin。 下图是抽取一部分的plugin之间的关系。</p>
 <p>
-<img src="../images/soul-chain-dep.png" alt="../images/soul-chain-dep.png" title="../images/soul-chain-dep.png" /></p>
-</div>
-</div>
-<div id="outline-container-headline-3" class="outline-4">
+soul的插件有个基础接口SoulPlugin和一个实现了execute方法的 AbstractSoulPlugin. 其他的类型的插件，要么直接继承AbstractSoulPlugin 实现doExecute对
+    对插件进行扩展。 要么直接实现SoulPlugin。 下图是抽取一部分的plugin之间的关系。
+</p>
+<p>
+<img src="../images/soul-chain-dep.png" alt="../images/soul-chain-dep.png" title="../images/soul-chain-dep.png" />
+</p>
 <h4 id="headline-3">
 待补充
 </h4>
-<div id="outline-text-headline-3" class="outline-text-4">
 <ul>
 <li>
-<p>对webflux的了解，能看明白相关代码</p>
+<p>
+对webflux的了解，能看明白相关代码
+</p>
 </li>
 <li>
-<p>SoulWebHandler是怎么被拉起的</p>
+<p>
+SoulWebHandler是怎么被拉起的
+</p>
 </li>
 </ul>
-</div>
-</div>
 
 
 <footer class="footline">
@@ -1299,19 +1297,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1614786481"></script>
-    <script src="/js/perfect-scrollbar.min.js?1614786481"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1614786481"></script>
-    <script src="/js/jquery.sticky.js?1614786481"></script>
-    <script src="/js/featherlight.min.js?1614786481"></script>
-    <script src="/js/highlight.pack.js?1614786481"></script>
+    <script src="/js/clipboard.min.js?1614953762"></script>
+    <script src="/js/perfect-scrollbar.min.js?1614953762"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1614953762"></script>
+    <script src="/js/jquery.sticky.js?1614953762"></script>
+    <script src="/js/featherlight.min.js?1614953762"></script>
+    <script src="/js/highlight.pack.js?1614953762"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1614786481"></script>
-    <script src="/js/learn.js?1614786481"></script>
-    <script src="/js/hugo-learn.js?1614786481"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1614953762"></script>
+    <script src="/js/learn.js?1614953762"></script>
+    <script src="/js/hugo-learn.js?1614953762"></script>
     
         
-            <script src="/mermaid/mermaid.js?1614786481"></script>
+            <script src="/mermaid/mermaid.js?1614953762"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

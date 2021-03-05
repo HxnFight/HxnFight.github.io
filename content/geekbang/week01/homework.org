@@ -12,8 +12,14 @@
 #+end_quote
 
   作业复用老师的架构，做了简单的修改，实现页面和注册的要求，jndi暂未实现,作业链接和分支如下
-  - 链接: https://gitee.com/valjean/mercyblitz-projects
-  - 分支: ~valjean~
+  - 链接: https://gitee.com/valjean/mercyblitz-projects.git 
+  - 分支: ~week-01~
+    
+  直接拷贝如下命令执行也可以：
+
+#+begin_src shell
+git clone  -b week-01  --depth 1 https://gitee.com/valjean/mercyblitz-projects.git  valjean/week-01
+#+end_src
     
   
 * 作业思路
