@@ -1,0 +1,14 @@
+#+title: Note
+#+date:  2021-03-08T10:10:47+08:00
+#+weight: 2
+
+
+** 相关资料
+
+*** jndi
+    - https://tomcat.apache.org/tomcat-8.0-doc/jndi-resources-howto.html
+    - 
+
+*** hibernate 
+    - https://hibernate.org/validator/
+ 
