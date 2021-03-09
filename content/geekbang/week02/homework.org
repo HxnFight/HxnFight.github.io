@@ -4,6 +4,12 @@
 
 * 作业信息
 #+begin_quote
+要求：
+通过课堂上的简易版依赖注入和依赖查找，实现用户注册功能
+通过 UserService 实现用户注册注册用户需要校验
+Id：必须大于 0 的整数
+密码：6-32 位 电话号码: 采用中国大陆方式（11 位校验）
+作业提交链接： https://jinshuju.net/f/afHnK6
 
 #+end_quote
 
@@ -16,3 +22,33 @@ git clone  -b week-02  --depth 1 https://gitee.com/valjean/mercyblitz-projects.g
 #+end_src
 
 * 作业思路
+https://doc.bccnsoft.com/docs/tomcat-8.0-doc/jndi-resources-howto.html
+  <resource-ref> - Resource reference, which is typically to an object factory for resources such as a JDBC DataSource, a JavaMail Session, or custom object factories configured into Tomcat.
+<resource-env-ref> - Resource environment reference, a new variation of resource-ref added in Servlet 2.4 that is simpler to configure for resources that do not require authentication information.
+
+
+* derby
+
+  [[http://db.apache.org/derby/][office web site]]
+** derby 路径问题
+   使用derby，程序报
+   #+begin_quote
+   getConnection failed: SQL Exception: Failed to create database '/db/user-platform', see the next exception for details
+   #+end_quote
+   
+   - [[https://db.apache.org/derby/docs/10.0/manuals/develop/develop14.html#HDRSII-DEVELOP-22102][office url issue]]
+     
+     ~jdbc:derby:/db/user-platform;create=true ~
+     #+begin_quote
+
+     jdbc:derby:/reference/phrases/french
+     Open a connection to the database /reference/phrases/french.
+     On a UNIX system, this would be the path of the directory. On a Windows system,
+     the path would be C:\reference\phrases\french if the current drive were C. If a jar file storing databases were in the user's class path,
+     this could also be a path within the jar file.
+     
+     #+end_quote
+
+     按照官网的解释， ~/reference/phrases/french~ 后面这段对应的是本地的一个路劲地址，所以程序需要有创建的权限才行
+     
+
