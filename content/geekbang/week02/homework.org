@@ -75,5 +75,10 @@ java.lang.NoClassDefFoundError: javax/el/ELManager
 
 ** hibrate
 
+*** hibrate 查询
+https://www.objectdb.com/java/jpa/query/jpql/select
+
 *** 查询的时候，用类名，而不是表名
 https://blog.csdn.net/wuting3680278/article/details/71974028
+
+*** controll 注入问题
