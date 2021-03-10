@@ -17,7 +17,7 @@
       <pubDate>Mon, 08 Mar 2021 10:10:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/geekbang/week02/homework/</guid>
-      <description> 作业信息       链接: https://gitee.com/valjean/mercyblitz-projects.git    分支: week-02    直接拷贝如下命令执行也可以： git clone -b week-02 --depth 1 https://gitee.com/valjean/mercyblitz-projects.git  作业思路  </description>
+      <description>作业信息    要求： 通过课堂上的简易版依赖注入和依赖查找，实现用户注册功能 通过 UserService 实现用户注册注册用户需要校验 Id：必须大于 0 的整数 密码：6-32 位 电话号码: 采用中国大陆方式（11 位校验） 作业提交链接： https://jinshuju.net/f/afHnK6     链接: https://gitee.com/valjean/mercyblitz-projects.git    分支: week-02    直接拷贝如下命令执行也可以： git clone -b week-02 --depth 1 https://gitee.com/valjean/mercyblitz-projects.git  作业思路   https://doc.bccnsoft.com/docs/tomcat-8.0-doc/jndi-resources-howto.html &amp;lt;resource-ref&amp;gt; - Resource reference, which is typically to an object factory for resources such as a JDBC DataSource, a JavaMail Session, or custom object factories configured into Tomcat.</description>
     </item>
     
     <item>
