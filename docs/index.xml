@@ -17,7 +17,7 @@
       <pubDate>Mon, 08 Mar 2021 10:10:43 +0800</pubDate>
       
       <guid>http://blog.valjean.cn/geekbang/week02/homework/</guid>
-      <description>作业信息    要求： 通过课堂上的简易版依赖注入和依赖查找，实现用户注册功能 通过 UserService 实现用户注册注册用户需要校验 Id：必须大于 0 的整数 密码：6-32 位 电话号码: 采用中国大陆方式（11 位校验）     链接: https://gitee.com/valjean/mercyblitz-projects.git    分支: week-02    直接拷贝如下命令执行也可以： git clone -b week-02 --depth 1 https://gitee.com/valjean/mercyblitz-projects.git  作业完成度     用户注册功能实现: 但是control的注入暂未实现，userService 是通过ComponentContext,手动获取 hibernate 查询，没怎么用过hibernate，项目中只做了简单的插入和查询，没有深究相关语法    hibernate validator 暂未实现   作业收获     对derby 有了大概的了解，会安装、查询    hibernate validator 有个大概的了解    对spring ioc这块，有了一个更深入的理解，bean的注入、查询    lambda的各种封装调用   作业思路  作业中注意事项     derby db 因为是在mac、Linux下使用，将derby的path设置为 tmp/user-platform 另外user 表需要提前创建    hibernate-validator 的版本引用   笔记与问题见 https://www.</description>
+      <description>作业信息    要求： 通过课堂上的简易版依赖注入和依赖查找，实现用户注册功能 通过 UserService 实现用户注册注册用户需要校验 Id：必须大于 0 的整数 密码：6-32 位 电话号码: 采用中国大陆方式（11 位校验）     链接: https://gitee.com/valjean/mercyblitz-projects.git    分支: week-02    直接拷贝如下命令执行也可以： git clone -b week-02 --depth 1 https://gitee.com/valjean/mercyblitz-projects.git  完成度     用户注册功能实现: 但是control的注入暂未实现，userService 是通过ComponentContext,手动获取 hibernate 查询，没怎么用过hibernate，项目中只做了简单的插入和查询，没有深究相关语法    hibernate validator 暂未实现   注意事项     derby db 因为是在mac、Linux下使用，将derby的path设置为 tmp/user-platform 另外user 表需要提前创建    hibernate-validator 的版本引用    controller 是在另外的模块创建，在user-web中无法适当的注入资源，目前资源是手动注入   笔记与问题见     https://www.</description>
     </item>
     
     <item>
