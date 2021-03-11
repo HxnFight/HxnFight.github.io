@@ -7,6 +7,7 @@
    - https://tomcat.apache.org/tomcat-8.0-doc/jndi-resources-howto.html
 ** hibernate 
    - https://hibernate.org/validator/
+   - https://docs.jboss.org/hibernate/validator/
  
 * tomcat jndi
 ** resource-ref  resource-env-ref 区别

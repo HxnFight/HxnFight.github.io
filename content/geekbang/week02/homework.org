@@ -23,7 +23,8 @@
 ** 完成度
    - 用户注册功能实现: 但是control的注入暂未实现，userService 是通过ComponentContext,手动获取  \\
      hibernate 查询，没怎么用过hibernate，项目中只做了简单的插入和查询，没有深究相关语法
-   - hibernate validator 暂未实现
+   - hibernate validator 只是简单的实现,在数据保存的时候，将检验信息以日志形式输出
+     - org.geektimes.projects.user.validator.bean.validation.UserValidAnnotationValidator
 
 ** 注意事项
    - derby db
