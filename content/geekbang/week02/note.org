@@ -2,13 +2,73 @@
 #+date:  2021-03-08T10:10:47+08:00
 #+weight: 2
 
-
-** 相关资料
-
-*** jndi
-    - https://tomcat.apache.org/tomcat-8.0-doc/jndi-resources-howto.html
-    - 
-
-*** hibernate 
-    - https://hibernate.org/validator/
+* 相关资料
+** jndi
+   - https://tomcat.apache.org/tomcat-8.0-doc/jndi-resources-howto.html
+** hibernate 
+   - https://hibernate.org/validator/
  
+* tomcat jndi
+** resource-ref  resource-env-ref 区别
+  https://doc.bccnsoft.com/docs/tomcat-8.0-doc/jndi-resources-howto.html  \\
+  <resource-ref> - Resource reference, which is typically to an object factory for resources such as a JDBC DataSource, \\
+  a JavaMail Session, or custom object factories configured into Tomcat. \\
+
+  <resource-env-ref> - Resource environment reference,  \\
+  a new variation of resource-ref added in Servlet 2.4 that is simpler to configure for resources that do not require authentication information.
+
+* derby
+
+  [[http://db.apache.org/derby/][office web site]]
+** derby 路径问题
+   使用derby，程序报
+   #+begin_quote
+   getConnection failed: SQL Exception: Failed to create database '/db/user-platform', see the next exception for details
+   #+end_quote
+   
+   - [[https://db.apache.org/derby/docs/10.0/manuals/develop/develop14.html#HDRSII-DEVELOP-22102][office url issue]]
+     
+     ~jdbc:derby:/db/user-platform;create=true ~
+     #+begin_quote
+
+     jdbc:derby:/reference/phrases/french  \\
+     Open a connection to the database /reference/phrases/french. \\
+     On a UNIX system, this would be the path of the directory. On a Windows system, \\
+     the path would be C:\reference\phrases\french if the current drive were C. If a jar file storing databases were in the user's class path, \\
+     this could also be a path within the jar file.
+     
+     #+end_quote
+
+     按照官网的解释， ~/reference/phrases/french~ 后面这段对应的是本地的一个路劲地址，所以程序需要有创建的权限才行
+
+* pom 依赖
+** 项目启动报如下的错
+
+  #+begin_quote
+  java.lang.NoClassDefFoundError: javax/el/ELManager
+  #+end_quote
+
+   - 降低hibernate-validator的版本
+     #+begin_quote
+    <dependency>
+        <groupId>org.hibernate</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>5.1.0.Final</version>
+    </dependency>
+     #+end_quote
+   - hibernate-validator 的maven groupId 做过变更， org.hibernate.validator » hibernate-validator  \\
+    在 org.hibernate.validator 下找不到6.0.0 以下的版本，故降低版本的时候，需要注意groupId的取值 [[https://mvnrepository.com/artifact/org.hibernate/hibernate-validator][maven-repo]]
+   [[file: ../images/hibernate-dep.png]] 
+
+** 内嵌tomcat升级版本
+   尝试将pom中的tomcat版本统一，发现改到8报错，暂未深究
+     
+** hiberate
+
+*** hiberate 查询
+   - https://www.objectdb.com/java/jpa/query/jpql/select
+
+*** 查询的时候，用类名，而不是表名
+   - https://blog.csdn.net/wuting3680278/article/details/71974028
+
+*** controll 注入问题

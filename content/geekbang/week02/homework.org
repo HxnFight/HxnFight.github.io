@@ -4,12 +4,11 @@
 
 * 作业信息
 #+begin_quote
-要求：
-通过课堂上的简易版依赖注入和依赖查找，实现用户注册功能
-通过 UserService 实现用户注册注册用户需要校验
-Id：必须大于 0 的整数
-密码：6-32 位 电话号码: 采用中国大陆方式（11 位校验）
-作业提交链接： https://jinshuju.net/f/afHnK6
+要求： \\
+通过课堂上的简易版依赖注入和依赖查找，实现用户注册功能 \\
+通过 UserService 实现用户注册注册用户需要校验  \\
+Id：必须大于 0 的整数  \\
+密码：6-32 位 电话号码: 采用中国大陆方式（11 位校验） 
 
 #+end_quote
 
@@ -17,68 +16,26 @@ Id：必须大于 0 的整数
   - 分支: ~week-02~
     
   直接拷贝如下命令执行也可以：
-#+begin_src shell
-git clone  -b week-02  --depth 1 https://gitee.com/valjean/mercyblitz-projects.git  
-#+end_src
+  #+begin_src shell
+  git clone  -b week-02  --depth 1 https://gitee.com/valjean/mercyblitz-projects.git  
+  #+end_src
 
+* 作业完成度
+  - 用户注册功能实现: 但是control的注入暂未实现，userService 是通过ComponentContext,手动获取
+    hibernate 查询，没怎么用过hibernate，项目中只做了简单的插入和查询，没有深究相关语法
+  - hibernate validator 暂未实现
+
+* 作业收获
+  - 对derby 有了大概的了解，会安装、查询
+  - hibernate validator 有个大概的了解
+  - 对spring ioc这块，有了一个更深入的理解，bean的注入、查询
+  - lambda的各种封装调用
 * 作业思路
-https://doc.bccnsoft.com/docs/tomcat-8.0-doc/jndi-resources-howto.html
- <resource-ref> - Resource reference, which is typically to an object factory for resources such as a JDBC DataSource, a JavaMail Session, or custom object factories configured into Tomcat.
-<resource-env-ref> - Resource environment reference, a new variation of resource-ref added in Servlet 2.4 that is simpler to configure for resources that do not require authentication information.
 
-
-* derby
-
-  [[http://db.apache.org/derby/][office web site]]
-** derby 路径问题
-   使用derby，程序报
-   #+begin_quote
-   getConnection failed: SQL Exception: Failed to create database '/db/user-platform', see the next exception for details
-   #+end_quote
-   
-   - [[https://db.apache.org/derby/docs/10.0/manuals/develop/develop14.html#HDRSII-DEVELOP-22102][office url issue]]
+* 作业中注意事项
+  - derby db
+    因为是在mac、Linux下使用，将derby的path设置为 /tmp/user-platform/ \\
+    另外user 表需要提前创建
+  - hibernate-validator 的版本引用
      
-     ~jdbc:derby:/db/user-platform;create=true ~
-     #+begin_quote
-
-     jdbc:derby:/reference/phrases/french
-     Open a connection to the database /reference/phrases/french.
-     On a UNIX system, this would be the path of the directory. On a Windows system,
-     the path would be C:\reference\phrases\french if the current drive were C. If a jar file storing databases were in the user's class path,
-     this could also be a path within the jar file.
-     
-     #+end_quote
-
-     按照官网的解释， ~/reference/phrases/french~ 后面这段对应的是本地的一个路劲地址，所以程序需要有创建的权限才行
-
-* pom 依赖
-** 项目启动报如下的错
-
-#+begin_quote
-java.lang.NoClassDefFoundError: javax/el/ELManager
-#+end_quote
-   - 降低hibernate-validator的版本
-     #+begin_quote
-    <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <version>5.1.0.Final</version>
-    </dependency>
-     #+end_quote
-   - hibernate-validator 的maven groupId 做过变更， org.hibernate.validator » hibernate-validator  \\
-    在 org.hibernate.validator 下找不到6.0.0 以下的版本，故降低版本的时候，需要注意groupId的取值 [[https://mvnrepository.com/artifact/org.hibernate/hibernate-validator][maven-repo]]
-   [[file: ../images/hibernate-dep.png]] 
-
-** 内嵌tomcat升级版本
-   尝试将pom中的tomcat版本统一，发现改到8报错，暂未深究
-     
-
-** hibrate
-
-*** hibrate 查询
-https://www.objectdb.com/java/jpa/query/jpql/select
-
-*** 查询的时候，用类名，而不是表名
-https://blog.csdn.net/wuting3680278/article/details/71974028
-
-*** controll 注入问题
+* 笔记与问题见 [[https://www.valjean.cn/geekbang/week02/note/]]
