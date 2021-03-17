@@ -16,6 +16,14 @@
     应用名称 property name = “application.name” \\
 #+end_quote
 
+   - 链接: https://gitee.com/valjean/mercyblitz-projects.git 
+   - 分支: ~valjean/week-03~
+    
+   直接拷贝如下命令执行也可以：
+   #+begin_src shell
+   git clone  -b valjean/week-03  --depth 1 https://gitee.com/valjean/mercyblitz-projects.git  
+   #+end_src
+
 * 完成度
 ** 需求一
    复用UserMBean， 在项目中增加Jolokia 依赖，完成属性的查询、修改操作
