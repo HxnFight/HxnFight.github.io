@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://blog.valjean.cn/geekbang/week03/homework/</loc>
+    <lastmod>2021-03-12T09:44:25+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.valjean.cn/geekbang/week02/homework/</loc>
     <lastmod>2021-03-08T10:10:43+08:00</lastmod>
   </url>
@@ -53,6 +58,11 @@
   </url>
   
   <url>
+    <loc>http://blog.valjean.cn/geekbang/week03/</loc>
+    <lastmod>2021-03-12T09:44:10+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://blog.valjean.cn/soul/src_learn/</loc>
     <lastmod>2021-01-26T16:05:11+08:00</lastmod>
   </url>
@@ -75,6 +85,11 @@
   <url>
     <loc>http://blog.valjean.cn/soul/src_learn/summary/</loc>
     <lastmod>2021-01-18T16:42:43+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.valjean.cn/geekbang/week03/note/</loc>
+    <lastmod>2021-03-12T09:44:17+08:00</lastmod>
   </url>
   
   <url>
@@ -139,7 +154,7 @@
   
   <url>
     <loc>http://blog.valjean.cn/</loc>
-    <lastmod>2021-03-08T10:10:47+08:00</lastmod>
+    <lastmod>2021-03-12T09:44:25+08:00</lastmod>
   </url>
   
   <url>

@@ -1,3 +1,36 @@
 #+title: Note
 #+date:  2021-03-12T09:44:17+08:00
 #+weight: 5
+
+
+* 
+
+* [[https://jolokia.org/][Jolokia]]
+
+** 方式
+*** proxy mode
+    单独部署应用，请求到proxy后，经过翻译再到对应的应用，根据官网的介绍，该种模式下，有的操作不执行，还是建议走agent模式
+    该方式未实践
+*** agent mode [[https://jolokia.org/reference/html/agents.html#agents-mule][docs]]
+    该种模式下有是四种方式，目前选的 ~Webarchive (War) agent~ , 相对操作简单。 其他方式暂未尝试.
+
+
+** 请求协议
+*** [[https://jolokia.org/reference/html/protocol.html][docs]]
+
+  - post 请求的固定地址 ~http://localhost:8080/jolokia~ 其余的操作类型，参数均在json中指定。 具体详情见文档
+    
+    #+begin_src shell
+POST http://localhost:8080/jolokia
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "write",
+  "mbean": "org.geektimes.projects.user.management:type=User",
+  "attribute": "Name",
+  "value": "valjean"
+}
+
+    #+end_src
+

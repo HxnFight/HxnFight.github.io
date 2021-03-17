@@ -2,7 +2,7 @@
 #+date: 2021-03-12T09:44:10+08:00
 #+weight: 3
 #+chapter: true
-#+pre: <b>1. </b>
+#+pre: <b>3. </b>
 
 * week-03
 

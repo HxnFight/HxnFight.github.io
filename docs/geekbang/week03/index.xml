@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Week03 on Documentation for Hugo Learn Theme</title>
+    <link>http://blog.valjean.cn/geekbang/week03/</link>
+    <description>Recent content in Week03 on Documentation for Hugo Learn Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Fri, 12 Mar 2021 09:44:10 +0800</lastBuildDate>
+    
+	<atom:link href="http://blog.valjean.cn/geekbang/week03/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Homework</title>
+      <link>http://blog.valjean.cn/geekbang/week03/homework/</link>
+      <pubDate>Fri, 12 Mar 2021 09:44:25 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/geekbang/week03/homework/</guid>
+      <description>作业    需求一（必须） 整合 https://jolokia.org/ 实现一个自定义 JMX MBean，通过 Jolokia 做 Servlet 代理 需求二（选做） 继续完成 Microprofile config API 中的实现 扩展 org.eclipse.microprofile.config.spi.ConfigSource 实现，包括 OS 环境变量，以及本地配置文件 扩展 org.eclipse.microprofile.config.spi.Converter 实现，提供 String 类型到简单类型 通过 org.eclipse.microprofile.config.Config 读取当前应用名称 应用名称 property name = “application.name” 作业提交链接： https://jinshuju.net/f/EDwozM  完成度  需求一   复用UserMBean， 在项目中增加Jolokia 依赖，完成属性的查询、修改操作 需求二   暂未实现 思路     引入对应的依赖    在web.xml 中添加对应的 servlet 的配置    修改 UserMBeanDemo 添加一个init方法，并带上 @PostConstruct 这样，本框架会再启动的时候，调用该方法 完成 MBean的初始化，并注册到MBeanServer 中    随后调用脚本进行测试    测试脚本如下： projects/stage-0/user-platform/user-web/scripts/jmx.</description>
+    </item>
+    
+    <item>
+      <title>Note</title>
+      <link>http://blog.valjean.cn/geekbang/week03/note/</link>
+      <pubDate>Fri, 12 Mar 2021 09:44:17 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/geekbang/week03/note/</guid>
+      <description>  Jolokia  方式  proxy mode   单独部署应用，请求到proxy后，经过翻译再到对应的应用，根据官网的介绍，该种模式下，有的操作不执行，还是建议走agent模式 该方式未实践 agent mode docs   该种模式下有是四种方式，目前选的 Webarchive (War) agent , 相对操作简单。 其他方式暂未尝试. 请求协议  docs     post 请求的固定地址 http://localhost:8080/jolokia 其余的操作类型，参数均在json中指定。 具体详情见文档 POST http://localhost:8080/jolokia Content-Type: application/json Accept: application/json { &amp;#34;type&amp;#34;: &amp;#34;write&amp;#34;, &amp;#34;mbean&amp;#34;: &amp;#34;org.geektimes.projects.user.management:type=User&amp;#34;, &amp;#34;attribute&amp;#34;: &amp;#34;Name&amp;#34;, &amp;#34;value&amp;#34;: &amp;#34;valjean&amp;#34; }    </description>
+    </item>
+    
+  </channel>
+</rss>
