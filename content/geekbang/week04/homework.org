@@ -1,0 +1,29 @@
+#+title: Homework
+#+date:  2021-03-21T08:01:03+08:00
+#+weight: 1
+
+* 作业
+#+begin_quote
+** 完善 my dependency-injection 模块
+    - 脱离 web.xml 配置实现 ComponentContext 自动初始化
+    - 使用独立模块并且能够在 user-web 中运行成功
+** 完善 my-configuration 模块
+    - Config 对象如何能被 my-web-mvc 使用
+    - 可能在 ServletContext 获取如何通过 ThreadLocal 获取
+    - 去提前阅读 Servlet 规范中 Security 章节（Servlet 容器安全）
+ 作业提交链接： https://jinshuju.net/f/OubQma
+
+ #+end_quote
+
+   - 链接: https://gitee.com/valjean/mercyblitz-projects.git 
+   - 分支: ~valjean/week-04~
+
+
+* 完成度
+
+* 思路
+
+* 注意事项
+
+* 笔记
+ [[file: ../note/][note]]
