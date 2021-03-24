@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>tars summary :: Documentation for Hugo Learn Theme</title>
+    <title>Homework :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1616572578" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/soul/src_learn/summary/">
+  <body class="" data-url="/geekbang/week04/homework/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -96,7 +96,7 @@
   
     
     <li data-nav-id="/geekbang/" title="Geekbang" class="dd-item
-        
+        parent
         
         
         ">
@@ -346,7 +346,7 @@
   
     
     <li data-nav-id="/geekbang/week04/" title="Week04" class="dd-item
-        
+        parent
         
         
         ">
@@ -374,7 +374,7 @@
  
   
     
-      <li data-nav-id="/geekbang/week04/homework/" title="Homework" class="dd-item ">
+      <li data-nav-id="/geekbang/week04/homework/" title="Homework" class="dd-item active">
         <a href="/geekbang/week04/homework/">
         Homework
         <i class="fas fa-check read-icon"></i>
@@ -433,7 +433,7 @@
   
     
     <li data-nav-id="/soul/" title="soul 学习笔记" class="dd-item
-        parent
+        
         
         
         ">
@@ -750,7 +750,7 @@
   
     
     <li data-nav-id="/soul/src_learn/" title="源码学习" class="dd-item
-        parent
+        
         
         
         ">
@@ -883,7 +883,7 @@
  
   
     
-      <li data-nav-id="/soul/src_learn/summary/" title="tars summary" class="dd-item active">
+      <li data-nav-id="/soul/src_learn/summary/" title="tars summary" class="dd-item ">
         <a href="/soul/src_learn/summary/">
         tars summary
         <i class="fas fa-check read-icon"></i>
@@ -996,7 +996,7 @@
             
           
           
-            <a href='/'>Documentation for Hugo Learn Theme</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/src_learn/'>源码学习</a> > tars summary
+            <a href='/'>Documentation for Hugo Learn Theme</a> > <a href='/geekbang/'>Geekbang</a> > <a href='/geekbang/week04/'>Week04</a> > Homework
           
         
           
@@ -1013,19 +1013,23 @@
     <div class="wrapper">
 <nav id="TableOfContents">
 <ul>
-<li><a href="#headline-1">分享</a>
+<li><a href="#headline-1">作业</a>
 <ul>
-<li><a href="#headline-2">tarscloud 由来</a>
+<li><a href="#headline-2">完善 my dependency-injection 模块</a>
 </li>
-<li><a href="#headline-3">环境搭建</a>
-</li>
-<li><a href="#headline-4">联调测试,带演示过程</a>
-</li>
-<li><a href="#headline-5">问题汇总</a>
-</li>
-<li><a href="#headline-6">总结</a>
+<li><a href="#headline-3">完善 my-configuration 模块</a>
 </li>
 </ul>
+</li>
+<li><a href="#headline-4">思路以及完成度</a>
+<ul>
+<li><a href="#headline-5">作业一</a>
+</li>
+<li><a href="#headline-6">作业二</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-7">笔记</a>
 </li>
 </ul>
 </nav>
@@ -1044,7 +1048,7 @@
           
             <h1>
               
-              tars summary
+              Homework
             </h1>
           
 
@@ -1052,186 +1056,134 @@
 
 
 
-<h3 id="headline-1">
-分享
-</h3>
+<h2 id="headline-1">
+作业
+</h2>
+<blockquote>
 <h4 id="headline-2">
-tarscloud 由来
+完善 my dependency-injection 模块
 </h4>
 <ul>
 <li>
 <p>
-tars 简介 <a href="https://tarscloud.github.io/TarsDocs/dev/tarsjava/tars-quick-start.html">office website</a> 
+脱离 web.xml 配置实现 ComponentContext 自动初始化
 </p>
 </li>
 <li>
 <p>
-<a href="https://tarscloud.github.io/TarsDocs/dev/tarsjava/tars-quick-start.html">office quick start</a>
-</p>
-</li>
-<li>
-<p>
-配置应用, 这里基础概念很重要
+使用独立模块并且能够在 user-web 中运行成功
 </p>
 </li>
 </ul>
-<blockquote>
-<p>
-<a href="https://tarscloud.gitbook.io/tarsdocs/rumen/tars-concept">tars 基础概念</a> <br>
-    应用名：表示一组服务的集合 –&gt; APP <br>
-    服务名称：提供服务的进程名称  –&gt; Server <br>
-    OBJ：提供具体服务的接口 –&gt; Servant 
-</p>
-</blockquote>
 <h4 id="headline-3">
-环境搭建
+完善 my-configuration 模块
 </h4>
 <ul>
 <li>
 <p>
-搞明白tars-framework, tars-nodesd的不同
+Config 对象如何能被 my-web-mvc 使用
 </p>
-<blockquote>
+</li>
+<li>
 <p>
-framework: Tars 框架 Docker 制作脚本, 制作的 docker 包含了框架核心服务和 web 管理平台 <br>
-  tars: Tars 框架 Docker 制作脚本, 和 framework 比, 增加了 java, nodejs 等运行时支持, <br>
-  即可以把 java, nodejs 服务发布到 docker 里面(docker 里面安装了 jdk, node, php 环境) <br>
-  nodes: 是正常的代码运行环境，包含基本的开发环境。
+可能在 ServletContext 获取如何通过 ThreadLocal 获取
 </p>
+</li>
+<li>
+<p>
+去提前阅读 Servlet 规范中 Security 章节（Servlet 容器安全）
+</p>
+</li>
+</ul>
 </blockquote>
-</li>
-<li>
-<p>
-拉取配置国内源，拉取docker 镜像.
-</p>
 <ul>
 <li>
 <p>
-创建docker network
+链接: <a href="https://gitee.com/valjean/mercyblitz-projects.git">https://gitee.com/valjean/mercyblitz-projects.git</a> 
 </p>
 </li>
 <li>
 <p>
-在启动docker的过程中，不要修改默认的端口
-</p>
-</li>
-<li>
-<p>
-在控制台能看到nodes的就算启动成功
-</p>
-</li>
-<li>
-</li>
-</ul>
-</li>
-<li>
-</li>
-</ul>
-<h4 id="headline-4">
-联调测试,带演示过程
-</h4>
-<ul>
-<li>
-<p>
-节点配置
-app=SoulExampleServer
-server=SoulExampleApp
-</p>
-</li>
-<li>
-<p>
-项目部署
-</p>
-</li>
-<li>
-<p>
-接口调试
-</p>
-</li>
-<li>
-<p>
-查看日志
-</p>
-<ul>
-<li>
-<p>
-web 日志
-</p>
-</li>
-<li>
-<p>
-本机日志
+分支: <code>valjean/week-04</code>
 </p>
 </li>
 </ul>
-</li>
-</ul>
+<h2 id="headline-4">
+思路以及完成度
+</h2>
 <h4 id="headline-5">
-问题汇总
+作业一
 </h4>
+<p>
+初步完成项目要求
+</p>
 <ul>
 <li>
 <p>
-pom 中加入相关依赖
+将 <code>ComponentContext</code> 项目代码迁移到 <code>my-dependency-injection</code> 模块中，并进行相应的配置。
 </p>
-<div class="src src-xml">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">    <span style="color:#f92672">&lt;dependency&gt;</span>
-        <span style="color:#f92672">&lt;groupId&gt;</span>com.tencent.tars<span style="color:#f92672">&lt;/groupId&gt;</span>
-        <span style="color:#f92672">&lt;artifactId&gt;</span>tars-client<span style="color:#f92672">&lt;/artifactId&gt;</span>
-        <span style="color:#f92672">&lt;version&gt;</span>1.7.2<span style="color:#f92672">&lt;/version&gt;</span>
-    <span style="color:#f92672">&lt;/dependency&gt;</span></code></pre></div>
-</div>
 </li>
 <li>
 <p>
-更改元数据
-gson Pair json话的问题，目前跟踪发现，是soul-client-tars 中向soul-admin注册的元数据有问题。可以查看tarscloud的日志 <br>
-暂时没有找到具体的原因，本地的test跑不通. 强行修改元数据跑通
+添加将 <code>ServletConfigInitializer.java</code> 添加到spi中 <code>javax.servlet.ServletContainerInitializer</code>
 </p>
-<p>
-soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/cache/ApplicationConfigCache.java:123 这行
-</p>
-<div class="src src-java">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">String clazzName <span style="color:#f92672">=</span> PrxInfoUtil<span style="color:#f92672">.</span><span style="color:#a6e22e">getPrxName</span><span style="color:#f92672">(</span>metaData<span style="color:#f92672">);</span>
-TarsParamExtInfo tarsParamExtInfo <span style="color:#f92672">=</span> GsonUtils<span style="color:#f92672">.</span><span style="color:#a6e22e">getInstance</span><span style="color:#f92672">().</span><span style="color:#a6e22e">fromJson</span><span style="color:#f92672">(</span>metaData<span style="color:#f92672">.</span><span style="color:#a6e22e">getRpcExt</span><span style="color:#f92672">(),</span> TarsParamExtInfo<span style="color:#f92672">.</span><span style="color:#a6e22e">class</span><span style="color:#f92672">);</span>
-DynamicType<span style="color:#f92672">.</span><span style="color:#a6e22e">Builder</span><span style="color:#f92672">&lt;?&gt;</span> classDefinition <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ByteBuddy<span style="color:#f92672">()</span>
-      <span style="color:#f92672">.</span><span style="color:#a6e22e">makeInterface</span><span style="color:#f92672">()</span>
-      <span style="color:#f92672">.</span><span style="color:#a6e22e">name</span><span style="color:#f92672">(</span>clazzName<span style="color:#f92672">);</span></code></pre></div>
-</div>
 </li>
 <li>
 <p>
-类型转换的错误
-soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/PrxInfoUtil.java
+删除user-web 相关代码，并注释掉web.xml 中的listener，将 <code>my-dependency-injection</code> 添加到项目依赖中
 </p>
-<div class="src src-java">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">  <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> paramNames<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
-      String paramName <span style="color:#f92672">=</span> paramNames<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
-      Class<span style="color:#f92672">&lt;?&gt;</span> paramType <span style="color:#f92672">=</span> paramTypes<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
-      <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>PRIMITIVE_TYPE<span style="color:#f92672">.</span><span style="color:#a6e22e">containsKey</span><span style="color:#f92672">(</span>paramType<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()))</span> <span style="color:#f92672">{</span>
-          param<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> PRIMITIVE_TYPE<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>paramType<span style="color:#f92672">.</span><span style="color:#a6e22e">getName</span><span style="color:#f92672">()).</span><span style="color:#a6e22e">getFunc</span><span style="color:#f92672">().</span><span style="color:#a6e22e">apply</span><span style="color:#f92672">(</span>String<span style="color:#f92672">.</span><span style="color:#a6e22e">valueOf</span><span style="color:#f92672">(</span>bodyMap<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>paramName<span style="color:#f92672">))</span> <span style="color:#f92672">);</span>
-      <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-          param<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> bodyMap<span style="color:#f92672">.</span><span style="color:#a6e22e">get</span><span style="color:#f92672">(</span>paramName<span style="color:#f92672">);</span>
-      <span style="color:#f92672">}</span>
-  <span style="color:#f92672">}</span></code></pre></div>
-</div>
 </li>
 </ul>
 <h4 id="headline-6">
-总结
+作业二
 </h4>
+<p>
+初步完成项目要求
+</p>
 <ul>
 <li>
 <p>
-拓展了眼界，学习到很多新的东西
+屏蔽掉 ServletContextConfigSource 的配置初始化，其有参构造，在初始化时，存在赋值先后的问题，导致失败，暂屏蔽掉
 </p>
 </li>
 <li>
 <p>
-生态的多样性
+参照 ~my-dependency-injection~的实现方式，创建ConfigContext.java,将ConfigProviderResolver放入到 ServletContext中 <br>
+并进行简单的封装，提供getValue方法
+</p>
+</li>
+<li>
+<p>
+另外需要将 基本的 Converter 放入到 org.eclipse.microprofile.config.spi.Converter ，供Converter初始化调用
+</p>
+</li>
+<li>
+<p>
+在resource 下增加 microprofile-config.properties, 增加相关配置
+</p>
+</li>
+<li>
+<p>
+目前在SignUpOpController 中做了简单的验证，流程ok
+</p>
+</li>
+<li>
+<p>
+ThreadLocal 获取暂时深究
+</p>
+</li>
+<li>
+<p>
+Servlet 规范中 Security 章节 通读
 </p>
 </li>
 </ul>
+<h2 id="headline-7">
+笔记
+</h2>
+<p>
+<a href=" ../note/">note</a>
+</p>
 
 
 <footer class="footline">
@@ -1269,203 +1221,6 @@ soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/Prx
             
                 
                     
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
                     
                 
                 
@@ -1540,6 +1295,189 @@ soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/Prx
                     
             
         
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
                     
                         
             
@@ -1669,38 +1607,21 @@ soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/Prx
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
             
         
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -1717,9 +1638,6 @@ soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/Prx
                     
                     
 
-                    
-            
-        
                     
                         
             
@@ -1774,6 +1692,21 @@ soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/Prx
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1791,8 +1724,21 @@ soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/Prx
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
@@ -1820,10 +1766,10 @@ soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/Prx
 	 
 	 
 		
-			<a class="nav nav-prev" href="/soul/src_learn/soul-client/" title="soul-client"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/geekbang/week04/" title="Week04"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/soul/src_learn/spi/" title="spi 机制" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/geekbang/week04/note/" title="Note" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

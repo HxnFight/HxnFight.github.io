@@ -1,5 +1,12 @@
 [
 {
+	"uri": "http://blog.valjean.cn/geekbang/week04/homework/",
+	"title": "Homework",
+	"tags": [],
+	"description": "",
+	"content": " 作业   完善 my dependency-injection 模块     脱离 web.xml 配置实现 ComponentContext 自动初始化    使用独立模块并且能够在 user-web 中运行成功   完善 my-configuration 模块     Config 对象如何能被 my-web-mvc 使用    可能在 ServletContext 获取如何通过 ThreadLocal 获取    去提前阅读 Servlet 规范中 Security 章节（Servlet 容器安全）       链接: https://gitee.com/valjean/mercyblitz-projects.git    分支: valjean/week-04   思路以及完成度  作业一   初步完成项目要求    将 ComponentContext 项目代码迁移到 my-dependency-injection 模块中，并进行相应的配置。    添加将 ServletConfigInitializer.java 添加到spi中 javax.servlet.ServletContainerInitializer    删除user-web 相关代码，并注释掉web.xml 中的listener，将 my-dependency-injection 添加到项目依赖中   作业二   初步完成项目要求    屏蔽掉 ServletContextConfigSource 的配置初始化，其有参构造，在初始化时，存在赋值先后的问题，导致失败，暂屏蔽掉    参照 ~my-dependency-injection~的实现方式，创建ConfigContext.java,将ConfigProviderResolver放入到 ServletContext中 并进行简单的封装，提供getValue方法    另外需要将 基本的 Converter 放入到 org.eclipse.microprofile.config.spi.Converter ，供Converter初始化调用    在resource 下增加 microprofile-config.properties, 增加相关配置    目前在SignUpOpController 中做了简单的验证，流程ok    ThreadLocal 获取暂时深究    Servlet 规范中 Security 章节 通读   笔记   note "
+},
+{
 	"uri": "http://blog.valjean.cn/geekbang/week03/homework/",
 	"title": "Homework",
 	"tags": [],
@@ -47,6 +54,13 @@
 	"tags": [],
 	"description": "",
 	"content": " 开篇随笔   自己的学习随笔和感想. 自己还没有做过这样正式的学习记录。  希望在这一个月的学习过程中，不断提升自己的能力。  进行开发环境、blog环境的搭建。  搞得还是有点仓促，只记录一下一些大致过程。  本来也有个国内ec2的环境，但是最近访问报网站未审核，  今天刚提了审核，可能得过几天才会下来。随后会迁移到自己的ec2上.  刚从manjaro 换到deepin系统上。有些软件还未安装完毕，先将就的用着  等周末将环境好好的整理一下 "
+},
+{
+	"uri": "http://blog.valjean.cn/geekbang/week04/note/",
+	"title": "Note",
+	"tags": [],
+	"description": "",
+	"content": " note     spring native    graal vm    maven plugin    transformer   javax.servlet.ServletContainerInitializer   spi: javax.servlet.ServletContainerInitializer microprofile     https://projects.eclipse.org/projects/technology.microprofile    相关内容待研究    老师的代码实现，需要画下流程图   "
 },
 {
 	"uri": "http://blog.valjean.cn/geekbang/week02/note/",
@@ -103,6 +117,13 @@
 	"tags": [],
 	"description": "",
 	"content": " 插件链初探   soul-bootstrap启动,相关初始化工作完毕之后，当外部发起一个请求到soul-bootstrap,其内部是如何进行过滤、筛选的. 此次拿divide插件来做简单分析。 SoulWebHandler是程序的一个入口点，目前soul代理的服务，都是通过http请求调用的。该类在初始化的时候，会获取到pom中配置的相关插件依赖创建的spring bean. 其handle方法会被触发执行，（这块应该是框架调用的，待确认）.随后会创建一个 DefaultSoulPluginChain 并发起插件链的调用。  插件的分类   soul的插件有个基础接口SoulPlugin和一个实现了execute方法的 AbstractSoulPlugin. 其他的类型的插件，要么直接继承AbstractSoulPlugin 实现doExecute对 对插件进行扩展。 要么直接实现SoulPlugin。 下图是抽取一部分的plugin之间的关系。  待补充     对webflux的了解，能看明白相关代码    SoulWebHandler是怎么被拉起的   "
+},
+{
+	"uri": "http://blog.valjean.cn/geekbang/week04/",
+	"title": "Week04",
+	"tags": [],
+	"description": "",
+	"content": " Weeok04  "
 },
 {
 	"uri": "http://blog.valjean.cn/soul/src_learn/soul-client/",

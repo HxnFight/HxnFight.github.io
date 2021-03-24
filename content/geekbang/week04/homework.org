@@ -4,26 +4,35 @@
 
 * 作业
 #+begin_quote
-** 完善 my dependency-injection 模块
-    - 脱离 web.xml 配置实现 ComponentContext 自动初始化
-    - 使用独立模块并且能够在 user-web 中运行成功
-** 完善 my-configuration 模块
-    - Config 对象如何能被 my-web-mvc 使用
-    - 可能在 ServletContext 获取如何通过 ThreadLocal 获取
-    - 去提前阅读 Servlet 规范中 Security 章节（Servlet 容器安全）
- 作业提交链接： https://jinshuju.net/f/OubQma
+*** 完善 my dependency-injection 模块
+     - 脱离 web.xml 配置实现 ComponentContext 自动初始化
+     - 使用独立模块并且能够在 user-web 中运行成功
+*** 完善 my-configuration 模块
+     - Config 对象如何能被 my-web-mvc 使用
+     - 可能在 ServletContext 获取如何通过 ThreadLocal 获取
+     - 去提前阅读 Servlet 规范中 Security 章节（Servlet 容器安全）
 
- #+end_quote
+  #+end_quote
 
-   - 链接: https://gitee.com/valjean/mercyblitz-projects.git 
-   - 分支: ~valjean/week-04~
+    - 链接: https://gitee.com/valjean/mercyblitz-projects.git 
+    - 分支: ~valjean/week-04~
 
-
-* 完成度
-
-* 思路
-
-* 注意事项
+* 思路以及完成度
+*** 作业一
+    初步完成项目要求
+    - 将 ~ComponentContext~ 项目代码迁移到 ~my-dependency-injection~ 模块中，并进行相应的配置。
+    - 添加将 ~ServletConfigInitializer.java~ 添加到spi中 ~javax.servlet.ServletContainerInitializer~
+    - 删除user-web 相关代码，并注释掉web.xml 中的listener，将 ~my-dependency-injection~ 添加到项目依赖中
+*** 作业二
+    初步完成项目要求
+    - 屏蔽掉 ServletContextConfigSource 的配置初始化，其有参构造，在初始化时，存在赋值先后的问题，导致失败，暂屏蔽掉
+    - 参照 ~my-dependency-injection~的实现方式，创建ConfigContext.java,将ConfigProviderResolver放入到 ServletContext中 \\
+      并进行简单的封装，提供getValue方法
+    - 另外需要将 基本的 Converter 放入到 org.eclipse.microprofile.config.spi.Converter ，供Converter初始化调用
+    - 在resource 下增加 microprofile-config.properties, 增加相关配置
+    - 目前在SignUpOpController 中做了简单的验证，流程ok
+    - ThreadLocal 获取暂时深究
+    - Servlet 规范中 Security 章节 通读
 
 * 笔记
  [[file: ../note/][note]]

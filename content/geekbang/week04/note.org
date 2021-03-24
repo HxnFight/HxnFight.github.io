@@ -4,15 +4,14 @@
 
 
 * note
-
-** spring native
-
-** graal vm
-
-** maven  plugin
-
-*** transformer
-
+  - spring native
+  - graal vm
+  - maven  plugin
+  - transformer
 * javax.servlet.ServletContainerInitializer
   spi:
 javax.servlet.ServletContainerInitializer
+* microprofile
+  - https://projects.eclipse.org/projects/technology.microprofile
+  - 相关内容待研究
+  - 老师的代码实现，需要画下流程图

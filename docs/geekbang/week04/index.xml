@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Week04 on Documentation for Hugo Learn Theme</title>
+    <link>http://blog.valjean.cn/geekbang/week04/</link>
+    <description>Recent content in Week04 on Documentation for Hugo Learn Theme</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 21 Mar 2021 08:00:54 +0800</lastBuildDate>
+    
+	<atom:link href="http://blog.valjean.cn/geekbang/week04/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Homework</title>
+      <link>http://blog.valjean.cn/geekbang/week04/homework/</link>
+      <pubDate>Sun, 21 Mar 2021 08:01:03 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/geekbang/week04/homework/</guid>
+      <description>作业   完善 my dependency-injection 模块     脱离 web.xml 配置实现 ComponentContext 自动初始化    使用独立模块并且能够在 user-web 中运行成功   完善 my-configuration 模块     Config 对象如何能被 my-web-mvc 使用    可能在 ServletContext 获取如何通过 ThreadLocal 获取    去提前阅读 Servlet 规范中 Security 章节（Servlet 容器安全）       链接: https://gitee.com/valjean/mercyblitz-projects.git    分支: valjean/week-04   思路以及完成度  作业一   初步完成项目要求    将 ComponentContext 项目代码迁移到 my-dependency-injection 模块中，并进行相应的配置。    添加将 ServletConfigInitializer.</description>
+    </item>
+    
+    <item>
+      <title>Note</title>
+      <link>http://blog.valjean.cn/geekbang/week04/note/</link>
+      <pubDate>Sun, 21 Mar 2021 08:01:08 +0800</pubDate>
+      
+      <guid>http://blog.valjean.cn/geekbang/week04/note/</guid>
+      <description> note     spring native    graal vm    maven plugin    transformer   javax.servlet.ServletContainerInitializer   spi: javax.servlet.ServletContainerInitializer microprofile     https://projects.eclipse.org/projects/technology.microprofile    相关内容待研究    老师的代码实现，需要画下流程图   </description>
+    </item>
+    
+  </channel>
+</rss>
