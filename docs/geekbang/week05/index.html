@@ -9,7 +9,7 @@
 
     <link rel="icon" href="/images/favicon.png" type="image/png">
 
-    <title>soul-tars 插件实践 :: Documentation for Hugo Learn Theme</title>
+    <title>Week05 :: Documentation for Hugo Learn Theme</title>
 
     
     <link href="/css/nucleus.css?1617181538" rel="stylesheet">
@@ -34,7 +34,7 @@
     </style>
     
   </head>
-  <body class="" data-url="/soul/exercise/tars-2/">
+  <body class="" data-url="/geekbang/week05/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -96,7 +96,7 @@
   
     
     <li data-nav-id="/geekbang/" title="Geekbang" class="dd-item
-        
+        parent
         
         
         ">
@@ -426,8 +426,8 @@
   
     
     <li data-nav-id="/geekbang/week05/" title="Week05" class="dd-item
-        
-        
+        parent
+        active
         
         ">
       <a href="/geekbang/week05/">
@@ -492,7 +492,7 @@
   
     
     <li data-nav-id="/soul/" title="soul 学习笔记" class="dd-item
-        parent
+        
         
         
         ">
@@ -582,7 +582,7 @@
   
     
     <li data-nav-id="/soul/exercise/" title="模块实践" class="dd-item
-        parent
+        
         
         
         ">
@@ -631,7 +631,7 @@
  
   
     
-      <li data-nav-id="/soul/exercise/tars-2/" title="soul-tars 插件实践" class="dd-item active">
+      <li data-nav-id="/soul/exercise/tars-2/" title="soul-tars 插件实践" class="dd-item ">
         <a href="/soul/exercise/tars-2/">
         soul-tars 插件实践
         <i class="fas fa-check read-icon"></i>
@@ -1035,8 +1035,6 @@
                         </a>
                     </span>
                   
-                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
-                  
                   <span class="links">
                  
                  
@@ -1051,13 +1049,7 @@
             
           
           
-            
-            
-          
-          
-            <a href='/'>Documentation for Hugo Learn Theme</a> > <a href='/soul/'>soul 学习笔记</a> > <a href='/soul/exercise/'>模块实践</a> > soul-tars 插件实践
-          
-        
+            <a href='/'>Documentation for Hugo Learn Theme</a> > <a href='/geekbang/'>Geekbang</a> > Week05
           
         
           
@@ -1068,40 +1060,6 @@
                   </span>
                 </div>
                 
-                    <div class="progress">
-    <div class="wrapper">
-<nav id="TableOfContents">
-<ul>
-<li><a href="#headline-1">soul-tars 后续</a>
-<ul>
-<li><a href="#headline-2">1. tars cloud 中尝试添加soul依赖</a>
-</li>
-<li><a href="#headline-3">2. soul-example-tars配置</a>
-</li>
-<li><a href="#headline-4">3. 接口测试调用</a>
-</li>
-<li><a href="#headline-5">4. soul-gateway 调用</a>
-</li>
-</ul>
-</li>
-<li><a href="#headline-6">soul-tar客户端调试</a>
-<ul>
-<li><a href="#headline-7">1. 加入pom依赖</a>
-</li>
-<li><a href="#headline-8">2. 更改元数据</a>
-</li>
-<li><a href="#headline-9">3. 更改解析参数</a>
-</li>
-<li><a href="#headline-10">4. 请求测试</a>
-</li>
-</ul>
-</li>
-</ul>
-</nav>
-    </div>
-</div>
-
-                
               </div>
             </div>
             
@@ -1109,286 +1067,30 @@
         
         </div>
         
+          <div id="chapter">
+        
         <div id="body-inner">
-          
-            <h1>
-              
-              soul-tars 插件实践
-            </h1>
           
 
         
 
 
 
-<h3 id="headline-1">
-soul-tars 后续
-</h3>
-<h4 id="headline-2">
-1. tars cloud 中尝试添加soul依赖
-</h4>
-<p>
-     tarscloud的demo跑起来后，想着在其上引入 soul-spring-boot-starter-client-tars 依赖，来测试soul-tars。  <br>
-     但是将打好的jar发布到tars框架中，一直报jvm错误，也尝试调整jvm参数，但是均启动失败。 这块应该还是tars框架的使用问题 <br>
-     暂时未深入研究，随后开始尝试 soul-examples-tars. 
-</p>
-<p>
-   <img src="../images/tars-demo-erro.png" alt="../images/tars-demo-erro.png" title="../images/tars-demo-erro.png" /> 
-</p>
-<h4 id="headline-3">
-2. soul-example-tars配置
-</h4>
-<p>
-     和使用其他的插件一样， 需要先打开插件开关。 但是不同点是在官方的说明中，并未有tars的使用教程。 这点只能自己摸索。  <br>
-     我在配置的过程中，soul相关的项目是在本机启动， tarscloud是在另一台机器的。 故在配置application.yml的过程中，有一下几点需要注意。
-</p>
-<div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">#application.yml
-soul:
-  tars:
-    adminUrl: http://172.16.0.35:9095
-    contextPath: /tars
-    appName: tars
-    ipAndPort: 192.168.1.110:9002</code></pre></div>
-</div>
-<ul>
-<li>
-<p>
-soul.tars.adminUrl需要更改为实际的ip地址，
-</p>
-</li>
-<li>
-<p>
-soul.tars.ipAndPort 配置要根据tars-node 启动脚本中暴露的端口来选择一个。 因为应用将来是部署在docker容器内的。<br>
-而服务本身的端口与tars框架暴露的端口可以通过tars控制台来更改。
-</p>
-</li>
-</ul>
-<p>
-<img src="../images/soul-tars-cnf.png" alt="../images/soul-tars-cnf.png" title="../images/soul-tars-cnf.png" /> 
-</p>
-<ul>
-<li>
-<p>
-tars-node的启动脚本指定了9000 –&gt; 9010之间的端口对外暴露
-</p>
-</li>
-</ul>
-<div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">docker run -d \
-    --name=tars-node \
-    --net=tars \
-    #-e INET=enp2s0 \
-    -e WEB_HOST=&#34;http://172.25.0.3:3000&#34; \
-    --ip=&#34;172.25.0.5&#34; \
-    -v /data/workspace/tars-cloud/tars:/data/tars \
-    -v /etc/localtime:/etc/localtime \
-    -p 9000-9010:9000-9010 \
-    tarscloud/tars-node:stable</code></pre></div>
-</div>
-<ul>
-<li>
-<p>
-将SoulExampleServer.SoulExampleApp.config.conf文件中 192.168.41.103 全部替换为127.0.0.1. 因其在容器内部调用
-</p>
-</li>
-</ul>
-<h4 id="headline-4">
-3. 接口测试调用
-</h4>
-<p>
-在tars中部署应用完成后， 可以在soul-admin 中tars的接口已经注册好了
-</p>
-<p>
-   <img src="../images/soul-tars-select.png" alt="../images/soul-tars-select.png" title="../images/soul-tars-select.png" />
-</p>
-<p>
-    tars 平台中调用soul-example
-   <img src="../images/soul-tars-api.png" alt="../images/soul-tars-api.png" title="../images/soul-tars-api.png" /> 
-</p>
-<h4 id="headline-5">
-4. soul-gateway 调用
-</h4>
-<p>
-通用gateway的调用报的404，这个还在排查中.
-</p>
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
-POST http://localhost:9195/tars/hello
 
-HTTP/1.1 <span style="color:#ae81ff">404</span> Not Found
-Content-Type: application/json
-Content-Length: <span style="color:#ae81ff">136</span>
-
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;timestamp&#34;</span>: <span style="color:#e6db74">&#34;2021-01-22T08:04:09.878+0000&#34;</span>,
-  <span style="color:#e6db74">&#34;path&#34;</span>: <span style="color:#e6db74">&#34;/tars/hello&#34;</span>,
-  <span style="color:#e6db74">&#34;status&#34;</span>: 404,
-  <span style="color:#e6db74">&#34;error&#34;</span>: <span style="color:#e6db74">&#34;Not Found&#34;</span>,
-  <span style="color:#e6db74">&#34;message&#34;</span>: null,
-  <span style="color:#e6db74">&#34;requestId&#34;</span>: <span style="color:#e6db74">&#34;2adfe3bc&#34;</span>
-<span style="color:#f92672">}</span>
-
-Response code: <span style="color:#ae81ff">404</span> <span style="color:#f92672">(</span>Not Found<span style="color:#f92672">)</span>; Time: 258ms; Content length: <span style="color:#ae81ff">136</span> bytes</code></pre></div>
-</div>
-<h3 id="headline-6">
-soul-tar客户端调试
-</h3>
-<p>
-今天将剩下的tars调试走通了，大致过程记录如下。 tars 部署的应用还是老的代码，本地的soul-bootstrap是最近的代码。<br>
-  随后将所有代码更新，再跑一边流程。 目前调试中遇到的情况记录如下。
-</p>
-<h4 id="headline-7">
-1. 加入pom依赖
-</h4>
-<p>
-soul-bootstrap pom中单加入soul-spring-boot-starter-plugin-tars 启动报错。 
-</p>
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">  Exception in thread <span style="color:#e6db74">&#34;WebSocketConnectReadThread-22&#34;</span> java.lang.NoClassDefFoundError: com/qq/tars/client/CommunicatorFactory
-	at org.dromara.soul.plugin.tars.cache.ApplicationConfigCache.&lt;init&gt;<span style="color:#f92672">(</span>ApplicationConfigCache.java:87<span style="color:#f92672">)</span>
-	at org.dromara.soul.plugin.tars.cache.ApplicationConfigCache.&lt;init&gt;<span style="color:#f92672">(</span>ApplicationConfigCache.java:61<span style="color:#f92672">)</span>
-	at org.dromara.soul.plugin.tars.cache.ApplicationConfigCache$ApplicationConfigCacheInstance.&lt;clinit&gt;<span style="color:#f92672">(</span>ApplicationConfigCache.java:208<span style="color:#f92672">)</span>
-	at org.dromara.soul.plugin.tars.cache.ApplicationConfigCache.getInstance<span style="color:#f92672">(</span>ApplicationConfigCache.java:198<span style="color:#f92672">)</span>
-	at org.dromara.soul.plugin.tars.subscriber.TarsMetaDataSubscriber.onSubscribe<span style="color:#f92672">(</span>TarsMetaDataSubscriber.java:49<span style="color:#f92672">)</span>
-	at org.dromara.soul.plugin.sync.data.websocket.handler.MetaDataHandler.lambda$null$0<span style="color:#f92672">(</span>MetaDataHandler.java:42<span style="color:#f92672">)</span></code></pre></div>
-</div>
-<p>
-    <code>CommunicatorFactory</code> 查看该类是属于com.tencent.tars 下的依赖，在pom中添加如下依赖。在项目中添加相关依赖后，不是立即生效的，<br>
-    这个时候打包还是会出错。 可以安装 <a href="https://plugins.jetbrains.com/plugin/7179-maven-helper">maven-helper</a> 插件，点击Reimport 再查询相关依赖是否引入，很方便
-</p>
-<div class="src src-xml">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml">       <span style="color:#f92672">&lt;dependency&gt;</span>
-            <span style="color:#f92672">&lt;groupId&gt;</span>com.tencent.tars<span style="color:#f92672">&lt;/groupId&gt;</span>
-            <span style="color:#f92672">&lt;artifactId&gt;</span>tars-client<span style="color:#f92672">&lt;/artifactId&gt;</span>
-            <span style="color:#f92672">&lt;version&gt;</span>1.7.2<span style="color:#f92672">&lt;/version&gt;</span>
-        <span style="color:#f92672">&lt;/dependency&gt;</span></code></pre></div>
-</div>
-<p>
-<img src="../images/tars-maven.png" alt="../images/tars-maven.png" title="../images/tars-maven.png" />
-</p>
-<h4 id="headline-8">
-2. 更改元数据
-</h4>
-<p>
-在tars中的应用启动后，相关的元数据信息已经注册到soul-admin中。 但是执行请求的时候，还是会报如下错误。
-</p>
-<p>
-<img src="../images/tar-param-error.png" alt="../images/tar-param-error.png" title="../images/tar-param-error.png" />
-</p>
-<p>
-   随后在相关的test中发现，soul-bootstrap使用功能的元数据中的params是left、right的，而应用上报上来的事key、value的 <br>
-   我的元数据信息：
-</p>
-<div class="src src-json">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;methodInfo&#34;</span>: [
-    {
-      <span style="color:#f92672">&#34;methodName&#34;</span>: <span style="color:#e6db74">&#34;hello&#34;</span>,
-      <span style="color:#f92672">&#34;params&#34;</span>: [
-        {
-          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;int&#34;</span>,
-          <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;no&#34;</span>
-        },
-        {
-          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;java.lang.String&#34;</span>,
-          <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;name&#34;</span>
-        }
-      ],
-      <span style="color:#f92672">&#34;returnType&#34;</span>: <span style="color:#e6db74">&#34;java.lang.String&#34;</span>
-    },
-    {
-      <span style="color:#f92672">&#34;methodName&#34;</span>: <span style="color:#e6db74">&#34;helloInt&#34;</span>,
-      <span style="color:#f92672">&#34;params&#34;</span>: [
-        {
-          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;int&#34;</span>,
-          <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;no&#34;</span>
-        },
-        {
-          <span style="color:#f92672">&#34;key&#34;</span>: <span style="color:#e6db74">&#34;java.lang.String&#34;</span>,
-          <span style="color:#f92672">&#34;value&#34;</span>: <span style="color:#e6db74">&#34;name&#34;</span>
-        }
-      ],
-      <span style="color:#f92672">&#34;returnType&#34;</span>: <span style="color:#e6db74">&#34;java.lang.Integer&#34;</span>
-    }
-  ]
-}</code></pre></div>
-</div>
-<p>
-   按照test中的示例，将元数据更新成如下的形式.
-</p>
-<div class="src src-json">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-  <span style="color:#f92672">&#34;methodInfo&#34;</span>: [
-    {
-      <span style="color:#f92672">&#34;methodName&#34;</span>: <span style="color:#e6db74">&#34;hello&#34;</span>,
-      <span style="color:#f92672">&#34;params&#34;</span>: [
-        {
-          <span style="color:#f92672">&#34;left&#34;</span>: <span style="color:#e6db74">&#34;int&#34;</span>,
-          <span style="color:#f92672">&#34;right&#34;</span>: <span style="color:#e6db74">&#34;no&#34;</span>
-        },
-        {
-          <span style="color:#f92672">&#34;left&#34;</span>: <span style="color:#e6db74">&#34;java.lang.String&#34;</span>,
-          <span style="color:#f92672">&#34;right&#34;</span>: <span style="color:#e6db74">&#34;name&#34;</span>
-        }
-      ],
-      <span style="color:#f92672">&#34;returnType&#34;</span>: <span style="color:#e6db74">&#34;java.lang.String&#34;</span>
-    },
-    {
-      <span style="color:#f92672">&#34;methodName&#34;</span>: <span style="color:#e6db74">&#34;helloInt&#34;</span>,
-      <span style="color:#f92672">&#34;params&#34;</span>: [
-        {
-          <span style="color:#f92672">&#34;left&#34;</span>: <span style="color:#e6db74">&#34;int&#34;</span>,
-          <span style="color:#f92672">&#34;right&#34;</span>: <span style="color:#e6db74">&#34;no&#34;</span>
-        },
-        {
-          <span style="color:#f92672">&#34;left&#34;</span>: <span style="color:#e6db74">&#34;java.lang.String&#34;</span>,
-          <span style="color:#f92672">&#34;right&#34;</span>: <span style="color:#e6db74">&#34;name&#34;</span>
-        }
-      ],
-      <span style="color:#f92672">&#34;returnType&#34;</span>: <span style="color:#e6db74">&#34;java.lang.Integer&#34;</span>
-    }
-  ]
-}</code></pre></div>
-</div>
-<h4 id="headline-9">
-3. 更改解析参数
-</h4>
-<p>
-在元数据更改成功后，测试调用的请求依然失败，打断点跟踪发现类型转换错误。
-<img src="../images/tar-param-cast.png" alt="../images/tar-param-cast.png" title="../images/tar-param-cast.png" />
-</p>
-<p>
-    随后将这块的改成String.valueOf(). 再重启应用,发起调用顺利通过。
-<img src="../images/tar-param-change.png" alt="../images/tar-param-change.png" title="../images/tar-param-change.png" />
-</p>
-<h4 id="headline-10">
-4. 请求测试
-</h4>
-<div class="src src-shell">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">POST http://localhost:9195/tars/hello
-
-HTTP/1.1 <span style="color:#ae81ff">200</span> OK
-Content-Type: application/json
-content-length: <span style="color:#ae81ff">97</span>
-
-<span style="color:#f92672">{</span>
-  <span style="color:#e6db74">&#34;code&#34;</span>: 200,
-  <span style="color:#e6db74">&#34;message&#34;</span>: <span style="color:#e6db74">&#34;Access to success!&#34;</span>,
-  <span style="color:#e6db74">&#34;data&#34;</span>: <span style="color:#e6db74">&#34;hello no=1, name=valjean, time=1611916346616&#34;</span>
-<span style="color:#f92672">}</span>
-
-Response code: <span style="color:#ae81ff">200</span> <span style="color:#f92672">(</span>OK<span style="color:#f92672">)</span>; Time: 10652ms; Content length: <span style="color:#ae81ff">97</span> bytes</code></pre></div>
-</div>
-<p>
-    虽然，目前测试通过。 但是还知道为啥，tars的上报的数据和test中的数据格式不一致，这块明天再跟踪一下。 这块总算告一段落。
-</p>
+<h2 id="headline-1">
+week-05
+</h2>
 
 
-<footer class="footline">
+
+
+
+<footer class=" footline" >
 	
 </footer>
 
+        
+            </div> 
         
         </div>
         
@@ -1420,8 +1122,6 @@ Response code: <span style="color:#ae81ff">200</span> <span style="color:#f92672
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -1438,37 +1138,8 @@ Response code: <span style="color:#ae81ff">200</span> <span style="color:#f92672
             
                 
                     
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
                         
-            
-            
-                
                     
                 
                 
@@ -1477,22 +1148,6 @@ Response code: <span style="color:#ae81ff">200</span> <span style="color:#f92672
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -1638,44 +1293,6 @@ Response code: <span style="color:#ae81ff">200</span> <span style="color:#f92672
             
         
                     
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                        
-                        
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
                         
             
             
@@ -1728,11 +1345,76 @@ Response code: <span style="color:#ae81ff">200</span> <span style="color:#f92672
             
         
                     
+            
+        
+                    
+            
+        
+                    
                         
             
             
                 
                     
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+                        
+            
+            
+                
                     
                 
                 
@@ -1750,8 +1432,21 @@ Response code: <span style="color:#ae81ff">200</span> <span style="color:#f92672
             
                 
                     
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
                         
-                        
+            
+            
+                
                     
                 
                 
@@ -2003,10 +1698,10 @@ Response code: <span style="color:#ae81ff">200</span> <span style="color:#f92672
 	 
 	 
 		
-			<a class="nav nav-prev" href="/soul/exercise/websocket/" title="Soul 数据同步-Websocket初探"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="/geekbang/week04/note/" title="Note"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="/soul/exercise/summary/" title="心得体会" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="/geekbang/week05/homework/" title="Homework" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

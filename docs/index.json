@@ -1,5 +1,12 @@
 [
 {
+	"uri": "http://blog.valjean.cn/geekbang/week05/homework/",
+	"title": "Homework",
+	"tags": [],
+	"description": "",
+	"content": " 一、 作业   修复本程序 org.geektimes.reactive.streams 包下  继续完善 my-rest-client POST 方法  (可选) 读一下 Servlet 3.0 关于 Servlet 异步 AsyncContext   二、 思路以及完成度  作业一   循环中，第三次无打印的原因。 因第三次正好达到上限，此处将订阅器设置为取消状态。同时本次的业务逻辑按理来说，还应该进行相关的业务逻辑处理。 在下次的循环中，不会再向订阅者发送信息。 作业二   构建第一步参数失败，暂时没有什么思路。 作业三   泛读相关文档 "
+},
+{
 	"uri": "http://blog.valjean.cn/geekbang/week04/homework/",
 	"title": "Homework",
 	"tags": [],
@@ -138,6 +145,13 @@
 	"tags": [],
 	"description": "",
 	"content": " 分享  tarscloud 由来     tars 简介 office website    office quick start    配置应用, 这里基础概念很重要     tars 基础概念 应用名：表示一组服务的集合 –\u0026gt; APP 服务名称：提供服务的进程名称 –\u0026gt; Server OBJ：提供具体服务的接口 –\u0026gt; Servant  环境搭建     搞明白tars-framework, tars-nodesd的不同   framework: Tars 框架 Docker 制作脚本, 制作的 docker 包含了框架核心服务和 web 管理平台 tars: Tars 框架 Docker 制作脚本, 和 framework 比, 增加了 java, nodejs 等运行时支持, 即可以把 java, nodejs 服务发布到 docker 里面(docker 里面安装了 jdk, node, php 环境) nodes: 是正常的代码运行环境，包含基本的开发环境。     拉取配置国内源，拉取docker 镜像.    创建docker network    在启动docker的过程中，不要修改默认的端口    在控制台能看到nodes的就算启动成功         联调测试,带演示过程     节点配置 app=SoulExampleServer server=SoulExampleApp    项目部署    接口调试    查看日志    web 日志    本机日志     问题汇总     pom 中加入相关依赖 \u0026lt;dependency\u0026gt; \u0026lt;groupId\u0026gt;com.tencent.tars\u0026lt;/groupId\u0026gt; \u0026lt;artifactId\u0026gt;tars-client\u0026lt;/artifactId\u0026gt; \u0026lt;version\u0026gt;1.7.2\u0026lt;/version\u0026gt; \u0026lt;/dependency\u0026gt;     更改元数据 gson Pair json话的问题，目前跟踪发现，是soul-client-tars 中向soul-admin注册的元数据有问题。可以查看tarscloud的日志 暂时没有找到具体的原因，本地的test跑不通. 强行修改元数据跑通  soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/cache/ApplicationConfigCache.java:123 这行 String clazzName = PrxInfoUtil.getPrxName(metaData); TarsParamExtInfo tarsParamExtInfo = GsonUtils.getInstance().fromJson(metaData.getRpcExt(), TarsParamExtInfo.class); DynamicType.Builder\u0026lt;?\u0026gt; classDefinition = new ByteBuddy() .makeInterface() .name(clazzName);     类型转换的错误 soul-plugin/soul-plugin-tars/src/main/java/org/dromara/soul/plugin/tars/util/PrxInfoUtil.java for (int i = 0; i \u0026lt; paramNames.length; i++) { String paramName = paramNames[i]; Class\u0026lt;?\u0026gt; paramType = paramTypes[i]; if (PRIMITIVE_TYPE.containsKey(paramType.getName())) { param[i] = PRIMITIVE_TYPE.get(paramType.getName()).getFunc().apply(String.valueOf(bodyMap.get(paramName)) ); } else { param[i] = bodyMap.get(paramName); } }    总结     拓展了眼界，学习到很多新的东西    生态的多样性   "
+},
+{
+	"uri": "http://blog.valjean.cn/geekbang/week05/",
+	"title": "Week05",
+	"tags": [],
+	"description": "",
+	"content": " week-05  "
 },
 {
 	"uri": "http://blog.valjean.cn/geekbang/week03/note/",
